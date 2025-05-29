@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Falcon.CLI", "Falcon.CLI\Falcon.CLI.csproj", "{A86AF07D-A052-44CD-AA74-82F4FAE72584}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FalconEngine", "FalconEngine\FalconEngine.csproj", "{87968C43-455A-4614-866B-7D213A7DF4BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FalconEngineTest", "FalconEngineTest\FalconEngineTest.csproj", "{74DAC1B8-5ADF-4778-B195-8A9C6D58DFB5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A86AF07D-A052-44CD-AA74-82F4FAE72584}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A86AF07D-A052-44CD-AA74-82F4FAE72584}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A86AF07D-A052-44CD-AA74-82F4FAE72584}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A86AF07D-A052-44CD-AA74-82F4FAE72584}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87968C43-455A-4614-866B-7D213A7DF4BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87968C43-455A-4614-866B-7D213A7DF4BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87968C43-455A-4614-866B-7D213A7DF4BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87968C43-455A-4614-866B-7D213A7DF4BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74DAC1B8-5ADF-4778-B195-8A9C6D58DFB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74DAC1B8-5ADF-4778-B195-8A9C6D58DFB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74DAC1B8-5ADF-4778-B195-8A9C6D58DFB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74DAC1B8-5ADF-4778-B195-8A9C6D58DFB5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
