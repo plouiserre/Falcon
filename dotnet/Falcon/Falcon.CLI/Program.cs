@@ -1,4 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
+using FalconEngine.DomParsing;
 using FalconEngine.Engine;
 using Newtonsoft.Json;
 
@@ -17,6 +18,7 @@ string html = @"<html lang=""en"">
                             </body>
                             </html>";
 
-var engine = new HtmlEngine();
+var htmlParsing = new HtmlParsing();
+var engine = new HtmlEngine(htmlParsing);
 var result = engine.Calculate(html);
 Console.WriteLine(JsonConvert.SerializeObject(result));

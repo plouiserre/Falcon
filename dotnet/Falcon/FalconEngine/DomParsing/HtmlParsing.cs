@@ -2,51 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using FalconEngine.DomParsing;
-using FalconEngine.Engine;
 using FalconEngine.Models;
-using Xunit;
 
-namespace FalconEngineTest.Engine
+namespace FalconEngine.DomParsing
 {
-    public class HtmlEngineTest
+    public class HtmlParsing : IHtmlParsing
     {
-
-        private HtmlParsing _htmlParsing { get; set; }
-
-        string html = @"<html lang=""en"">
-                            <head>
-                                <meta charset=""UTF-8"">
-                                <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
-                                <title>Document</title>
-                                <link rel=""stylesheet"" href=""main.css"">
-                            </head>
-                            <body>
-                                <div id=""content"">
-                                    <p class=""declarationText"">Ceci est un <span><a href=""declaration.html"">paragraphe</a></span></p>
-                                    <p>Allez-vous apprécier mon article?</p>
-                                </div>
-                            </body>
-                            </html>";
-
-        public HtmlEngineTest()
-        {
-            _htmlParsing = new HtmlParsing();
-        }
-
-        [Fact]
-        public void IsSimplePageIsAnalyzedCorrectly()
-        {
-            HtmlPage htmlPage = GetHtmlPage();
-            var engine = new HtmlEngine(_htmlParsing);
-
-            var engineResult = engine.Calculate(html);
-
-            Assert.True(CompareTags(htmlPage.Tags, engineResult.Tags));
-        }
-
-
-        private HtmlPage GetHtmlPage()
+        public HtmlPage Parse()
         {
             var htmlTag = GetTagHtml();
             var headTag = GetHeadTag();
@@ -228,42 +190,5 @@ namespace FalconEngineTest.Engine
 
             return pTag;
         }
-
-        //TODO externalize in a new file
-        private bool CompareTags(List<TagModel> allExpected, List<TagModel> results)
-        {
-            if (allExpected.Count != results.Count)
-                return false;
-            for (int i = 0; i < allExpected.Count; i++)
-            {
-                TagModel expected = allExpected[i];
-                TagModel result = results[i];
-                if (expected.Content != result.Content)
-                    return false;
-                if (expected.NameTag != result.NameTag)
-                    return false;
-                if (expected.TagFamily != result.TagFamily)
-                    return false;
-                if (expected.Attributes != null && result.Attributes != null)
-                {
-                    if (expected.Attributes.Count != result.Attributes.Count)
-                        return false;
-                    for (int j = 0; j < expected.Attributes.Count; j++)
-                    {
-                        var expectedAttribute = expected.Attributes[j];
-                        var resultAttribute = result.Attributes[j];
-                        if (expectedAttribute.FamilyAttribute != resultAttribute.FamilyAttribute)
-                            return false;
-                        if (expectedAttribute.Value != resultAttribute.Value)
-                            return false;
-                    }
-                }
-                else if ((expected.Attributes == null && result.Attributes != null) ||
-                    (expected.Attributes != null && result.Attributes == null))
-                    return false;
-            }
-            return true;
-        }
-
     }
 }
