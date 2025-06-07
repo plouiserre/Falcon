@@ -8,6 +8,15 @@ namespace FalconEngine.DomParsing
 {
     public class HtmlParsing : IHtmlParsing
     {
+        private ITagParsing _htmlParse;
+        private string _html;
+
+        public HtmlParsing(ITagParsing htmlParse, string html)
+        {
+            _htmlParse = htmlParse;
+            _html = html;
+        }
+
         public HtmlPage Parse()
         {
             var htmlTag = GetTagHtml();
@@ -83,32 +92,8 @@ namespace FalconEngine.DomParsing
         private TagModel GetTagHtml()
         {
             var attributLang = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.lang, Value = "en" };
-            string contentHtml = @"<head>
-                                        <meta charset=""UTF-8"">
-                                        <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
-                                        <title>Document</title>
-                                        <link rel=""stylesheet"" href=""main.css"">
-                                    </head>
-                                    <body>
-                                        <div id=""content"">
-                                            <p class=""declarationText"">
-                                                Ceci est un 
-                                                    <span>
-                                                        <a href=""declaration.html"">
-                                                            paragraphe
-                                                        </a>
-                                                    </span>
-                                            </p>
-                                            <p>Allez-vous apprécier mon article?</p>
-                                        </div>
-                                    </body>";
-            var htmlTag = new TagModel()
-            {
-                Attributes = new List<AttributeModel>() { attributLang },
-                NameTag = NameTagEnum.html,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = contentHtml
-            };
+            var htmlTag = _htmlParse.Parse(_html);
+            htmlTag.Attributes = new List<AttributeModel>() { attributLang };
             return htmlTag;
         }
 

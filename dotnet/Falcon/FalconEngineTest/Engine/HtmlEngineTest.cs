@@ -14,7 +14,22 @@ namespace FalconEngineTest.Engine
 
         private HtmlParsing _htmlParsing { get; set; }
 
-        string html = @"<html lang=""en"">
+        string htmlWithEnAttribute = @"<html lang=""en"">
+                            <head>
+                                <meta charset=""UTF-8"">
+                                <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+                                <title>Document</title>
+                                <link rel=""stylesheet"" href=""main.css"">
+                            </head>
+                            <body>
+                                <div id=""content"">
+                                    <p class=""declarationText"">Ceci est un <span><a href=""declaration.html"">paragraphe</a></span></p>
+                                    <p>Allez-vous apprécier mon article?</p>
+                                </div>
+                            </body>
+                            </html>";
+
+        string htmlWithoutAttribute = @"<html>
                             <head>
                                 <meta charset=""UTF-8"">
                                 <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
@@ -31,7 +46,8 @@ namespace FalconEngineTest.Engine
 
         public HtmlEngineTest()
         {
-            _htmlParsing = new HtmlParsing();
+            var htmlTagParse = new HtmlTagParse();
+            _htmlParsing = new HtmlParsing(htmlTagParse, htmlWithoutAttribute);
         }
 
         [Fact]
@@ -40,7 +56,7 @@ namespace FalconEngineTest.Engine
             HtmlPage htmlPage = GetHtmlPage();
             var engine = new HtmlEngine(_htmlParsing);
 
-            var engineResult = engine.Calculate(html);
+            var engineResult = engine.Calculate(htmlWithoutAttribute);
 
             Assert.True(CompareTags(htmlPage.Tags, engineResult.Tags));
         }
@@ -122,24 +138,17 @@ namespace FalconEngineTest.Engine
         {
             var attributLang = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.lang, Value = "en" };
             string contentHtml = @"<head>
-                                        <meta charset=""UTF-8"">
-                                        <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
-                                        <title>Document</title>
-                                        <link rel=""stylesheet"" href=""main.css"">
-                                    </head>
-                                    <body>
-                                        <div id=""content"">
-                                            <p class=""declarationText"">
-                                                Ceci est un 
-                                                    <span>
-                                                        <a href=""declaration.html"">
-                                                            paragraphe
-                                                        </a>
-                                                    </span>
-                                            </p>
-                                            <p>Allez-vous apprécier mon article?</p>
-                                        </div>
-                                    </body>";
+                                <meta charset=""UTF-8"">
+                                <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+                                <title>Document</title>
+                                <link rel=""stylesheet"" href=""main.css"">
+                            </head>
+                            <body>
+                                <div id=""content"">
+                                    <p class=""declarationText"">Ceci est un <span><a href=""declaration.html"">paragraphe</a></span></p>
+                                    <p>Allez-vous apprécier mon article?</p>
+                                </div>
+                            </body>";
             var htmlTag = new TagModel()
             {
                 Attributes = new List<AttributeModel>() { attributLang },

@@ -15,7 +15,7 @@ namespace FalconEngine.CleanData
             _tag = tag;
         }
 
-        public string Clean(string text)
+        public string CleanContent(string text)
         {
             string textCleaned = string.Empty;
             string textWorking = text.Replace(_tag.TagStart, string.Empty).Replace(_tag.TagEnd, string.Empty);
@@ -29,7 +29,7 @@ namespace FalconEngine.CleanData
                 textCleaned = textCleanedWithSpace(textWorking);
             }
             else
-                textCleaned = text;
+                textCleaned = textWorking;
             return textCleaned;
         }
 
@@ -37,8 +37,7 @@ namespace FalconEngine.CleanData
         {
             int positionStartTag = IndexStartTag(textWorking);
             string textWithoutSpace = textWorking.Remove(0, positionStartTag);
-            string textCleaned = string.Concat(_tag.TagStart, textWithoutSpace, _tag.TagEnd);
-            return textCleaned;
+            return textWithoutSpace;
         }
 
         public bool IsInnerTags(string textWorking)

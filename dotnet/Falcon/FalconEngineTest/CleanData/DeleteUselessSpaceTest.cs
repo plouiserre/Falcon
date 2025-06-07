@@ -20,9 +20,10 @@ namespace FalconEngineTest.CleanData
             };
             var cleaner = new DeleteUselessSpace(tag);
 
-            string htmlClean = cleaner.Clean(html);
+            string htmlClean = cleaner.CleanContent(html);
 
-            Assert.Equal(html, htmlClean);
+            string htmlExpected = " Hello bro !!!!";
+            Assert.Equal(htmlExpected, htmlClean);
         }
 
         [Fact]
@@ -36,9 +37,10 @@ namespace FalconEngineTest.CleanData
             };
             var cleaner = new DeleteUselessSpace(tag);
 
-            string htmlClean = cleaner.Clean(html);
+            string htmlClean = cleaner.CleanContent(html);
 
-            Assert.Equal(html, htmlClean);
+            string htmlExpected = "<span> Hello</span> bro!!!!";
+            Assert.Equal(htmlExpected, htmlClean);
         }
 
         [Fact]
@@ -52,9 +54,9 @@ namespace FalconEngineTest.CleanData
             };
             var cleaner = new DeleteUselessSpace(tag);
 
-            string htmlClean = cleaner.Clean(html);
+            string htmlClean = cleaner.CleanContent(html);
 
-            string htmlExpected = "<p><span> Hello</span> bro!!!!</p>";
+            string htmlExpected = "<span> Hello</span> bro!!!!";
             Assert.Equal(htmlExpected, htmlClean);
         }
 
@@ -69,9 +71,9 @@ namespace FalconEngineTest.CleanData
             };
             var cleaner = new DeleteUselessSpace(tag);
 
-            string htmlClean = cleaner.Clean(html);
+            string htmlClean = cleaner.CleanContent(html);
 
-            string htmlExpected = "<p><span> Hello</span> bro!!!!</p>";
+            string htmlExpected = "<span> Hello</span> bro!!!!";
             Assert.Equal(htmlExpected, htmlClean);
         }
 
@@ -87,9 +89,9 @@ namespace FalconEngineTest.CleanData
             };
             var cleaner = new DeleteUselessSpace(tag);
 
-            string htmlClean = cleaner.Clean(html);
+            string htmlClean = cleaner.CleanContent(html);
 
-            string htmlExpected = "<p><span> Hello</span> bro!!!!</p>";
+            string htmlExpected = "<span> Hello</span> bro!!!!";
             Assert.Equal(htmlExpected, htmlClean);
         }
 
@@ -108,9 +110,9 @@ namespace FalconEngineTest.CleanData
             };
             var cleaner = new DeleteUselessSpace(tag);
 
-            string htmlClean = cleaner.Clean(html);
+            string htmlClean = cleaner.CleanContent(html);
 
-            string htmlExpected = "<p><span> Hello</span> bro!!!!</p>";
+            string htmlExpected = "<span> Hello</span> bro!!!!";
             Assert.Equal(htmlExpected, htmlClean);
         }
 
@@ -129,9 +131,9 @@ namespace FalconEngineTest.CleanData
             };
             var cleaner = new DeleteUselessSpace(tag);
 
-            string htmlClean = cleaner.Clean(html);
+            string htmlClean = cleaner.CleanContent(html);
 
-            string htmlExpected = "<p><span> Hello</span> bro!!!!</p>";
+            string htmlExpected = "<span> Hello</span> bro!!!!";
             Assert.Equal(htmlExpected, htmlClean);
         }
 
@@ -146,9 +148,9 @@ namespace FalconEngineTest.CleanData
             };
             var cleaner = new DeleteUselessSpace(tag);
 
-            string htmlClean = cleaner.Clean(html);
+            string htmlClean = cleaner.CleanContent(html);
 
-            string htmlExpected = "<p><span> Hello</span> bro!!!!</p>";
+            string htmlExpected = "<span> Hello</span> bro!!!!";
             Assert.Equal(htmlExpected, htmlClean);
         }
 
@@ -164,9 +166,9 @@ namespace FalconEngineTest.CleanData
             };
             var cleaner = new DeleteUselessSpace(tag);
 
-            string htmlClean = cleaner.Clean(html);
+            string htmlClean = cleaner.CleanContent(html);
 
-            string htmlExpected = "<p><span> Hello</span> bro!!!!</p>";
+            string htmlExpected = "<span> Hello</span> bro!!!!";
             Assert.Equal(htmlExpected, htmlClean);
         }
 
@@ -185,9 +187,9 @@ namespace FalconEngineTest.CleanData
             };
             var cleaner = new DeleteUselessSpace(tag);
 
-            string htmlClean = cleaner.Clean(html);
+            string htmlClean = cleaner.CleanContent(html);
 
-            string htmlExpected = "<p><span> Hello</span> bro!!!!</p>";
+            string htmlExpected = "<span> Hello</span> bro!!!!";
             Assert.Equal(htmlExpected, htmlClean);
         }
     }
