@@ -92,5 +92,26 @@ namespace FalconEngineTest.CleanData
             string htmlExpected = "<p><span> Hello</span> bro!!!!</p>";
             Assert.Equal(htmlExpected, htmlClean);
         }
+
+        [Fact]
+        public void CleanManySpaceWithMultipleNewLine()
+        {
+            string html = @"<p>
+
+
+
+<span> Hello</span> bro!!!!</p>";
+            var tag = new TagModel()
+            {
+                TagStart = "<p>",
+                TagEnd = "</p>"
+            };
+            var cleaner = new DeleteUselessSpace(tag);
+
+            string htmlClean = cleaner.Clean(html);
+
+            string htmlExpected = "<p><span> Hello</span> bro!!!!</p>";
+            Assert.Equal(htmlExpected, htmlClean);
+        }
     }
 }

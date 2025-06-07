@@ -26,8 +26,7 @@ namespace FalconEngine.CleanData
             }
             else if (textWorking[0] == '\n' && innerTags)
             {
-                string textWithoutSpace = textWorking.Remove(0, 1);
-                textCleaned = string.Concat(_tag.TagStart, textWithoutSpace, _tag.TagEnd);
+                textCleaned = textCleanedWithSpace(textWorking);
             }
             else
                 textCleaned = text;
@@ -36,10 +35,9 @@ namespace FalconEngine.CleanData
 
         private string textCleanedWithSpace(string textWorking)
         {
-            string textCleaned = "";
             int positionStartTag = IndexStartTag(textWorking);
             string textWithoutSpace = textWorking.Remove(0, positionStartTag);
-            textCleaned = string.Concat(_tag.TagStart, textWithoutSpace, _tag.TagEnd);
+            string textCleaned = string.Concat(_tag.TagStart, textWithoutSpace, _tag.TagEnd);
             return textCleaned;
         }
 
