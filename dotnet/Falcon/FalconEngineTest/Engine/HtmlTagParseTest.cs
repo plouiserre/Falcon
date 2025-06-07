@@ -30,18 +30,18 @@ namespace FalconEngineTest.Engine
 
 
         //TODO decomment this UT and correct it in next US
-        // [Fact]
-        // public void ParseSimpleHtmlWithSpaceAndEscapment()
-        // {
-        //     string html = HtmlData.HtmlSimpleWithSpace;
-        //     var htmlTagParse = new HtmlTagParse();
+        [Fact]
+        public void ParseSimpleHtmlWithSpaceAndEscapment()
+        {
+            string html = HtmlData.HtmlSimpleWithSpace;
+            var htmlTagParse = new HtmlTagParse();
 
-        //     var tagHtml = htmlTagParse.Parse(html);
+            var tagHtml = htmlTagParse.Parse(html);
 
-        //     Assert.Equal(NameTagEnum.html, tagHtml.NameTag);
-        //     Assert.Equal(HtmlData.ContentHtmlSimpleWithSpace, tagHtml.Content);
-        //     Assert.Equal(TagFamilyEnum.WithEnd, tagHtml.TagFamily);
-        // }
+            Assert.Equal(NameTagEnum.html, tagHtml.NameTag);
+            Assert.Equal(HtmlData.ContentHtmlSimpleWithSpace, tagHtml.Content);
+            Assert.Equal(TagFamilyEnum.WithEnd, tagHtml.TagFamily);
+        }
 
     }
 }

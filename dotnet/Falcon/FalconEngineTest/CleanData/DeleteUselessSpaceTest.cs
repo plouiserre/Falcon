@@ -192,5 +192,27 @@ namespace FalconEngineTest.CleanData
             string htmlExpected = "<span> Hello</span> bro!!!!";
             Assert.Equal(htmlExpected, htmlClean);
         }
+
+        [Fact]
+        public void CleanManySpaceWithMultipleNewLineManyTabsBeforeAndAfter()
+        {
+            string html = @"<p>
+
+
+
+                            <span> Hello</span> bro!!!!
+                                       </p>";
+            var tag = new TagModel()
+            {
+                TagStart = "<p>",
+                TagEnd = "</p>"
+            };
+            var cleaner = new DeleteUselessSpace(tag);
+
+            string htmlClean = cleaner.CleanContent(html);
+
+            string htmlExpected = "<span> Hello</span> bro!!!!";
+            Assert.Equal(htmlExpected, htmlClean);
+        }
     }
 }
