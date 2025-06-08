@@ -6,7 +6,7 @@ using FalconEngine.DomParsing;
 using FalconEngine.Models;
 using FalconEngineTest.Utils;
 
-namespace FalconEngineTest.Engine
+namespace FalconEngineTest.DomParsing
 {
     public class HtmlTagParseTest
     {
@@ -29,7 +29,6 @@ namespace FalconEngineTest.Engine
         }
 
 
-        //TODO decomment this UT and correct it in next US
         [Fact]
         public void ParseSimpleHtmlWithSpaceAndEscapment()
         {
