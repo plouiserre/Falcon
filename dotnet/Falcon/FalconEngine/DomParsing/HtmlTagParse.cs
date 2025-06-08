@@ -18,10 +18,11 @@ namespace FalconEngine.DomParsing
             {
                 NameTag = NameTagEnum.html,
                 TagFamily = TagFamilyEnum.WithEnd,
-                TagStart = "<html>",
+                TagStart = "<html lang=\"en\">",
                 TagEnd = "</html>"
             };
             _tag.Content = CleanText(html);
+            _tag.Attributes = GetAttributsHtml();
             return _tag;
         }
 
@@ -30,6 +31,13 @@ namespace FalconEngine.DomParsing
             var deleteUselessSpace = new DeleteUselessSpace(_tag);
             string contentCleaned = deleteUselessSpace.CleanContent(html);
             return contentCleaned;
+        }
+
+        public List<AttributeModel> GetAttributsHtml()
+        {
+            var discoverAttributs = new DiscoverAttributs();
+            var attributs = discoverAttributs.Find(_tag.TagStart);
+            return attributs;
         }
     }
 }

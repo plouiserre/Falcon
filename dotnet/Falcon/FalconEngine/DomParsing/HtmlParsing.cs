@@ -91,9 +91,7 @@ namespace FalconEngine.DomParsing
 
         private TagModel GetTagHtml()
         {
-            var attributLang = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.lang, Value = "en" };
             var htmlTag = _htmlParse.Parse(_html);
-            htmlTag.Attributes = new List<AttributeModel>() { attributLang };
             return htmlTag;
         }
 
