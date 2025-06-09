@@ -18,7 +18,7 @@ namespace FalconEngine.DomParsing
             {
                 NameTag = NameTagEnum.html,
                 TagFamily = TagFamilyEnum.WithEnd,
-                TagStart = "<html lang=\"en\">",
+                TagStart = "<html lang=\"en\" dir=\"auto\">",
                 TagEnd = "</html>"
             };
             _tag.Content = CleanText(html);
