@@ -105,9 +105,10 @@ namespace FalconEngineTest.Engine
         {
             var attributLang = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.lang, Value = "en" };
             var attributDir = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.dir, Value = "auto" };
+            var attributXmlns = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.xmlns, Value = "http://www.w3.org/1999/xhtml" };
             var htmlTag = new TagModel()
             {
-                Attributes = new List<AttributeModel>() { attributLang, attributDir },
+                Attributes = new List<AttributeModel>() { attributLang, attributDir, attributXmlns },
                 NameTag = NameTagEnum.html,
                 TagFamily = TagFamilyEnum.WithEnd,
                 Content = HtmlData.ContentHtmlSimpleWithSpace

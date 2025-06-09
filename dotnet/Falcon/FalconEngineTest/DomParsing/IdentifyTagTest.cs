@@ -17,8 +17,10 @@ namespace FalconEngineTest.DomParsing
 
             identifyTag.Analyze(html);
 
-            Assert.Equal("<html lang=\"en\" dir=\"auto\">", identifyTag.TagStart);
+            Assert.Equal("<html lang=\"en\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\">", identifyTag.TagStart);
             Assert.Equal("</html>", identifyTag.TagEnd);
         }
+
+        //TODO add a case when you have more than one space between attributes
     }
 }
