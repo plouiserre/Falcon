@@ -10,54 +10,88 @@ namespace FalconEngine.DomParsing
     {
         public List<AttributeModel> Find(string tagStart)
         {
-            string attributs = ExtractAttributs(tagStart);
-            FamilyAttributeEnum attributeKey = FindKey(attributs);
-            string valueAttribute = GetValueAttribute(attributs);
-            var attribute = new AttributeModel()
+            var attributs = ExtractAttributs(tagStart);
+            List<FamilyAttributeEnum> attributesKey = FindKey(attributs);
+            List<string> valueAttributes = GetValueAttributs(attributs);
+            var attributsModel = new List<AttributeModel>();
+            for (int i = 0; i < attributs.Count; i++)
             {
-                FamilyAttribute = attributeKey,
-                Value = valueAttribute
-            };
-            return new List<AttributeModel>() { attribute };
+                var attribute = new AttributeModel()
+                {
+                    FamilyAttribute = attributesKey[i],
+                    Value = valueAttributes[i]
+                };
+                attributsModel.Add(attribute);
+            }
+            return attributsModel;
         }
 
-        private string ExtractAttributs(string tagStart)
+        private List<string> ExtractAttributs(string tagStart)
         {
-            string withoutStartTagStart = tagStart.Split(' ')[1];
-            string attributs = withoutStartTagStart.Replace(">", string.Empty);
+            var attributs = new List<string>();
+            var tagsElement = tagStart.Split(' ');
+            for (int i = 0; i < tagsElement.Count(); i++)
+            {
+                if (i == 0)
+                    continue;
+                string element = tagsElement[i];
+                string elementClean = element.Replace(">", string.Empty);
+                attributs.Add(elementClean);
+            }
             return attributs;
         }
 
-        private FamilyAttributeEnum FindKey(string attributs)
+        private List<FamilyAttributeEnum> FindKey(List<string> attributs)
         {
-            string attribut = attributs.Split('=')[0];
-            switch (attribut)
+            var keys = new List<FamilyAttributeEnum>();
+            foreach (var attribut in attributs)
             {
-                case "lang":
-                    return FamilyAttributeEnum.lang;
-                case "name":
-                    return FamilyAttributeEnum.name;
-                case "rel":
-                    return FamilyAttributeEnum.rel;
-                case "id":
-                    return FamilyAttributeEnum.id;
-                case "charset":
-                    return FamilyAttributeEnum.charset;
-                case "content":
-                    return FamilyAttributeEnum.content;
-                case "href":
-                    return FamilyAttributeEnum.href;
-                case "classCss":
-                default:
-                    return FamilyAttributeEnum.classCss;
+                string attributKey = attribut.Split('=')[0];
+                switch (attributKey)
+                {
+                    case "lang":
+                        keys.Add(FamilyAttributeEnum.lang);
+                        break;
+                    case "name":
+                        keys.Add(FamilyAttributeEnum.name);
+                        break;
+                    case "rel":
+                        keys.Add(FamilyAttributeEnum.rel);
+                        break;
+                    case "id":
+                        keys.Add(FamilyAttributeEnum.id);
+                        break;
+                    case "charset":
+                        keys.Add(FamilyAttributeEnum.charset);
+                        break;
+                    case "content":
+                        keys.Add(FamilyAttributeEnum.content);
+                        break;
+                    case "href":
+                        keys.Add(FamilyAttributeEnum.href);
+                        break;
+                    case "dir":
+                        keys.Add(FamilyAttributeEnum.dir);
+                        break;
+                    case "classCss":
+                    default:
+                        keys.Add(FamilyAttributeEnum.classCss);
+                        break;
+                }
             }
+            return keys;
         }
 
-        private string GetValueAttribute(string attributs)
+        private List<string> GetValueAttributs(List<string> attributs)
         {
-            string valueAttributeNotClean = attributs.Split('=')[1];
-            string valueAttribute = valueAttributeNotClean.Replace("\"", string.Empty);
-            return valueAttribute;
+            List<string> valueAttributes = new List<string>();
+            foreach (var attribut in attributs)
+            {
+                string valueAttributeNotClean = attribut.Split('=')[1];
+                string valueAttribute = valueAttributeNotClean.Replace("\"", string.Empty);
+                valueAttributes.Add(valueAttribute);
+            }
+            return valueAttributes;
         }
     }
 }

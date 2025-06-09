@@ -2,6 +2,6 @@ namespace FalconEngine.Models
 {
     public enum FamilyAttributeEnum
     {
-        lang, name, rel, id, charset, content, href, classCss
+        lang, name, rel, id, charset, content, href, classCss, dir
     }
 }

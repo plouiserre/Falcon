@@ -14,7 +14,7 @@ namespace FalconEngineTest.Engine
 
         private HtmlParsing _htmlParsing { get; set; }
 
-        string htmlWithEnAttribute = @"<html lang=""en"">
+        string htmlWithEnAttribute = @"<html lang=""en"" dir=""auto"">
                             <head>
                                 <meta charset=""UTF-8"">
                                 <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
@@ -122,6 +122,7 @@ namespace FalconEngineTest.Engine
         private TagModel GetTagHtml()
         {
             var attributLang = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.lang, Value = "en" };
+            var attributDir = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.dir, Value = "auto" };
             string contentHtml = @"<head>
                                 <meta charset=""UTF-8"">
                                 <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
@@ -136,7 +137,7 @@ namespace FalconEngineTest.Engine
                             </body>";
             var htmlTag = new TagModel()
             {
-                Attributes = new List<AttributeModel>() { attributLang },
+                Attributes = new List<AttributeModel>() { attributLang, attributDir },
                 NameTag = NameTagEnum.html,
                 TagFamily = TagFamilyEnum.WithEnd,
                 Content = contentHtml

@@ -7,11 +7,11 @@ namespace FalconEngineTest.Utils
 {
     public static class HtmlData
     {
-        public static string HtmlSimple = @"<html lang=""en""><head><metacharset=""UTF-8""><metaname=""viewport""content=""width=device-width,initial-scale=1.0""><title>Document</title><linkrel=""stylesheet""href=""main.css""></head><body><divid=""content""><pclass=""declarationText"">Ceciestun<span><ahref=""declaration.html"">paragraphe</a></span></p><p>Allez-vousappréciermonarticle?</p></div></body></html>";
+        public static string HtmlSimple = @"<html lang=""en"" dir=""auto""><head><metacharset=""UTF-8""><metaname=""viewport""content=""width=device-width,initial-scale=1.0""><title>Document</title><linkrel=""stylesheet""href=""main.css""></head><body><divid=""content""><pclass=""declarationText"">Ceciestun<span><ahref=""declaration.html"">paragraphe</a></span></p><p>Allez-vousappréciermonarticle?</p></div></body></html>";
 
         public static string ContentHtmlSimple = @"<head><metacharset=""UTF-8""><metaname=""viewport""content=""width=device-width,initial-scale=1.0""><title>Document</title><linkrel=""stylesheet""href=""main.css""></head><body><divid=""content""><pclass=""declarationText"">Ceciestun<span><ahref=""declaration.html"">paragraphe</a></span></p><p>Allez-vousappréciermonarticle?</p></div></body>";
 
-        public static string HtmlSimpleWithSpace = @"<html lang=""en"">
+        public static string HtmlSimpleWithSpace = @"<html lang=""en"" dir=""auto"">
                             <head>
                                 <meta charset=""UTF-8"">
                                 <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
