@@ -38,5 +38,39 @@ namespace FalconEngineTest.Utils
                                     <p>Allez-vous apprécier mon article?</p>
                                 </div>
                             </body>";
+
+        public static string ContentHeadSimple = @"<meta charset=""UTF-8"">
+                                <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+                                <title>Document</title>
+                                <link rel=""stylesheet"" href=""main.css"">";
+
+        public static string BodyHtmlSimple = @"<div id=""content"">
+                                    <p class=""declarationText"">
+                                        Ceci est un 
+                                            <span>
+                                                <a href=""declaration.html"">
+                                                    paragraphe
+                                                </a>
+                                            </span>
+                                    </p>
+                                    <p>Allez-vous apprécier mon article?</p>
+                                </div>";
+
+        public static string firstPHtmlSimple = @"<p class=""declarationText"">
+                                    Ceci est un 
+                                        <span>
+                                            <a href=""declaration.html"">
+                                                paragraphe
+                                            </a>
+                                        </span>
+                                </p>
+                                <p>Allez-vous apprécier mon article?</p>";
+
+        public static string secondPHtmlSimple = @"Ceci est un 
+                                    <span>
+                                        <a href=""declaration.html"">
+                                            paragraphe
+                                        </a>
+                                    </span>";
     }
 }

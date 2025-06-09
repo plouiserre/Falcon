@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using FalconEngine.DomParsing;
 using FalconEngine.Engine;
 using FalconEngine.Models;
+using FalconEngineTest.Utils;
 using Xunit;
 
 namespace FalconEngineTest.Engine
@@ -14,25 +15,10 @@ namespace FalconEngineTest.Engine
 
         private HtmlParsing _htmlParsing { get; set; }
 
-        string htmlWithEnAttribute = @"<html lang=""en"" dir=""auto"">
-                            <head>
-                                <meta charset=""UTF-8"">
-                                <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
-                                <title>Document</title>
-                                <link rel=""stylesheet"" href=""main.css"">
-                            </head>
-                            <body>
-                                <div id=""content"">
-                                    <p class=""declarationText"">Ceci est un <span><a href=""declaration.html"">paragraphe</a></span></p>
-                                    <p>Allez-vous apprécier mon article?</p>
-                                </div>
-                            </body>
-                            </html>";
-
         public HtmlEngineTest()
         {
             var htmlTagParse = new HtmlTagParse();
-            _htmlParsing = new HtmlParsing(htmlTagParse, htmlWithEnAttribute);
+            _htmlParsing = new HtmlParsing(htmlTagParse, HtmlData.HtmlSimpleWithSpace);
         }
 
         [Fact]
@@ -41,7 +27,7 @@ namespace FalconEngineTest.Engine
             HtmlPage htmlPage = GetHtmlPage();
             var engine = new HtmlEngine(_htmlParsing);
 
-            var engineResult = engine.Calculate(htmlWithEnAttribute);
+            var engineResult = engine.Calculate(HtmlData.HtmlSimpleWithSpace);
 
             Assert.True(CompareTags(htmlPage.Tags, engineResult.Tags));
         }
@@ -123,61 +109,34 @@ namespace FalconEngineTest.Engine
         {
             var attributLang = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.lang, Value = "en" };
             var attributDir = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.dir, Value = "auto" };
-            string contentHtml = @"<head>
-                                <meta charset=""UTF-8"">
-                                <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
-                                <title>Document</title>
-                                <link rel=""stylesheet"" href=""main.css"">
-                            </head>
-                            <body>
-                                <div id=""content"">
-                                    <p class=""declarationText"">Ceci est un <span><a href=""declaration.html"">paragraphe</a></span></p>
-                                    <p>Allez-vous apprécier mon article?</p>
-                                </div>
-                            </body>";
             var htmlTag = new TagModel()
             {
                 Attributes = new List<AttributeModel>() { attributLang, attributDir },
                 NameTag = NameTagEnum.html,
                 TagFamily = TagFamilyEnum.WithEnd,
-                Content = contentHtml
+                Content = HtmlData.ContentHtmlSimpleWithSpace
             };
             return htmlTag;
         }
 
         private TagModel GetHeadTag()
         {
-            string content = @"<meta charset=""UTF-8"">
-                                <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
-                                <title>Document</title>
-                                <link rel=""stylesheet"" href=""main.css"">";
             var headTag = new TagModel()
             {
                 NameTag = NameTagEnum.head,
                 TagFamily = TagFamilyEnum.WithEnd,
-                Content = content
+                Content = HtmlData.ContentHeadSimple
             };
             return headTag;
         }
 
         private TagModel GetBodyTag()
         {
-            string content = @"<div id=""content"">
-                                    <p class=""declarationText"">
-                                        Ceci est un 
-                                            <span>
-                                                <a href=""declaration.html"">
-                                                    paragraphe
-                                                </a>
-                                            </span>
-                                    </p>
-                                    <p>Allez-vous apprécier mon article?</p>
-                                </div>";
             var bodyTag = new TagModel()
             {
                 NameTag = NameTagEnum.body,
                 TagFamily = TagFamilyEnum.WithEnd,
-                Content = content
+                Content = HtmlData.BodyHtmlSimple
             };
             return bodyTag;
         }
@@ -185,15 +144,7 @@ namespace FalconEngineTest.Engine
         private TagModel GetDivContent()
         {
             var attributId = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.id, Value = "content" };
-            string content = @"<p class=""declarationText"">
-                                    Ceci est un 
-                                        <span>
-                                            <a href=""declaration.html"">
-                                                paragraphe
-                                            </a>
-                                        </span>
-                                </p>
-                                <p>Allez-vous apprécier mon article?</p>";
+            string content = HtmlData.firstPHtmlSimple;
             var divTag = new TagModel()
             {
                 Attributes = new List<AttributeModel>() { attributId },
@@ -207,18 +158,12 @@ namespace FalconEngineTest.Engine
         private TagModel GetFirstPContent()
         {
             var attributClass = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.classCss, Value = "declarationText" };
-            string contentHtml = @"Ceci est un 
-                                    <span>
-                                        <a href=""declaration.html"">
-                                            paragraphe
-                                        </a>
-                                    </span>";
             var pTag = new TagModel()
             {
                 Attributes = new List<AttributeModel>() { attributClass },
                 NameTag = NameTagEnum.p,
                 TagFamily = TagFamilyEnum.WithEnd,
-                Content = contentHtml
+                Content = HtmlData.secondPHtmlSimple
             };
 
             return pTag;
