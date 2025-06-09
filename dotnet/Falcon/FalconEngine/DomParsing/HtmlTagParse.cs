@@ -11,15 +11,22 @@ namespace FalconEngine.DomParsing
     {
 
         private TagModel _tag;
+        private IdentifyTag _identifyTag;
+
+        public HtmlTagParse()
+        {
+            _identifyTag = new IdentifyTag();
+        }
 
         public TagModel Parse(string html)
         {
+            _identifyTag.Analyze(html);
             _tag = new TagModel()
             {
                 NameTag = NameTagEnum.html,
                 TagFamily = TagFamilyEnum.WithEnd,
-                TagStart = "<html lang=\"en\" dir=\"auto\">",
-                TagEnd = "</html>"
+                TagStart = _identifyTag.TagStart,
+                TagEnd = _identifyTag.TagEnd
             };
             _tag.Content = CleanText(html);
             _tag.Attributes = GetAttributsHtml();
