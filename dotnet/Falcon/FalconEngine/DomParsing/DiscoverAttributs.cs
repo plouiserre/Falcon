@@ -73,6 +73,9 @@ namespace FalconEngine.DomParsing
                     case "dir":
                         keys.Add(FamilyAttributeEnum.dir);
                         break;
+                    case "xmlns":
+                        keys.Add(FamilyAttributeEnum.xmlns);
+                        break;
                     case "classCss":
                     default:
                         keys.Add(FamilyAttributeEnum.classCss);
