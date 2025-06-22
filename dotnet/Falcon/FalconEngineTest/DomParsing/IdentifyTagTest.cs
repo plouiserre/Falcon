@@ -21,6 +21,17 @@ namespace FalconEngineTest.DomParsing
             Assert.Equal("</html>", identifyTag.TagEnd);
         }
 
-        //TODO add a case when you have more than one space between attributes
+
+        [Fact]
+        public void IdentifyClairlyDoctypeTagElement()
+        {
+            string html = "<!DOCTYPE html>";
+            var identifyTag = new IdentifyTag();
+
+            identifyTag.Analyze(html);
+
+            Assert.Equal("<!DOCTYPE html>", identifyTag.TagStart);
+            Assert.Null(identifyTag.TagEnd);
+        }
     }
 }
