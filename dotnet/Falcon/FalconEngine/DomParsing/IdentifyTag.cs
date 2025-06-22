@@ -37,7 +37,8 @@ namespace FalconEngine.DomParsing
         {
             string cleanTagStart = TagStart.Replace("<", string.Empty).Replace(">", string.Empty);
             string baseTag = cleanTagStart.Split(" ")[0];
-            TagEnd = string.Concat("</", baseTag, ">");
+            string tagEndCandidate = string.Concat("</", baseTag, ">");
+            TagEnd = _html.Contains(tagEndCandidate) ? tagEndCandidate : null;
         }
     }
 }
