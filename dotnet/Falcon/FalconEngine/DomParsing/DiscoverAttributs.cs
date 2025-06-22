@@ -29,16 +29,29 @@ namespace FalconEngine.DomParsing
         private List<string> ExtractAttributs(string tagStart)
         {
             var attributs = new List<string>();
-            var tagsElement = tagStart.Split(' ');
-            for (int i = 0; i < tagsElement.Count(); i++)
+            var tagsElement = tagStart.Split(' '); ;
+            var tagsElementCleaned = CleanTagsElements(tagsElement);
+            for (int i = 0; i < tagsElementCleaned.Count(); i++)
             {
                 if (i == 0)
                     continue;
-                string element = tagsElement[i];
+                string element = tagsElementCleaned[i];
                 string elementClean = element.Replace(">", string.Empty);
                 attributs.Add(elementClean);
             }
             return attributs;
+        }
+
+        private List<string> CleanTagsElements(string[] elements)
+        {
+            var elementsCleaned = new List<string>();
+            foreach (var element in elements)
+            {
+                if (element == "")
+                    continue;
+                elementsCleaned.Add(element);
+            }
+            return elementsCleaned;
         }
 
         private List<FamilyAttributeEnum> FindKey(List<string> attributs)
