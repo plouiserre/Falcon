@@ -13,5 +13,11 @@ namespace FalconEngine.Models
         public TagFamilyEnum TagFamily { get; set; }
         public string TagStart { get; set; }
         public string TagEnd { get; set; }
+        public bool IsValid { get; set; }
+
+        public TagModel()
+        {
+            IsValid = false;
+        }
     }
 }

@@ -38,7 +38,8 @@ namespace FalconEngineTest.Engine
                 TagFamily = TagFamilyEnum.NoEnd,
                 Attributes = new List<AttributeModel>() { new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.charset, Value = "UTF-8" } },
                 NameTag = NameTagEnum.meta,
-                Content = string.Empty
+                Content = string.Empty,
+                IsValid = true
             };
             var metaViewPort = new TagModel()
             {
@@ -48,13 +49,15 @@ namespace FalconEngineTest.Engine
                         new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.content, Value = "width=device-width, initial-scale=1.0" }
                 },
                 NameTag = NameTagEnum.meta,
-                Content = string.Empty
+                Content = string.Empty,
+                IsValid = true
             };
             var title = new TagModel()
             {
                 TagFamily = TagFamilyEnum.NoEnd,
                 NameTag = NameTagEnum.title,
-                Content = string.Empty
+                Content = string.Empty,
+                IsValid = true
             };
             var link = new TagModel()
             {
@@ -64,7 +67,8 @@ namespace FalconEngineTest.Engine
                         new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.href, Value = "main.css" }
                 },
                 NameTag = NameTagEnum.link,
-                Content = string.Empty
+                Content = string.Empty,
+                IsValid = true
             };
             var body = GetBodyTag();
             var divContent = GetDivContent();
@@ -75,7 +79,8 @@ namespace FalconEngineTest.Engine
                 NameTag = NameTagEnum.span,
                 Content = @"<a href=""declaration.html"">
                                                             paragraphe
-                                                        </a>"
+                                                        </a>",
+                IsValid = true
             };
             var a = new TagModel()
             {
@@ -88,13 +93,15 @@ namespace FalconEngineTest.Engine
                 },
                 TagFamily = TagFamilyEnum.WithEnd,
                 NameTag = NameTagEnum.a,
-                Content = "paragraphe"
+                Content = "paragraphe",
+                IsValid = true
             };
             var secondP = new TagModel()
             {
                 NameTag = NameTagEnum.p,
                 TagFamily = TagFamilyEnum.WithEnd,
-                Content = "Allez-vous apprécier mon article?"
+                Content = "Allez-vous apprécier mon article?",
+                IsValid = true
             };
             var tags = new List<TagModel>() { htmlTag, headTag, metaCharsetTag, metaViewPort, title, link, body, divContent, firstP, span, a, secondP };
             var htmlPage = new HtmlPage() { Tags = tags };
@@ -111,7 +118,8 @@ namespace FalconEngineTest.Engine
                 Attributes = new List<AttributeModel>() { attributLang, attributDir, attributXmlns },
                 NameTag = NameTagEnum.html,
                 TagFamily = TagFamilyEnum.WithEnd,
-                Content = HtmlData.ContentHtmlSimpleWithSpace
+                Content = HtmlData.ContentHtmlSimpleWithSpace,
+                IsValid = true
             };
             return htmlTag;
         }
@@ -122,7 +130,8 @@ namespace FalconEngineTest.Engine
             {
                 NameTag = NameTagEnum.head,
                 TagFamily = TagFamilyEnum.WithEnd,
-                Content = HtmlData.ContentHeadSimple
+                Content = HtmlData.ContentHeadSimple,
+                IsValid = true
             };
             return headTag;
         }
@@ -133,7 +142,8 @@ namespace FalconEngineTest.Engine
             {
                 NameTag = NameTagEnum.body,
                 TagFamily = TagFamilyEnum.WithEnd,
-                Content = HtmlData.BodyHtmlSimple
+                Content = HtmlData.BodyHtmlSimple,
+                IsValid = true
             };
             return bodyTag;
         }
@@ -147,7 +157,8 @@ namespace FalconEngineTest.Engine
                 Attributes = new List<AttributeModel>() { attributId },
                 NameTag = NameTagEnum.div,
                 TagFamily = TagFamilyEnum.WithEnd,
-                Content = content
+                Content = content,
+                IsValid = true
             };
             return divTag;
         }
@@ -160,7 +171,8 @@ namespace FalconEngineTest.Engine
                 Attributes = new List<AttributeModel>() { attributClass },
                 NameTag = NameTagEnum.p,
                 TagFamily = TagFamilyEnum.WithEnd,
-                Content = HtmlData.secondPHtmlSimple
+                Content = HtmlData.secondPHtmlSimple,
+                IsValid = true
             };
 
             return pTag;

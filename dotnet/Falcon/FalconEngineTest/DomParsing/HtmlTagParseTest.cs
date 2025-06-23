@@ -26,6 +26,7 @@ namespace FalconEngineTest.DomParsing
             Assert.Equal(NameTagEnum.html, tagHtml.NameTag);
             Assert.Equal(HtmlData.ContentHtmlSimple, tagHtml.Content);
             Assert.Equal(TagFamilyEnum.WithEnd, tagHtml.TagFamily);
+            Assert.True(tagHtml.IsValid);
         }
 
 
@@ -40,6 +41,7 @@ namespace FalconEngineTest.DomParsing
             Assert.Equal(NameTagEnum.html, tagHtml.NameTag);
             Assert.Equal(HtmlData.ContentHtmlSimpleWithSpace, tagHtml.Content);
             Assert.Equal(TagFamilyEnum.WithEnd, tagHtml.TagFamily);
+            Assert.True(tagHtml.IsValid);
         }
 
     }

@@ -25,6 +25,26 @@ namespace FalconEngineTest.DomParsing
             Assert.Equal(string.Empty, tagHtml.Content);
             Assert.Equal(TagFamilyEnum.NoEnd, tagHtml.TagFamily);
             Assert.Equal(doctypeHtml, tagHtml.TagStart);
+            Assert.True(tagHtml.IsValid);
+            Assert.Null(tagHtml.TagEnd);
+        }
+
+
+        [Theory]
+        [InlineData("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">")]
+        [InlineData("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">")]
+        [InlineData("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Frameset//EN\" \"http://www.w3.org/TR/html4/frameset.dtd\">")]
+        public void ParseDoctypeHtml401(string doctypeHtml)
+        {
+            var doctypeParse = new DoctypeParse();
+
+            var tagHtml = doctypeParse.Parse(doctypeHtml);
+
+            Assert.Equal(NameTagEnum.doctype, tagHtml.NameTag);
+            Assert.Equal(string.Empty, tagHtml.Content);
+            Assert.Equal(TagFamilyEnum.NoEnd, tagHtml.TagFamily);
+            Assert.Equal(doctypeHtml, tagHtml.TagStart);
+            Assert.True(tagHtml.IsValid);
             Assert.Null(tagHtml.TagEnd);
         }
     }
