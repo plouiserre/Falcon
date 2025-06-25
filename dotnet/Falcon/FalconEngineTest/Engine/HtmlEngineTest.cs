@@ -1,6 +1,7 @@
 using FalconEngine.DomParsing;
 using FalconEngine.Engine;
 using FalconEngine.Models;
+using FalconEngineTest.Data;
 using FalconEngineTest.Utils;
 using Xunit;
 
@@ -20,7 +21,7 @@ namespace FalconEngineTest.Engine
         [Fact]
         public void IsSimplePageIsAnalyzedCorrectly()
         {
-            HtmlPage htmlPage = GetHtmlPage();
+            HtmlPage htmlPage = HtmlPageData.InitHtmlPage();
             var engine = new HtmlEngine(_htmlParsing);
 
             var engineResult = engine.Calculate(HtmlData.HtmlSimpleWithSpace);
@@ -28,155 +29,6 @@ namespace FalconEngineTest.Engine
             Assert.True(CompareTags(htmlPage.Tags, engineResult.Tags));
         }
 
-
-        private HtmlPage GetHtmlPage()
-        {
-            var htmlTag = GetTagHtml();
-            var headTag = GetHeadTag();
-            var metaCharsetTag = new TagModel()
-            {
-                TagFamily = TagFamilyEnum.NoEnd,
-                Attributes = new List<AttributeModel>() { new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.charset, Value = "UTF-8" } },
-                NameTag = NameTagEnum.meta,
-                Content = string.Empty,
-                IsValid = true
-            };
-            var metaViewPort = new TagModel()
-            {
-                TagFamily = TagFamilyEnum.NoEnd,
-                Attributes = new List<AttributeModel>() {
-                        new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.name, Value = "viewport" } ,
-                        new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.content, Value = "width=device-width, initial-scale=1.0" }
-                },
-                NameTag = NameTagEnum.meta,
-                Content = string.Empty,
-                IsValid = true
-            };
-            var title = new TagModel()
-            {
-                TagFamily = TagFamilyEnum.NoEnd,
-                NameTag = NameTagEnum.title,
-                Content = string.Empty,
-                IsValid = true
-            };
-            var link = new TagModel()
-            {
-                TagFamily = TagFamilyEnum.NoEnd,
-                Attributes = new List<AttributeModel>() {
-                        new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.rel, Value = "stylesheet" } ,
-                        new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.href, Value = "main.css" }
-                },
-                NameTag = NameTagEnum.link,
-                Content = string.Empty,
-                IsValid = true
-            };
-            var body = GetBodyTag();
-            var divContent = GetDivContent();
-            var firstP = GetFirstPContent();
-            var span = new TagModel()
-            {
-                TagFamily = TagFamilyEnum.WithEnd,
-                NameTag = NameTagEnum.span,
-                Content = @"<a href=""declaration.html"">
-                                                            paragraphe
-                                                        </a>",
-                IsValid = true
-            };
-            var a = new TagModel()
-            {
-                Attributes = new List<AttributeModel>(){
-                    new AttributeModel()
-                    {
-                        FamilyAttribute = FamilyAttributeEnum.href,
-                        Value = "declaration.html"
-                    }
-                },
-                TagFamily = TagFamilyEnum.WithEnd,
-                NameTag = NameTagEnum.a,
-                Content = "paragraphe",
-                IsValid = true
-            };
-            var secondP = new TagModel()
-            {
-                NameTag = NameTagEnum.p,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = "Allez-vous apprécier mon article?",
-                IsValid = true
-            };
-            var tags = new List<TagModel>() { htmlTag, headTag, metaCharsetTag, metaViewPort, title, link, body, divContent, firstP, span, a, secondP };
-            var htmlPage = new HtmlPage() { Tags = tags };
-            return htmlPage;
-        }
-
-        private TagModel GetTagHtml()
-        {
-            var attributLang = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.lang, Value = "en" };
-            var attributDir = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.dir, Value = "auto" };
-            var attributXmlns = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.xmlns, Value = "http://www.w3.org/1999/xhtml" };
-            var htmlTag = new TagModel()
-            {
-                Attributes = new List<AttributeModel>() { attributLang, attributDir, attributXmlns },
-                NameTag = NameTagEnum.html,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = HtmlData.ContentHtmlSimpleWithSpace,
-                IsValid = true
-            };
-            return htmlTag;
-        }
-
-        private TagModel GetHeadTag()
-        {
-            var headTag = new TagModel()
-            {
-                NameTag = NameTagEnum.head,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = HtmlData.ContentHeadSimple,
-                IsValid = true
-            };
-            return headTag;
-        }
-
-        private TagModel GetBodyTag()
-        {
-            var bodyTag = new TagModel()
-            {
-                NameTag = NameTagEnum.body,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = HtmlData.BodyHtmlSimple,
-                IsValid = true
-            };
-            return bodyTag;
-        }
-
-        private TagModel GetDivContent()
-        {
-            var attributId = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.id, Value = "content" };
-            string content = HtmlData.firstPHtmlSimple;
-            var divTag = new TagModel()
-            {
-                Attributes = new List<AttributeModel>() { attributId },
-                NameTag = NameTagEnum.div,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = content,
-                IsValid = true
-            };
-            return divTag;
-        }
-
-        private TagModel GetFirstPContent()
-        {
-            var attributClass = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.classCss, Value = "declarationText" };
-            var pTag = new TagModel()
-            {
-                Attributes = new List<AttributeModel>() { attributClass },
-                NameTag = NameTagEnum.p,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = HtmlData.secondPHtmlSimple,
-                IsValid = true
-            };
-
-            return pTag;
-        }
 
         //TODO externalize in a new file
         private bool CompareTags(List<TagModel> allExpected, List<TagModel> results)
@@ -187,7 +39,9 @@ namespace FalconEngineTest.Engine
             {
                 TagModel expected = allExpected[i];
                 TagModel result = results[i];
-                if (expected.Content != result.Content)
+                string expectedContent = AssertUtils.DeleteUselessSpace(expected.Content);
+                string resultContent = AssertUtils.DeleteUselessSpace(result.Content);
+                if (expectedContent != resultContent)
                     return false;
                 if (expected.NameTag != result.NameTag)
                     return false;
