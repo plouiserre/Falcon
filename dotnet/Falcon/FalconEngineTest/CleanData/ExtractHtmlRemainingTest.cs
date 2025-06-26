@@ -36,9 +36,7 @@ namespace FalconEngineTest.CleanData
 
             var htmlRemaining = extraction.Extract(doctypeTag, html);
 
-            string expected = AssertUtils.DeleteUselessSpace(HtmlData.HtmlSimpleWithSpace);
-            string result = AssertUtils.DeleteUselessSpace(htmlRemaining);
-            Assert.Equal(expected, result);
+            Assert.Equal(HtmlData.HtmlSimpleWithSpace, htmlRemaining);
         }
     }
 }
