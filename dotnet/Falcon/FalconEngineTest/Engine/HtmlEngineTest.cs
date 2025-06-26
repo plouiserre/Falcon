@@ -39,9 +39,7 @@ namespace FalconEngineTest.Engine
             {
                 TagModel expected = allExpected[i];
                 TagModel result = results[i];
-                string expectedContent = AssertUtils.DeleteUselessSpace(expected.Content);
-                string resultContent = AssertUtils.DeleteUselessSpace(result.Content);
-                if (expectedContent != resultContent)
+                if (expected.Content != result.Content)
                     return false;
                 if (expected.NameTag != result.NameTag)
                     return false;
