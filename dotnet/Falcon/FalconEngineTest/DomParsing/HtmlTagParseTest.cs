@@ -38,8 +38,10 @@ namespace FalconEngineTest.DomParsing
 
             var tagHtml = htmlTagParse.Parse(html);
 
+            string expected = AssertUtils.DeleteUselessSpace(HtmlData.ContentHtmlSimpleWithSpace);
+            string result = AssertUtils.DeleteUselessSpace(tagHtml.Content);
             Assert.Equal(NameTagEnum.html, tagHtml.NameTag);
-            Assert.Equal(HtmlData.ContentHtmlSimpleWithSpace, tagHtml.Content);
+            Assert.Equal(expected, result);
             Assert.Equal(TagFamilyEnum.WithEnd, tagHtml.TagFamily);
             Assert.True(tagHtml.IsValid);
         }

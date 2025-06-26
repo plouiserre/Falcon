@@ -18,7 +18,8 @@ string html = @"<html lang=""en"">
                             </body>
                             </html>";
 
-var htmlParsing = new HtmlParsing();
+var htmlParse = new HtmlTagParse();
+var htmlParsing = new HtmlParsing(htmlParse, html);
 var engine = new HtmlEngine(htmlParsing);
 var result = engine.Calculate(html);
 Console.WriteLine(JsonConvert.SerializeObject(result));
