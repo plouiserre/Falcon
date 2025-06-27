@@ -21,11 +21,11 @@ namespace FalconEngine.DomParsing
                 NameTag = NameTagEnum.doctype,
                 TagFamily = TagFamilyEnum.NoEnd
             };
-            tag.IsValid = IsValid(tag);
             return tag;
         }
 
-        private bool IsValid(TagModel tag)
+
+        public bool IsValid(TagModel tag)
         {
             bool isTagStartGoodFormatting = false;
             bool isNoTagEnd = false;

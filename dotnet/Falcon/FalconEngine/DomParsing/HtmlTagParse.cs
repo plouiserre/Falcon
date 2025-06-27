@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FalconEngine.CleanData;
+using FalconEngine.DomParsing.CustomException;
 using FalconEngine.Models;
 
 namespace FalconEngine.DomParsing
@@ -20,17 +21,24 @@ namespace FalconEngine.DomParsing
 
         public TagModel Parse(string html)
         {
-            _identifyTag.Analyze(html);
-            _tag = new TagModel()
+            try
             {
-                NameTag = NameTagEnum.html,
-                TagFamily = TagFamilyEnum.WithEnd,
-                TagStart = _identifyTag.TagStart,
-                TagEnd = _identifyTag.TagEnd,
-                IsValid = IsValid()
-            };
-            _tag.Content = CleanText(html);
-            _tag.Attributes = GetAttributsHtml();
+                _identifyTag.Analyze(html);
+                _tag = new TagModel()
+                {
+                    NameTag = NameTagEnum.html,
+                    TagFamily = TagFamilyEnum.WithEnd,
+                    TagStart = _identifyTag.TagStart,
+                    TagEnd = _identifyTag.TagEnd
+                };
+                _tag.Content = CleanText(html);
+                _tag.Attributes = GetAttributsHtml();
+            }
+            catch (Exception ex)
+            {
+                string message = string.Format($"Une erreur a eu lieu lors du parsing de {html}");
+                throw new HtmlParsingException(ErrorType.html, message);
+            }
             return _tag;
         }
 
@@ -48,9 +56,12 @@ namespace FalconEngine.DomParsing
             return attributs;
         }
 
-        private bool IsValid()
+        public bool IsValid(TagModel tag)
         {
-            return true;
+            if (tag.TagEnd == "</html>" && tag.TagStart.Contains("html"))
+                return true;
+            else
+                return false;
         }
     }
 }

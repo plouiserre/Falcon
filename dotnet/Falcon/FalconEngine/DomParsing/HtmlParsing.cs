@@ -99,15 +99,18 @@ namespace FalconEngine.DomParsing
                 TagEnd = string.Empty,
                 Attributes = null,
                 Content = string.Empty,
-                TagFamily = TagFamilyEnum.NoEnd,
-                IsValid = true
+                TagFamily = TagFamilyEnum.NoEnd
             };
             return doctypeTag;
         }
 
+        //TODO c'est ici qu'il faut modifier pour gérer la validation!!!!
         private TagModel GetTagHtml()
         {
             var htmlTag = _htmlParse.Parse(_html);
+            bool isValid = _htmlParse.IsValid(htmlTag);
+            if (!isValid)
+                throw new Exception("Html tag is not valid!!!");
             return htmlTag;
         }
 

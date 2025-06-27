@@ -20,12 +20,13 @@ namespace FalconEngineTest.DomParsing
             var doctypeParse = new DoctypeParse();
 
             var tagHtml = doctypeParse.Parse(doctypeHtml);
+            bool isValid = doctypeParse.IsValid(tagHtml);
 
             Assert.Equal(NameTagEnum.doctype, tagHtml.NameTag);
             Assert.Equal(string.Empty, tagHtml.Content);
             Assert.Equal(TagFamilyEnum.NoEnd, tagHtml.TagFamily);
             Assert.Equal(doctypeHtml, tagHtml.TagStart);
-            Assert.True(tagHtml.IsValid);
+            Assert.True(isValid);
             Assert.Null(tagHtml.TagEnd);
         }
 
@@ -39,12 +40,13 @@ namespace FalconEngineTest.DomParsing
             var doctypeParse = new DoctypeParse();
 
             var tagHtml = doctypeParse.Parse(doctypeHtml);
+            bool isValid = doctypeParse.IsValid(tagHtml);
 
             Assert.Equal(NameTagEnum.doctype, tagHtml.NameTag);
             Assert.Equal(string.Empty, tagHtml.Content);
             Assert.Equal(TagFamilyEnum.NoEnd, tagHtml.TagFamily);
             Assert.Equal(doctypeHtml, tagHtml.TagStart);
-            Assert.True(tagHtml.IsValid);
+            Assert.True(isValid);
             Assert.Null(tagHtml.TagEnd);
         }
 
@@ -58,12 +60,13 @@ namespace FalconEngineTest.DomParsing
             var doctypeParse = new DoctypeParse();
 
             var tagHtml = doctypeParse.Parse(doctypeHtml);
+            bool isValid = doctypeParse.IsValid(tagHtml);
 
             Assert.Equal(NameTagEnum.doctype, tagHtml.NameTag);
             Assert.Equal(string.Empty, tagHtml.Content);
             Assert.Equal(TagFamilyEnum.NoEnd, tagHtml.TagFamily);
             Assert.Equal(doctypeHtml, tagHtml.TagStart);
-            Assert.True(tagHtml.IsValid);
+            Assert.True(isValid);
             Assert.Null(tagHtml.TagEnd);
         }
     }
