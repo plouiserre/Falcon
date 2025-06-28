@@ -1,3 +1,4 @@
+using FalconEngine.CleanData;
 using FalconEngine.DomParsing;
 using FalconEngine.Engine;
 using FalconEngine.Models;
@@ -14,8 +15,10 @@ namespace FalconEngineTest.Engine
 
         public HtmlEngineTest()
         {
+            var doctypeParse = new DoctypeParse();
             var htmlTagParse = new HtmlTagParse();
-            _htmlParsing = new HtmlParsing(htmlTagParse, HtmlData.HtmlSimpleWithSpace);
+            var extractHtmlRemaining = new ExtractHtmlRemaining();
+            _htmlParsing = new HtmlParsing(doctypeParse, htmlTagParse, extractHtmlRemaining);
         }
 
         [Fact]
@@ -24,7 +27,7 @@ namespace FalconEngineTest.Engine
             HtmlPage htmlPage = HtmlPageData.InitHtmlPage();
             var engine = new HtmlEngine(_htmlParsing);
 
-            var engineResult = engine.Calculate(HtmlData.HtmlSimpleWithSpace);
+            var engineResult = engine.Calculate(HtmlData.HtmlSimpleWithSpaceDoctype);
 
             Assert.True(CompareTags(htmlPage.Tags, engineResult.Tags));
         }

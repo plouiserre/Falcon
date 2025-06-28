@@ -59,5 +59,10 @@ namespace FalconEngine.DomParsing
                 isGoodTagHtml401 = true;
             return isGoodTagModern || isGoodTagHtml401;
         }
+
+        public string CleanHtml(TagModel tag, string html)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

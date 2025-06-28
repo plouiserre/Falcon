@@ -63,5 +63,10 @@ namespace FalconEngine.DomParsing
             else
                 return false;
         }
+
+        public string CleanHtml(TagModel tag, string html)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

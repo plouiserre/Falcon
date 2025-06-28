@@ -8,6 +8,6 @@ namespace FalconEngine.DomParsing
 {
     public interface IHtmlParsing
     {
-        HtmlPage Parse();
+        HtmlPage Parse(string html);
     }
 }

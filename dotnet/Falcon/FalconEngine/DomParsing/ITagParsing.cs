@@ -10,5 +10,6 @@ namespace FalconEngine.DomParsing
     {
         TagModel Parse(string html);
         bool IsValid(TagModel tag);
+        string CleanHtml(TagModel tag, string html);
     }
 }

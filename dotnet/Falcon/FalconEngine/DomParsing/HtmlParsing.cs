@@ -2,24 +2,30 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FalconEngine.CleanData;
 using FalconEngine.Models;
 
 namespace FalconEngine.DomParsing
 {
     public class HtmlParsing : IHtmlParsing
     {
+        private ITagParsing _doctypeParse;
         private ITagParsing _htmlParse;
+        private IExtractHtmlRemaining _extractHtmlRemaining;
         private string _html;
 
-        public HtmlParsing(ITagParsing htmlParse, string html)
+        public HtmlParsing(ITagParsing doctypeParse, ITagParsing htmlParse, IExtractHtmlRemaining extractHtmlRemaining)
         {
+            _doctypeParse = doctypeParse;
             _htmlParse = htmlParse;
-            _html = html;
+            _extractHtmlRemaining = extractHtmlRemaining;
         }
 
-        public HtmlPage Parse()
+        public HtmlPage Parse(string html)
         {
-            var doctypeParse = GetDoctypeTag();
+            _html = html;
+            var doctypeTag = GetDoctypeTag();
+            RemoveUselessHtml(doctypeTag);
             var htmlTag = GetTagHtml();
             var headTag = GetHeadTag();
             var metaCharsetTag = new TagModel()
@@ -85,25 +91,23 @@ namespace FalconEngine.DomParsing
                 TagFamily = TagFamilyEnum.WithEnd,
                 Content = "Allez-vous apprécier mon article?"
             };
-            var tags = new List<TagModel>() { doctypeParse, htmlTag, headTag, metaCharsetTag, metaViewPort, title, link, body, divContent, firstP, span, a, secondP };
+            var tags = new List<TagModel>() { doctypeTag, htmlTag, headTag, metaCharsetTag, metaViewPort, title, link, body, divContent, firstP, span, a, secondP };
             var htmlPage = new HtmlPage() { Tags = tags };
             return htmlPage;
         }
 
+        //TODO ajouter des tests
+        //TODO c'est ici qu'il faut modifier pour gérer la validation!!!!
         private TagModel GetDoctypeTag()
         {
-            var doctypeTag = new TagModel()
-            {
-                NameTag = NameTagEnum.doctype,
-                TagStart = "<!DOCTYPE html>",
-                TagEnd = string.Empty,
-                Attributes = null,
-                Content = string.Empty,
-                TagFamily = TagFamilyEnum.NoEnd
-            };
+            var doctypeTag = _doctypeParse.Parse(_html);
+            bool isValid = _doctypeParse.IsValid(doctypeTag);
+            if (!isValid)
+                throw new Exception("Doctype tag is not valid!!!");
             return doctypeTag;
         }
 
+        //TODO ajouter des tests
         //TODO c'est ici qu'il faut modifier pour gérer la validation!!!!
         private TagModel GetTagHtml()
         {
@@ -191,6 +195,11 @@ namespace FalconEngine.DomParsing
             };
 
             return pTag;
+        }
+
+        private void RemoveUselessHtml(TagModel tag)
+        {
+            _html = _extractHtmlRemaining.Extract(tag, _html);
         }
     }
 }
