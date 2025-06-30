@@ -22,8 +22,9 @@ string html = @"<!DOCTYPE html>
 
 var doctypeParse = new DoctypeParse();
 var htmlParse = new HtmlTagParse();
+var headParse = new HeadParse();
 var extractHtmlRemaining = new ExtractHtmlRemaining();
-var htmlParsing = new HtmlParsing(doctypeParse, htmlParse, extractHtmlRemaining);
+var htmlParsing = new HtmlParsing(doctypeParse, htmlParse, headParse, extractHtmlRemaining);
 var engine = new HtmlEngine(htmlParsing);
 var result = engine.Calculate(html);
 Console.WriteLine(JsonConvert.SerializeObject(result));

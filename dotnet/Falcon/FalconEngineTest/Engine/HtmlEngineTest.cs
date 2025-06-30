@@ -17,8 +17,9 @@ namespace FalconEngineTest.Engine
         {
             var doctypeParse = new DoctypeParse();
             var htmlTagParse = new HtmlTagParse();
+            var headParse = new HeadParse();
             var extractHtmlRemaining = new ExtractHtmlRemaining();
-            _htmlParsing = new HtmlParsing(doctypeParse, htmlTagParse, extractHtmlRemaining);
+            _htmlParsing = new HtmlParsing(doctypeParse, htmlTagParse, headParse, extractHtmlRemaining);
         }
 
         [Fact]
