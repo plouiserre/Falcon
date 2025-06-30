@@ -11,14 +11,16 @@ namespace FalconEngine.DomParsing
     {
         private ITagParsing _doctypeParse;
         private ITagParsing _htmlParse;
+        private ITagParsing _headParse;
         private IExtractHtmlRemaining _extractHtmlRemaining;
         private string _html;
 
-        public HtmlParsing(ITagParsing doctypeParse, ITagParsing htmlParse, IExtractHtmlRemaining extractHtmlRemaining)
+        public HtmlParsing(ITagParsing doctypeParse, ITagParsing htmlParse, ITagParsing headParse, IExtractHtmlRemaining extractHtmlRemaining)
         {
             _doctypeParse = doctypeParse;
             _htmlParse = htmlParse;
             _extractHtmlRemaining = extractHtmlRemaining;
+            _headParse = headParse;
         }
 
         public HtmlPage Parse(string html)
@@ -27,6 +29,7 @@ namespace FalconEngine.DomParsing
             var doctypeTag = GetDoctypeTag();
             RemoveUselessHtml(doctypeTag);
             var htmlTag = GetTagHtml();
+            RemoveTagOpenCloed(htmlTag);
             var headTag = GetHeadTag();
             var metaCharsetTag = new TagModel()
             {
@@ -120,16 +123,10 @@ namespace FalconEngine.DomParsing
 
         private TagModel GetHeadTag()
         {
-            string content = @"<meta charset=""UTF-8"">
-                                <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
-                                <title>Document</title>
-                                <link rel=""stylesheet"" href=""main.css"">";
-            var headTag = new TagModel()
-            {
-                NameTag = NameTagEnum.head,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = content
-            };
+            var headTag = _headParse.Parse(_html);
+            bool isValid = _headParse.IsValid(headTag);
+            if (!isValid)
+                throw new Exception("Head tag is not valid!!!");
             return headTag;
         }
 
@@ -200,6 +197,13 @@ namespace FalconEngine.DomParsing
         private void RemoveUselessHtml(TagModel tag)
         {
             _html = _extractHtmlRemaining.Extract(tag, _html);
+        }
+
+        //TODO externalize in _extractHtmlRemaining
+        private void RemoveTagOpenCloed(TagModel tag)
+        {
+            _html = _html.Replace(tag.TagStart, string.Empty);
+            _html = _html.Replace(tag.TagEnd, string.Empty);
         }
     }
 }
