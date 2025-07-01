@@ -71,5 +71,48 @@ namespace FalconEngine.DomParsing.Parser
             return content;
             //faire une exception si on parse mal
         }
+
+        public List<TagModel> DeterminateChildren(string html)
+        {
+            //TODO call here the InitiateParser
+            var initiateParse = new InitiateParser();
+            var parsers = initiateParse.GetTagParsers(html);
+            var metaCharsetTag = new TagModel()
+            {
+                TagFamily = TagFamilyEnum.NoEnd,
+                Attributes = new List<AttributeModel>() { new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.charset, Value = "UTF-8" } },
+                NameTag = NameTagEnum.meta,
+                Content = string.Empty
+            };
+            var metaViewPort = new TagModel()
+            {
+                TagFamily = TagFamilyEnum.NoEnd,
+                Attributes = new List<AttributeModel>() {
+                        new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.name, Value = "viewport" } ,
+                        new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.content, Value = "width=device-width, initial-scale=1.0" }
+                },
+                NameTag = NameTagEnum.meta,
+                Content = string.Empty
+            };
+            var title = new TagModel()
+            {
+                TagFamily = TagFamilyEnum.NoEnd,
+                NameTag = NameTagEnum.title,
+                Content = string.Empty
+            };
+            var link = new TagModel()
+            {
+                TagFamily = TagFamilyEnum.NoEnd,
+                Attributes = new List<AttributeModel>() {
+                        new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.rel, Value = "stylesheet" } ,
+                        new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.href, Value = "main.css" }
+                },
+                NameTag = NameTagEnum.link,
+                Content = string.Empty
+            };
+            var children = new List<TagModel>() { metaCharsetTag, metaViewPort, title, link };
+            return children;
+        }
+
     }
 }

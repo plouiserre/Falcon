@@ -10,7 +10,14 @@ namespace FalconEngine.DomParsing
     {
         public List<ITagParser> GetTagParsers(string html)
         {
-            return null;
+            var parsers = new List<ITagParser>()
+            {
+                new MetaParser(),
+                new MetaParser(),
+                new TitleParser(),
+                new LinkParser()
+            };
+            return parsers;
         }
     }
 }

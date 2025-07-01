@@ -68,5 +68,10 @@ namespace FalconEngine.DomParsing.Parser
         {
             throw new NotImplementedException();
         }
+
+        public List<TagModel> DeterminateChildren(string html)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

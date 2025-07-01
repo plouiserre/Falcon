@@ -11,5 +11,6 @@ namespace FalconEngine.DomParsing.Parser
         TagModel Parse(string html);
         bool IsValid(TagModel tag);
         string CleanHtml(TagModel tag, string html);
+        List<TagModel> DeterminateChildren(string html);
     }
 }
