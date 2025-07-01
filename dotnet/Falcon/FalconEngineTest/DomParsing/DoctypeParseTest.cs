@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FalconEngine.DomParsing;
+using FalconEngine.DomParsing.Parser;
 using FalconEngine.Models;
 using FalconEngineTest.Utils;
 
@@ -17,10 +18,10 @@ namespace FalconEngineTest.DomParsing
         [InlineData("<!doctype html>")]
         public void ParseModernDoctype(string doctypeHtml)
         {
-            var doctypeParse = new DoctypeParse();
+            var doctypeParser = new DoctypeParser();
 
-            var tagHtml = doctypeParse.Parse(doctypeHtml);
-            bool isValid = doctypeParse.IsValid(tagHtml);
+            var tagHtml = doctypeParser.Parse(doctypeHtml);
+            bool isValid = doctypeParser.IsValid(tagHtml);
 
             Assert.Equal(NameTagEnum.doctype, tagHtml.NameTag);
             Assert.Equal(string.Empty, tagHtml.Content);
@@ -37,10 +38,10 @@ namespace FalconEngineTest.DomParsing
         [InlineData("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Frameset//EN\" \"http://www.w3.org/TR/html4/frameset.dtd\">")]
         public void ParseDoctypeHtml401(string doctypeHtml)
         {
-            var doctypeParse = new DoctypeParse();
+            var doctypeParser = new DoctypeParser();
 
-            var tagHtml = doctypeParse.Parse(doctypeHtml);
-            bool isValid = doctypeParse.IsValid(tagHtml);
+            var tagHtml = doctypeParser.Parse(doctypeHtml);
+            bool isValid = doctypeParser.IsValid(tagHtml);
 
             Assert.Equal(NameTagEnum.doctype, tagHtml.NameTag);
             Assert.Equal(string.Empty, tagHtml.Content);
@@ -57,7 +58,7 @@ namespace FalconEngineTest.DomParsing
         [InlineData("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Frameset//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd\">")]
         public void ParseDoctypeXHtml1(string doctypeHtml)
         {
-            var doctypeParse = new DoctypeParse();
+            var doctypeParse = new DoctypeParser();
 
             var tagHtml = doctypeParse.Parse(doctypeHtml);
             bool isValid = doctypeParse.IsValid(tagHtml);

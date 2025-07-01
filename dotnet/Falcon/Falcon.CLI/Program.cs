@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using FalconEngine.CleanData;
 using FalconEngine.DomParsing;
+using FalconEngine.DomParsing.Parser;
 using FalconEngine.Engine;
 using Newtonsoft.Json;
 
@@ -20,11 +21,11 @@ string html = @"<!DOCTYPE html>
                         </body>
                     </html>";
 
-var doctypeParse = new DoctypeParse();
-var htmlParse = new HtmlTagParse();
-var headParse = new HeadParse();
+var doctypeParser = new DoctypeParser();
+var htmlParser = new HtmlTagParser();
+var headParser = new HeadParser();
 var extractHtmlRemaining = new ExtractHtmlRemaining();
-var htmlParsing = new HtmlParsing(doctypeParse, htmlParse, headParse, extractHtmlRemaining);
+var htmlParsing = new HtmlParsing(doctypeParser, htmlParser, headParser, extractHtmlRemaining);
 var engine = new HtmlEngine(htmlParsing);
 var result = engine.Calculate(html);
 Console.WriteLine(JsonConvert.SerializeObject(result));

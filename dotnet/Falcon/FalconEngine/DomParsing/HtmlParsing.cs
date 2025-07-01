@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FalconEngine.CleanData;
+using FalconEngine.DomParsing.Parser;
 using FalconEngine.Models;
 
 namespace FalconEngine.DomParsing
 {
     public class HtmlParsing : IHtmlParsing
     {
-        private ITagParsing _doctypeParse;
-        private ITagParsing _htmlParse;
-        private ITagParsing _headParse;
+        private ITagParser _doctypeParse;
+        private ITagParser _htmlParse;
+        private ITagParser _headParse;
         private IExtractHtmlRemaining _extractHtmlRemaining;
         private string _html;
 
-        public HtmlParsing(ITagParsing doctypeParse, ITagParsing htmlParse, ITagParsing headParse, IExtractHtmlRemaining extractHtmlRemaining)
+        public HtmlParsing(ITagParser doctypeParse, ITagParser htmlParse, ITagParser headParse, IExtractHtmlRemaining extractHtmlRemaining)
         {
             _doctypeParse = doctypeParse;
             _htmlParse = htmlParse;
@@ -31,39 +32,6 @@ namespace FalconEngine.DomParsing
             var htmlTag = GetTagHtml();
             RemoveTagOpenCloed(htmlTag);
             var headTag = GetHeadTag();
-            var metaCharsetTag = new TagModel()
-            {
-                TagFamily = TagFamilyEnum.NoEnd,
-                Attributes = new List<AttributeModel>() { new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.charset, Value = "UTF-8" } },
-                NameTag = NameTagEnum.meta,
-                Content = string.Empty
-            };
-            var metaViewPort = new TagModel()
-            {
-                TagFamily = TagFamilyEnum.NoEnd,
-                Attributes = new List<AttributeModel>() {
-                        new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.name, Value = "viewport" } ,
-                        new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.content, Value = "width=device-width, initial-scale=1.0" }
-                },
-                NameTag = NameTagEnum.meta,
-                Content = string.Empty
-            };
-            var title = new TagModel()
-            {
-                TagFamily = TagFamilyEnum.NoEnd,
-                NameTag = NameTagEnum.title,
-                Content = string.Empty
-            };
-            var link = new TagModel()
-            {
-                TagFamily = TagFamilyEnum.NoEnd,
-                Attributes = new List<AttributeModel>() {
-                        new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.rel, Value = "stylesheet" } ,
-                        new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.href, Value = "main.css" }
-                },
-                NameTag = NameTagEnum.link,
-                Content = string.Empty
-            };
             var body = GetBodyTag();
             var divContent = GetDivContent();
             var firstP = GetFirstPContent();
@@ -94,7 +62,8 @@ namespace FalconEngine.DomParsing
                 TagFamily = TagFamilyEnum.WithEnd,
                 Content = "Allez-vous apprécier mon article?"
             };
-            var tags = new List<TagModel>() { doctypeTag, htmlTag, headTag, metaCharsetTag, metaViewPort, title, link, body, divContent, firstP, span, a, secondP };
+            var tags = new List<TagModel>() { doctypeTag, htmlTag, headTag, headTag.Children[0], headTag.Children[1],
+                    headTag.Children[2], headTag.Children[3], body, divContent, firstP, span, a, secondP };
             var htmlPage = new HtmlPage() { Tags = tags };
             return htmlPage;
         }
@@ -127,6 +96,7 @@ namespace FalconEngine.DomParsing
             bool isValid = _headParse.IsValid(headTag);
             if (!isValid)
                 throw new Exception("Head tag is not valid!!!");
+            headTag.Children = _headParse.DeterminateChildren(_html);
             return headTag;
         }
 

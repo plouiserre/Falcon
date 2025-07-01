@@ -13,5 +13,6 @@ namespace FalconEngine.Models
         public TagFamilyEnum TagFamily { get; set; }
         public string TagStart { get; set; }
         public string TagEnd { get; set; }
+        public List<TagModel> Children { get; set; }
     }
 }

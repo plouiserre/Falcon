@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using FalconEngine.CleanData;
 using FalconEngine.DomParsing;
 using FalconEngine.DomParsing.CustomException;
+using FalconEngine.DomParsing.Parser;
 using FalconEngine.Models;
 using FalconEngineTest.Utils;
 
@@ -20,9 +21,9 @@ namespace FalconEngineTest.DomParsing
         [Fact]
         public void IsHeadParseIsExtract()
         {
-            var headParse = new HeadParse();
+            var headParser = new HeadParser();
 
-            var tagHtml = headParse.Parse(HtmlData.ContentHtmlSimpleWithSpace);
+            var tagHtml = headParser.Parse(HtmlData.ContentHtmlSimpleWithSpace);
 
             Assert.Equal(HtmlData.ContentHeadSimple, tagHtml.Content);
             Assert.Equal(NameTagEnum.head, tagHtml.NameTag);
@@ -34,10 +35,10 @@ namespace FalconEngineTest.DomParsing
         [Fact]
         public void IsHeadParseIsFailingBecauseNoTagEnd()
         {
-            var headParse = new HeadParse();
+            var headParser = new HeadParser();
 
             string badHtml = HtmlData.ContentHtmlSimpleWithSpace.Replace("</head>", string.Empty);
-            var exception = Assert.Throws<HeadParsingException>(() => headParse.Parse(badHtml));
+            var exception = Assert.Throws<HeadParsingException>(() => headParser.Parse(badHtml));
 
             Assert.Equal($"Une erreur a eu lieu lors du parsing de {badHtml}", exception.Message);
             Assert.Equal(ErrorType.head, exception.ErrorType);
