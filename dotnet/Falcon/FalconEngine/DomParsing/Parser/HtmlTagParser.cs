@@ -6,15 +6,15 @@ using FalconEngine.CleanData;
 using FalconEngine.DomParsing.CustomException;
 using FalconEngine.Models;
 
-namespace FalconEngine.DomParsing
+namespace FalconEngine.DomParsing.Parser
 {
-    public class HtmlTagParse : ITagParsing
+    public class HtmlTagParser : ITagParser
     {
 
         private TagModel _tag;
         private IdentifyTag _identifyTag;
 
-        public HtmlTagParse()
+        public HtmlTagParser()
         {
             _identifyTag = new IdentifyTag();
         }

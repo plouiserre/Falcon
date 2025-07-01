@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FalconEngine.DomParsing;
 using FalconEngine.DomParsing.CustomException;
+using FalconEngine.DomParsing.Parser;
 using FalconEngine.Models;
 using FalconEngineTest.Utils;
 
@@ -20,10 +21,10 @@ namespace FalconEngineTest.DomParsing
         public void ParseSimpleHtmlOneLine()
         {
             string html = HtmlData.HtmlSimple;
-            var htmlTagParse = new HtmlTagParse();
+            var htmlTagParser = new HtmlTagParser();
 
-            var tagHtml = htmlTagParse.Parse(html);
-            bool isValid = htmlTagParse.IsValid(tagHtml);
+            var tagHtml = htmlTagParser.Parse(html);
+            bool isValid = htmlTagParser.IsValid(tagHtml);
 
             Assert.Equal(NameTagEnum.html, tagHtml.NameTag);
             Assert.Equal(HtmlData.ContentHtmlSimple, tagHtml.Content);
@@ -36,10 +37,10 @@ namespace FalconEngineTest.DomParsing
         public void ParseSimpleHtmlWithSpaceAndEscapment()
         {
             string html = HtmlData.HtmlSimpleWithSpace;
-            var htmlTagParse = new HtmlTagParse();
+            var htmlTagParser = new HtmlTagParser();
 
-            var tagHtml = htmlTagParse.Parse(html);
-            bool isValid = htmlTagParse.IsValid(tagHtml);
+            var tagHtml = htmlTagParser.Parse(html);
+            bool isValid = htmlTagParser.IsValid(tagHtml);
 
             Assert.Equal(HtmlData.ContentHtmlSimpleWithSpace, tagHtml.Content);
             Assert.Equal(NameTagEnum.html, tagHtml.NameTag);
@@ -52,9 +53,9 @@ namespace FalconEngineTest.DomParsing
         public void ErrorDuringParsingHtmlTag()
         {
             string html = "<html>test";
-            var htmlTagParse = new HtmlTagParse();
+            var htmlTagParser = new HtmlTagParser();
 
-            var exception = Assert.Throws<HtmlParsingException>(() => htmlTagParse.Parse(html));
+            var exception = Assert.Throws<HtmlParsingException>(() => htmlTagParser.Parse(html));
 
             Assert.Equal("Une erreur a eu lieu lors du parsing de <html>test", exception.Message);
             Assert.Equal(ErrorType.html, exception.ErrorType);

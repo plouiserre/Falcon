@@ -1,5 +1,6 @@
 using FalconEngine.CleanData;
 using FalconEngine.DomParsing;
+using FalconEngine.DomParsing.Parser;
 using FalconEngine.Engine;
 using FalconEngine.Models;
 using FalconEngineTest.Data;
@@ -15,11 +16,11 @@ namespace FalconEngineTest.Engine
 
         public HtmlEngineTest()
         {
-            var doctypeParse = new DoctypeParse();
-            var htmlTagParse = new HtmlTagParse();
-            var headParse = new HeadParse();
+            var doctypeParser = new DoctypeParser();
+            var htmlTagParser = new HtmlTagParser();
+            var headParser = new HeadParser();
             var extractHtmlRemaining = new ExtractHtmlRemaining();
-            _htmlParsing = new HtmlParsing(doctypeParse, htmlTagParse, headParse, extractHtmlRemaining);
+            _htmlParsing = new HtmlParsing(doctypeParser, htmlTagParser, headParser, extractHtmlRemaining);
         }
 
         [Fact]

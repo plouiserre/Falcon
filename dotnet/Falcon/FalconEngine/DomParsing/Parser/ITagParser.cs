@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using FalconEngine.Models;
 
-namespace FalconEngine.DomParsing
+namespace FalconEngine.DomParsing.Parser
 {
-    public interface ITagParsing
+    public interface ITagParser
     {
         TagModel Parse(string html);
         bool IsValid(TagModel tag);

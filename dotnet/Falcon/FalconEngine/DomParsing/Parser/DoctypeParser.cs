@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using FalconEngine.Models;
 
-namespace FalconEngine.DomParsing
+namespace FalconEngine.DomParsing.Parser
 {
-    public class DoctypeParse : ITagParsing
+    public class DoctypeParser : ITagParser
     {
         public TagModel Parse(string html)
         {

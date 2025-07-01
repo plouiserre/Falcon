@@ -6,16 +6,16 @@ using FalconEngine.CleanData;
 using FalconEngine.DomParsing.CustomException;
 using FalconEngine.Models;
 
-namespace FalconEngine.DomParsing
+namespace FalconEngine.DomParsing.Parser
 {
-    public class HeadParse : ITagParsing
+    public class HeadParser : ITagParser
     {
 
         private string _html;
         private string _tagStart;
         private string _tagEnd;
 
-        public HeadParse()
+        public HeadParser()
         {
             _tagStart = "<head>";
             _tagEnd = "</head>";

@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FalconEngine.CleanData;
+using FalconEngine.DomParsing.Parser;
 using FalconEngine.Models;
 
 namespace FalconEngine.DomParsing
 {
     public class HtmlParsing : IHtmlParsing
     {
-        private ITagParsing _doctypeParse;
-        private ITagParsing _htmlParse;
-        private ITagParsing _headParse;
+        private ITagParser _doctypeParse;
+        private ITagParser _htmlParse;
+        private ITagParser _headParse;
         private IExtractHtmlRemaining _extractHtmlRemaining;
         private string _html;
 
-        public HtmlParsing(ITagParsing doctypeParse, ITagParsing htmlParse, ITagParsing headParse, IExtractHtmlRemaining extractHtmlRemaining)
+        public HtmlParsing(ITagParser doctypeParse, ITagParser htmlParse, ITagParser headParse, IExtractHtmlRemaining extractHtmlRemaining)
         {
             _doctypeParse = doctypeParse;
             _htmlParse = htmlParse;
