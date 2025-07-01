@@ -8,11 +8,11 @@ using FalconEngine.DomParsing.Parser;
 using FalconEngine.Models;
 using FalconEngineTest.Utils;
 
-namespace FalconEngineTest.DomParsing
+namespace FalconEngineTest.DomParsing.Parser
 {
-    public class HtmlTagParseTest
+    public class HtmlTagParserTest
     {
-        public HtmlTagParseTest()
+        public HtmlTagParserTest()
         {
 
         }

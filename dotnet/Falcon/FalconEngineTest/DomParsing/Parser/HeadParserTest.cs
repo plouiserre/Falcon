@@ -9,12 +9,12 @@ using FalconEngine.DomParsing.Parser;
 using FalconEngine.Models;
 using FalconEngineTest.Utils;
 
-namespace FalconEngineTest.DomParsing
+namespace FalconEngineTest.DomParsing.Parser
 {
-    public class HeadParseTest
+    public class HeadParserTest
     {
 
-        public HeadParseTest()
+        public HeadParserTest()
         {
         }
 
