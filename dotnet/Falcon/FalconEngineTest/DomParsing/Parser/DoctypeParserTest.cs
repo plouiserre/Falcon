@@ -7,9 +7,9 @@ using FalconEngine.DomParsing.Parser;
 using FalconEngine.Models;
 using FalconEngineTest.Utils;
 
-namespace FalconEngineTest.DomParsing
+namespace FalconEngineTest.DomParsing.Parser
 {
-    public class DoctypeParseTest
+    public class DoctypeParserTest
     {
         [Theory]
         [InlineData("<!DOCTYPE html>")]
