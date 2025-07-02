@@ -25,7 +25,16 @@ namespace FalconEngine.DomParsing.Parser
 
         public TagModel Parse(string html)
         {
-            throw new NotImplementedException();
+            return new TagModel()
+            {
+                Attributes = new List<AttributeModel>()
+                {
+                    new AttributeModel(){ FamilyAttribute = FamilyAttributeEnum.charset, Value = "utf-8"}
+                },
+                NameTag = NameTagEnum.meta,
+                TagFamily = TagFamilyEnum.NoEnd,
+                TagStart = html
+            };
         }
     }
 }
