@@ -8,35 +8,19 @@ namespace FalconEngine.DomParsing
 {
     public class InitiateParser
     {
+        public InitiateParser()
+        {
+
+        }
+
         public List<ITagParser> GetTagParsers(string html)
         {
-            // var parsers = new List<ITagParser>()
-            // {
-            //     new MetaParser(),
-            //     new MetaParser(),
-            //     new TitleParser(),
-            //     new LinkParser()
-            // };
-            // return parsers;
             var parser = GetTagParser(html);
             var parsers = new List<ITagParser>()
             {
                 parser
             };
             return parsers;
-        }
-
-        //for the moment I mock that but in the futur I will put in automatic
-        private List<string> SeparateInsideHtml(string html)
-        {
-            List<string> results = new List<string>()
-            {
-                "<meta charset=\"UTF-8\">",
-                "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">",
-                "<title>Document</title>",
-                "<link rel=\"stylesheet\" href=\"main.css\">"
-            };
-            return results;
         }
 
         //TODO subdivise in two differents methods!!!

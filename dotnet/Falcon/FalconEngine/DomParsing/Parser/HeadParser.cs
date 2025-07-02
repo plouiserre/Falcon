@@ -74,9 +74,8 @@ namespace FalconEngine.DomParsing.Parser
 
         public List<TagModel> DeterminateChildren(string html)
         {
-            //TODO call here the InitiateParser
-            var initiateParse = new InitiateParser();
-            var parsers = initiateParse.GetTagParsers(html);
+            var initiateParser = new InitiateParser();
+            var parsers = initiateParser.GetTagParsers(html);
             var metaCharsetTag = new TagModel()
             {
                 TagFamily = TagFamilyEnum.NoEnd,
