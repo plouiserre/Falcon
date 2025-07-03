@@ -8,6 +8,14 @@ namespace FalconEngine.DomParsing.Parser
 {
     public class MetaParser : ITagParser
     {
+
+        private IAttributeTagParser _attributeTagParser;
+
+        public MetaParser()
+        {
+            _attributeTagParser = new AttributeTagParser();
+        }
+
         public string CleanHtml(TagModel tag, string html)
         {
             throw new NotImplementedException();
@@ -25,12 +33,10 @@ namespace FalconEngine.DomParsing.Parser
 
         public TagModel Parse(string html)
         {
+            var attributes = _attributeTagParser.Parse(html);
             return new TagModel()
             {
-                Attributes = new List<AttributeModel>()
-                {
-                    new AttributeModel(){ FamilyAttribute = FamilyAttributeEnum.charset, Value = "utf-8"}
-                },
+                Attributes = attributes,
                 NameTag = NameTagEnum.meta,
                 TagFamily = TagFamilyEnum.NoEnd,
                 TagStart = html

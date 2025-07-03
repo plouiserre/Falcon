@@ -49,7 +49,7 @@ namespace FalconEngine.DomParsing.Parser
             catch (Exception ex)
             {
                 string message = $"Une erreur a eu lieu lors du parsing de {html}";
-                throw new HeadParsingException(ErrorType.head, message);
+                throw new HeadParsingException(ErrorTypeParsing.head, message);
             }
         }
 

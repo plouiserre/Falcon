@@ -5,17 +5,17 @@ using System.Threading.Tasks;
 
 namespace FalconEngine.DomParsing.CustomException
 {
-    public enum ErrorType
+    public enum ErrorTypeParsing
     {
-        html, doctype, head
+        attributes, html, doctype, head
     }
 
     public abstract class ParsingException : Exception
     {
-        public ErrorType ErrorType { get; set; }
+        public ErrorTypeParsing ErrorType { get; set; }
         public string Message { get; set; }
 
-        public ParsingException(ErrorType errorType, string message)
+        public ParsingException(ErrorTypeParsing errorType, string message)
         {
             ErrorType = errorType;
             Message = message;

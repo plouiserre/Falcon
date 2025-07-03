@@ -37,7 +37,7 @@ namespace FalconEngine.DomParsing.Parser
             catch (Exception ex)
             {
                 string message = string.Format($"Une erreur a eu lieu lors du parsing de {html}");
-                throw new HtmlParsingException(ErrorType.html, message);
+                throw new HtmlParsingException(ErrorTypeParsing.html, message);
             }
             return _tag;
         }

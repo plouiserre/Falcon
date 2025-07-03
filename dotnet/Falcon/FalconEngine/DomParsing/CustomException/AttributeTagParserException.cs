@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace FalconEngine.DomParsing.CustomException
 {
-    public class HeadParsingException : ParsingException
+    public class AttributeTagParserException : ParsingException
     {
-        public HeadParsingException(ErrorTypeParsing errorType, string message) : base(errorType, message)
+        public AttributeTagParserException(ErrorTypeParsing errorType, string message) : base(errorType, message)
         {
 
         }

@@ -58,7 +58,7 @@ namespace FalconEngineTest.DomParsing.Parser
             var exception = Assert.Throws<HtmlParsingException>(() => htmlTagParser.Parse(html));
 
             Assert.Equal("Une erreur a eu lieu lors du parsing de <html>test", exception.Message);
-            Assert.Equal(ErrorType.html, exception.ErrorType);
+            Assert.Equal(ErrorTypeParsing.html, exception.ErrorType);
         }
 
     }
