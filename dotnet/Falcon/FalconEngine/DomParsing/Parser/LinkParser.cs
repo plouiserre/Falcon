@@ -8,6 +8,13 @@ namespace FalconEngine.DomParsing.Parser
 {
     public class LinkParser : ITagParser
     {
+        private AttributeTagParser _attributeTagParser;
+
+        public LinkParser()
+        {
+            _attributeTagParser = new AttributeTagParser();
+        }
+
         public string CleanHtml(TagModel tag, string html)
         {
             throw new NotImplementedException();
@@ -25,7 +32,14 @@ namespace FalconEngine.DomParsing.Parser
 
         public TagModel Parse(string html)
         {
-            throw new NotImplementedException();
+            var attributes = _attributeTagParser.Parse(html);
+            return new TagModel()
+            {
+                Attributes = attributes,
+                NameTag = NameTagEnum.link,
+                TagFamily = TagFamilyEnum.NoEnd,
+                TagStart = html
+            };
         }
     }
 }
