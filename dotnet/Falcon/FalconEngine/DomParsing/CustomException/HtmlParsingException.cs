@@ -7,7 +7,7 @@ namespace FalconEngine.DomParsing.CustomException
 {
     public class HtmlParsingException : ParsingException
     {
-        public HtmlParsingException(ErrorType errorType, string message) : base(errorType, message)
+        public HtmlParsingException(ErrorTypeParsing errorType, string message) : base(errorType, message)
         {
 
         }
