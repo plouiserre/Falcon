@@ -96,7 +96,6 @@ namespace FalconEngine.DomParsing
             bool isValid = _headParse.IsValid(headTag);
             if (!isValid)
                 throw new Exception("Head tag is not valid!!!");
-            headTag.Children = _headParse.DeterminateChildren(_html);
             return headTag;
         }
 

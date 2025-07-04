@@ -23,13 +23,30 @@ namespace FalconEngineTest.DomParsing.Parser
         {
             var headParser = new HeadParser();
 
-            var tagHtml = headParser.Parse(HtmlData.ContentHtmlSimpleWithSpace);
+            var tagHtml = headParser.Parse(HtmlData.HeadSimple);
+            var firstChild = tagHtml.Children[0];
+            var secondChild = tagHtml.Children[1];
+            var thirdChild = tagHtml.Children[2];
+            var fourthChild = tagHtml.Children[3];
 
-            Assert.Equal(HtmlData.ContentHeadSimple, tagHtml.Content);
             Assert.Equal(NameTagEnum.head, tagHtml.NameTag);
+            Assert.Equal(HtmlData.ContentHeadSimple, tagHtml.Content);
             Assert.Equal(TagFamilyEnum.WithEnd, tagHtml.TagFamily);
             Assert.Equal("<head>", tagHtml.TagStart);
             Assert.Equal("</head>", tagHtml.TagEnd);
+            Assert.NotNull(tagHtml.Children);
+
+            Assert.Equal(NameTagEnum.meta, firstChild.NameTag);
+            Assert.Null(firstChild.Content);
+            Assert.Equal(FamilyAttributeEnum.charset, firstChild.Attributes[0].FamilyAttribute);
+            Assert.Equal("UTF-8", firstChild.Attributes[0].Value);
+            Assert.Equal(HtmlData.MetaCharset, firstChild.TagStart);
+            Assert.Null(firstChild.TagEnd);
+            Assert.Null(firstChild.Children);
+
+
+            //TODO remplacer cette fausse egalité par un test sur tous les enfants et voir si on peut en // factoriser les assert des tag
+            //Assert.Equal(1, 2);
         }
 
         [Fact]
