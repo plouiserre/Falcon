@@ -24,7 +24,7 @@ namespace FalconEngineTest.DomParsing.Parser
             bool isValid = doctypeParser.IsValid(tagHtml);
 
             Assert.Equal(NameTagEnum.doctype, tagHtml.NameTag);
-            Assert.Equal(string.Empty, tagHtml.Content);
+            Assert.Null(tagHtml.Content);
             Assert.Equal(TagFamilyEnum.NoEnd, tagHtml.TagFamily);
             Assert.Equal(doctypeHtml, tagHtml.TagStart);
             Assert.True(isValid);
@@ -44,7 +44,7 @@ namespace FalconEngineTest.DomParsing.Parser
             bool isValid = doctypeParser.IsValid(tagHtml);
 
             Assert.Equal(NameTagEnum.doctype, tagHtml.NameTag);
-            Assert.Equal(string.Empty, tagHtml.Content);
+            Assert.Null(tagHtml.Content);
             Assert.Equal(TagFamilyEnum.NoEnd, tagHtml.TagFamily);
             Assert.Equal(doctypeHtml, tagHtml.TagStart);
             Assert.True(isValid);
@@ -64,7 +64,7 @@ namespace FalconEngineTest.DomParsing.Parser
             bool isValid = doctypeParse.IsValid(tagHtml);
 
             Assert.Equal(NameTagEnum.doctype, tagHtml.NameTag);
-            Assert.Equal(string.Empty, tagHtml.Content);
+            Assert.Null(tagHtml.Content);
             Assert.Equal(TagFamilyEnum.NoEnd, tagHtml.TagFamily);
             Assert.Equal(doctypeHtml, tagHtml.TagStart);
             Assert.True(isValid);

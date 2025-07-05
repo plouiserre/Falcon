@@ -70,7 +70,10 @@ namespace FalconEngine.DomParsing.Parser
 
         private void GetContent()
         {
-            _content = _html.Replace(_startTag, string.Empty).Replace(_endTag, string.Empty);
+            int startTagIndex = _html.IndexOf(_startTag);
+            int endTagIndex = _html.IndexOf(_endTag);
+            string allTag = _html.Substring(startTagIndex, endTagIndex + _endTag.Length);
+            _content = allTag.Replace(_startTag, string.Empty).Replace(_endTag, string.Empty);
         }
     }
 }

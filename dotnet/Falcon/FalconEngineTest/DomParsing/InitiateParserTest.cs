@@ -25,7 +25,7 @@ namespace FalconEngineTest.DomParsing
         [Fact]
         public void ShoudInitiateDoctypeParser()
         {
-            string html = HtmlData.HtmlSimpleWithDoctype;
+            string html = HtmlData.SimpleDoctype;
             var initiate = new InitiateParser();
 
             var parsers = initiate.GetTagParsers(html);
@@ -84,19 +84,19 @@ namespace FalconEngineTest.DomParsing
             Assert.IsType<TitleParser>(parsers[0]);
         }
 
-        // [Fact]
-        // public void ShouldInitiateAllHeadContentParsers()
-        // {
-        //     string html = HtmlData.ContentHeadSimple;
-        //     var initiate = new InitiateParser();
+        [Fact]
+        public void ShouldInitiateAllHeadContentParsers()
+        {
+            string html = HtmlData.ContentHeadSimple;
+            var initiate = new InitiateParser();
 
-        //     var parsers = initiate.GetTagParsers(html);
+            var parsers = initiate.GetTagParsers(html);
 
-        //     Assert.Equal(4, parsers.Count);
-        //     Assert.IsType<MetaParser>(parsers[0]);
-        //     Assert.IsType<MetaParser>(parsers[1]);
-        //     Assert.IsType<TitleParser>(parsers[2]);
-        //     Assert.IsType<LinkParser>(parsers[3]);
-        // }
+            Assert.Equal(4, parsers.Count);
+            Assert.IsType<MetaParser>(parsers[0]);
+            Assert.IsType<MetaParser>(parsers[1]);
+            Assert.IsType<TitleParser>(parsers[2]);
+            Assert.IsType<LinkParser>(parsers[3]);
+        }
     }
 }
