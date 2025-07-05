@@ -82,8 +82,20 @@ namespace FalconEngine.DomParsing.Parser
             {
                 var tagChild = parser.Parse(content);
                 children.Add(tagChild);
+                string tagToRemove = CalculateAllTagAnalyze(tagChild);
+                content = content.Replace(tagToRemove, string.Empty);
             }
             return children;
+        }
+
+        private string CalculateAllTagAnalyze(TagModel tag)
+        {
+            string allTag = tag.TagStart;
+            if (!string.IsNullOrEmpty(tag.Content))
+                allTag += tag.Content;
+            if (!string.IsNullOrEmpty(tag.TagEnd))
+                allTag += tag.TagEnd;
+            return allTag;
         }
 
     }

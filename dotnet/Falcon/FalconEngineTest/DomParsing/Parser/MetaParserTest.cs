@@ -55,5 +55,23 @@ namespace FalconEngineTest.DomParsing.Parser
             Assert.Equal("width=device-width, initial-scale=1.0", tag.Attributes[1].Value);
             Assert.Null(tag.Children);
         }
+
+        [Fact]
+        public void ParseMetaCharsetWithTooManyHtml()
+        {
+            string html = HtmlData.MetaCharset;
+
+            var tag = _metaParser.Parse(HtmlData.ContentHeadSimple);
+
+            Assert.Equal(html, tag.TagStart);
+            Assert.Null(tag.TagEnd);
+            Assert.Equal(NameTagEnum.meta, tag.NameTag);
+            Assert.Null(tag.Content);
+            Assert.Equal(TagFamilyEnum.NoEnd, tag.TagFamily);
+            Assert.Single(tag.Attributes);
+            Assert.Equal(FamilyAttributeEnum.charset, tag.Attributes[0].FamilyAttribute);
+            Assert.Equal("UTF-8", tag.Attributes[0].Value);
+            Assert.Null(tag.Children);
+        }
     }
 }

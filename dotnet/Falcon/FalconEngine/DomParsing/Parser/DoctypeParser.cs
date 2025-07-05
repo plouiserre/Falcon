@@ -16,8 +16,6 @@ namespace FalconEngine.DomParsing.Parser
             {
                 TagStart = identifyTag.TagStart,
                 TagEnd = identifyTag.TagEnd,
-                Attributes = null,
-                Content = string.Empty,
                 NameTag = NameTagEnum.doctype,
                 TagFamily = TagFamilyEnum.NoEnd
             };

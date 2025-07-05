@@ -14,6 +14,10 @@ namespace FalconEngineTest.Data
 
     public class HtmlPageData
     {
+        private static TagModel _metaCharsetTag;
+        private static TagModel _metaViewPort;
+        private static TagModel _title;
+        private static TagModel _link;
         private static TagModel _doctypeTag;
         private static TagModel _htmlTag;
         private static HtmlPage _htmlPage { get; set; }
@@ -32,39 +36,8 @@ namespace FalconEngineTest.Data
             _doctypeTag = GetDoctypeTag();
             _htmlTag = GetTagHtml();
             var headTag = GetHeadTag();
-            var metaCharsetTag = new TagModel()
-            {
-                TagFamily = TagFamilyEnum.NoEnd,
-                Attributes = new List<AttributeModel>() { new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.charset, Value = "UTF-8" } },
-                NameTag = NameTagEnum.meta,
-                Content = string.Empty
-            };
-            var metaViewPort = new TagModel()
-            {
-                TagFamily = TagFamilyEnum.NoEnd,
-                Attributes = new List<AttributeModel>() {
-                        new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.name, Value = "viewport" } ,
-                        new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.content, Value = "width=device-width, initial-scale=1.0" }
-                },
-                NameTag = NameTagEnum.meta,
-                Content = string.Empty
-            };
-            var title = new TagModel()
-            {
-                TagFamily = TagFamilyEnum.NoEnd,
-                NameTag = NameTagEnum.title,
-                Content = string.Empty
-            };
-            var link = new TagModel()
-            {
-                TagFamily = TagFamilyEnum.NoEnd,
-                Attributes = new List<AttributeModel>() {
-                        new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.rel, Value = "stylesheet" } ,
-                        new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.href, Value = "main.css" }
-                },
-                NameTag = NameTagEnum.link,
-                Content = string.Empty
-            };
+
+
             var body = GetBodyTag();
             var divContent = GetDivContent();
             var firstP = GetFirstPContent();
@@ -95,7 +68,7 @@ namespace FalconEngineTest.Data
                 TagFamily = TagFamilyEnum.WithEnd,
                 Content = "Allez-vous apprécier mon article?"
             };
-            var tags = new List<TagModel>() { _doctypeTag, _htmlTag, headTag, metaCharsetTag, metaViewPort, title, link, body, divContent, firstP, span, a, secondP };
+            var tags = new List<TagModel>() { _doctypeTag, _htmlTag, headTag, _metaCharsetTag, _metaViewPort, _title, _link, body, divContent, firstP, span, a, secondP };
             _htmlPage = new HtmlPage() { Tags = tags };
             return _htmlPage;
         }
@@ -106,9 +79,6 @@ namespace FalconEngineTest.Data
             {
                 NameTag = NameTagEnum.doctype,
                 TagStart = "<!DOCTYPE html>",
-                TagEnd = string.Empty,
-                Attributes = null,
-                Content = string.Empty,
                 TagFamily = TagFamilyEnum.NoEnd
             };
             return doctypeTag;
@@ -124,18 +94,58 @@ namespace FalconEngineTest.Data
                 Attributes = new List<AttributeModel>() { attributLang, attributDir, attributXmlns },
                 NameTag = NameTagEnum.html,
                 TagFamily = TagFamilyEnum.WithEnd,
-                Content = HtmlData.ContentHtmlSimpleWithSpace
+                Content = HtmlData.ContentHtmlSimpleWithSpace,
+                TagStart = "<html lang=\"en\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\">",
+                TagEnd = "</html>"
             };
             return htmlTag;
         }
 
         private static TagModel GetHeadTag()
         {
+            _metaCharsetTag = new TagModel()
+            {
+                TagFamily = TagFamilyEnum.NoEnd,
+                Attributes = new List<AttributeModel>() { new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.charset, Value = "UTF-8" } },
+                NameTag = NameTagEnum.meta,
+                TagStart = HtmlData.MetaCharset
+            };
+            _metaViewPort = new TagModel()
+            {
+                TagFamily = TagFamilyEnum.NoEnd,
+                Attributes = new List<AttributeModel>() {
+                        new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.name, Value = "viewport" } ,
+                        new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.content, Value = "width=device-width, initial-scale=1.0" }
+                },
+                NameTag = NameTagEnum.meta,
+                TagStart = HtmlData.MetaViewPort
+            };
+            _title = new TagModel()
+            {
+                TagFamily = TagFamilyEnum.WithEnd,
+                NameTag = NameTagEnum.title,
+                Content = "Document",
+                TagStart = "<title>",
+                TagEnd = "</title>"
+            };
+            _link = new TagModel()
+            {
+                TagFamily = TagFamilyEnum.NoEnd,
+                Attributes = new List<AttributeModel>() {
+                        new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.rel, Value = "stylesheet" } ,
+                        new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.href, Value = "main.css" }
+                },
+                NameTag = NameTagEnum.link,
+                TagStart = @"<link rel=""stylesheet"" href=""main.css"">",
+            };
             var headTag = new TagModel()
             {
                 NameTag = NameTagEnum.head,
                 TagFamily = TagFamilyEnum.WithEnd,
-                Content = HtmlData.ContentHeadSimple
+                Content = HtmlData.ContentHeadSimple,
+                Children = new List<TagModel>() { _metaCharsetTag, _metaViewPort, _title, _link },
+                TagStart = "<head>",
+                TagEnd = "</head>"
             };
             return headTag;
         }
