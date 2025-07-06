@@ -72,7 +72,7 @@ namespace FalconEngine.DomParsing.Parser
         {
             int startTagIndex = _html.IndexOf(_startTag);
             int endTagIndex = _html.IndexOf(_endTag);
-            string allTag = _html.Substring(startTagIndex, endTagIndex + _endTag.Length);
+            string allTag = _html.Substring(startTagIndex, endTagIndex + _endTag.Length - startTagIndex);
             _content = allTag.Replace(_startTag, string.Empty).Replace(_endTag, string.Empty);
         }
     }

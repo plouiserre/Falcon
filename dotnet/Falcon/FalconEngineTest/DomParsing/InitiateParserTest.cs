@@ -98,5 +98,21 @@ namespace FalconEngineTest.DomParsing
             Assert.IsType<TitleParser>(parsers[2]);
             Assert.IsType<LinkParser>(parsers[3]);
         }
+
+        [Fact]
+        public void ShouldInitiateAllHeadContentParsersWithHtmlNotClean()
+        {
+            string html = "                                                    <meta charset=\"UTF-8\">                            <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">                            <title>Document</title>                            <link rel=\"stylesheet\" href=\"main.css\">                        ";
+            var initiate = new InitiateParser();
+
+            var parsers = initiate.GetTagParsers(html);
+
+            Assert.Equal(4, parsers.Count);
+            Assert.IsType<MetaParser>(parsers[0]);
+            Assert.IsType<MetaParser>(parsers[1]);
+            Assert.IsType<TitleParser>(parsers[2]);
+            Assert.IsType<LinkParser>(parsers[3]);
+        }
+
     }
 }
