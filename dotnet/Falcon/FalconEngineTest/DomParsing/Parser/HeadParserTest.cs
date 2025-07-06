@@ -45,6 +45,35 @@ namespace FalconEngineTest.DomParsing.Parser
             AssertLinkCss(fourthChild);
         }
 
+        [Fact]
+        public void IsHeadParseIsExtractWithHtmlNotClean()
+        {
+            string htmlNotClean = "\r\n                        <head>\r\n                            <meta charset=\"UTF-8\">\r\n                            <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n                            <title>Document</title>\r\n                            <link rel=\"stylesheet\" href=\"main.css\">\r\n                        </head>\r\n                        <body>\r\n                            <div id=\"content\">\r\n                                <p class=\"declarationText\">Ceci est un <span><a href=\"declaration.html\">paragraphe</a></span></p>\r\n                                <p>Allez-vous apprécier mon article?</p>\r\n                            </div>\r\n                        </body>\r\n                    ";
+            string content = "                                                    <meta charset=\"UTF-8\">                            <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">                            <title>Document</title>                            <link rel=\"stylesheet\" href=\"main.css\">                        ";
+            var headParser = new HeadParser();
+
+            var tagHtml = headParser.Parse(htmlNotClean);
+            var firstChild = tagHtml.Children[0];
+            var secondChild = tagHtml.Children[1];
+            var thirdChild = tagHtml.Children[2];
+            var fourthChild = tagHtml.Children[3];
+
+            Assert.Equal(NameTagEnum.head, tagHtml.NameTag);
+            Assert.Equal(content, tagHtml.Content);
+            Assert.Equal(TagFamilyEnum.WithEnd, tagHtml.TagFamily);
+            Assert.Equal("<head>", tagHtml.TagStart);
+            Assert.Equal("</head>", tagHtml.TagEnd);
+            Assert.NotNull(tagHtml.Children);
+
+            AssertMetaCharsetChild(firstChild);
+
+            AssertMetaViewPortChild(secondChild);
+
+            AssertTitleDocumentChild(thirdChild);
+
+            AssertLinkCss(fourthChild);
+        }
+
         private void AssertMetaCharsetChild(TagModel metaCharsetChild)
         {
             Assert.Equal(NameTagEnum.meta, metaCharsetChild.NameTag);
@@ -91,7 +120,7 @@ namespace FalconEngineTest.DomParsing.Parser
             Assert.Equal(FamilyAttributeEnum.href, linkCss.Attributes[1].FamilyAttribute);
             Assert.Equal("main.css", linkCss.Attributes[1].Value);
             Assert.Equal(TagFamilyEnum.NoEnd, linkCss.TagFamily);
-            Assert.Equal(HtmlData.LinkHead, linkCss.TagStart);
+            Assert.Equal("<link rel=\"stylesheet\" href=\"main.css\">                        ", linkCss.TagStart);
             Assert.Null(linkCss.TagEnd);
             Assert.Null(linkCss.Children);
         }

@@ -99,6 +99,30 @@ namespace FalconEngine.DomParsing
                 string htmlToRemove = _html.Substring(startTagIndex, endTagIndex - startTagIndex + endTag.Length);
                 _html = _html.Replace(htmlToRemove, string.Empty);
             }
+            _html = CleanHtml();
+        }
+
+        private string CleanHtml()
+        {
+            int goodStartHtml = LocateFirstCaracter();
+            return _html.Substring(goodStartHtml, _html.Length - goodStartHtml);
+        }
+
+        private int LocateFirstCaracter()
+        {
+            int localisation = 0;
+            for (int i = 0; i < _html.Length; i++)
+            {
+                char caracter = _html[i];
+                if (caracter != ' ')
+                {
+                    localisation = i;
+                    break;
+                }
+            }
+            if (localisation == 0)
+                localisation = _html.Length;
+            return localisation;
         }
     }
 }
