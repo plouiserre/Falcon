@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FalconEngine.CleanData;
 using FalconEngine.DomParsing.Parser;
 
 namespace FalconEngine.DomParsing
@@ -10,9 +11,11 @@ namespace FalconEngine.DomParsing
     {
         private string _html;
         private string _startTag;
-        public InitiateParser()
-        {
+        private IDeleteUselessSpace _deleteUselessSpace;
 
+        public InitiateParser(IDeleteUselessSpace deleteUselessSpace)
+        {
+            _deleteUselessSpace = deleteUselessSpace;
         }
 
         public List<ITagParser> GetTagParsers(string html)
@@ -66,7 +69,7 @@ namespace FalconEngine.DomParsing
                 case string tag when tag.ToLower().Contains("html"):
                     return new HtmlTagParser();
                 case string tag when tag.ToLower().Contains("head"):
-                    return new HeadParser();
+                    return new HeadParser(_deleteUselessSpace);
                 case string tag when tag.ToLower().Contains("meta"):
                     return new MetaParser();
                 case string tag when tag.ToLower().Contains("link"):

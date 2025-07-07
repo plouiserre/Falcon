@@ -107,5 +107,13 @@ namespace FalconEngine.CleanData
         {
             return textWorking.Contains('<');
         }
+
+        public string RemoveSpecialCaracter(string html)
+        {
+            string htmlWorking = html;
+            htmlWorking = htmlWorking.Replace("\n", string.Empty);
+            htmlWorking = htmlWorking.Replace("\r", string.Empty);
+            return htmlWorking;
+        }
     }
 }

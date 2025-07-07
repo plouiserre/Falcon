@@ -214,5 +214,19 @@ namespace FalconEngineTest.CleanData
             string htmlExpected = "<span> Hello</span> bro!!!!";
             Assert.Equal(htmlExpected, htmlClean);
         }
+
+
+        [Fact]
+        public void RemoveSpecialCaracters()
+        {
+            string html = "<span>\n \r Hello\n \r </span>";
+
+            var cleaner = new DeleteUselessSpace(null);
+
+            string htmlClean = cleaner.RemoveSpecialCaracter(html);
+
+            string htmlExpected = "<span>  Hello  </span>";
+            Assert.Equal(htmlExpected, htmlClean);
+        }
     }
 }

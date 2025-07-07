@@ -14,9 +14,11 @@ namespace FalconEngine.DomParsing.Parser
         private string _html;
         private string _tagStart;
         private string _tagEnd;
+        private IDeleteUselessSpace _deleteUselessSpace;
 
-        public HeadParser()
+        public HeadParser(IDeleteUselessSpace deleteUselessSpace)
         {
+            _deleteUselessSpace = deleteUselessSpace;
             _tagStart = "<head>";
             _tagEnd = "</head>";
         }
@@ -53,10 +55,7 @@ namespace FalconEngine.DomParsing.Parser
 
         private string CleanHtml()
         {
-            string htmlWorking = _html;
-            htmlWorking = htmlWorking.Replace("\n", string.Empty);
-            htmlWorking = htmlWorking.Replace("\r", string.Empty);
-            return htmlWorking;
+            return _deleteUselessSpace.RemoveSpecialCaracter(_html);
         }
 
         //TODO check présence des tags start and end
@@ -81,7 +80,7 @@ namespace FalconEngine.DomParsing.Parser
         //TODO add good exceptions
         private List<TagModel> DeterminateChildren(string content)
         {
-            var initiateParser = new InitiateParser();
+            var initiateParser = new InitiateParser(_deleteUselessSpace);
             var children = new List<TagModel>();
             var parsers = initiateParser.GetTagParsers(content);
             foreach (var parser in parsers)
