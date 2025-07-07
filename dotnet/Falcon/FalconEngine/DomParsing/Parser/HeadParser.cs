@@ -85,40 +85,13 @@ namespace FalconEngine.DomParsing.Parser
             var parsers = initiateParser.GetTagParsers(content);
             foreach (var parser in parsers)
             {
-                content = RemoveUselessSpace(content);
+                content = _deleteUselessSpace.RemoveUselessSpace(content);
                 var tagChild = parser.Parse(content);
                 children.Add(tagChild);
                 string tagToRemove = CalculateAllTagAnalyze(tagChild);
                 content = content.Replace(tagToRemove, string.Empty);
             }
             return children;
-        }
-
-        //TODO même code présent dans initiateParser à remettre ailleurs ici CleanHtml!!!
-        private string RemoveUselessSpace(string content)
-        {
-            int goodStartHtml = LocateFirstCaracter(content);
-            return content.Substring(goodStartHtml, content.Length - goodStartHtml);
-        }
-
-        //TODO même code présent dans initiateParser à remettre ailleurs!!!
-        private int LocateFirstCaracter(string content)
-        {
-            int Localisation = 0;
-            bool IsOpenBracket = false;
-            for (int i = 0; i < content.Length; i++)
-            {
-                char caracter = content[i];
-                if (caracter != ' ')
-                {
-                    Localisation = i;
-                    IsOpenBracket = true;
-                    break;
-                }
-            }
-            if (!IsOpenBracket)
-                Localisation = content.Length;
-            return Localisation;
         }
 
         private string CalculateAllTagAnalyze(TagModel tag)

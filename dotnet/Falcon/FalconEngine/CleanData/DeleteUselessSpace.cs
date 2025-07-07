@@ -115,5 +115,30 @@ namespace FalconEngine.CleanData
             htmlWorking = htmlWorking.Replace("\r", string.Empty);
             return htmlWorking;
         }
+
+        public string RemoveUselessSpace(string content)
+        {
+            int goodStartHtml = LocateFirstCaracter(content);
+            return content.Substring(goodStartHtml, content.Length - goodStartHtml);
+        }
+
+        private int LocateFirstCaracter(string content)
+        {
+            int Localisation = 0;
+            bool IsOpenBracket = false;
+            for (int i = 0; i < content.Length; i++)
+            {
+                char caracter = content[i];
+                if (caracter != ' ')
+                {
+                    Localisation = i;
+                    IsOpenBracket = true;
+                    break;
+                }
+            }
+            if (!IsOpenBracket)
+                Localisation = content.Length;
+            return Localisation;
+        }
     }
 }

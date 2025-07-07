@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using FalconEngine.CleanData;
 using FalconEngine.Models;
@@ -226,6 +227,19 @@ namespace FalconEngineTest.CleanData
             string htmlClean = cleaner.RemoveSpecialCaracter(html);
 
             string htmlExpected = "<span>  Hello  </span>";
+            Assert.Equal(htmlExpected, htmlClean);
+        }
+
+        [Fact]
+        public void RemoveUselessSpace()
+        {
+            string htmlNotClean = "                                                    <meta charset=\"UTF-8\">                            <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">                            <title>Document</title>                            <link rel=\"stylesheet\" href=\"main.css\">                        ";
+
+            var cleaner = new DeleteUselessSpace(null);
+
+            string htmlClean = cleaner.RemoveUselessSpace(htmlNotClean);
+
+            string htmlExpected = "<meta charset=\"UTF-8\">                            <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">                            <title>Document</title>                            <link rel=\"stylesheet\" href=\"main.css\">                        ";
             Assert.Equal(htmlExpected, htmlClean);
         }
     }
