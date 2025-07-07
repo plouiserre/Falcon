@@ -140,5 +140,10 @@ namespace FalconEngine.CleanData
                 Localisation = content.Length;
             return Localisation;
         }
+
+        public string CleanTagStart(string html)
+        {
+            return html.TrimEnd();
+        }
     }
 }

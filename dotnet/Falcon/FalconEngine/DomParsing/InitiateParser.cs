@@ -73,7 +73,7 @@ namespace FalconEngine.DomParsing
                 case string tag when tag.ToLower().Contains("meta"):
                     return new MetaParser();
                 case string tag when tag.ToLower().Contains("link"):
-                    return new LinkParser();
+                    return new LinkParser(_deleteUselessSpace);
                 case string tag when tag.ToLower().Contains("title"):
                     return new TitleParser();
                 default:

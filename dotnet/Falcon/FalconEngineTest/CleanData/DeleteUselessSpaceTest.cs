@@ -242,5 +242,18 @@ namespace FalconEngineTest.CleanData
             string htmlExpected = "<meta charset=\"UTF-8\">                            <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">                            <title>Document</title>                            <link rel=\"stylesheet\" href=\"main.css\">                        ";
             Assert.Equal(htmlExpected, htmlClean);
         }
+
+        [Fact]
+        public void CleanTagStart()
+        {
+            string html = "<link rel=\"stylesheet\" href=\"main.css\">                     ";
+
+            var cleaner = new DeleteUselessSpace(null);
+
+            string htmlClean = cleaner.CleanTagStart(html);
+
+            string htmlExpected = "<link rel=\"stylesheet\" href=\"main.css\">";
+            Assert.Equal(htmlExpected, htmlClean);
+        }
     }
 }
