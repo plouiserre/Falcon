@@ -120,7 +120,7 @@ namespace FalconEngineTest.DomParsing.Parser
             Assert.Equal(FamilyAttributeEnum.href, linkCss.Attributes[1].FamilyAttribute);
             Assert.Equal("main.css", linkCss.Attributes[1].Value);
             Assert.Equal(TagFamilyEnum.NoEnd, linkCss.TagFamily);
-            Assert.Equal("<link rel=\"stylesheet\" href=\"main.css\">                        ", linkCss.TagStart);
+            Assert.Equal("<link rel=\"stylesheet\" href=\"main.css\">", linkCss.TagStart);
             Assert.Null(linkCss.TagEnd);
             Assert.Null(linkCss.Children);
         }

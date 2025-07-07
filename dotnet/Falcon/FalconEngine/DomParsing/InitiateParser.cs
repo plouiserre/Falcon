@@ -110,19 +110,21 @@ namespace FalconEngine.DomParsing
 
         private int LocateFirstCaracter()
         {
-            int localisation = 0;
+            int Localisation = 0;
+            bool IsOpenBracketPresent = false;
             for (int i = 0; i < _html.Length; i++)
             {
                 char caracter = _html[i];
                 if (caracter != ' ')
                 {
-                    localisation = i;
+                    Localisation = i;
+                    IsOpenBracketPresent = true;
                     break;
                 }
             }
-            if (localisation == 0)
-                localisation = _html.Length;
-            return localisation;
+            if (!IsOpenBracketPresent)
+                Localisation = _html.Length;
+            return Localisation;
         }
     }
 }

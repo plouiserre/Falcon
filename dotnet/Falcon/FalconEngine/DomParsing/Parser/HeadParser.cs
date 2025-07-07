@@ -78,6 +78,7 @@ namespace FalconEngine.DomParsing.Parser
             //faire une exception si on parse mal
         }
 
+        //TODO add good exceptions
         private List<TagModel> DeterminateChildren(string content)
         {
             var initiateParser = new InitiateParser();
@@ -104,19 +105,21 @@ namespace FalconEngine.DomParsing.Parser
         //TODO même code présent dans initiateParser à remettre ailleurs!!!
         private int LocateFirstCaracter(string content)
         {
-            int localisation = 0;
+            int Localisation = 0;
+            bool IsOpenBracket = false;
             for (int i = 0; i < content.Length; i++)
             {
                 char caracter = content[i];
                 if (caracter != ' ')
                 {
-                    localisation = i;
+                    Localisation = i;
+                    IsOpenBracket = true;
                     break;
                 }
             }
-            if (localisation == 0)
-                localisation = content.Length;
-            return localisation;
+            if (!IsOpenBracket)
+                Localisation = content.Length;
+            return Localisation;
         }
 
         private string CalculateAllTagAnalyze(TagModel tag)
