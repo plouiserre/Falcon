@@ -38,8 +38,14 @@ namespace FalconEngine.DomParsing.Parser
                 Attributes = attributes,
                 NameTag = NameTagEnum.link,
                 TagFamily = TagFamilyEnum.NoEnd,
-                TagStart = html
+                TagStart = CleanTagStart(html)
             };
+        }
+
+        //TODO put in deleteuselesspace
+        private string CleanTagStart(string html)
+        {
+            return html.TrimEnd();
         }
     }
 }
