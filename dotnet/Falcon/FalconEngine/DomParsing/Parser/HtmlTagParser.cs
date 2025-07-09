@@ -8,6 +8,7 @@ using FalconEngine.Models;
 
 namespace FalconEngine.DomParsing.Parser
 {
+    //TODO HTMLTAGPARSER CLEAN TAGS ADD TEST AND STEP IN CODE
     public class HtmlTagParser : ITagParser
     {
 
@@ -31,7 +32,7 @@ namespace FalconEngine.DomParsing.Parser
                     TagStart = _identifyTag.TagStart,
                     TagEnd = _identifyTag.TagEnd
                 };
-                _tag.Content = CleanText(html);
+                _tag.Content = GetContent(html);
                 _tag.Attributes = GetAttributsHtml();
             }
             catch (Exception ex)
@@ -42,11 +43,9 @@ namespace FalconEngine.DomParsing.Parser
             return _tag;
         }
 
-        private string CleanText(string html)
+        private string GetContent(string html)
         {
-            var deleteUselessSpace = new DeleteUselessSpace(_tag);
-            string contentCleaned = deleteUselessSpace.CleanContent(html);
-            return contentCleaned;
+            return html.Replace(_identifyTag.TagStart, string.Empty).Replace(_identifyTag.TagEnd, string.Empty);
         }
 
         private List<AttributeModel> GetAttributsHtml()

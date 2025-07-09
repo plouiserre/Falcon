@@ -14,9 +14,11 @@ namespace FalconEngine.DomParsing.Parser
         private string _html;
         private string _tagStart;
         private string _tagEnd;
+        private IDeleteUselessSpace _deleteUselessSpace;
 
-        public HeadParser()
+        public HeadParser(IDeleteUselessSpace deleteUselessSpace)
         {
+            _deleteUselessSpace = deleteUselessSpace;
             _tagStart = "<head>";
             _tagEnd = "</head>";
         }
@@ -53,10 +55,7 @@ namespace FalconEngine.DomParsing.Parser
 
         private string CleanHtml()
         {
-            string htmlWorking = _html;
-            htmlWorking = htmlWorking.Replace("\n", string.Empty);
-            htmlWorking = htmlWorking.Replace("\r", string.Empty);
-            return htmlWorking;
+            return _deleteUselessSpace.PurgeUselessCaractersAroundTag(_html);
         }
 
         //TODO check présence des tags start and end
@@ -81,45 +80,17 @@ namespace FalconEngine.DomParsing.Parser
         //TODO add good exceptions
         private List<TagModel> DeterminateChildren(string content)
         {
-            var initiateParser = new InitiateParser();
+            var initiateParser = new InitiateParser(_deleteUselessSpace);
             var children = new List<TagModel>();
             var parsers = initiateParser.GetTagParsers(content);
             foreach (var parser in parsers)
             {
-                content = RemoveUselessSpace(content);
                 var tagChild = parser.Parse(content);
                 children.Add(tagChild);
                 string tagToRemove = CalculateAllTagAnalyze(tagChild);
                 content = content.Replace(tagToRemove, string.Empty);
             }
             return children;
-        }
-
-        //TODO même code présent dans initiateParser à remettre ailleurs ici CleanHtml!!!
-        private string RemoveUselessSpace(string content)
-        {
-            int goodStartHtml = LocateFirstCaracter(content);
-            return content.Substring(goodStartHtml, content.Length - goodStartHtml);
-        }
-
-        //TODO même code présent dans initiateParser à remettre ailleurs!!!
-        private int LocateFirstCaracter(string content)
-        {
-            int Localisation = 0;
-            bool IsOpenBracket = false;
-            for (int i = 0; i < content.Length; i++)
-            {
-                char caracter = content[i];
-                if (caracter != ' ')
-                {
-                    Localisation = i;
-                    IsOpenBracket = true;
-                    break;
-                }
-            }
-            if (!IsOpenBracket)
-                Localisation = content.Length;
-            return Localisation;
         }
 
         private string CalculateAllTagAnalyze(TagModel tag)

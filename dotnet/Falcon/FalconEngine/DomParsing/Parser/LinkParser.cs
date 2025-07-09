@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FalconEngine.CleanData;
 using FalconEngine.Models;
 
 namespace FalconEngine.DomParsing.Parser
@@ -9,9 +10,11 @@ namespace FalconEngine.DomParsing.Parser
     public class LinkParser : ITagParser
     {
         private AttributeTagParser _attributeTagParser;
+        private IDeleteUselessSpace _deleteUselessSpace;
 
-        public LinkParser()
+        public LinkParser(IDeleteUselessSpace deleteUselessSpace)
         {
+            _deleteUselessSpace = deleteUselessSpace;
             _attributeTagParser = new AttributeTagParser();
         }
 
@@ -38,14 +41,8 @@ namespace FalconEngine.DomParsing.Parser
                 Attributes = attributes,
                 NameTag = NameTagEnum.link,
                 TagFamily = TagFamilyEnum.NoEnd,
-                TagStart = CleanTagStart(html)
+                TagStart = _deleteUselessSpace.PurgeUselessCaractersAroundTag(html)
             };
-        }
-
-        //TODO put in deleteuselesspace
-        private string CleanTagStart(string html)
-        {
-            return html.TrimEnd();
         }
     }
 }

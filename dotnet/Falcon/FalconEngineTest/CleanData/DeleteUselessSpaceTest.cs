@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using FalconEngine.CleanData;
 using FalconEngine.Models;
@@ -10,208 +11,41 @@ namespace FalconEngineTest.CleanData
     public class DeleteUselessSpaceTest
     {
         [Fact]
-        public void NoCleanIfItIsOnlyText()
+        public void PurgeUselessCaractersBeforeTag()
         {
-            string html = "<p> Hello bro !!!!</p>";
-            var tag = new TagModel()
-            {
-                TagStart = "<p>",
-                TagEnd = "</p>"
-            };
-            var cleaner = new DeleteUselessSpace(tag);
+            string htmlNotClean = "                           \r\n                         <meta charset=\"UTF-8\">";
 
-            string htmlClean = cleaner.CleanContent(html);
+            var cleaner = new DeleteUselessSpace();
 
-            string htmlExpected = " Hello bro !!!!";
+            string htmlClean = cleaner.PurgeUselessCaractersAroundTag(htmlNotClean);
+
+            string htmlExpected = "<meta charset=\"UTF-8\">";
             Assert.Equal(htmlExpected, htmlClean);
         }
 
         [Fact]
-        public void CleanNoSpaceWithTags()
+        public void PurgeUselessCaractersAfterTagSimple()
         {
-            string html = "<p><span> Hello</span> bro!!!!</p>";
-            var tag = new TagModel()
-            {
-                TagStart = "<p>",
-                TagEnd = "</p>"
-            };
-            var cleaner = new DeleteUselessSpace(tag);
+            string htmlNotClean = "<link rel=\"stylesheet\" href=\"main.css\">            \r\n         ";
 
-            string htmlClean = cleaner.CleanContent(html);
+            var cleaner = new DeleteUselessSpace();
 
-            string htmlExpected = "<span> Hello</span> bro!!!!";
+            string htmlClean = cleaner.PurgeUselessCaractersAroundTag(htmlNotClean);
+
+            string htmlExpected = "<link rel=\"stylesheet\" href=\"main.css\">";
             Assert.Equal(htmlExpected, htmlClean);
         }
 
         [Fact]
-        public void CleanOneSpaceWithTags()
+        public void PurgeUselessCaractersAfterTagComplexe()
         {
-            string html = "<p> <span> Hello</span> bro!!!!</p>";
-            var tag = new TagModel()
-            {
-                TagStart = "<p>",
-                TagEnd = "</p>"
-            };
-            var cleaner = new DeleteUselessSpace(tag);
+            string htmlNotClean = "<head><title>Document</title>\r\n</head>            \r\n         ";
 
-            string htmlClean = cleaner.CleanContent(html);
+            var cleaner = new DeleteUselessSpace();
 
-            string htmlExpected = "<span> Hello</span> bro!!!!";
-            Assert.Equal(htmlExpected, htmlClean);
-        }
+            string htmlClean = cleaner.PurgeUselessCaractersAroundTag(htmlNotClean);
 
-        [Fact]
-        public void CleanManySpaceWithTags()
-        {
-            string html = "<p>                 <span> Hello</span> bro!!!!</p>";
-            var tag = new TagModel()
-            {
-                TagStart = "<p>",
-                TagEnd = "</p>"
-            };
-            var cleaner = new DeleteUselessSpace(tag);
-
-            string htmlClean = cleaner.CleanContent(html);
-
-            string htmlExpected = "<span> Hello</span> bro!!!!";
-            Assert.Equal(htmlExpected, htmlClean);
-        }
-
-        [Fact]
-        public void CleanNewLine()
-        {
-            string html = @"<p>
-<span> Hello</span> bro!!!!</p>";
-            var tag = new TagModel()
-            {
-                TagStart = "<p>",
-                TagEnd = "</p>"
-            };
-            var cleaner = new DeleteUselessSpace(tag);
-
-            string htmlClean = cleaner.CleanContent(html);
-
-            string htmlExpected = "<span> Hello</span> bro!!!!";
-            Assert.Equal(htmlExpected, htmlClean);
-        }
-
-        [Fact]
-        public void CleanMultipleNewLine()
-        {
-            string html = @"<p>
-
-
-
-<span> Hello</span> bro!!!!</p>";
-            var tag = new TagModel()
-            {
-                TagStart = "<p>",
-                TagEnd = "</p>"
-            };
-            var cleaner = new DeleteUselessSpace(tag);
-
-            string htmlClean = cleaner.CleanContent(html);
-
-            string htmlExpected = "<span> Hello</span> bro!!!!";
-            Assert.Equal(htmlExpected, htmlClean);
-        }
-
-        [Fact]
-        public void CleanManySpaceWithMultipleNewLine()
-        {
-            string html = @"<p>
-
-
-
-                 <span> Hello</span> bro!!!!</p>";
-            var tag = new TagModel()
-            {
-                TagStart = "<p>",
-                TagEnd = "</p>"
-            };
-            var cleaner = new DeleteUselessSpace(tag);
-
-            string htmlClean = cleaner.CleanContent(html);
-
-            string htmlExpected = "<span> Hello</span> bro!!!!";
-            Assert.Equal(htmlExpected, htmlClean);
-        }
-
-        [Fact]
-        public void CleanTab()
-        {
-            string html = @"<p> <span> Hello</span> bro!!!!</p>";
-            var tag = new TagModel()
-            {
-                TagStart = "<p>",
-                TagEnd = "</p>"
-            };
-            var cleaner = new DeleteUselessSpace(tag);
-
-            string htmlClean = cleaner.CleanContent(html);
-
-            string htmlExpected = "<span> Hello</span> bro!!!!";
-            Assert.Equal(htmlExpected, htmlClean);
-        }
-
-
-        [Fact]
-        public void CleanManyTabs()
-        {
-            string html = @"<p>         <span> Hello</span> bro!!!!</p>";
-            var tag = new TagModel()
-            {
-                TagStart = "<p>",
-                TagEnd = "</p>"
-            };
-            var cleaner = new DeleteUselessSpace(tag);
-
-            string htmlClean = cleaner.CleanContent(html);
-
-            string htmlExpected = "<span> Hello</span> bro!!!!";
-            Assert.Equal(htmlExpected, htmlClean);
-        }
-
-        [Fact]
-        public void CleanManySpaceWithMultipleNewLineManyTabs()
-        {
-            string html = @"<p>
-
-
-
-                            <span> Hello</span> bro!!!!</p>";
-            var tag = new TagModel()
-            {
-                TagStart = "<p>",
-                TagEnd = "</p>"
-            };
-            var cleaner = new DeleteUselessSpace(tag);
-
-            string htmlClean = cleaner.CleanContent(html);
-
-            string htmlExpected = "<span> Hello</span> bro!!!!";
-            Assert.Equal(htmlExpected, htmlClean);
-        }
-
-        [Fact]
-        public void CleanManySpaceWithMultipleNewLineManyTabsBeforeAndAfter()
-        {
-            string html = @"<p>
-
-
-
-                            <span> Hello</span> bro!!!!
-                                       </p>";
-            var tag = new TagModel()
-            {
-                TagStart = "<p>",
-                TagEnd = "</p>"
-            };
-            var cleaner = new DeleteUselessSpace(tag);
-
-            string htmlClean = cleaner.CleanContent(html);
-
-            string htmlExpected = "<span> Hello</span> bro!!!!";
+            string htmlExpected = "<head><title>Document</title></head>";
             Assert.Equal(htmlExpected, htmlClean);
         }
     }

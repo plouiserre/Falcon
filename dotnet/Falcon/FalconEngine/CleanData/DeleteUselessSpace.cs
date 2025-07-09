@@ -8,104 +8,81 @@ namespace FalconEngine.CleanData
 {
     public class DeleteUselessSpace : IDeleteUselessSpace
     {
-        private TagModel _tag;
+        private string _startTag;
+        private string _endTag;
 
-        public DeleteUselessSpace(TagModel tag)
+        public DeleteUselessSpace()
         {
-            _tag = tag;
         }
 
-        public string CleanContent(string text)
+        public string PurgeUselessCaractersAroundTag(string html)
         {
-            string textCleaned = string.Empty;
-            string textWorking = text.Replace(_tag.TagStart, string.Empty).Replace(_tag.TagEnd, string.Empty);
-            bool innerTags = IsInnerTags(textWorking);
-            textCleaned = DeleteFrontSpace(textWorking, innerTags);
-            textCleaned = DeleteBottomSpace(textCleaned, innerTags);
-            return textCleaned;
+            string htmlPurgeBeforeTag = PurgeBeforeTag(html);
+            string htmlPurgeWrongCaracter = PurgeWrongCaracterInsideTag(htmlPurgeBeforeTag);
+            string htmlPurge = PurgeAfterTag(htmlPurgeWrongCaracter);
+            return htmlPurge;
         }
 
-        private string DeleteFrontSpace(string textWorking, bool innerTags)
+        private string PurgeBeforeTag(string html)
         {
-            string textCleaned = string.Empty;
-            if (textWorking[0] == ' ' && innerTags)
+            string htmlWorking = html;
+            int goodStartHtml = LocateFirstCorrectCaracter(htmlWorking);
+            return htmlWorking.Substring(goodStartHtml, htmlWorking.Length - goodStartHtml);
+        }
+
+        private int LocateFirstCorrectCaracter(string content)
+        {
+            int Localisation = 0;
+            bool IsOpenBracket = false;
+            for (int i = 0; i < content.Length; i++)
             {
-                textCleaned = FrontTextCleanedWithSpace(textWorking);
-            }
-            else if (textWorking[0] == '\n' && innerTags)
-            {
-                textCleaned = FrontTextCleanedWithSpace(textWorking);
-            }
-            else
-                textCleaned = textWorking;
-            return textCleaned;
-        }
-
-        private string FrontTextCleanedWithSpace(string textWorking)
-        {
-            int positionStartTag = IndexStartTag(textWorking);
-            string textWithoutSpace = textWorking.Remove(0, positionStartTag);
-            return textWithoutSpace;
-        }
-
-        private int IndexStartTag(string textWorking)
-        {
-            int position = 0;
-            for (int i = 0; i < textWorking.Length; i++)
-            {
-                char character = textWorking[i];
-                if (character == '<')
+                char caracter = content[i];
+                if (caracter != ' ' && caracter != '\n' && caracter != '\r')
                 {
-                    position = i;
+                    Localisation = i;
+                    IsOpenBracket = true;
                     break;
                 }
             }
-            return position;
+            if (!IsOpenBracket)
+                Localisation = content.Length;
+            return Localisation;
         }
 
-        private string DeleteBottomSpace(string textWorking, bool innerTags)
+        private string PurgeWrongCaracterInsideTag(string html)
         {
-            string textCleaned = string.Empty;
-            int endIndex = textWorking.Length - 1;
-            if (textWorking[endIndex] == ' ' && innerTags)
-            {
-                textCleaned = BottomTextCleanedWithSpace(textWorking, ' ');
-            }
-            else if (textWorking[endIndex] == '\n' && innerTags)
-            {
-                textCleaned = BottomTextCleanedWithSpace(textWorking, '\n');
-            }
-            else
-                textCleaned = textWorking;
-            return textCleaned;
+            return html.Replace("\r", string.Empty).Replace("\n", string.Empty);
         }
 
-        private string BottomTextCleanedWithSpace(string textWorking, char caracterSpecial)
+        private string PurgeAfterTag(string html)
         {
-            int positionEndContent = FindLastCaracter(textWorking, caracterSpecial);
-            int caractersToDelete = textWorking.Length - positionEndContent;
-            string textWithoutSpace = textWorking.Remove(positionEndContent, caractersToDelete);
-            return textWithoutSpace;
+            _startTag = CalculateStartTag(html);
+            _endTag = CalculateEndTag();
+            string htmlCleaned = OnlyAllTag(html);
+            return htmlCleaned;
         }
 
-        public int FindLastCaracter(string textWorking, char caracterSpecial)
+
+        //TODO when I centralize the start and end tag I must replace this part
+        private string CalculateStartTag(string html)
         {
-            int position = 0;
-            for (int i = textWorking.Length - 1; i > 0; i--)
-            {
-                char caracter = textWorking[i];
-                if (caracter != caracterSpecial)
-                {
-                    position = i;
-                    break;
-                }
-            }
-            return position;
+            string htmlWorking = html;
+            int startStartTag = html.IndexOf('<');
+            int endStartTag = html.IndexOf('>');
+            return htmlWorking.Substring(startStartTag, endStartTag + 1);
         }
 
-        public bool IsInnerTags(string textWorking)
+        private string CalculateEndTag()
         {
-            return textWorking.Contains('<');
+            string tag = _startTag.Replace("<", string.Empty).Replace(">", string.Empty);
+            string cleanTag = tag.Split(' ')[0];
+            return string.Concat("</", cleanTag, ">");
+        }
+
+        private string OnlyAllTag(string html)
+        {
+            int index = html.IndexOf(_endTag);
+            return index == -1 ? _startTag : html.Substring(0, index + _endTag.Length);
         }
     }
 }

@@ -7,6 +7,6 @@ namespace FalconEngine.CleanData
 {
     public interface IDeleteUselessSpace
     {
-        string CleanContent(string text);
+        string PurgeUselessCaractersAroundTag(string html);
     }
 }
