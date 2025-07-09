@@ -41,7 +41,7 @@ namespace FalconEngine.DomParsing.Parser
                 Attributes = attributes,
                 NameTag = NameTagEnum.link,
                 TagFamily = TagFamilyEnum.NoEnd,
-                TagStart = _deleteUselessSpace.CleanTagStart(html)
+                TagStart = _deleteUselessSpace.PurgeUselessCaractersAroundTag(html)
             };
         }
     }
