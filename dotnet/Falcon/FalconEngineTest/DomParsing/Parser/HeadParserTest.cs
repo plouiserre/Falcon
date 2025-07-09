@@ -17,7 +17,7 @@ namespace FalconEngineTest.DomParsing.Parser
 
         public HeadParserTest()
         {
-            _deleteUselessSpace = new DeleteUselessSpace(null);
+            _deleteUselessSpace = new DeleteUselessSpace();
         }
 
         [Fact]

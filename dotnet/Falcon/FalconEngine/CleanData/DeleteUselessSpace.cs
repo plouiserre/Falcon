@@ -8,13 +8,11 @@ namespace FalconEngine.CleanData
 {
     public class DeleteUselessSpace : IDeleteUselessSpace
     {
-        private TagModel _tag;
         private string _startTag;
         private string _endTag;
 
-        public DeleteUselessSpace(TagModel tag)
+        public DeleteUselessSpace()
         {
-            _tag = tag;
         }
 
         public string PurgeUselessCaractersAroundTag(string html)

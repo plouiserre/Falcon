@@ -21,7 +21,7 @@ string html = @"<!DOCTYPE html>
                         </body>
                     </html>";
 
-var deleteUselessSpace = new DeleteUselessSpace(null);
+var deleteUselessSpace = new DeleteUselessSpace();
 var doctypeParser = new DoctypeParser();
 var htmlParser = new HtmlTagParser();
 var headParser = new HeadParser(deleteUselessSpace);

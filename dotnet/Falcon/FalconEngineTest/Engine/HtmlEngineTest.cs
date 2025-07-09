@@ -13,11 +13,10 @@ namespace FalconEngineTest.Engine
     {
 
         private HtmlParsing _htmlParsing { get; set; }
-        private IDeleteUselessSpace _deleteUselessSpace;
 
         public HtmlEngineTest()
         {
-            var deleteUselessSpace = new DeleteUselessSpace(null);
+            var deleteUselessSpace = new DeleteUselessSpace();
             var doctypeParser = new DoctypeParser();
             var htmlTagParser = new HtmlTagParser();
             var headParser = new HeadParser(deleteUselessSpace);

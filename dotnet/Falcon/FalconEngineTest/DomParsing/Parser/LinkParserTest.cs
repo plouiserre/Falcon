@@ -15,7 +15,7 @@ namespace FalconEngineTest.DomParsing.Parser
         public void ParseLinkTag()
         {
             string html = HtmlData.LinkHead;
-            var deleteUselessSpace = new DeleteUselessSpace(null);
+            var deleteUselessSpace = new DeleteUselessSpace();
             var linkTagParser = new LinkParser(deleteUselessSpace);
 
             var tag = linkTagParser.Parse(html);
