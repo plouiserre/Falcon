@@ -145,5 +145,46 @@ namespace FalconEngine.CleanData
         {
             return html.TrimEnd();
         }
+
+        public string PurgeUselessCaractersAroundTag(string html)
+        {
+            string htmlPurgeBeforeTag = PurgeBeforeTag(html);
+            string htmlPurge = PurgeAfterTag(htmlPurgeBeforeTag);
+            return htmlPurge;
+        }
+
+        private string PurgeBeforeTag(string html)
+        {
+            string htmlWorking = html;
+            int goodStartHtml = LocateFirstCorrectCaracter(htmlWorking);
+            return htmlWorking.Substring(goodStartHtml, htmlWorking.Length - goodStartHtml);
+        }
+
+        private int LocateFirstCorrectCaracter(string content)
+        {
+            int Localisation = 0;
+            bool IsOpenBracket = false;
+            for (int i = 0; i < content.Length; i++)
+            {
+                char caracter = content[i];
+                if (caracter != ' ' && caracter != '\n' && caracter != '\r')
+                {
+                    Localisation = i;
+                    IsOpenBracket = true;
+                    break;
+                }
+            }
+            if (!IsOpenBracket)
+                Localisation = content.Length;
+            return Localisation;
+        }
+
+        private string PurgeAfterTag(string html)
+        {
+            string htmlNotClean = html;
+            int indexLastCaracterTag = htmlNotClean.IndexOf('>');
+            string htmlCleaned = htmlNotClean.Substring(0, indexLastCaracterTag + 1);
+            return htmlCleaned;
+        }
     }
 }

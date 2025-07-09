@@ -11,5 +11,6 @@ namespace FalconEngine.CleanData
         string RemoveSpecialCaracter(string html);
         string RemoveUselessSpace(string content);
         string CleanTagStart(string html);
+        string PurgeUselessCaractersAroundTag(string html);
     }
 }

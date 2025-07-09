@@ -255,5 +255,44 @@ namespace FalconEngineTest.CleanData
             string htmlExpected = "<link rel=\"stylesheet\" href=\"main.css\">";
             Assert.Equal(htmlExpected, htmlClean);
         }
+
+        [Fact]
+        public void PurgeUselessCaractersBeforeTag()
+        {
+            string htmlNotClean = "                           \r\n                         <meta charset=\"UTF-8\">";
+
+            var cleaner = new DeleteUselessSpace(null);
+
+            string htmlClean = cleaner.PurgeUselessCaractersAroundTag(htmlNotClean);
+
+            string htmlExpected = "<meta charset=\"UTF-8\">";
+            Assert.Equal(htmlExpected, htmlClean);
+        }
+
+        [Fact]
+        public void PurgeUselessCaractersAfterTag()
+        {
+            string htmlNotClean = "<link rel=\"stylesheet\" href=\"main.css\">            \r\n         ";
+
+            var cleaner = new DeleteUselessSpace(null);
+
+            string htmlClean = cleaner.PurgeUselessCaractersAroundTag(htmlNotClean);
+
+            string htmlExpected = "<link rel=\"stylesheet\" href=\"main.css\">";
+            Assert.Equal(htmlExpected, htmlClean);
+        }
+
+        [Fact]
+        public void PurgeUselessCaractersBetweenTag()
+        {
+            string htmlNotClean = "<link rel=\"stylesheet\" href=\"main.css\">      \r\n               <meta charset=\"UTF-8\">";
+
+            var cleaner = new DeleteUselessSpace(null);
+
+            string htmlClean = cleaner.PurgeUselessCaractersAroundTag(htmlNotClean);
+
+            string htmlExpected = "<link rel=\"stylesheet\" href=\"main.css\">";
+            Assert.Equal(htmlExpected, htmlClean);
+        }
     }
 }
