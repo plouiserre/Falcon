@@ -85,7 +85,6 @@ namespace FalconEngine.DomParsing.Parser
             var parsers = initiateParser.GetTagParsers(content);
             foreach (var parser in parsers)
             {
-                content = _deleteUselessSpace.RemoveUselessSpace(content);
                 var tagChild = parser.Parse(content);
                 children.Add(tagChild);
                 string tagToRemove = CalculateAllTagAnalyze(tagChild);
