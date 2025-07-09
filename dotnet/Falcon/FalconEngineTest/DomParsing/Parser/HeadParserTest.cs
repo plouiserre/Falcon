@@ -51,7 +51,7 @@ namespace FalconEngineTest.DomParsing.Parser
         public void IsHeadParseIsExtractWithHtmlNotClean()
         {
             string htmlNotClean = "\r\n                        <head>\r\n                            <meta charset=\"UTF-8\">\r\n                            <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n                            <title>Document</title>\r\n                            <link rel=\"stylesheet\" href=\"main.css\">\r\n                        </head>\r\n                        <body>\r\n                            <div id=\"content\">\r\n                                <p class=\"declarationText\">Ceci est un <span><a href=\"declaration.html\">paragraphe</a></span></p>\r\n                                <p>Allez-vous apprécier mon article?</p>\r\n                            </div>\r\n                        </body>\r\n                    ";
-            string content = "                                                    <meta charset=\"UTF-8\">                            <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">                            <title>Document</title>                            <link rel=\"stylesheet\" href=\"main.css\">                        ";
+            string content = "                            <meta charset=\"UTF-8\">                            <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">                            <title>Document</title>                            <link rel=\"stylesheet\" href=\"main.css\">                        ";
             var headParser = new HeadParser(_deleteUselessSpace);
 
             var tagHtml = headParser.Parse(htmlNotClean);

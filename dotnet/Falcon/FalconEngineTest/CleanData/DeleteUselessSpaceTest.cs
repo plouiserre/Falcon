@@ -270,7 +270,7 @@ namespace FalconEngineTest.CleanData
         }
 
         [Fact]
-        public void PurgeUselessCaractersAfterTag()
+        public void PurgeUselessCaractersAfterTagSimple()
         {
             string htmlNotClean = "<link rel=\"stylesheet\" href=\"main.css\">            \r\n         ";
 
@@ -283,15 +283,15 @@ namespace FalconEngineTest.CleanData
         }
 
         [Fact]
-        public void PurgeUselessCaractersBetweenTag()
+        public void PurgeUselessCaractersAfterTagComplexe()
         {
-            string htmlNotClean = "<link rel=\"stylesheet\" href=\"main.css\">      \r\n               <meta charset=\"UTF-8\">";
+            string htmlNotClean = "<head><title>Document</title>\r\n</head>            \r\n         ";
 
             var cleaner = new DeleteUselessSpace(null);
 
             string htmlClean = cleaner.PurgeUselessCaractersAroundTag(htmlNotClean);
 
-            string htmlExpected = "<link rel=\"stylesheet\" href=\"main.css\">";
+            string htmlExpected = "<head><title>Document</title></head>";
             Assert.Equal(htmlExpected, htmlClean);
         }
     }

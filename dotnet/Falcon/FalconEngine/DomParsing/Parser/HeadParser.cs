@@ -55,7 +55,7 @@ namespace FalconEngine.DomParsing.Parser
 
         private string CleanHtml()
         {
-            return _deleteUselessSpace.RemoveSpecialCaracter(_html);
+            return _deleteUselessSpace.PurgeUselessCaractersAroundTag(_html);
         }
 
         //TODO check présence des tags start and end
