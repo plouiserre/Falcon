@@ -9,5 +9,6 @@ namespace FalconEngine.DomParsing.Parser
     public interface IAttributeTagParser
     {
         public List<AttributeModel> Parse(string html);
+        public bool IsAttributePresent(string html);
     }
 }

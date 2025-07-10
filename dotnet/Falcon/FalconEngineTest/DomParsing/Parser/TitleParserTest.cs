@@ -17,7 +17,8 @@ namespace FalconEngineTest.DomParsing.Parser
         public void ParseTitleTag(string titleName)
         {
             var deleteUselessSpace = new DeleteUselessSpace();
-            var identifyTag = new IdentifyTag(deleteUselessSpace);
+            var attributeTagParser = new AttributeTagParser();
+            var identifyTag = new IdentifyTag(deleteUselessSpace, attributeTagParser);
             string html = $"<title>{titleName}</title>";
             var parseTitle = new TitleParser(identifyTag);
 

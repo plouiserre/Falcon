@@ -29,20 +29,23 @@ namespace FalconEngine.DomParsing.Parser
 
         private void GetStartTag()
         {
-            int startStartTag = 0;
-            int finishStartTag = 0;
-            for (int i = 0; i < _html.Length; i++)
+            if (string.IsNullOrEmpty(_startTag))
             {
-                char caracter = _html[i];
-                if (caracter == '<')
-                    startStartTag = i;
-                else if (caracter == '>')
+                int startStartTag = 0;
+                int finishStartTag = 0;
+                for (int i = 0; i < _html.Length; i++)
                 {
-                    finishStartTag = i;
-                    break;
+                    char caracter = _html[i];
+                    if (caracter == '<')
+                        startStartTag = i;
+                    else if (caracter == '>')
+                    {
+                        finishStartTag = i;
+                        break;
+                    }
                 }
+                _startTag = _html.Substring(startStartTag, finishStartTag - startStartTag + 1);
             }
-            _startTag = _html.Substring(startStartTag, finishStartTag - startStartTag + 1);
         }
 
         private void GetAttributes()
@@ -137,6 +140,27 @@ namespace FalconEngine.DomParsing.Parser
                 throw new AttributeTagParserException(ErrorTypeParsing.attributes, $"We fail to parse the attributes of {_html}");
 
             return familyAttribute;
+        }
+
+        public bool IsAttributePresent(string html)
+        {
+            _html = html;
+            GetStartTag();
+            bool isDoctype = _startTag.ToLower().Contains("doctype");
+            bool isAttributeHere = false;
+
+            if (!isDoctype)
+            {
+                string startTagWithoutBracket = _startTag.Replace("<", string.Empty).Replace(">", string.Empty);
+                var partStartTagWithoutBracket = startTagWithoutBracket.Split("=");
+
+                isAttributeHere = partStartTagWithoutBracket.Length > 1;
+            }
+
+            if (isDoctype)
+                return false;
+            else
+                return isAttributeHere;
         }
     }
 }

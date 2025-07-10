@@ -22,7 +22,8 @@ string html = @"<!DOCTYPE html>
                     </html>";
 
 var deleteUselessSpace = new DeleteUselessSpace();
-var identifyTag = new IdentifyTag(deleteUselessSpace);
+var attributeTagParser = new AttributeTagParser();
+var identifyTag = new IdentifyTag(deleteUselessSpace, attributeTagParser);
 var doctypeParser = new DoctypeParser(identifyTag);
 var htmlParser = new HtmlTagParser(identifyTag);
 var headParser = new HeadParser(deleteUselessSpace, identifyTag);

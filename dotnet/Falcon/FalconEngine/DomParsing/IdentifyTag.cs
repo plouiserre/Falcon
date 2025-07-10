@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FalconEngine.CleanData;
+using FalconEngine.DomParsing.Parser;
 using FalconEngine.Models;
 
 namespace FalconEngine.DomParsing
@@ -12,11 +13,14 @@ namespace FalconEngine.DomParsing
         private string? _html;
         private string? _tagStart { get; set; }
         private string? _tagEnd { get; set; }
+        private List<AttributeModel> _attributes;
         private IDeleteUselessSpace _deleteUselessSpace;
+        private IAttributeTagParser _attributeTagParser;
 
-        public IdentifyTag(IDeleteUselessSpace deleteUselessSpace)
+        public IdentifyTag(IDeleteUselessSpace deleteUselessSpace, IAttributeTagParser attributeTagParser)
         {
             _deleteUselessSpace = deleteUselessSpace;
+            _attributeTagParser = attributeTagParser;
         }
 
         public TagModel Analyze(string html)
@@ -24,6 +28,7 @@ namespace FalconEngine.DomParsing
             _html = html;
             FindTagStart();
             FindTagEnd();
+            FindAttributes();
             return new TagModel()
             {
                 TagStart = _tagStart,
@@ -53,6 +58,13 @@ namespace FalconEngine.DomParsing
             string baseTag = cleanTagStart.Split(" ")[0];
             string tagEndCandidate = string.Concat("</", baseTag, ">");
             _tagEnd = _html.Contains(tagEndCandidate) ? tagEndCandidate : null;
+        }
+
+        private void FindAttributes()
+        {
+            bool isAttributeHere = _attributeTagParser.IsAttributePresent(_tagStart);
+            if (isAttributeHere)
+                _attributes = _attributeTagParser.Parse(_tagStart);
         }
     }
 }

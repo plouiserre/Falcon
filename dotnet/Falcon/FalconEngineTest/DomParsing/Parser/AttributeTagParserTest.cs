@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using FalconEngine.DomParsing.CustomException;
@@ -52,6 +53,33 @@ namespace FalconEngineTest.DomParsing.Parser
 
             Assert.Equal(ErrorTypeParsing.attributes, exception.ErrorType);
             Assert.Equal($"We fail to parse the attributes of {html}", exception.Message);
+        }
+
+
+        [Theory]
+        [InlineData("<meta name=\"viewport\" wrong content=\"width=device-width, initial-scale=1.0\">")]
+        [InlineData("<meta bigname=\"viewport\" content=\"width=device-width, initial-scale=1.0\">")]
+        [InlineData("<title class=\"beautiful\">Document</title>")]
+        public void ValidateAttributeIsHere(string html)
+        {
+            var attributeTagParser = new AttributeTagParser();
+
+            bool isAttributeHere = attributeTagParser.IsAttributePresent(html);
+
+            Assert.True(isAttributeHere);
+        }
+
+
+        [Theory]
+        [InlineData("<!DOCTYPE html>")]
+        [InlineData("<title>Document</title>")]
+        public void NoAttributeIsHere(string html)
+        {
+            var attributeTagParser = new AttributeTagParser();
+
+            bool isAttributeHere = attributeTagParser.IsAttributePresent(html);
+
+            Assert.False(isAttributeHere);
         }
     }
 }

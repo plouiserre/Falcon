@@ -17,7 +17,8 @@ namespace FalconEngineTest.DomParsing.Parser
         {
             string html = HtmlData.LinkHead;
             var deleteUselessSpace = new DeleteUselessSpace();
-            var identifyTag = new IdentifyTag(deleteUselessSpace);
+            var attributeTagParser = new AttributeTagParser();
+            var identifyTag = new IdentifyTag(deleteUselessSpace, attributeTagParser);
             var linkTagParser = new LinkParser(identifyTag);
 
             var tag = linkTagParser.Parse(html);

@@ -18,7 +18,8 @@ namespace FalconEngineTest.DomParsing.Parser
         public MetaParserTest()
         {
             var deleteUselessSpace = new DeleteUselessSpace();
-            var identifyTag = new IdentifyTag(deleteUselessSpace);
+            var attributeTagParser = new AttributeTagParser();
+            var identifyTag = new IdentifyTag(deleteUselessSpace, attributeTagParser);
             _metaParser = new MetaParser(identifyTag);
         }
 

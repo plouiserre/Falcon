@@ -17,7 +17,8 @@ namespace FalconEngineTest.DomParsing.Parser
         public HtmlTagParserTest()
         {
             var deleteUselessSpace = new DeleteUselessSpace();
-            _identifyTag = new IdentifyTag(deleteUselessSpace);
+            var attributeTagParser = new AttributeTagParser();
+            _identifyTag = new IdentifyTag(deleteUselessSpace, attributeTagParser);
         }
 
         [Fact]
