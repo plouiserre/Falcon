@@ -16,10 +16,11 @@ namespace FalconEngineTest.Engine
 
         public HtmlEngineTest()
         {
+            var identifyTag = new IdentifyTag();
             var deleteUselessSpace = new DeleteUselessSpace();
             var doctypeParser = new DoctypeParser();
-            var htmlTagParser = new HtmlTagParser();
-            var headParser = new HeadParser(deleteUselessSpace);
+            var htmlTagParser = new HtmlTagParser(identifyTag);
+            var headParser = new HeadParser(deleteUselessSpace, identifyTag);
             var extractHtmlRemaining = new ExtractHtmlRemaining();
             _htmlParsing = new HtmlParsing(doctypeParser, htmlTagParser, headParser, extractHtmlRemaining);
         }

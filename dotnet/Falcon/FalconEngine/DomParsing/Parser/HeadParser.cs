@@ -15,9 +15,11 @@ namespace FalconEngine.DomParsing.Parser
         private string _tagStart;
         private string _tagEnd;
         private IDeleteUselessSpace _deleteUselessSpace;
+        private IIdentifyTag _identifyTag;
 
-        public HeadParser(IDeleteUselessSpace deleteUselessSpace)
+        public HeadParser(IDeleteUselessSpace deleteUselessSpace, IIdentifyTag identifyTag)
         {
+            _identifyTag = identifyTag;
             _deleteUselessSpace = deleteUselessSpace;
             _tagStart = "<head>";
             _tagEnd = "</head>";
@@ -80,7 +82,7 @@ namespace FalconEngine.DomParsing.Parser
         //TODO add good exceptions
         private List<TagModel> DeterminateChildren(string content)
         {
-            var initiateParser = new InitiateParser(_deleteUselessSpace);
+            var initiateParser = new InitiateParser(_deleteUselessSpace, _identifyTag);
             var children = new List<TagModel>();
             var parsers = initiateParser.GetTagParsers(content);
             foreach (var parser in parsers)

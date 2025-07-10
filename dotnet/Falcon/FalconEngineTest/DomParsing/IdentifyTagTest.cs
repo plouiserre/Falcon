@@ -15,10 +15,10 @@ namespace FalconEngineTest.DomParsing
             string html = HtmlData.HtmlSimpleWithSpace;
             var identifyTag = new IdentifyTag();
 
-            identifyTag.Analyze(html);
+            var tag = identifyTag.Analyze(html);
 
-            Assert.Equal("<html lang=\"en\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\">", identifyTag.TagStart);
-            Assert.Equal("</html>", identifyTag.TagEnd);
+            Assert.Equal("<html lang=\"en\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\">", tag.TagStart);
+            Assert.Equal("</html>", tag.TagEnd);
         }
 
 
@@ -28,10 +28,10 @@ namespace FalconEngineTest.DomParsing
             string html = "<!DOCTYPE html>";
             var identifyTag = new IdentifyTag();
 
-            identifyTag.Analyze(html);
+            var tag = identifyTag.Analyze(html);
 
-            Assert.Equal("<!DOCTYPE html>", identifyTag.TagStart);
-            Assert.Null(identifyTag.TagEnd);
+            Assert.Equal("<!DOCTYPE html>", tag.TagStart);
+            Assert.Null(tag.TagEnd);
         }
     }
 }

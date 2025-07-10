@@ -11,14 +11,9 @@ namespace FalconEngine.DomParsing.Parser
         public TagModel Parse(string html)
         {
             var identifyTag = new IdentifyTag();
-            identifyTag.Analyze(html);
-            var tag = new TagModel()
-            {
-                TagStart = identifyTag.TagStart,
-                TagEnd = identifyTag.TagEnd,
-                NameTag = NameTagEnum.doctype,
-                TagFamily = TagFamilyEnum.NoEnd
-            };
+            var tag = identifyTag.Analyze(html);
+            tag.NameTag = NameTagEnum.doctype;
+            tag.TagFamily = TagFamilyEnum.NoEnd;
             return tag;
         }
 

@@ -12,17 +12,19 @@ namespace FalconEngineTest.DomParsing
     public class InitiateParserTest
     {
         private IDeleteUselessSpace _deleteUselessSpace;
+        private IdentifyTag _identifyTag;
 
         public InitiateParserTest()
         {
             _deleteUselessSpace = new DeleteUselessSpace();
+            _identifyTag = new IdentifyTag();
         }
 
         [Fact]
         public void ShouldInitiateHtmlParser()
         {
             string html = HtmlData.HtmlSimple;
-            var initiate = new InitiateParser(_deleteUselessSpace);
+            var initiate = new InitiateParser(_deleteUselessSpace, _identifyTag);
 
             var parsers = initiate.GetTagParsers(html);
 
@@ -34,7 +36,7 @@ namespace FalconEngineTest.DomParsing
         public void ShoudInitiateDoctypeParser()
         {
             string html = HtmlData.SimpleDoctype;
-            var initiate = new InitiateParser(_deleteUselessSpace);
+            var initiate = new InitiateParser(_deleteUselessSpace, _identifyTag);
 
             var parsers = initiate.GetTagParsers(html);
 
@@ -46,7 +48,7 @@ namespace FalconEngineTest.DomParsing
         public void ShoudInitiateHeadParser()
         {
             string html = HtmlData.HeadSimple;
-            var initiate = new InitiateParser(_deleteUselessSpace);
+            var initiate = new InitiateParser(_deleteUselessSpace, _identifyTag);
 
             var parsers = initiate.GetTagParsers(html);
 
@@ -59,7 +61,7 @@ namespace FalconEngineTest.DomParsing
         [InlineData("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">")]
         public void ShoudInitiateMetaParser(string html)
         {
-            var initiate = new InitiateParser(_deleteUselessSpace);
+            var initiate = new InitiateParser(_deleteUselessSpace, _identifyTag);
 
             var parsers = initiate.GetTagParsers(html);
 
@@ -71,7 +73,7 @@ namespace FalconEngineTest.DomParsing
         public void ShoudInitiateLinkParser()
         {
             string html = HtmlData.LinkHead;
-            var initiate = new InitiateParser(_deleteUselessSpace);
+            var initiate = new InitiateParser(_deleteUselessSpace, _identifyTag);
 
             var parsers = initiate.GetTagParsers(html);
 
@@ -84,7 +86,7 @@ namespace FalconEngineTest.DomParsing
         public void ShoudInitiateTitleParser()
         {
             string html = HtmlData.TitleDocument;
-            var initiate = new InitiateParser(_deleteUselessSpace);
+            var initiate = new InitiateParser(_deleteUselessSpace, _identifyTag);
 
             var parsers = initiate.GetTagParsers(html);
 
@@ -96,7 +98,7 @@ namespace FalconEngineTest.DomParsing
         public void ShouldInitiateAllHeadContentParsers()
         {
             string html = HtmlData.ContentHeadSimple;
-            var initiate = new InitiateParser(_deleteUselessSpace);
+            var initiate = new InitiateParser(_deleteUselessSpace, _identifyTag);
 
             var parsers = initiate.GetTagParsers(html);
 
@@ -111,7 +113,7 @@ namespace FalconEngineTest.DomParsing
         public void ShouldInitiateAllHeadContentParsersWithHtmlNotClean()
         {
             string html = "                                                    <meta charset=\"UTF-8\">                            <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">                            <title>Document</title>                            <link rel=\"stylesheet\" href=\"main.css\">                        ";
-            var initiate = new InitiateParser(_deleteUselessSpace);
+            var initiate = new InitiateParser(_deleteUselessSpace, _identifyTag);
 
             var parsers = initiate.GetTagParsers(html);
 
