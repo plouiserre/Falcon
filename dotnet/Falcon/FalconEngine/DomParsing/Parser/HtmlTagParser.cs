@@ -28,7 +28,6 @@ namespace FalconEngine.DomParsing.Parser
                 _tag.NameTag = NameTagEnum.html;
                 _tag.TagFamily = TagFamilyEnum.WithEnd;
                 _tag.Content = GetContent(html);
-                _tag.Attributes = GetAttributsHtml();
             }
             catch (Exception ex)
             {
@@ -41,13 +40,6 @@ namespace FalconEngine.DomParsing.Parser
         private string GetContent(string html)
         {
             return html.Replace(_tag.TagStart, string.Empty).Replace(_tag.TagEnd, string.Empty);
-        }
-
-        private List<AttributeModel> GetAttributsHtml()
-        {
-            var discoverAttributs = new DiscoverAttributs();
-            var attributs = discoverAttributs.Find(_tag.TagStart);
-            return attributs;
         }
 
         public bool IsValid(TagModel tag)

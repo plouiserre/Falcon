@@ -14,13 +14,9 @@ namespace FalconEngine.DomParsing.Parser
         private string _startTag { get; set; }
         private List<AttributeModel> _attributes { get; set; }
 
-        public AttributeTagParser()
-        {
-            _attributes = new List<AttributeModel>();
-        }
-
         public List<AttributeModel> Parse(string html)
         {
+            _attributes = new List<AttributeModel>();
             _html = html;
             GetStartTag();
             GetAttributes();
@@ -29,23 +25,22 @@ namespace FalconEngine.DomParsing.Parser
 
         private void GetStartTag()
         {
-            if (string.IsNullOrEmpty(_startTag))
+
+            int startStartTag = 0;
+            int finishStartTag = 0;
+            for (int i = 0; i < _html.Length; i++)
             {
-                int startStartTag = 0;
-                int finishStartTag = 0;
-                for (int i = 0; i < _html.Length; i++)
+                char caracter = _html[i];
+                if (caracter == '<')
+                    startStartTag = i;
+                else if (caracter == '>')
                 {
-                    char caracter = _html[i];
-                    if (caracter == '<')
-                        startStartTag = i;
-                    else if (caracter == '>')
-                    {
-                        finishStartTag = i;
-                        break;
-                    }
+                    finishStartTag = i;
+                    break;
                 }
-                _startTag = _html.Substring(startStartTag, finishStartTag - startStartTag + 1);
             }
+            _startTag = _html.Substring(startStartTag, finishStartTag - startStartTag + 1);
+
         }
 
         private void GetAttributes()

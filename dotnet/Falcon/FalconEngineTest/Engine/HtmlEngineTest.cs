@@ -45,7 +45,9 @@ namespace FalconEngineTest.Engine
                 return false;
             for (int i = 0; i < allExpected.Count; i++)
             {
-                if (!CheckTagModel(allExpected[i], results[i]))
+                var expectedTag = allExpected[i];
+                var resultTag = results[i];
+                if (!CheckTagModel(expectedTag, resultTag))
                     return false;
             }
             return true;

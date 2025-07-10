@@ -38,9 +38,7 @@ namespace FalconEngine.DomParsing.Parser
         public TagModel Parse(string html)
         {
             _html = html;
-            var attributes = _attributeTagParser.Parse(_html);
             var tag = _identifyTag.Analyze(_html);
-            tag.Attributes = attributes;
             tag.TagFamily = TagFamilyEnum.NoEnd;
             tag.NameTag = NameTagEnum.meta;
             return tag;

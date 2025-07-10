@@ -26,13 +26,15 @@ namespace FalconEngine.DomParsing
         public TagModel Analyze(string html)
         {
             _html = html;
+            _attributes = null;
             FindTagStart();
             FindTagEnd();
             FindAttributes();
             return new TagModel()
             {
                 TagStart = _tagStart,
-                TagEnd = _tagEnd
+                TagEnd = _tagEnd,
+                Attributes = _attributes
             };
         }
 
