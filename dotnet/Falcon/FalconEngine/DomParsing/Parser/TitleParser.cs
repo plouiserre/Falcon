@@ -9,7 +9,6 @@ namespace FalconEngine.DomParsing.Parser
     public class TitleParser : ITagParser
     {
         private string _html;
-        private string _content;
         private IIdentifyTag _identityTag;
         private TagModel _tag;
 
@@ -37,19 +36,19 @@ namespace FalconEngine.DomParsing.Parser
         {
             _html = html;
             _tag = _identityTag.Analyze(_html);
-            GetContent();
             _tag.NameTag = NameTagEnum.title;
-            _tag.Content = _content;
+            _tag.Content = GetContent();
             _tag.TagFamily = TagFamilyEnum.WithEnd;
             return _tag;
         }
 
-        private void GetContent()
+        private string GetContent()
         {
             int startTagIndex = _html.IndexOf(_tag.TagStart);
             int endTagIndex = _html.IndexOf(_tag.TagEnd);
             string allTag = _html.Substring(startTagIndex, endTagIndex + _tag.TagEnd.Length - startTagIndex);
-            _content = allTag.Replace(_tag.TagStart, string.Empty).Replace(_tag.TagEnd, string.Empty);
+            string content = allTag.Replace(_tag.TagStart, string.Empty).Replace(_tag.TagEnd, string.Empty);
+            return content;
         }
     }
 }

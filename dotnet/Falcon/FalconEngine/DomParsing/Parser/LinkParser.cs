@@ -1,21 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using FalconEngine.CleanData;
 using FalconEngine.Models;
 
 namespace FalconEngine.DomParsing.Parser
 {
     public class LinkParser : ITagParser
     {
-        private AttributeTagParser _attributeTagParser;
         private IIdentifyTag _identifyTag;
 
         public LinkParser(IIdentifyTag identifyTag)
         {
             _identifyTag = identifyTag;
-            _attributeTagParser = new AttributeTagParser();
         }
 
         public string CleanHtml(TagModel tag, string html)
@@ -35,9 +28,7 @@ namespace FalconEngine.DomParsing.Parser
 
         public TagModel Parse(string html)
         {
-            var attributes = _attributeTagParser.Parse(html);
             var tag = _identifyTag.Analyze(html);
-            tag.Attributes = attributes;
             tag.NameTag = NameTagEnum.link;
             tag.TagFamily = TagFamilyEnum.NoEnd;
             return tag;
