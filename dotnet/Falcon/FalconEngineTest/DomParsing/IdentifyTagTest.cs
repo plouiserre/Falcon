@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FalconEngine.CleanData;
 using FalconEngine.DomParsing;
 using FalconEngineTest.Utils;
 
@@ -9,11 +10,18 @@ namespace FalconEngineTest.DomParsing
 {
     public class IdentifyTagTest
     {
+        private DeleteUselessSpace _deleteUselessSpace;
+
+        public IdentifyTagTest()
+        {
+            _deleteUselessSpace = new DeleteUselessSpace();
+        }
+
         [Fact]
         public void IdentifyClairlyHtmlTagElement()
         {
             string html = HtmlData.HtmlSimpleWithSpace;
-            var identifyTag = new IdentifyTag();
+            var identifyTag = new IdentifyTag(_deleteUselessSpace);
 
             var tag = identifyTag.Analyze(html);
 
@@ -26,7 +34,7 @@ namespace FalconEngineTest.DomParsing
         public void IdentifyClairlyDoctypeTagElement()
         {
             string html = "<!DOCTYPE html>";
-            var identifyTag = new IdentifyTag();
+            var identifyTag = new IdentifyTag(_deleteUselessSpace);
 
             var tag = identifyTag.Analyze(html);
 

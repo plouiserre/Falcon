@@ -21,9 +21,9 @@ string html = @"<!DOCTYPE html>
                         </body>
                     </html>";
 
-var identifyTag = new IdentifyTag();
 var deleteUselessSpace = new DeleteUselessSpace();
-var doctypeParser = new DoctypeParser();
+var identifyTag = new IdentifyTag(deleteUselessSpace);
+var doctypeParser = new DoctypeParser(identifyTag);
 var htmlParser = new HtmlTagParser(identifyTag);
 var headParser = new HeadParser(deleteUselessSpace, identifyTag);
 var extractHtmlRemaining = new ExtractHtmlRemaining();

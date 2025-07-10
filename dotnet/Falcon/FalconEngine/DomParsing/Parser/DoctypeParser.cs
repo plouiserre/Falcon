@@ -2,16 +2,23 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FalconEngine.CleanData;
 using FalconEngine.Models;
 
 namespace FalconEngine.DomParsing.Parser
 {
     public class DoctypeParser : ITagParser
     {
+        private IIdentifyTag _identifyTag;
+
+        public DoctypeParser(IIdentifyTag identifyTag)
+        {
+            _identifyTag = identifyTag;
+        }
+
         public TagModel Parse(string html)
         {
-            var identifyTag = new IdentifyTag();
-            var tag = identifyTag.Analyze(html);
+            var tag = _identifyTag.Analyze(html);
             tag.NameTag = NameTagEnum.doctype;
             tag.TagFamily = TagFamilyEnum.NoEnd;
             return tag;

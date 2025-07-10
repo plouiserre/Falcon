@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FalconEngine.CleanData;
 using FalconEngine.Models;
 
 namespace FalconEngine.DomParsing
@@ -11,6 +12,12 @@ namespace FalconEngine.DomParsing
         private string? _html;
         private string? _tagStart { get; set; }
         private string? _tagEnd { get; set; }
+        private IDeleteUselessSpace _deleteUselessSpace;
+
+        public IdentifyTag(IDeleteUselessSpace deleteUselessSpace)
+        {
+            _deleteUselessSpace = deleteUselessSpace;
+        }
 
         public TagModel Analyze(string html)
         {
@@ -37,6 +44,7 @@ namespace FalconEngine.DomParsing
                 }
             }
             _tagStart = _html?.Substring(0, position + 1);
+            _tagStart = _deleteUselessSpace.PurgeUselessCaractersAroundTag(_tagStart);
         }
 
         private void FindTagEnd()

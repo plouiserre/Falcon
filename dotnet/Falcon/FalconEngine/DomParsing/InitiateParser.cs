@@ -67,7 +67,7 @@ namespace FalconEngine.DomParsing
             switch (_startTag)
             {
                 case string tag when tag.ToLower().Contains("doctype"):
-                    return new DoctypeParser();
+                    return new DoctypeParser(_identifyTag);
                 case string tag when tag.ToLower().Contains("html"):
                     return new HtmlTagParser(_identifyTag);
                 case string tag when tag.ToLower().Contains("head"):
@@ -75,7 +75,7 @@ namespace FalconEngine.DomParsing
                 case string tag when tag.ToLower().Contains("meta"):
                     return new MetaParser();
                 case string tag when tag.ToLower().Contains("link"):
-                    return new LinkParser(_deleteUselessSpace);
+                    return new LinkParser(_deleteUselessSpace, _identifyTag);
                 case string tag when tag.ToLower().Contains("title"):
                     return new TitleParser();
                 default:

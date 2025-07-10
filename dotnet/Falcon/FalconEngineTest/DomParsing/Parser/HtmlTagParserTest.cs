@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FalconEngine.CleanData;
 using FalconEngine.DomParsing;
 using FalconEngine.DomParsing.CustomException;
 using FalconEngine.DomParsing.Parser;
@@ -15,7 +16,8 @@ namespace FalconEngineTest.DomParsing.Parser
         private IdentifyTag _identifyTag;
         public HtmlTagParserTest()
         {
-            _identifyTag = new IdentifyTag();
+            var deleteUselessSpace = new DeleteUselessSpace();
+            _identifyTag = new IdentifyTag(deleteUselessSpace);
         }
 
         [Fact]

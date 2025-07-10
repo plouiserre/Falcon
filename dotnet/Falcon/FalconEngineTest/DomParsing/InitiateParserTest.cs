@@ -17,7 +17,7 @@ namespace FalconEngineTest.DomParsing
         public InitiateParserTest()
         {
             _deleteUselessSpace = new DeleteUselessSpace();
-            _identifyTag = new IdentifyTag();
+            _identifyTag = new IdentifyTag(_deleteUselessSpace);
         }
 
         [Fact]
