@@ -17,9 +17,11 @@ namespace FalconEngineTest.Engine
         public HtmlEngineTest()
         {
             var deleteUselessSpace = new DeleteUselessSpace();
-            var doctypeParser = new DoctypeParser();
-            var htmlTagParser = new HtmlTagParser();
-            var headParser = new HeadParser(deleteUselessSpace);
+            var attributeTagParser = new AttributeTagParser();
+            var identifyTag = new IdentifyTag(deleteUselessSpace, attributeTagParser);
+            var doctypeParser = new DoctypeParser(identifyTag);
+            var htmlTagParser = new HtmlTagParser(identifyTag);
+            var headParser = new HeadParser(deleteUselessSpace, identifyTag);
             var extractHtmlRemaining = new ExtractHtmlRemaining();
             _htmlParsing = new HtmlParsing(doctypeParser, htmlTagParser, headParser, extractHtmlRemaining);
         }
@@ -43,7 +45,9 @@ namespace FalconEngineTest.Engine
                 return false;
             for (int i = 0; i < allExpected.Count; i++)
             {
-                if (!CheckTagModel(allExpected[i], results[i]))
+                var expectedTag = allExpected[i];
+                var resultTag = results[i];
+                if (!CheckTagModel(expectedTag, resultTag))
                     return false;
             }
             return true;

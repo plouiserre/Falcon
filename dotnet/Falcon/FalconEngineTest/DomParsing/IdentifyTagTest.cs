@@ -2,23 +2,42 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FalconEngine.CleanData;
 using FalconEngine.DomParsing;
+using FalconEngine.DomParsing.Parser;
+using FalconEngine.Models;
 using FalconEngineTest.Utils;
 
 namespace FalconEngineTest.DomParsing
 {
     public class IdentifyTagTest
     {
+        private DeleteUselessSpace _deleteUselessSpace;
+        private AttributeTagParser _attributeTagParser;
+
+        public IdentifyTagTest()
+        {
+            _deleteUselessSpace = new DeleteUselessSpace();
+            _attributeTagParser = new AttributeTagParser();
+        }
+
         [Fact]
         public void IdentifyClairlyHtmlTagElement()
         {
             string html = HtmlData.HtmlSimpleWithSpace;
-            var identifyTag = new IdentifyTag();
+            var identifyTag = new IdentifyTag(_deleteUselessSpace, _attributeTagParser);
 
-            identifyTag.Analyze(html);
+            var tag = identifyTag.Analyze(html);
 
-            Assert.Equal("<html lang=\"en\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\">", identifyTag.TagStart);
-            Assert.Equal("</html>", identifyTag.TagEnd);
+            Assert.Equal("<html lang=\"en\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\">", tag.TagStart);
+            Assert.Equal("</html>", tag.TagEnd);
+            Assert.Equal(3, tag.Attributes.Count);
+            Assert.Equal(FamilyAttributeEnum.lang, tag.Attributes[0].FamilyAttribute);
+            Assert.Equal("en", tag.Attributes[0].Value);
+            Assert.Equal(FamilyAttributeEnum.dir, tag.Attributes[1].FamilyAttribute);
+            Assert.Equal("auto", tag.Attributes[1].Value);
+            Assert.Equal(FamilyAttributeEnum.xmlns, tag.Attributes[2].FamilyAttribute);
+            Assert.Equal("http://www.w3.org/1999/xhtml", tag.Attributes[2].Value);
         }
 
 
@@ -26,12 +45,27 @@ namespace FalconEngineTest.DomParsing
         public void IdentifyClairlyDoctypeTagElement()
         {
             string html = "<!DOCTYPE html>";
-            var identifyTag = new IdentifyTag();
+            var identifyTag = new IdentifyTag(_deleteUselessSpace, _attributeTagParser);
 
-            identifyTag.Analyze(html);
+            var tag = identifyTag.Analyze(html);
 
-            Assert.Equal("<!DOCTYPE html>", identifyTag.TagStart);
-            Assert.Null(identifyTag.TagEnd);
+            Assert.Equal("<!DOCTYPE html>", tag.TagStart);
+            Assert.Null(tag.TagEnd);
         }
+
+
+        [Fact]
+        public void IdentifyClairlWithSoManyHtml()
+        {
+            string html = "<title>Document</title><link rel=\"stylesheet\" href=\"main.css\">";
+            var identifyTag = new IdentifyTag(_deleteUselessSpace, _attributeTagParser);
+
+            var tag = identifyTag.Analyze(html);
+
+            Assert.Equal("<title>", tag.TagStart);
+            Assert.Equal("</title>", tag.TagEnd);
+            Assert.Null(tag.Attributes);
+        }
+
     }
 }

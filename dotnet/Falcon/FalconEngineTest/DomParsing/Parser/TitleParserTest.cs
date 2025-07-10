@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FalconEngine.CleanData;
+using FalconEngine.DomParsing;
 using FalconEngine.DomParsing.Parser;
 using FalconEngine.Models;
 
@@ -14,8 +16,11 @@ namespace FalconEngineTest.DomParsing.Parser
         [InlineData("My website")]
         public void ParseTitleTag(string titleName)
         {
+            var deleteUselessSpace = new DeleteUselessSpace();
+            var attributeTagParser = new AttributeTagParser();
+            var identifyTag = new IdentifyTag(deleteUselessSpace, attributeTagParser);
             string html = $"<title>{titleName}</title>";
-            var parseTitle = new TitleParser();
+            var parseTitle = new TitleParser(identifyTag);
 
             var tag = parseTitle.Parse(html);
 

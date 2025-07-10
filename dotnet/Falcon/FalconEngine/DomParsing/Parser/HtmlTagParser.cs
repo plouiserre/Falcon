@@ -13,27 +13,21 @@ namespace FalconEngine.DomParsing.Parser
     {
 
         private TagModel _tag;
-        private IdentifyTag _identifyTag;
+        private IIdentifyTag _identifyTag;
 
-        public HtmlTagParser()
+        public HtmlTagParser(IIdentifyTag identifyTag)
         {
-            _identifyTag = new IdentifyTag();
+            _identifyTag = identifyTag;
         }
 
         public TagModel Parse(string html)
         {
             try
             {
-                _identifyTag.Analyze(html);
-                _tag = new TagModel()
-                {
-                    NameTag = NameTagEnum.html,
-                    TagFamily = TagFamilyEnum.WithEnd,
-                    TagStart = _identifyTag.TagStart,
-                    TagEnd = _identifyTag.TagEnd
-                };
+                _tag = _identifyTag.Analyze(html);
+                _tag.NameTag = NameTagEnum.html;
+                _tag.TagFamily = TagFamilyEnum.WithEnd;
                 _tag.Content = GetContent(html);
-                _tag.Attributes = GetAttributsHtml();
             }
             catch (Exception ex)
             {
@@ -45,14 +39,7 @@ namespace FalconEngine.DomParsing.Parser
 
         private string GetContent(string html)
         {
-            return html.Replace(_identifyTag.TagStart, string.Empty).Replace(_identifyTag.TagEnd, string.Empty);
-        }
-
-        private List<AttributeModel> GetAttributsHtml()
-        {
-            var discoverAttributs = new DiscoverAttributs();
-            var attributs = discoverAttributs.Find(_tag.TagStart);
-            return attributs;
+            return html.Replace(_tag.TagStart, string.Empty).Replace(_tag.TagEnd, string.Empty);
         }
 
         public bool IsValid(TagModel tag)

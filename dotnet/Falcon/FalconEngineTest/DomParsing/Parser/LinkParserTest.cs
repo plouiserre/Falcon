@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FalconEngine.CleanData;
+using FalconEngine.DomParsing;
 using FalconEngine.DomParsing.Parser;
 using FalconEngine.Models;
 using FalconEngineTest.Utils;
@@ -16,7 +17,9 @@ namespace FalconEngineTest.DomParsing.Parser
         {
             string html = HtmlData.LinkHead;
             var deleteUselessSpace = new DeleteUselessSpace();
-            var linkTagParser = new LinkParser(deleteUselessSpace);
+            var attributeTagParser = new AttributeTagParser();
+            var identifyTag = new IdentifyTag(deleteUselessSpace, attributeTagParser);
+            var linkTagParser = new LinkParser(identifyTag);
 
             var tag = linkTagParser.Parse(html);
 

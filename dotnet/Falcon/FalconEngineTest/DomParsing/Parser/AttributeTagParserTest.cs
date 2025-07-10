@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using FalconEngine.DomParsing.CustomException;
@@ -41,6 +42,27 @@ namespace FalconEngineTest.DomParsing.Parser
         }
 
 
+
+
+        [Fact]
+        public void HtmlAttribute()
+        {
+            string html = "<html lang=\"en\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>Document</title><link rel=\"stylesheet\" href=\"main.css\"></head><body><div id=\"content\">\n                                    <p class=\"declarationText\">\n                                        Ceci est un \n                                            <span>\n                                                <a href=\"declaration.html\">\n                                                    paragraphe\n                                                </a>\n                                            </span>\n                                    </p>\n                                    <p>Allez-vous apprécier mon article?</p>\n                                </div></body></html>";
+
+            var attributeTagParser = new AttributeTagParser();
+
+            var attributs = attributeTagParser.Parse(html);
+
+            Assert.Equal(3, attributs.Count);
+            Assert.Equal(FamilyAttributeEnum.lang, attributs[0].FamilyAttribute);
+            Assert.Equal("en", attributs[0].Value);
+            Assert.Equal(FamilyAttributeEnum.dir, attributs[1].FamilyAttribute);
+            Assert.Equal("auto", attributs[1].Value);
+            Assert.Equal(FamilyAttributeEnum.xmlns, attributs[2].FamilyAttribute);
+            Assert.Equal("http://www.w3.org/1999/xhtml", attributs[2].Value);
+        }
+
+
         [Theory]
         [InlineData("<meta name=\"viewport\" wrong content=\"width=device-width, initial-scale=1.0\">")]
         [InlineData("<meta bigname=\"viewport\" content=\"width=device-width, initial-scale=1.0\">")]
@@ -52,6 +74,34 @@ namespace FalconEngineTest.DomParsing.Parser
 
             Assert.Equal(ErrorTypeParsing.attributes, exception.ErrorType);
             Assert.Equal($"We fail to parse the attributes of {html}", exception.Message);
+        }
+
+
+        [Theory]
+        [InlineData("<meta name=\"viewport\" wrong content=\"width=device-width, initial-scale=1.0\">")]
+        [InlineData("<meta bigname=\"viewport\" content=\"width=device-width, initial-scale=1.0\">")]
+        [InlineData("<title class=\"beautiful\">Document</title>")]
+        [InlineData("<html lang=\"en\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\">")]
+        public void ValidateAttributeIsHere(string html)
+        {
+            var attributeTagParser = new AttributeTagParser();
+
+            bool isAttributeHere = attributeTagParser.IsAttributePresent(html);
+
+            Assert.True(isAttributeHere);
+        }
+
+
+        [Theory]
+        [InlineData("<!DOCTYPE html>")]
+        [InlineData("<title>Document</title>")]
+        public void NoAttributeIsHere(string html)
+        {
+            var attributeTagParser = new AttributeTagParser();
+
+            bool isAttributeHere = attributeTagParser.IsAttributePresent(html);
+
+            Assert.False(isAttributeHere);
         }
     }
 }

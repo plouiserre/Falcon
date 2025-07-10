@@ -12,10 +12,12 @@ namespace FalconEngine.DomParsing.Parser
         private string _html;
         private string _tagStart;
         private IAttributeTagParser _attributeTagParser;
+        private IIdentifyTag _identifyTag;
 
-        public MetaParser()
+        public MetaParser(IIdentifyTag identifyTag)
         {
             _attributeTagParser = new AttributeTagParser();
+            _identifyTag = identifyTag;
         }
 
         public string CleanHtml(TagModel tag, string html)
@@ -36,22 +38,10 @@ namespace FalconEngine.DomParsing.Parser
         public TagModel Parse(string html)
         {
             _html = html;
-            var attributes = _attributeTagParser.Parse(html);
-            DetermineTagStart();
-            return new TagModel()
-            {
-                Attributes = attributes,
-                NameTag = NameTagEnum.meta,
-                TagFamily = TagFamilyEnum.NoEnd,
-                TagStart = _tagStart
-            };
-        }
-
-        private void DetermineTagStart()
-        {
-            int startIndex = _html.IndexOf("<");
-            int endIndex = _html.IndexOf(">");
-            _tagStart = _html.Substring(startIndex, endIndex - startIndex + 1);
+            var tag = _identifyTag.Analyze(_html);
+            tag.TagFamily = TagFamilyEnum.NoEnd;
+            tag.NameTag = NameTagEnum.meta;
+            return tag;
         }
     }
 }

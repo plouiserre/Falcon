@@ -9,9 +9,13 @@ namespace FalconEngine.DomParsing.Parser
     public class TitleParser : ITagParser
     {
         private string _html;
-        private string _startTag;
-        private string _endTag;
-        private string _content;
+        private IIdentifyTag _identityTag;
+        private TagModel _tag;
+
+        public TitleParser(IIdentifyTag identifyTag)
+        {
+            _identityTag = identifyTag;
+        }
 
         public string CleanHtml(TagModel tag, string html)
         {
@@ -31,49 +35,20 @@ namespace FalconEngine.DomParsing.Parser
         public TagModel Parse(string html)
         {
             _html = html;
-            GetTagStart();
-            GetTagEnd();
-            GetContent();
-            return new TagModel()
-            {
-                NameTag = NameTagEnum.title,
-                Content = _content,
-                TagFamily = TagFamilyEnum.WithEnd,
-                TagStart = _startTag,
-                TagEnd = _endTag
-            };
+            _tag = _identityTag.Analyze(_html);
+            _tag.NameTag = NameTagEnum.title;
+            _tag.Content = GetContent();
+            _tag.TagFamily = TagFamilyEnum.WithEnd;
+            return _tag;
         }
 
-        //TODO externalize in one place
-        private void GetTagStart()
+        private string GetContent()
         {
-            int startIndex = 0;
-            int endIndex = 0;
-            for (int i = 0; i < _html.Length; i++)
-            {
-                char caracter = _html[i];
-                if (caracter == '<')
-                    startIndex = i;
-                else if (caracter == '>')
-                {
-                    endIndex = i;
-                    break;
-                }
-            }
-            _startTag = _html.Substring(startIndex, endIndex - startIndex + 1);
-        }
-
-        private void GetTagEnd()
-        {
-            _endTag = _startTag.Replace("<", "</");
-        }
-
-        private void GetContent()
-        {
-            int startTagIndex = _html.IndexOf(_startTag);
-            int endTagIndex = _html.IndexOf(_endTag);
-            string allTag = _html.Substring(startTagIndex, endTagIndex + _endTag.Length - startTagIndex);
-            _content = allTag.Replace(_startTag, string.Empty).Replace(_endTag, string.Empty);
+            int startTagIndex = _html.IndexOf(_tag.TagStart);
+            int endTagIndex = _html.IndexOf(_tag.TagEnd);
+            string allTag = _html.Substring(startTagIndex, endTagIndex + _tag.TagEnd.Length - startTagIndex);
+            string content = allTag.Replace(_tag.TagStart, string.Empty).Replace(_tag.TagEnd, string.Empty);
+            return content;
         }
     }
 }
