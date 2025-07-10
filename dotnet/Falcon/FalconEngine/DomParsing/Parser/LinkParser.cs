@@ -10,12 +10,10 @@ namespace FalconEngine.DomParsing.Parser
     public class LinkParser : ITagParser
     {
         private AttributeTagParser _attributeTagParser;
-        private IDeleteUselessSpace _deleteUselessSpace;
         private IIdentifyTag _identifyTag;
 
-        public LinkParser(IDeleteUselessSpace deleteUselessSpace, IIdentifyTag identifyTag)
+        public LinkParser(IIdentifyTag identifyTag)
         {
-            _deleteUselessSpace = deleteUselessSpace;
             _identifyTag = identifyTag;
             _attributeTagParser = new AttributeTagParser();
         }
@@ -42,13 +40,6 @@ namespace FalconEngine.DomParsing.Parser
             tag.Attributes = attributes;
             tag.NameTag = NameTagEnum.link;
             tag.TagFamily = TagFamilyEnum.NoEnd;
-            // return new TagModel()
-            // {
-            //     Attributes = attributes,
-            //     NameTag = NameTagEnum.link,
-            //     TagFamily = TagFamilyEnum.NoEnd,
-            //     TagStart = _deleteUselessSpace.PurgeUselessCaractersAroundTag(html)
-            // };
             return tag;
         }
     }
