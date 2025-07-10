@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FalconEngine.CleanData;
+using FalconEngine.DomParsing;
 using FalconEngine.DomParsing.Parser;
 using FalconEngine.Models;
 using FalconEngineTest.Utils;
@@ -15,7 +17,9 @@ namespace FalconEngineTest.DomParsing.Parser
 
         public MetaParserTest()
         {
-            _metaParser = new MetaParser();
+            var deleteUselessSpace = new DeleteUselessSpace();
+            var identifyTag = new IdentifyTag(deleteUselessSpace);
+            _metaParser = new MetaParser(identifyTag);
         }
 
         [Fact]
