@@ -8,6 +8,6 @@ namespace FalconEngine.DomParsing.IdentifyTagParsing
 {
     public interface IIdentifyTagName
     {
-        NameTagEnum FindTagName(string html);
+        NameTagEnum FindTagName(string tagStart);
     }
 }

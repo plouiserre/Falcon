@@ -41,6 +41,8 @@ namespace FalconEngineTest.DomParsing.IdentifyTagParsing
             Assert.Equal("auto", tag.Attributes[1].Value);
             Assert.Equal(FamilyAttributeEnum.xmlns, tag.Attributes[2].FamilyAttribute);
             Assert.Equal("http://www.w3.org/1999/xhtml", tag.Attributes[2].Value);
+            Assert.Equal(NameTagEnum.html, tag.NameTag);
+            Assert.Equal(TagFamilyEnum.WithEnd, tag.TagFamily);
         }
 
 
@@ -54,6 +56,8 @@ namespace FalconEngineTest.DomParsing.IdentifyTagParsing
 
             Assert.Equal("<!DOCTYPE html>", tag.TagStart);
             Assert.Null(tag.TagEnd);
+            Assert.Equal(NameTagEnum.doctype, tag.NameTag);
+            Assert.Equal(TagFamilyEnum.NoEnd, tag.TagFamily);
         }
 
 
@@ -68,6 +72,8 @@ namespace FalconEngineTest.DomParsing.IdentifyTagParsing
             Assert.Equal("<title>", tag.TagStart);
             Assert.Equal("</title>", tag.TagEnd);
             Assert.Null(tag.Attributes);
+            Assert.Equal(NameTagEnum.title, tag.NameTag);
+            Assert.Equal(TagFamilyEnum.WithEnd, tag.TagFamily);
         }
 
     }

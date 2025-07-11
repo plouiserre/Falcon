@@ -30,7 +30,6 @@ namespace FalconEngine.DomParsing.Parser
         public TagModel Parse(string html)
         {
             var tag = _identifyTag.Analyze(html);
-            tag.TagFamily = TagFamilyEnum.NoEnd;
             return tag;
         }
     }

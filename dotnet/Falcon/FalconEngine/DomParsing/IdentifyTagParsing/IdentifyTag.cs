@@ -13,6 +13,7 @@ namespace FalconEngine.DomParsing.IdentifyTagParsing
         private string? _html;
         private string? _tagStart { get; set; }
         private string? _tagEnd { get; set; }
+        private TagFamilyEnum _tagFamily;
         private NameTagEnum _nameTag { get; set; }
         private List<AttributeModel> _attributes;
         private IDeleteUselessSpace _deleteUselessSpace;
@@ -34,12 +35,14 @@ namespace FalconEngine.DomParsing.IdentifyTagParsing
             FindTagEnd();
             FindAttributes();
             IdentifyTagName();
+            FindTagFamily();
             return new TagModel()
             {
                 TagStart = _tagStart,
                 TagEnd = _tagEnd,
                 Attributes = _attributes,
-                NameTag = _nameTag
+                NameTag = _nameTag,
+                TagFamily = _tagFamily
             };
         }
 
@@ -77,6 +80,11 @@ namespace FalconEngine.DomParsing.IdentifyTagParsing
         private void IdentifyTagName()
         {
             _nameTag = _identifyTagName.FindTagName(_tagStart);
+        }
+
+        private void FindTagFamily()
+        {
+            _tagFamily = !string.IsNullOrEmpty(_tagEnd) ? TagFamilyEnum.WithEnd : TagFamilyEnum.NoEnd;
         }
     }
 }
