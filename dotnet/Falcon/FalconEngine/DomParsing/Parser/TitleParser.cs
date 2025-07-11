@@ -37,7 +37,6 @@ namespace FalconEngine.DomParsing.Parser
         {
             _html = html;
             _tag = _identityTag.Analyze(_html);
-            _tag.NameTag = NameTagEnum.title;
             _tag.Content = GetContent();
             _tag.TagFamily = TagFamilyEnum.WithEnd;
             return _tag;
