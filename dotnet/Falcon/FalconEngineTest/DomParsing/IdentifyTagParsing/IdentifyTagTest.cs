@@ -16,19 +16,21 @@ namespace FalconEngineTest.DomParsing.IdentifyTagParsing
         private DeleteUselessSpace _deleteUselessSpace;
         private AttributeTagParser _attributeTagParser;
         private IdentifyTagName _identifyTagName;
+        private IdentifyTagFamily _identifyTagFamily;
 
         public IdentifyTagTest()
         {
             _deleteUselessSpace = new DeleteUselessSpace();
             _attributeTagParser = new AttributeTagParser();
             _identifyTagName = new IdentifyTagName();
+            _identifyTagFamily = new IdentifyTagFamily();
         }
 
         [Fact]
         public void IdentifyClairlyHtmlTagElement()
         {
             string html = HtmlData.HtmlSimpleWithSpace;
-            var identifyTag = new IdentifyTag(_deleteUselessSpace, _attributeTagParser, _identifyTagName);
+            var identifyTag = new IdentifyTag(_deleteUselessSpace, _attributeTagParser, _identifyTagName, _identifyTagFamily);
 
             var tag = identifyTag.Analyze(html);
 
@@ -48,7 +50,7 @@ namespace FalconEngineTest.DomParsing.IdentifyTagParsing
         public void IdentifyClairlyDoctypeTagElement()
         {
             string html = "<!DOCTYPE html>";
-            var identifyTag = new IdentifyTag(_deleteUselessSpace, _attributeTagParser, _identifyTagName);
+            var identifyTag = new IdentifyTag(_deleteUselessSpace, _attributeTagParser, _identifyTagName, _identifyTagFamily);
 
             var tag = identifyTag.Analyze(html);
 
@@ -61,7 +63,7 @@ namespace FalconEngineTest.DomParsing.IdentifyTagParsing
         public void IdentifyClairlWithSoManyHtml()
         {
             string html = "<title>Document</title><link rel=\"stylesheet\" href=\"main.css\">";
-            var identifyTag = new IdentifyTag(_deleteUselessSpace, _attributeTagParser, _identifyTagName);
+            var identifyTag = new IdentifyTag(_deleteUselessSpace, _attributeTagParser, _identifyTagName, _identifyTagFamily);
 
             var tag = identifyTag.Analyze(html);
 

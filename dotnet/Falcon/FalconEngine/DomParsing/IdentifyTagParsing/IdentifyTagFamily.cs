@@ -6,8 +6,11 @@ using FalconEngine.Models;
 
 namespace FalconEngine.DomParsing.IdentifyTagParsing
 {
-    public interface IIdentifyTagName
+    public class IdentifyTagFamily : IIdentifyTagFamily
     {
-        NameTagEnum FindTagName(string tagStart);
+        public TagFamilyEnum FindTagFamily(string TagEnd)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

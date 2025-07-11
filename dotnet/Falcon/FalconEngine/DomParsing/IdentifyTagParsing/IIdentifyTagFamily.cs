@@ -6,8 +6,8 @@ using FalconEngine.Models;
 
 namespace FalconEngine.DomParsing.IdentifyTagParsing
 {
-    public interface IIdentifyTagName
+    public interface IIdentifyTagFamily
     {
-        NameTagEnum FindTagName(string tagStart);
+        TagFamilyEnum FindTagFamily(string TagEnd);
     }
 }

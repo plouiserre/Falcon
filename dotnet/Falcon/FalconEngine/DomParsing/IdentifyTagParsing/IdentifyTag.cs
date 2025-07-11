@@ -18,12 +18,14 @@ namespace FalconEngine.DomParsing.IdentifyTagParsing
         private IDeleteUselessSpace _deleteUselessSpace;
         private IAttributeTagParser _attributeTagParser;
         private IIdentifyTagName _identifyTagName;
+        private IIdentifyTagFamily _identifyTagFamily;
 
-        public IdentifyTag(IDeleteUselessSpace deleteUselessSpace, IAttributeTagParser attributeTagParser, IIdentifyTagName identifyTagName)
+        public IdentifyTag(IDeleteUselessSpace deleteUselessSpace, IAttributeTagParser attributeTagParser, IIdentifyTagName identifyTagName, IIdentifyTagFamily identifyTagFamily)
         {
             _deleteUselessSpace = deleteUselessSpace;
             _attributeTagParser = attributeTagParser;
             _identifyTagName = identifyTagName;
+            _identifyTagFamily = identifyTagFamily;
         }
 
         public TagModel Analyze(string html)

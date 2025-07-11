@@ -20,7 +20,8 @@ namespace FalconEngineTest.DomParsing.Parser
             var deleteUselessSpace = new DeleteUselessSpace();
             var attributeTagParser = new AttributeTagParser();
             var identifyTagName = new IdentifyTagName();
-            var identifyTag = new IdentifyTag(deleteUselessSpace, attributeTagParser, identifyTagName);
+            var identifyTagFamily = new IdentifyTagFamily();
+            var identifyTag = new IdentifyTag(deleteUselessSpace, attributeTagParser, identifyTagName, identifyTagFamily);
             string html = $"<title>{titleName}</title>";
             var parseTitle = new TitleParser(identifyTag);
 
