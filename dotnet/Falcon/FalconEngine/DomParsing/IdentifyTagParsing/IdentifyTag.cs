@@ -6,7 +6,7 @@ using FalconEngine.CleanData;
 using FalconEngine.DomParsing.Parser;
 using FalconEngine.Models;
 
-namespace FalconEngine.DomParsing
+namespace FalconEngine.DomParsing.IdentifyTagParsing
 {
     public class IdentifyTag : IIdentifyTag
     {

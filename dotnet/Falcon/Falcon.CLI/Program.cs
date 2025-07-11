@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using FalconEngine.CleanData;
 using FalconEngine.DomParsing;
+using FalconEngine.DomParsing.IdentifyTagParsing;
 using FalconEngine.DomParsing.Parser;
 using FalconEngine.Engine;
 using Newtonsoft.Json;
