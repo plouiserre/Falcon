@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FalconEngine.CleanData;
 using FalconEngine.DomParsing.CustomException;
+using FalconEngine.DomParsing.IdentifyTagParsing;
 using FalconEngine.Models;
 
 namespace FalconEngine.DomParsing.Parser
@@ -25,7 +26,6 @@ namespace FalconEngine.DomParsing.Parser
             try
             {
                 _tag = _identifyTag.Analyze(html);
-                _tag.NameTag = NameTagEnum.html;
                 _tag.TagFamily = TagFamilyEnum.WithEnd;
                 _tag.Content = GetContent(html);
             }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FalconEngine.CleanData;
 using FalconEngine.DomParsing;
+using FalconEngine.DomParsing.IdentifyTagParsing;
 using FalconEngine.DomParsing.Parser;
 using FalconEngine.Models;
 using FalconEngineTest.Utils;
@@ -18,7 +19,8 @@ namespace FalconEngineTest.DomParsing.Parser
             string html = HtmlData.LinkHead;
             var deleteUselessSpace = new DeleteUselessSpace();
             var attributeTagParser = new AttributeTagParser();
-            var identifyTag = new IdentifyTag(deleteUselessSpace, attributeTagParser);
+            var identifyTagName = new IdentifyTagName();
+            var identifyTag = new IdentifyTag(deleteUselessSpace, attributeTagParser, identifyTagName);
             var linkTagParser = new LinkParser(identifyTag);
 
             var tag = linkTagParser.Parse(html);

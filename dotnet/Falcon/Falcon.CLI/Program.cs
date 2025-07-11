@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using FalconEngine.CleanData;
 using FalconEngine.DomParsing;
+using FalconEngine.DomParsing.IdentifyTagParsing;
 using FalconEngine.DomParsing.Parser;
 using FalconEngine.Engine;
 using Newtonsoft.Json;
@@ -23,7 +24,8 @@ string html = @"<!DOCTYPE html>
 
 var deleteUselessSpace = new DeleteUselessSpace();
 var attributeTagParser = new AttributeTagParser();
-var identifyTag = new IdentifyTag(deleteUselessSpace, attributeTagParser);
+var identifyTagName = new IdentifyTagName();
+var identifyTag = new IdentifyTag(deleteUselessSpace, attributeTagParser, identifyTagName);
 var doctypeParser = new DoctypeParser(identifyTag);
 var htmlParser = new HtmlTagParser(identifyTag);
 var headParser = new HeadParser(deleteUselessSpace, identifyTag);

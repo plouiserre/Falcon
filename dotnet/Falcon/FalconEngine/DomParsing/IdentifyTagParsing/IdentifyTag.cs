@@ -6,21 +6,24 @@ using FalconEngine.CleanData;
 using FalconEngine.DomParsing.Parser;
 using FalconEngine.Models;
 
-namespace FalconEngine.DomParsing
+namespace FalconEngine.DomParsing.IdentifyTagParsing
 {
     public class IdentifyTag : IIdentifyTag
     {
         private string? _html;
         private string? _tagStart { get; set; }
         private string? _tagEnd { get; set; }
+        private NameTagEnum _nameTag { get; set; }
         private List<AttributeModel> _attributes;
         private IDeleteUselessSpace _deleteUselessSpace;
         private IAttributeTagParser _attributeTagParser;
+        private IIdentifyTagName _identifyTagName;
 
-        public IdentifyTag(IDeleteUselessSpace deleteUselessSpace, IAttributeTagParser attributeTagParser)
+        public IdentifyTag(IDeleteUselessSpace deleteUselessSpace, IAttributeTagParser attributeTagParser, IIdentifyTagName identifyTagName)
         {
             _deleteUselessSpace = deleteUselessSpace;
             _attributeTagParser = attributeTagParser;
+            _identifyTagName = identifyTagName;
         }
 
         public TagModel Analyze(string html)
@@ -30,11 +33,13 @@ namespace FalconEngine.DomParsing
             FindTagStart();
             FindTagEnd();
             FindAttributes();
+            IdentifyTagName();
             return new TagModel()
             {
                 TagStart = _tagStart,
                 TagEnd = _tagEnd,
-                Attributes = _attributes
+                Attributes = _attributes,
+                NameTag = _nameTag
             };
         }
 
@@ -67,6 +72,11 @@ namespace FalconEngine.DomParsing
             bool isAttributeHere = _attributeTagParser.IsAttributePresent(_tagStart);
             if (isAttributeHere)
                 _attributes = _attributeTagParser.Parse(_tagStart);
+        }
+
+        private void IdentifyTagName()
+        {
+            _nameTag = _identifyTagName.FindTagName(_tagStart);
         }
     }
 }

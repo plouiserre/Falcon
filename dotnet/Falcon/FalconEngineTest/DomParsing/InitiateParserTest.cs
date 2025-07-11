@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FalconEngine.CleanData;
 using FalconEngine.DomParsing;
+using FalconEngine.DomParsing.IdentifyTagParsing;
 using FalconEngine.DomParsing.Parser;
 using FalconEngineTest.Utils;
 
@@ -18,7 +19,8 @@ namespace FalconEngineTest.DomParsing
         {
             _deleteUselessSpace = new DeleteUselessSpace();
             var attributeTagParser = new AttributeTagParser();
-            _identifyTag = new IdentifyTag(_deleteUselessSpace, attributeTagParser);
+            var identifyTagName = new IdentifyTagName();
+            _identifyTag = new IdentifyTag(_deleteUselessSpace, attributeTagParser, identifyTagName);
         }
 
         [Fact]

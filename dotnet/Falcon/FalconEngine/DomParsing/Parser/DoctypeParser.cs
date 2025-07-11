@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FalconEngine.CleanData;
+using FalconEngine.DomParsing.IdentifyTagParsing;
 using FalconEngine.Models;
 
 namespace FalconEngine.DomParsing.Parser
@@ -19,7 +20,6 @@ namespace FalconEngine.DomParsing.Parser
         public TagModel Parse(string html)
         {
             var tag = _identifyTag.Analyze(html);
-            tag.NameTag = NameTagEnum.doctype;
             tag.TagFamily = TagFamilyEnum.NoEnd;
             return tag;
         }

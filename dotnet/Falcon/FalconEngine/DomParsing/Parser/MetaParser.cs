@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FalconEngine.DomParsing.IdentifyTagParsing;
 using FalconEngine.Models;
 
 namespace FalconEngine.DomParsing.Parser
@@ -40,7 +41,6 @@ namespace FalconEngine.DomParsing.Parser
             _html = html;
             var tag = _identifyTag.Analyze(_html);
             tag.TagFamily = TagFamilyEnum.NoEnd;
-            tag.NameTag = NameTagEnum.meta;
             return tag;
         }
     }

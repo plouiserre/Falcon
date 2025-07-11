@@ -4,28 +4,31 @@ using System.Linq;
 using System.Threading.Tasks;
 using FalconEngine.CleanData;
 using FalconEngine.DomParsing;
+using FalconEngine.DomParsing.IdentifyTagParsing;
 using FalconEngine.DomParsing.Parser;
 using FalconEngine.Models;
 using FalconEngineTest.Utils;
 
-namespace FalconEngineTest.DomParsing
+namespace FalconEngineTest.DomParsing.IdentifyTagParsing
 {
     public class IdentifyTagTest
     {
         private DeleteUselessSpace _deleteUselessSpace;
         private AttributeTagParser _attributeTagParser;
+        private IdentifyTagName _identifyTagName;
 
         public IdentifyTagTest()
         {
             _deleteUselessSpace = new DeleteUselessSpace();
             _attributeTagParser = new AttributeTagParser();
+            _identifyTagName = new IdentifyTagName();
         }
 
         [Fact]
         public void IdentifyClairlyHtmlTagElement()
         {
             string html = HtmlData.HtmlSimpleWithSpace;
-            var identifyTag = new IdentifyTag(_deleteUselessSpace, _attributeTagParser);
+            var identifyTag = new IdentifyTag(_deleteUselessSpace, _attributeTagParser, _identifyTagName);
 
             var tag = identifyTag.Analyze(html);
 
@@ -45,7 +48,7 @@ namespace FalconEngineTest.DomParsing
         public void IdentifyClairlyDoctypeTagElement()
         {
             string html = "<!DOCTYPE html>";
-            var identifyTag = new IdentifyTag(_deleteUselessSpace, _attributeTagParser);
+            var identifyTag = new IdentifyTag(_deleteUselessSpace, _attributeTagParser, _identifyTagName);
 
             var tag = identifyTag.Analyze(html);
 
@@ -58,7 +61,7 @@ namespace FalconEngineTest.DomParsing
         public void IdentifyClairlWithSoManyHtml()
         {
             string html = "<title>Document</title><link rel=\"stylesheet\" href=\"main.css\">";
-            var identifyTag = new IdentifyTag(_deleteUselessSpace, _attributeTagParser);
+            var identifyTag = new IdentifyTag(_deleteUselessSpace, _attributeTagParser, _identifyTagName);
 
             var tag = identifyTag.Analyze(html);
 
