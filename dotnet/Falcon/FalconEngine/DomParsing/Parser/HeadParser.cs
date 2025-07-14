@@ -19,16 +19,17 @@ namespace FalconEngine.DomParsing.Parser
         private IIdentifyTag _identifyTag;
         private IIdentifyStartTagEndTag _identitfyStartEndTag;
         private IAttributeTagParser _attributeTagParser;
+        private IDeterminateContent _determinateContent;
 
         public HeadParser(IDeleteUselessSpace deleteUselessSpace, IIdentifyTag identifyTag,
-            IIdentifyStartTagEndTag identifyStartTagEndTag, IAttributeTagParser attributeTagParser)
+            IIdentifyStartTagEndTag identifyStartTagEndTag, IAttributeTagParser attributeTagParser,
+            IDeterminateContent determinateContent)
         {
             _identifyTag = identifyTag;
             _deleteUselessSpace = deleteUselessSpace;
-            _tagStart = "<head>";
-            _tagEnd = "</head>";
             _identitfyStartEndTag = identifyStartTagEndTag;
             _attributeTagParser = attributeTagParser;
+            _determinateContent = determinateContent;
         }
 
         public bool IsValid(TagModel tag)
@@ -42,16 +43,11 @@ namespace FalconEngine.DomParsing.Parser
             {
                 _html = html;
                 _html = CleanHtml();
-                string content = GetContent();
-                return new TagModel()
-                {
-                    Content = content,
-                    NameTag = NameTagEnum.head,
-                    TagFamily = TagFamilyEnum.WithEnd,
-                    TagEnd = _tagEnd,
-                    TagStart = _tagStart,
-                    Children = DeterminateChildren(content)
-                };
+                var tag = _identifyTag.Analyze(_html);
+                _tagStart = tag.TagStart;
+                _tagEnd = tag.TagEnd;
+                tag.Children = DeterminateChildren(tag.Content);
+                return tag;
             }
             catch (Exception ex)
             {
@@ -88,7 +84,7 @@ namespace FalconEngine.DomParsing.Parser
         //TODO add good exceptions
         private List<TagModel> DeterminateChildren(string content)
         {
-            var initiateParser = new InitiateParser(_deleteUselessSpace, _identifyTag, _identitfyStartEndTag, _attributeTagParser);
+            var initiateParser = new InitiateParser(_deleteUselessSpace, _identifyTag, _identitfyStartEndTag, _attributeTagParser, _determinateContent);
             var children = new List<TagModel>();
             var parsers = initiateParser.GetTagParsers(content);
             foreach (var parser in parsers)

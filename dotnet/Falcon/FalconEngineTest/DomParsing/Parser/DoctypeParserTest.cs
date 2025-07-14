@@ -17,11 +17,7 @@ namespace FalconEngineTest.DomParsing.Parser
 
         public DoctypeParserTest()
         {
-            var deleteUselessSpace = TestFactory.InitDeleteUselessSpace();
-            var attributeTagParser = TestFactory.InitAttributeTagParser();
-            var identifyTagName = TestFactory.InitIdentifyTagName();
-            var identifyStartTagEndTag = new IdentifyStartTagEndTag();
-            _identifyTag = new IdentifyTag(deleteUselessSpace, attributeTagParser, identifyTagName, identifyStartTagEndTag);
+            _identifyTag = TestFactory.InitIdentifyTag();
         }
 
         [Theory]

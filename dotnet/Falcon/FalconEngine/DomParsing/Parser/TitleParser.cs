@@ -12,10 +12,12 @@ namespace FalconEngine.DomParsing.Parser
         private string _html;
         private IIdentifyTag _identityTag;
         private TagModel _tag;
+        private IDeterminateContent _determinateContent;
 
-        public TitleParser(IIdentifyTag identifyTag)
+        public TitleParser(IIdentifyTag identifyTag, IDeterminateContent determinateContent)
         {
             _identityTag = identifyTag;
+            _determinateContent = determinateContent;
         }
 
         public string CleanHtml(TagModel tag, string html)
@@ -37,17 +39,8 @@ namespace FalconEngine.DomParsing.Parser
         {
             _html = html;
             _tag = _identityTag.Analyze(_html);
-            _tag.Content = GetContent();
+            _tag.Content = _determinateContent.FindContent(html, _tag.TagStart, _tag.TagEnd);
             return _tag;
-        }
-
-        private string GetContent()
-        {
-            int startTagIndex = _html.IndexOf(_tag.TagStart);
-            int endTagIndex = _html.IndexOf(_tag.TagEnd);
-            string allTag = _html.Substring(startTagIndex, endTagIndex + _tag.TagEnd.Length - startTagIndex);
-            string content = allTag.Replace(_tag.TagStart, string.Empty).Replace(_tag.TagEnd, string.Empty);
-            return content;
         }
     }
 }
