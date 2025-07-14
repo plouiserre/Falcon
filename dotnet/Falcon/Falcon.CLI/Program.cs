@@ -22,10 +22,10 @@ string html = @"<!DOCTYPE html>
                         </body>
                     </html>";
 
+var identifyTagName = new IdentifyTagName();
 var identifyStartTagEndTag = new IdentifyStartTagEndTag();
 var deleteUselessSpace = new DeleteUselessSpace(identifyStartTagEndTag);
 var attributeTagParser = new AttributeTagParser(identifyStartTagEndTag);
-var identifyTagName = new IdentifyTagName(identifyStartTagEndTag);
 var identifyTag = new IdentifyTag(deleteUselessSpace, attributeTagParser, identifyTagName, identifyStartTagEndTag);
 var doctypeParser = new DoctypeParser(identifyTag);
 var htmlParser = new HtmlTagParser(identifyTag);

@@ -30,7 +30,7 @@ namespace FalconEngineTest.Utils
 
         public static IdentifyTagName InitIdentifyTagName()
         {
-            return new IdentifyTagName(InitIdentifyStartTagEndTag());
+            return new IdentifyTagName();
         }
 
         public static IdentifyTag InitIdentifyTag()

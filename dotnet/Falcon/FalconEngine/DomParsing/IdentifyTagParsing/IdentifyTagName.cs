@@ -9,12 +9,6 @@ namespace FalconEngine.DomParsing.IdentifyTagParsing
     public class IdentifyTagName : IIdentifyTagName
     {
         private string _startTag;
-        private IIdentifyStartTagEndTag _identifyStartTagEndTag;
-
-        public IdentifyTagName(IIdentifyStartTagEndTag identifyStartTagEndTag)
-        {
-            _identifyStartTagEndTag = identifyStartTagEndTag;
-        }
 
         public NameTagEnum FindTagName(string startTag)
         {
