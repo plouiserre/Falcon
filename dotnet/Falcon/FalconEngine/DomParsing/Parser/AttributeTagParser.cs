@@ -25,29 +25,10 @@ namespace FalconEngine.DomParsing.Parser
         {
             _attributes = new List<AttributeModel>();
             _html = html;
-            GetStartTag();
+            _identifyStartTagEndTag.DetermineStartEndTags(_html);
+            _startTag = _identifyStartTagEndTag.StartTag;
             GetAttributes();
             return _attributes;
-        }
-
-        private void GetStartTag()
-        {
-
-            int startStartTag = 0;
-            int finishStartTag = 0;
-            for (int i = 0; i < _html.Length; i++)
-            {
-                char caracter = _html[i];
-                if (caracter == '<')
-                    startStartTag = i;
-                else if (caracter == '>')
-                {
-                    finishStartTag = i;
-                    break;
-                }
-            }
-            _startTag = _html.Substring(startStartTag, finishStartTag - startStartTag + 1);
-
         }
 
         private void GetAttributes()
@@ -147,7 +128,8 @@ namespace FalconEngine.DomParsing.Parser
         public bool IsAttributePresent(string html)
         {
             _html = html;
-            GetStartTag();
+            _identifyStartTagEndTag.DetermineStartEndTags(html);
+            _startTag = _identifyStartTagEndTag.StartTag;
             bool isDoctype = _startTag.ToLower().Contains("doctype");
             bool isAttributeHere = false;
 

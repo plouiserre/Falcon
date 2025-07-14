@@ -59,33 +59,21 @@ namespace FalconEngine.CleanData
 
         private string PurgeAfterTag(string html)
         {
-            _startTag = CalculateStartTag(html);
-            _endTag = CalculateEndTag();
+            _identifyStartTagEndTag.DetermineStartEndTags(html);
+            _startTag = _identifyStartTagEndTag.StartTag;
+            _endTag = _identifyStartTagEndTag.EndTag != null ? _identifyStartTagEndTag.EndTag : string.Empty;
             string htmlCleaned = OnlyAllTag(html);
             return htmlCleaned;
         }
 
-
-        //TODO when I centralize the start and end tag I must replace this part
-        private string CalculateStartTag(string html)
-        {
-            string htmlWorking = html;
-            int startStartTag = html.IndexOf('<');
-            int endStartTag = html.IndexOf('>');
-            return htmlWorking.Substring(startStartTag, endStartTag + 1);
-        }
-
-        private string CalculateEndTag()
-        {
-            string tag = _startTag.Replace("<", string.Empty).Replace(">", string.Empty);
-            string cleanTag = tag.Split(' ')[0];
-            return string.Concat("</", cleanTag, ">");
-        }
-
         private string OnlyAllTag(string html)
         {
-            int index = html.IndexOf(_endTag);
-            return index == -1 ? _startTag : html.Substring(0, index + _endTag.Length);
+            if (!string.IsNullOrEmpty(_endTag))
+            {
+                int index = html.IndexOf(_endTag);
+                return html.Substring(0, index + _endTag.Length);
+            }
+            return _startTag;
         }
     }
 }
