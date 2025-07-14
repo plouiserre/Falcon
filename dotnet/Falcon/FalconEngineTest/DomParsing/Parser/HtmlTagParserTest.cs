@@ -15,16 +15,18 @@ namespace FalconEngineTest.DomParsing.Parser
     public class HtmlTagParserTest
     {
         private IdentifyTag _identifyTag;
+        private DeterminateContent _determinateContent;
         public HtmlTagParserTest()
         {
             _identifyTag = TestFactory.InitIdentifyTag();
+            _determinateContent = TestFactory.InitDeterminateContent();
         }
 
         [Fact]
         public void ParseSimpleHtmlOneLine()
         {
             string html = HtmlData.HtmlSimple;
-            var htmlTagParser = new HtmlTagParser(_identifyTag);
+            var htmlTagParser = new HtmlTagParser(_identifyTag, _determinateContent);
 
             var tagHtml = htmlTagParser.Parse(html);
             bool isValid = htmlTagParser.IsValid(tagHtml);
@@ -40,7 +42,7 @@ namespace FalconEngineTest.DomParsing.Parser
         public void ParseSimpleHtmlWithSpaceAndEscapment()
         {
             string html = HtmlData.HtmlSimpleWithSpace;
-            var htmlTagParser = new HtmlTagParser(_identifyTag);
+            var htmlTagParser = new HtmlTagParser(_identifyTag, _determinateContent);
 
             var tagHtml = htmlTagParser.Parse(html);
             bool isValid = htmlTagParser.IsValid(tagHtml);
@@ -56,7 +58,7 @@ namespace FalconEngineTest.DomParsing.Parser
         public void ErrorDuringParsingHtmlTag()
         {
             string html = "<html>test";
-            var htmlTagParser = new HtmlTagParser(_identifyTag);
+            var htmlTagParser = new HtmlTagParser(_identifyTag, _determinateContent);
 
             var exception = Assert.Throws<HtmlParsingException>(() => htmlTagParser.Parse(html));
 

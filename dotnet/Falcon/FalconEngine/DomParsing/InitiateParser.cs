@@ -16,14 +16,17 @@ namespace FalconEngine.DomParsing
         private IIdentifyTag _identifyTag;
         private IIdentifyStartTagEndTag _identifyStartTagEndTag;
         private IAttributeTagParser _attributeTagParser;
+        private IDeterminateContent _determinateContent;
 
         public InitiateParser(IDeleteUselessSpace deleteUselessSpace, IIdentifyTag identifyTag,
-            IIdentifyStartTagEndTag identifyStartTagEndTag, IAttributeTagParser attributeTagParser)
+            IIdentifyStartTagEndTag identifyStartTagEndTag, IAttributeTagParser attributeTagParser,
+            IDeterminateContent determinateContent)
         {
             _deleteUselessSpace = deleteUselessSpace;
             _identifyTag = identifyTag;
             _identifyStartTagEndTag = identifyStartTagEndTag;
             _attributeTagParser = attributeTagParser;
+            _determinateContent = determinateContent;
         }
 
         public List<ITagParser> GetTagParsers(string html)
@@ -55,15 +58,15 @@ namespace FalconEngine.DomParsing
                 case string tag when tag.ToLower().Contains("doctype"):
                     return new DoctypeParser(_identifyTag);
                 case string tag when tag.ToLower().Contains("html"):
-                    return new HtmlTagParser(_identifyTag);
+                    return new HtmlTagParser(_identifyTag, _determinateContent);
                 case string tag when tag.ToLower().Contains("head"):
-                    return new HeadParser(_deleteUselessSpace, _identifyTag, _identifyStartTagEndTag, _attributeTagParser);
+                    return new HeadParser(_deleteUselessSpace, _identifyTag, _identifyStartTagEndTag, _attributeTagParser, _determinateContent);
                 case string tag when tag.ToLower().Contains("meta"):
                     return new MetaParser(_identifyTag, _attributeTagParser);
                 case string tag when tag.ToLower().Contains("link"):
                     return new LinkParser(_identifyTag);
                 case string tag when tag.ToLower().Contains("title"):
-                    return new TitleParser(_identifyTag);
+                    return new TitleParser(_identifyTag, _determinateContent);
                 default:
                     return null;
             }

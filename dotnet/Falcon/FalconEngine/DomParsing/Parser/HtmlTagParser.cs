@@ -15,10 +15,12 @@ namespace FalconEngine.DomParsing.Parser
 
         private TagModel _tag;
         private IIdentifyTag _identifyTag;
+        private IDeterminateContent _determinateContent;
 
-        public HtmlTagParser(IIdentifyTag identifyTag)
+        public HtmlTagParser(IIdentifyTag identifyTag, IDeterminateContent determinateContent)
         {
             _identifyTag = identifyTag;
+            _determinateContent = determinateContent;
         }
 
         public TagModel Parse(string html)
@@ -26,7 +28,9 @@ namespace FalconEngine.DomParsing.Parser
             try
             {
                 _tag = _identifyTag.Analyze(html);
-                _tag.Content = GetContent(html);
+                _tag.Content = _determinateContent.FindContent(html, _tag.TagStart, _tag.TagEnd);
+                if (string.IsNullOrEmpty(_tag.TagEnd))
+                    throw new HtmlParsingException(ErrorTypeParsing.html, $"Une erreur a eu lieu lors du parsing de {html}");
             }
             catch (Exception ex)
             {
@@ -34,11 +38,6 @@ namespace FalconEngine.DomParsing.Parser
                 throw new HtmlParsingException(ErrorTypeParsing.html, message);
             }
             return _tag;
-        }
-
-        private string GetContent(string html)
-        {
-            return html.Replace(_tag.TagStart, string.Empty).Replace(_tag.TagEnd, string.Empty);
         }
 
         public bool IsValid(TagModel tag)

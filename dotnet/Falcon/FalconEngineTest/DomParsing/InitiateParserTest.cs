@@ -12,16 +12,11 @@ namespace FalconEngineTest.DomParsing
 {
     public class InitiateParserTest
     {
-        private IDeleteUselessSpace _deleteUselessSpace;
         private IdentifyTag _identifyTag;
 
         public InitiateParserTest()
         {
-            _deleteUselessSpace = TestFactory.InitDeleteUselessSpace();
-            var attributeTagParser = TestFactory.InitAttributeTagParser(); ;
-            var identifyTagName = TestFactory.InitIdentifyTagName();
-            var identifyStartTagEndTag = new IdentifyStartTagEndTag();
-            _identifyTag = new IdentifyTag(_deleteUselessSpace, attributeTagParser, identifyTagName, identifyStartTagEndTag);
+            _identifyTag = TestFactory.InitIdentifyTag();
         }
 
         [Fact]

@@ -19,8 +19,9 @@ namespace FalconEngineTest.DomParsing.Parser
         public void ParseTitleTag(string titleName)
         {
             var identifyTag = TestFactory.InitIdentifyTag();
+            var determinateContent = TestFactory.InitDeterminateContent();
             string html = $"<title>{titleName}</title>";
-            var parseTitle = new TitleParser(identifyTag);
+            var parseTitle = new TitleParser(identifyTag, determinateContent);
 
             var tag = parseTitle.Parse(html);
 

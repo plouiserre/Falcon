@@ -18,6 +18,11 @@ namespace FalconEngineTest.Utils
             return new IdentifyStartTagEndTag();
         }
 
+        public static DeterminateContent InitDeterminateContent()
+        {
+            return new DeterminateContent();
+        }
+
         public static DeleteUselessSpace InitDeleteUselessSpace()
         {
             return new DeleteUselessSpace(InitIdentifyStartTagEndTag());
@@ -35,17 +40,26 @@ namespace FalconEngineTest.Utils
 
         public static IdentifyTag InitIdentifyTag()
         {
-            var attributeTagParser = InitAttributeTagParser();
-            var identifyTag = new IdentifyTag(InitDeleteUselessSpace(), attributeTagParser, InitIdentifyTagName(), InitIdentifyStartTagEndTag());
+            var identifyTag = new IdentifyTag(InitDeleteUselessSpace(), InitAttributeTagParser(), InitIdentifyTagName(),
+                            InitIdentifyStartTagEndTag(), InitDeterminateContent());
             return identifyTag;
         }
 
         public static InitiateParser InitInitiateParser()
         {
             var identifyTag = InitIdentifyTag();
-            var initiate = new InitiateParser(InitDeleteUselessSpace(), identifyTag, InitIdentifyStartTagEndTag(), InitAttributeTagParser());
+            var initiate = new InitiateParser(InitDeleteUselessSpace(), identifyTag, InitIdentifyStartTagEndTag(),
+                InitAttributeTagParser(), InitDeterminateContent());
             return initiate;
         }
+
+        public static HeadParser InitHeadParser()
+        {
+            var headParser = new HeadParser(InitDeleteUselessSpace(), InitIdentifyTag(), InitIdentifyStartTagEndTag(),
+            InitAttributeTagParser(), InitDeterminateContent());
+            return headParser;
+        }
+
 
     }
 }
