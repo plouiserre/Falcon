@@ -20,7 +20,8 @@ namespace FalconEngineTest.DomParsing
             _deleteUselessSpace = new DeleteUselessSpace();
             var attributeTagParser = new AttributeTagParser();
             var identifyTagName = new IdentifyTagName();
-            _identifyTag = new IdentifyTag(_deleteUselessSpace, attributeTagParser, identifyTagName);
+            var identifyStartTagEndTag = new IdentifyStartTagEndTag();
+            _identifyTag = new IdentifyTag(_deleteUselessSpace, attributeTagParser, identifyTagName, identifyStartTagEndTag);
         }
 
         [Fact]

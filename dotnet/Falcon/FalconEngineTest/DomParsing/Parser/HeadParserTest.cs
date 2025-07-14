@@ -20,9 +20,7 @@ namespace FalconEngineTest.DomParsing.Parser
         public HeadParserTest()
         {
             _deleteUselessSpace = new DeleteUselessSpace();
-            var attributeTagParser = new AttributeTagParser();
-            var identifyTagName = new IdentifyTagName();
-            _identifyTag = new IdentifyTag(_deleteUselessSpace, attributeTagParser, identifyTagName);
+            _identifyTag = TestFactory.InitIdentifyTag();
         }
 
         [Fact]
