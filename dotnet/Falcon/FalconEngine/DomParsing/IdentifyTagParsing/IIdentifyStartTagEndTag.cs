@@ -7,6 +7,9 @@ namespace FalconEngine.DomParsing.IdentifyTagParsing
 {
     public interface IIdentifyStartTagEndTag
     {
+        public string StartTag { get; set; }
+
+        public string EndTag { get; set; }
         void DetermineStartEndTags(string html);
     }
 }
