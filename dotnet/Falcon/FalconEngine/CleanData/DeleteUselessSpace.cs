@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FalconEngine.DomParsing.IdentifyTagParsing;
 using FalconEngine.Models;
 
 namespace FalconEngine.CleanData
@@ -10,9 +11,11 @@ namespace FalconEngine.CleanData
     {
         private string _startTag;
         private string _endTag;
+        private IIdentifyStartTagEndTag _identifyStartTagEndTag;
 
-        public DeleteUselessSpace()
+        public DeleteUselessSpace(IIdentifyStartTagEndTag identifyStartTagEndTag)
         {
+            _identifyStartTagEndTag = identifyStartTagEndTag;
         }
 
         public string PurgeUselessCaractersAroundTag(string html)

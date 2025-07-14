@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FalconEngine.DomParsing.CustomException;
+using FalconEngine.DomParsing.IdentifyTagParsing;
 using FalconEngine.Models;
 
 namespace FalconEngine.DomParsing.Parser
@@ -13,6 +14,12 @@ namespace FalconEngine.DomParsing.Parser
         private string _html { get; set; }
         private string _startTag { get; set; }
         private List<AttributeModel> _attributes { get; set; }
+        private IIdentifyStartTagEndTag _identifyStartTagEndTag;
+
+        public AttributeTagParser(IIdentifyStartTagEndTag identifyStartTagEndTag)
+        {
+            _identifyStartTagEndTag = identifyStartTagEndTag;
+        }
 
         public List<AttributeModel> Parse(string html)
         {

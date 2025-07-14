@@ -16,7 +16,7 @@ namespace FalconEngineTest.DomParsing.Parser
         public void ParseOneAttribute()
         {
             string html = HtmlData.MetaCharset;
-            var attributeTagParser = new AttributeTagParser();
+            var attributeTagParser = TestFactory.InitAttributeTagParser();
 
             var attributs = attributeTagParser.Parse(html);
 
@@ -30,7 +30,7 @@ namespace FalconEngineTest.DomParsing.Parser
         public void ParseTwoAttributes()
         {
             string html = HtmlData.MetaViewPort;
-            var attributeTagParser = new AttributeTagParser();
+            var attributeTagParser = TestFactory.InitAttributeTagParser();
 
             var attributs = attributeTagParser.Parse(html);
 
@@ -49,7 +49,7 @@ namespace FalconEngineTest.DomParsing.Parser
         {
             string html = "<html lang=\"en\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>Document</title><link rel=\"stylesheet\" href=\"main.css\"></head><body><div id=\"content\">\n                                    <p class=\"declarationText\">\n                                        Ceci est un \n                                            <span>\n                                                <a href=\"declaration.html\">\n                                                    paragraphe\n                                                </a>\n                                            </span>\n                                    </p>\n                                    <p>Allez-vous apprécier mon article?</p>\n                                </div></body></html>";
 
-            var attributeTagParser = new AttributeTagParser();
+            var attributeTagParser = TestFactory.InitAttributeTagParser();
 
             var attributs = attributeTagParser.Parse(html);
 
@@ -68,7 +68,7 @@ namespace FalconEngineTest.DomParsing.Parser
         [InlineData("<meta bigname=\"viewport\" content=\"width=device-width, initial-scale=1.0\">")]
         public void ParseFailesAttributes(string html)
         {
-            var attributeTagParser = new AttributeTagParser();
+            var attributeTagParser = TestFactory.InitAttributeTagParser();
 
             var exception = Assert.Throws<AttributeTagParserException>(() => attributeTagParser.Parse(html));
 
@@ -84,7 +84,7 @@ namespace FalconEngineTest.DomParsing.Parser
         [InlineData("<html lang=\"en\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\">")]
         public void ValidateAttributeIsHere(string html)
         {
-            var attributeTagParser = new AttributeTagParser();
+            var attributeTagParser = TestFactory.InitAttributeTagParser();
 
             bool isAttributeHere = attributeTagParser.IsAttributePresent(html);
 
@@ -97,7 +97,7 @@ namespace FalconEngineTest.DomParsing.Parser
         [InlineData("<title>Document</title>")]
         public void NoAttributeIsHere(string html)
         {
-            var attributeTagParser = new AttributeTagParser();
+            var attributeTagParser = TestFactory.InitAttributeTagParser();
 
             bool isAttributeHere = attributeTagParser.IsAttributePresent(html);
 

@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using FalconEngine.CleanData;
 using FalconEngine.Models;
+using FalconEngineTest.Utils;
 
 namespace FalconEngineTest.CleanData
 {
@@ -15,7 +16,7 @@ namespace FalconEngineTest.CleanData
         {
             string htmlNotClean = "                           \r\n                         <meta charset=\"UTF-8\">";
 
-            var cleaner = new DeleteUselessSpace();
+            var cleaner = TestFactory.InitDeleteUselessSpace();
 
             string htmlClean = cleaner.PurgeUselessCaractersAroundTag(htmlNotClean);
 
@@ -28,7 +29,7 @@ namespace FalconEngineTest.CleanData
         {
             string htmlNotClean = "<link rel=\"stylesheet\" href=\"main.css\">            \r\n         ";
 
-            var cleaner = new DeleteUselessSpace();
+            var cleaner = TestFactory.InitDeleteUselessSpace();
 
             string htmlClean = cleaner.PurgeUselessCaractersAroundTag(htmlNotClean);
 
@@ -41,7 +42,7 @@ namespace FalconEngineTest.CleanData
         {
             string htmlNotClean = "<head><title>Document</title>\r\n</head>            \r\n         ";
 
-            var cleaner = new DeleteUselessSpace();
+            var cleaner = TestFactory.InitDeleteUselessSpace();
 
             string htmlClean = cleaner.PurgeUselessCaractersAroundTag(htmlNotClean);
 
