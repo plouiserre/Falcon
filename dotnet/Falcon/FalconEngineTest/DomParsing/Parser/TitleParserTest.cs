@@ -7,6 +7,7 @@ using FalconEngine.DomParsing;
 using FalconEngine.DomParsing.IdentifyTagParsing;
 using FalconEngine.DomParsing.Parser;
 using FalconEngine.Models;
+using FalconEngineTest.Utils;
 
 namespace FalconEngineTest.DomParsing.Parser
 {
@@ -17,10 +18,7 @@ namespace FalconEngineTest.DomParsing.Parser
         [InlineData("My website")]
         public void ParseTitleTag(string titleName)
         {
-            var deleteUselessSpace = new DeleteUselessSpace();
-            var attributeTagParser = new AttributeTagParser();
-            var identifyTagName = new IdentifyTagName();
-            var identifyTag = new IdentifyTag(deleteUselessSpace, attributeTagParser, identifyTagName);
+            var identifyTag = TestFactory.InitIdentifyTag();
             string html = $"<title>{titleName}</title>";
             var parseTitle = new TitleParser(identifyTag);
 

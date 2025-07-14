@@ -15,9 +15,9 @@ namespace FalconEngine.DomParsing.Parser
         private IAttributeTagParser _attributeTagParser;
         private IIdentifyTag _identifyTag;
 
-        public MetaParser(IIdentifyTag identifyTag)
+        public MetaParser(IIdentifyTag identifyTag, IAttributeTagParser attributeTagParser)
         {
-            _attributeTagParser = new AttributeTagParser();
+            _attributeTagParser = attributeTagParser;
             _identifyTag = identifyTag;
         }
 

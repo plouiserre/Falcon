@@ -17,13 +17,18 @@ namespace FalconEngine.DomParsing.Parser
         private string _tagEnd;
         private IDeleteUselessSpace _deleteUselessSpace;
         private IIdentifyTag _identifyTag;
+        private IIdentifyStartTagEndTag _identitfyStartEndTag;
+        private IAttributeTagParser _attributeTagParser;
 
-        public HeadParser(IDeleteUselessSpace deleteUselessSpace, IIdentifyTag identifyTag)
+        public HeadParser(IDeleteUselessSpace deleteUselessSpace, IIdentifyTag identifyTag,
+            IIdentifyStartTagEndTag identifyStartTagEndTag, IAttributeTagParser attributeTagParser)
         {
             _identifyTag = identifyTag;
             _deleteUselessSpace = deleteUselessSpace;
             _tagStart = "<head>";
             _tagEnd = "</head>";
+            _identitfyStartEndTag = identifyStartTagEndTag;
+            _attributeTagParser = attributeTagParser;
         }
 
         public bool IsValid(TagModel tag)
@@ -83,7 +88,7 @@ namespace FalconEngine.DomParsing.Parser
         //TODO add good exceptions
         private List<TagModel> DeterminateChildren(string content)
         {
-            var initiateParser = new InitiateParser(_deleteUselessSpace, _identifyTag);
+            var initiateParser = new InitiateParser(_deleteUselessSpace, _identifyTag, _identitfyStartEndTag, _attributeTagParser);
             var children = new List<TagModel>();
             var parsers = initiateParser.GetTagParsers(content);
             foreach (var parser in parsers)

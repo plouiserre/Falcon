@@ -19,20 +19,22 @@ namespace FalconEngine.DomParsing.IdentifyTagParsing
         private IDeleteUselessSpace _deleteUselessSpace;
         private IAttributeTagParser _attributeTagParser;
         private IIdentifyTagName _identifyTagName;
+        private IIdentifyStartTagEndTag _identifyStartTagEndTag;
 
-        public IdentifyTag(IDeleteUselessSpace deleteUselessSpace, IAttributeTagParser attributeTagParser, IIdentifyTagName identifyTagName)
+        public IdentifyTag(IDeleteUselessSpace deleteUselessSpace, IAttributeTagParser attributeTagParser, IIdentifyTagName identifyTagName,
+                            IIdentifyStartTagEndTag identifyStartTagEndTag)
         {
             _deleteUselessSpace = deleteUselessSpace;
             _attributeTagParser = attributeTagParser;
             _identifyTagName = identifyTagName;
+            _identifyStartTagEndTag = identifyStartTagEndTag;
         }
 
         public TagModel Analyze(string html)
         {
             _html = html;
             _attributes = null;
-            FindTagStart();
-            FindTagEnd();
+            FindTagStartEnd();
             FindAttributes();
             IdentifyTagName();
             FindTagFamily();
@@ -46,28 +48,12 @@ namespace FalconEngine.DomParsing.IdentifyTagParsing
             };
         }
 
-        private void FindTagStart()
+        private void FindTagStartEnd()
         {
-            int position = 0;
-            for (int i = 0; i < _html?.Length; i++)
-            {
-                char caracter = _html[i];
-                if (caracter == '>')
-                {
-                    position = i;
-                    break;
-                }
-            }
-            _tagStart = _html?.Substring(0, position + 1);
-            _tagStart = _deleteUselessSpace.PurgeUselessCaractersAroundTag(_tagStart);
-        }
-
-        private void FindTagEnd()
-        {
-            string cleanTagStart = _tagStart.Replace("<", string.Empty).Replace(">", string.Empty);
-            string baseTag = cleanTagStart.Split(" ")[0];
-            string tagEndCandidate = string.Concat("</", baseTag, ">");
-            _tagEnd = _html.Contains(tagEndCandidate) ? tagEndCandidate : null;
+            var htmlCleaned = _deleteUselessSpace.PurgeUselessCaractersAroundTag(_html);
+            _identifyStartTagEndTag.DetermineStartEndTags(htmlCleaned);
+            _tagStart = _identifyStartTagEndTag.StartTag;
+            _tagEnd = _identifyStartTagEndTag.EndTag;
         }
 
         private void FindAttributes()

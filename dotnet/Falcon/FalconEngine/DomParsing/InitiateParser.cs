@@ -14,11 +14,16 @@ namespace FalconEngine.DomParsing
         private string _startTag;
         private IDeleteUselessSpace _deleteUselessSpace;
         private IIdentifyTag _identifyTag;
+        private IIdentifyStartTagEndTag _identifyStartTagEndTag;
+        private IAttributeTagParser _attributeTagParser;
 
-        public InitiateParser(IDeleteUselessSpace deleteUselessSpace, IIdentifyTag identifyTag)
+        public InitiateParser(IDeleteUselessSpace deleteUselessSpace, IIdentifyTag identifyTag,
+            IIdentifyStartTagEndTag identifyStartTagEndTag, IAttributeTagParser attributeTagParser)
         {
             _deleteUselessSpace = deleteUselessSpace;
             _identifyTag = identifyTag;
+            _identifyStartTagEndTag = identifyStartTagEndTag;
+            _attributeTagParser = attributeTagParser;
         }
 
         public List<ITagParser> GetTagParsers(string html)
@@ -33,34 +38,14 @@ namespace FalconEngine.DomParsing
             return parsers;
         }
 
-        //TODO subdivise in three differents methods one already did!!!
         private ITagParser GetTagParser()
         {
-            GetStartTag();
-            string endTag = GetEndTag();
+            string htmlCleaned = _deleteUselessSpace.PurgeUselessCaractersAroundTag(_html);
+            _identifyStartTagEndTag.DetermineStartEndTags(htmlCleaned);
+            _startTag = _identifyStartTagEndTag.StartTag;
+            var endTag = _identifyStartTagEndTag.EndTag;
             RemoveUselessHtml(_startTag, endTag);
             return ChooseGoodTagParser();
-        }
-
-        private void GetStartTag()
-        {
-            int start = 0;
-            int end = 0;
-            for (int i = 0; i < _html.Length; i++)
-            {
-                char caracter = _html[i];
-                if (caracter == '<')
-                {
-                    start = i;
-                    continue;
-                }
-                else if (caracter == '>')
-                {
-                    end = i;
-                    break;
-                }
-            }
-            _startTag = _html.Substring(start, end - start + 1);
         }
 
         private ITagParser ChooseGoodTagParser()
@@ -72,9 +57,9 @@ namespace FalconEngine.DomParsing
                 case string tag when tag.ToLower().Contains("html"):
                     return new HtmlTagParser(_identifyTag);
                 case string tag when tag.ToLower().Contains("head"):
-                    return new HeadParser(_deleteUselessSpace, _identifyTag);
+                    return new HeadParser(_deleteUselessSpace, _identifyTag, _identifyStartTagEndTag, _attributeTagParser);
                 case string tag when tag.ToLower().Contains("meta"):
-                    return new MetaParser(_identifyTag);
+                    return new MetaParser(_identifyTag, _attributeTagParser);
                 case string tag when tag.ToLower().Contains("link"):
                     return new LinkParser(_identifyTag);
                 case string tag when tag.ToLower().Contains("title"):
@@ -84,19 +69,9 @@ namespace FalconEngine.DomParsing
             }
         }
 
-        private string GetEndTag()
-        {
-            string coreTag = _startTag.Split(" ")[0].Replace("<", string.Empty).Replace(">", string.Empty);
-            string endTagPossible = string.Concat("</", coreTag, ">");
-            if (_html.Contains(endTagPossible))
-                return endTagPossible;
-            else
-                return string.Empty;
-        }
-
         private void RemoveUselessHtml(string startTag, string endTag)
         {
-            if (endTag == string.Empty)
+            if (string.IsNullOrEmpty(endTag))
                 _html = _html.Replace(startTag, string.Empty);
             else
             {
@@ -105,6 +80,7 @@ namespace FalconEngine.DomParsing
                 string htmlToRemove = _html.Substring(startTagIndex, endTagIndex - startTagIndex + endTag.Length);
                 _html = _html.Replace(htmlToRemove, string.Empty);
             }
+            //TODO improve this
             _html = CleanHtml();
         }
 

@@ -22,13 +22,14 @@ string html = @"<!DOCTYPE html>
                         </body>
                     </html>";
 
-var deleteUselessSpace = new DeleteUselessSpace();
-var attributeTagParser = new AttributeTagParser();
 var identifyTagName = new IdentifyTagName();
-var identifyTag = new IdentifyTag(deleteUselessSpace, attributeTagParser, identifyTagName);
+var identifyStartTagEndTag = new IdentifyStartTagEndTag();
+var deleteUselessSpace = new DeleteUselessSpace(identifyStartTagEndTag);
+var attributeTagParser = new AttributeTagParser(identifyStartTagEndTag);
+var identifyTag = new IdentifyTag(deleteUselessSpace, attributeTagParser, identifyTagName, identifyStartTagEndTag);
 var doctypeParser = new DoctypeParser(identifyTag);
 var htmlParser = new HtmlTagParser(identifyTag);
-var headParser = new HeadParser(deleteUselessSpace, identifyTag);
+var headParser = new HeadParser(deleteUselessSpace, identifyTag, identifyStartTagEndTag, attributeTagParser);
 var extractHtmlRemaining = new ExtractHtmlRemaining();
 var htmlParsing = new HtmlParsing(doctypeParser, htmlParser, headParser, extractHtmlRemaining);
 var engine = new HtmlEngine(htmlParsing);
