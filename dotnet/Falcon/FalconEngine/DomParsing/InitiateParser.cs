@@ -88,7 +88,6 @@ namespace FalconEngine.DomParsing
                 string htmlToRemove = _html.Substring(startTagIndex, endTagIndex - startTagIndex + endTag.Length);
                 _html = _html.Replace(htmlToRemove, string.Empty);
             }
-            //TODO improve this
             _html = CleanHtml();
         }
 

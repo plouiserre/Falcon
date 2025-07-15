@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FalconEngine.DomParsing.CustomException;
 using FalconEngine.DomParsing.IdentifyTagParsing;
 using FalconEngine.Models;
 using FalconEngineTest.Utils;
@@ -75,6 +76,19 @@ namespace FalconEngineTest.DomParsing.IdentifyTagParsing
             Assert.Equal("<link rel=\"stylesheet\" href=\"main.css\">", linkCss.TagStart);
             Assert.Null(linkCss.TagEnd);
             Assert.Null(linkCss.Children);
+        }
+
+
+        [Fact]
+        public void ThrowsChildrenExceptionWhenParseChildrenGoesWrong()
+        {
+            string html = "<head><test<title>Document</title></head>";
+
+            var determinateChildren = TestFactory.InitDeterminateChildren();
+            var error = Assert.Throws<DeterminateChildrenException>(() => determinateChildren.Find(html));
+
+            Assert.Equal(error.Message, $"Error parsing for the children of  {html}");
+            Assert.Equal(ErrorTypeParsing.children, error.ErrorType);
         }
     }
 }

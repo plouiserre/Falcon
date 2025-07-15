@@ -8,7 +8,6 @@ using FalconEngine.Models;
 
 namespace FalconEngine.DomParsing.Parser
 {
-    //TODO add exception
     public class AttributeTagParser : IAttributeTagParser
     {
         private string _html { get; set; }
