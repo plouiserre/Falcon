@@ -9,7 +9,7 @@ namespace FalconEngineTest.Data
 {
     public enum TagData
     {
-        html, doctype
+        html, doctype, metaCharset, head
     }
 
     public class HtmlPageData
@@ -20,22 +20,30 @@ namespace FalconEngineTest.Data
         private static TagModel _link;
         private static TagModel _doctypeTag;
         private static TagModel _htmlTag;
+        private static TagModel _headTag;
         private static HtmlPage _htmlPage { get; set; }
 
         public static TagModel GetTagModel(TagData tag)
         {
             InitHtmlPage();
-            if (tag == TagData.doctype)
-                return _doctypeTag;
-            else
-                return _htmlTag;
+            switch (tag)
+            {
+                case TagData.doctype:
+                    return _doctypeTag;
+                case TagData.metaCharset:
+                    return _metaCharsetTag;
+                case TagData.head:
+                    return _headTag;
+                default:
+                    return _htmlTag;
+            }
         }
 
         public static HtmlPage InitHtmlPage()
         {
             _doctypeTag = GetDoctypeTag();
             _htmlTag = GetTagHtml();
-            var headTag = GetHeadTag();
+            _headTag = GetHeadTag();
 
 
             var body = GetBodyTag();
@@ -68,7 +76,7 @@ namespace FalconEngineTest.Data
                 TagFamily = TagFamilyEnum.WithEnd,
                 Content = "Allez-vous apprécier mon article?"
             };
-            var tags = new List<TagModel>() { _doctypeTag, _htmlTag, headTag, _metaCharsetTag, _metaViewPort, _title, _link, body, divContent, firstP, span, a, secondP };
+            var tags = new List<TagModel>() { _doctypeTag, _htmlTag, _headTag, _metaCharsetTag, _metaViewPort, _title, _link, body, divContent, firstP, span, a, secondP };
             _htmlPage = new HtmlPage() { Tags = tags };
             return _htmlPage;
         }

@@ -165,14 +165,12 @@ namespace FalconEngine.DomParsing
 
         private void RemoveUselessHtml(TagModel tag)
         {
-            _html = _extractHtmlRemaining.Extract(tag, _html);
+            _html = _extractHtmlRemaining.Extract(tag, _html, ExtractionMode.ASide);
         }
 
-        //TODO externalize in _extractHtmlRemaining
         private void RemoveTagOpenCloed(TagModel tag)
         {
-            _html = _html.Replace(tag.TagStart, string.Empty);
-            _html = _html.Replace(tag.TagEnd, string.Empty);
+            _html = _extractHtmlRemaining.Extract(tag, _html, ExtractionMode.Inside);
         }
     }
 }

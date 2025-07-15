@@ -22,7 +22,7 @@ namespace FalconEngineTest.CleanData
             var doctypeTag = HtmlPageData.GetTagModel(TagData.doctype);
             var extraction = new ExtractHtmlRemaining();
 
-            var htmlRemaining = extraction.Extract(doctypeTag, html);
+            var htmlRemaining = extraction.Extract(doctypeTag, html, ExtractionMode.ASide);
 
             Assert.Equal(HtmlData.HtmlSimple, htmlRemaining);
         }
@@ -34,9 +34,37 @@ namespace FalconEngineTest.CleanData
             var doctypeTag = HtmlPageData.GetTagModel(TagData.doctype);
             var extraction = new ExtractHtmlRemaining();
 
-            var htmlRemaining = extraction.Extract(doctypeTag, html);
+            var htmlRemaining = extraction.Extract(doctypeTag, html, ExtractionMode.ASide);
 
             Assert.Equal(HtmlData.HtmlSimpleWithSpace, htmlRemaining);
+        }
+
+        //meta
+
+        [Fact]
+        public void RemoveFirstMetaHeadContent()
+        {
+            string html = HtmlData.ContentHeadSimple;
+            var meta = HtmlPageData.GetTagModel(TagData.metaCharset);
+            var extraction = new ExtractHtmlRemaining();
+
+            var htmlRemaining = extraction.Extract(meta, html, ExtractionMode.ASide);
+
+            string htmlRemainingExpected = HtmlData.ContentHeadSimple.Replace(HtmlData.MetaCharset, string.Empty);
+            Assert.Equal(htmlRemainingExpected, htmlRemaining);
+        }
+
+        //head autour
+        [Fact]
+        public void RemoveHtmlTags()
+        {
+            string html = HtmlData.HeadSimple;
+            var head = HtmlPageData.GetTagModel(TagData.html);
+            var extraction = new ExtractHtmlRemaining();
+
+            var htmlRemaining = extraction.Extract(head, html, ExtractionMode.Inside);
+
+            Assert.Equal(string.Concat(HtmlData.HeadSimple, HtmlData.BodySimple), htmlRemaining);
         }
     }
 }
