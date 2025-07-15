@@ -6,6 +6,10 @@ using FalconEngine.Models;
 
 namespace FalconEngine.CleanData
 {
+    public enum ExtractionMode
+    {
+        Inside, ASide
+    }
     public class ExtractHtmlRemaining : IExtractHtmlRemaining
     {
 
@@ -13,12 +17,19 @@ namespace FalconEngine.CleanData
         {
         }
 
-        public string Extract(TagModel tag, string html)
+        public string Extract(TagModel tag, string html, ExtractionMode extractionMode)
         {
-            string htmlTagModel = GetHtmlTagModel(tag);
-            string htmlRemaning = html.Replace(htmlTagModel, string.Empty);
-            htmlRemaning = DeleteFrontSpace(htmlRemaning);
-            return htmlRemaning;
+            if (extractionMode == ExtractionMode.ASide)
+            {
+                string htmlTagModel = GetHtmlTagModel(tag);
+                string htmlRemaning = html.Replace(htmlTagModel, string.Empty);
+                htmlRemaning = DeleteFrontSpace(htmlRemaning);
+                return htmlRemaning;
+            }
+            else
+            {
+                return tag.Content;
+            }
         }
 
         //If we need this somewhere else, move to TagModel

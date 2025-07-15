@@ -8,6 +8,6 @@ namespace FalconEngine.CleanData
 {
     public interface IExtractHtmlRemaining
     {
-        string Extract(TagModel tag, string html);
+        string Extract(TagModel tag, string html, ExtractionMode extractionMode);
     }
 }

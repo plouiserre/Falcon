@@ -41,7 +41,7 @@ namespace FalconEngine.DomParsing.IdentifyTagParsing
                 {
                     var tagChild = parser.Parse(html);
                     children.Add(tagChild);
-                    html = _extractHtmlRemaining.Extract(tagChild, html);
+                    html = _extractHtmlRemaining.Extract(tagChild, html, ExtractionMode.ASide);
                 }
             }
             catch (Exception ex)
