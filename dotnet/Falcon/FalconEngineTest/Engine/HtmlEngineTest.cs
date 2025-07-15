@@ -19,12 +19,11 @@ namespace FalconEngineTest.Engine
         {
             var deleteUselessSpace = TestFactory.InitDeleteUselessSpace();
             var determinateContent = TestFactory.InitDeterminateContent();
+            var determinateChildren = TestFactory.InitDeterminateChildren();
             var identifyTag = TestFactory.InitIdentifyTag();
-            var identifyStartTagEndTag = new IdentifyStartTagEndTag();
             var doctypeParser = new DoctypeParser(identifyTag);
             var htmlTagParser = new HtmlTagParser(identifyTag, determinateContent);
-            var attributeTagParser = TestFactory.InitAttributeTagParser();
-            var headParser = new HeadParser(deleteUselessSpace, identifyTag, identifyStartTagEndTag, attributeTagParser, determinateContent);
+            var headParser = new HeadParser(deleteUselessSpace, identifyTag, determinateChildren);
             var extractHtmlRemaining = new ExtractHtmlRemaining();
             _htmlParsing = new HtmlParsing(doctypeParser, htmlTagParser, headParser, extractHtmlRemaining);
         }
