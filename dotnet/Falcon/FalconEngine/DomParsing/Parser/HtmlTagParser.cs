@@ -9,7 +9,6 @@ using FalconEngine.Models;
 
 namespace FalconEngine.DomParsing.Parser
 {
-    //TODO HTMLTAGPARSER CLEAN TAGS ADD TEST AND STEP IN CODE
     public class HtmlTagParser : ITagParser
     {
 

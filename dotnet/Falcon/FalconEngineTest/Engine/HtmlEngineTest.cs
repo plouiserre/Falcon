@@ -40,7 +40,6 @@ namespace FalconEngineTest.Engine
         }
 
 
-        //TODO externalize in a new file
         private bool CompareTags(List<TagModel> allExpected, List<TagModel> results)
         {
             if (allExpected.Count != results.Count)

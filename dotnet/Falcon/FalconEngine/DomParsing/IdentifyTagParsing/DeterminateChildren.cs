@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FalconEngine.CleanData;
+using FalconEngine.DomParsing.CustomException;
 using FalconEngine.DomParsing.Parser;
 using FalconEngine.Models;
 
@@ -31,14 +32,21 @@ namespace FalconEngine.DomParsing.IdentifyTagParsing
 
         public List<TagModel> Find(string html)
         {
-            var initiateParser = new InitiateParser(_deleteUselessSpace, _identifyTag, _identitfyStartEndTag, _attributeTagParser, _determinateContent, this, _extractHtmlRemaining);
             var children = new List<TagModel>();
-            var parsers = initiateParser.GetTagParsers(html);
-            foreach (var parser in parsers)
+            try
             {
-                var tagChild = parser.Parse(html);
-                children.Add(tagChild);
-                html = _extractHtmlRemaining.Extract(tagChild, html);
+                var initiateParser = new InitiateParser(_deleteUselessSpace, _identifyTag, _identitfyStartEndTag, _attributeTagParser, _determinateContent, this, _extractHtmlRemaining);
+                var parsers = initiateParser.GetTagParsers(html);
+                foreach (var parser in parsers)
+                {
+                    var tagChild = parser.Parse(html);
+                    children.Add(tagChild);
+                    html = _extractHtmlRemaining.Extract(tagChild, html);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new DeterminateChildrenException(ErrorTypeParsing.children, $"Error parsing for the children of  {html}");
             }
             return children;
         }
