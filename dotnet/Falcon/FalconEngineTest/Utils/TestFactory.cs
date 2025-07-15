@@ -12,6 +12,10 @@ namespace FalconEngineTest.Utils
     public static class TestFactory
     {
 
+        private static IExtractHtmlRemaining InitExtractHtmlRemaining()
+        {
+            return new ExtractHtmlRemaining();
+        }
 
         private static IdentifyStartTagEndTag InitIdentifyStartTagEndTag()
         {
@@ -49,7 +53,7 @@ namespace FalconEngineTest.Utils
         {
             var identifyTag = InitIdentifyTag();
             var initiate = new InitiateParser(InitDeleteUselessSpace(), identifyTag, InitIdentifyStartTagEndTag(),
-                InitAttributeTagParser(), InitDeterminateContent(), InitDeterminateChildren());
+                InitAttributeTagParser(), InitDeterminateContent(), InitDeterminateChildren(), InitExtractHtmlRemaining());
             return initiate;
         }
 
@@ -62,7 +66,7 @@ namespace FalconEngineTest.Utils
         public static DeterminateChildren InitDeterminateChildren()
         {
             var determinateChildren = new DeterminateChildren(InitDeleteUselessSpace(), InitIdentifyTag(), InitIdentifyStartTagEndTag(),
-            InitAttributeTagParser(), InitDeterminateContent());
+            InitAttributeTagParser(), InitDeterminateContent(), InitExtractHtmlRemaining());
             return determinateChildren;
         }
 
