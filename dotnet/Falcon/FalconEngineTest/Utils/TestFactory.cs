@@ -49,17 +49,22 @@ namespace FalconEngineTest.Utils
         {
             var identifyTag = InitIdentifyTag();
             var initiate = new InitiateParser(InitDeleteUselessSpace(), identifyTag, InitIdentifyStartTagEndTag(),
-                InitAttributeTagParser(), InitDeterminateContent());
+                InitAttributeTagParser(), InitDeterminateContent(), InitDeterminateChildren());
             return initiate;
         }
 
         public static HeadParser InitHeadParser()
         {
-            var headParser = new HeadParser(InitDeleteUselessSpace(), InitIdentifyTag(), InitIdentifyStartTagEndTag(),
-            InitAttributeTagParser(), InitDeterminateContent());
+            var headParser = new HeadParser(InitDeleteUselessSpace(), InitIdentifyTag(), InitDeterminateChildren());
             return headParser;
         }
 
+        public static DeterminateChildren InitDeterminateChildren()
+        {
+            var determinateChildren = new DeterminateChildren(InitDeleteUselessSpace(), InitIdentifyTag(), InitIdentifyStartTagEndTag(),
+            InitAttributeTagParser(), InitDeterminateContent());
+            return determinateChildren;
+        }
 
     }
 }
