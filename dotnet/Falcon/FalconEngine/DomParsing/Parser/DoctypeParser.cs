@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FalconEngine.CleanData;
+using FalconEngine.DomParsing.CustomException;
 using FalconEngine.DomParsing.IdentifyTagParsing;
 using FalconEngine.Models;
 
@@ -11,6 +12,7 @@ namespace FalconEngine.DomParsing.Parser
     public class DoctypeParser : ITagParser
     {
         private IIdentifyTag _identifyTag;
+        private TagModel _tag;
 
         public DoctypeParser(IIdentifyTag identifyTag)
         {
@@ -19,23 +21,25 @@ namespace FalconEngine.DomParsing.Parser
 
         public TagModel Parse(string html)
         {
-            var tag = _identifyTag.Analyze(html);
-            return tag;
+            _tag = _identifyTag.Analyze(html);
+            return _tag;
         }
 
-
-        public bool IsValid(TagModel tag)
+        //TODO if _tag null throw exception!!!!
+        public bool IsValid()
         {
+            if (_tag == null)
+                throw new ValidationParsingException(ErrorTypeParsing.validation, "Doctype validation is failing because parsing is not did");
             bool isTagStartGoodFormatting = false;
             bool isNoTagEnd = false;
             bool isNoContent = false;
             bool isGoodNameTag = false;
-            isTagStartGoodFormatting = IsGoodTagStart(tag.TagStart);
-            if (tag.TagEnd == null)
+            isTagStartGoodFormatting = IsGoodTagStart(_tag.TagStart);
+            if (_tag.TagEnd == null)
                 isNoTagEnd = true;
-            if (string.IsNullOrEmpty(tag.Content))
+            if (string.IsNullOrEmpty(_tag.Content))
                 isNoContent = true;
-            if (tag.NameTag == NameTagEnum.doctype)
+            if (_tag.NameTag == NameTagEnum.doctype)
                 isGoodNameTag = true;
             return isGoodNameTag && isNoContent && isNoTagEnd && isTagStartGoodFormatting;
         }
