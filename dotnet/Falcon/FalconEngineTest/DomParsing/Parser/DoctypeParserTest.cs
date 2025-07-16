@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FalconEngine.CleanData;
 using FalconEngine.DomParsing;
+using FalconEngine.DomParsing.CustomException;
 using FalconEngine.DomParsing.IdentifyTagParsing;
 using FalconEngine.DomParsing.Parser;
 using FalconEngine.Models;
@@ -30,7 +31,7 @@ namespace FalconEngineTest.DomParsing.Parser
             var doctypeParser = new DoctypeParser(_identifyTag);
 
             var tagHtml = doctypeParser.Parse(doctypeHtml);
-            bool isValid = true;// doctypeParser.IsValid(tagHtml);
+            bool isValid = doctypeParser.IsValid();
 
             Assert.Equal(NameTagEnum.doctype, tagHtml.NameTag);
             Assert.Null(tagHtml.Content);
@@ -50,7 +51,7 @@ namespace FalconEngineTest.DomParsing.Parser
             var doctypeParser = new DoctypeParser(_identifyTag);
 
             var tagHtml = doctypeParser.Parse(doctypeHtml);
-            bool isValid = true; //doctypeParser.IsValid(tagHtml);
+            bool isValid = doctypeParser.IsValid();
 
             Assert.Equal(NameTagEnum.doctype, tagHtml.NameTag);
             Assert.Null(tagHtml.Content);
@@ -70,7 +71,7 @@ namespace FalconEngineTest.DomParsing.Parser
             var doctypeParse = new DoctypeParser(_identifyTag);
 
             var tagHtml = doctypeParse.Parse(doctypeHtml);
-            bool isValid = true;// doctypeParse.IsValid(tagHtml);
+            bool isValid = doctypeParse.IsValid();
 
             Assert.Equal(NameTagEnum.doctype, tagHtml.NameTag);
             Assert.Null(tagHtml.Content);
@@ -78,6 +79,17 @@ namespace FalconEngineTest.DomParsing.Parser
             Assert.Equal(doctypeHtml, tagHtml.TagStart);
             Assert.True(isValid);
             Assert.Null(tagHtml.TagEnd);
+        }
+
+        [Fact]
+        public void ValidationFail()
+        {
+            var doctypeParse = new DoctypeParser(_identifyTag);
+
+            var exception = Assert.Throws<ValidationParsingException>(() => doctypeParse.IsValid());
+
+            Assert.Equal("Doctype validation is failing because parsing is not did", exception.Message);
+            Assert.Equal(ErrorTypeParsing.validation, exception.ErrorType);
         }
     }
 }

@@ -7,7 +7,7 @@ namespace FalconEngine.DomParsing.CustomException
 {
     public enum ErrorTypeParsing
     {
-        attributes, html, doctype, head, children
+        attributes, html, doctype, head, children, validation
     }
 
     public abstract class ParsingException : Exception
