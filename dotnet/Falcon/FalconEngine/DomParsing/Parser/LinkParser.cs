@@ -22,7 +22,7 @@ namespace FalconEngine.DomParsing.Parser
             throw new NotImplementedException();
         }
 
-        public bool IsValid(TagModel tag)
+        public bool IsValid()
         {
             throw new NotImplementedException();
         }

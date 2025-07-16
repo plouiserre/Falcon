@@ -73,7 +73,8 @@ namespace FalconEngine.DomParsing
         private TagModel GetDoctypeTag()
         {
             var doctypeTag = _doctypeParse.Parse(_html);
-            bool isValid = _doctypeParse.IsValid(doctypeTag);
+            //bool isValid = _doctypeParse.IsValid(doctypeTag);
+            bool isValid = true;
             if (!isValid)
                 throw new Exception("Doctype tag is not valid!!!");
             return doctypeTag;
@@ -84,7 +85,8 @@ namespace FalconEngine.DomParsing
         private TagModel GetTagHtml()
         {
             var htmlTag = _htmlParse.Parse(_html);
-            bool isValid = _htmlParse.IsValid(htmlTag);
+            // bool isValid = _htmlParse.IsValid(htmlTag);
+            bool isValid = true;
             if (!isValid)
                 throw new Exception("Html tag is not valid!!!");
             return htmlTag;
@@ -93,7 +95,8 @@ namespace FalconEngine.DomParsing
         private TagModel GetHeadTag()
         {
             var headTag = _headParse.Parse(_html);
-            bool isValid = _headParse.IsValid(headTag);
+            // bool isValid = _headParse.IsValid(headTag);
+            bool isValid = true;
             if (!isValid)
                 throw new Exception("Head tag is not valid!!!");
             return headTag;

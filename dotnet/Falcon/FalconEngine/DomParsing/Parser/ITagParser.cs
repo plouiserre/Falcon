@@ -9,6 +9,6 @@ namespace FalconEngine.DomParsing.Parser
     public interface ITagParser
     {
         TagModel Parse(string html);
-        bool IsValid(TagModel tag);
+        bool IsValid();
     }
 }

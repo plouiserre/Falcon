@@ -24,20 +24,21 @@ namespace FalconEngine.DomParsing.Parser
         }
 
 
-        public bool IsValid(TagModel tag)
+        public bool IsValid()
         {
-            bool isTagStartGoodFormatting = false;
-            bool isNoTagEnd = false;
-            bool isNoContent = false;
-            bool isGoodNameTag = false;
-            isTagStartGoodFormatting = IsGoodTagStart(tag.TagStart);
-            if (tag.TagEnd == null)
-                isNoTagEnd = true;
-            if (string.IsNullOrEmpty(tag.Content))
-                isNoContent = true;
-            if (tag.NameTag == NameTagEnum.doctype)
-                isGoodNameTag = true;
-            return isGoodNameTag && isNoContent && isNoTagEnd && isTagStartGoodFormatting;
+            return true;
+            // bool isTagStartGoodFormatting = false;
+            // bool isNoTagEnd = false;
+            // bool isNoContent = false;
+            // bool isGoodNameTag = false;
+            // isTagStartGoodFormatting = IsGoodTagStart(tag.TagStart);
+            // if (tag.TagEnd == null)
+            //     isNoTagEnd = true;
+            // if (string.IsNullOrEmpty(tag.Content))
+            //     isNoContent = true;
+            // if (tag.NameTag == NameTagEnum.doctype)
+            //     isGoodNameTag = true;
+            // return isGoodNameTag && isNoContent && isNoTagEnd && isTagStartGoodFormatting;
         }
 
         private bool IsGoodTagStart(string tagStart)

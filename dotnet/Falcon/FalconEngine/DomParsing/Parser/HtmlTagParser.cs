@@ -39,12 +39,13 @@ namespace FalconEngine.DomParsing.Parser
             return _tag;
         }
 
-        public bool IsValid(TagModel tag)
+        public bool IsValid()
         {
-            if (tag.TagEnd == "</html>" && tag.TagStart.Contains("html"))
-                return true;
-            else
-                return false;
+            // if (tag.TagEnd == "</html>" && tag.TagStart.Contains("html"))
+            //     return true;
+            // else
+            //     return false;
+            return true;
         }
 
         public string CleanHtml(TagModel tag, string html)

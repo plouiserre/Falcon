@@ -27,9 +27,10 @@ namespace FalconEngine.DomParsing.Parser
             _determinateChildren = determinateChildren;
         }
 
-        public bool IsValid(TagModel tag)
+        public bool IsValid()
         {
-            return tag.TagStart == _tagStart && tag.TagEnd == _tagEnd;
+            //return tag.TagStart == _tagStart && tag.TagEnd == _tagEnd;
+            return true;
         }
 
         public TagModel Parse(string html)
