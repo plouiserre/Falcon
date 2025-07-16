@@ -21,6 +21,7 @@ namespace FalconEngineTest.DomParsing.Parser
             var headParser = TestFactory.InitHeadParser();
 
             var tagHtml = headParser.Parse(HtmlData.HeadSimple);
+            bool isValid = headParser.IsValid();
             var firstChild = tagHtml.Children[0];
             var secondChild = tagHtml.Children[1];
             var thirdChild = tagHtml.Children[2];
@@ -40,6 +41,8 @@ namespace FalconEngineTest.DomParsing.Parser
             AssertTitleDocumentChild(thirdChild);
 
             AssertLinkCss(fourthChild);
+
+            Assert.True(isValid);
         }
 
         [Fact]
@@ -50,6 +53,7 @@ namespace FalconEngineTest.DomParsing.Parser
             var headParser = TestFactory.InitHeadParser();
 
             var tagHtml = headParser.Parse(htmlNotClean);
+            bool isValid = headParser.IsValid();
             var firstChild = tagHtml.Children[0];
             var secondChild = tagHtml.Children[1];
             var thirdChild = tagHtml.Children[2];
@@ -69,6 +73,8 @@ namespace FalconEngineTest.DomParsing.Parser
             AssertTitleDocumentChild(thirdChild);
 
             AssertLinkCss(fourthChild);
+
+            Assert.True(isValid);
         }
 
         private void AssertMetaCharsetChild(TagModel metaCharsetChild)
@@ -132,6 +138,30 @@ namespace FalconEngineTest.DomParsing.Parser
 
             Assert.Equal($"Une erreur a eu lieu lors du parsing de {badHtml}", exception.Message);
             Assert.Equal(ErrorTypeParsing.head, exception.ErrorType);
+        }
+
+        [Fact]
+        public void HeadIsNotValidAfterParsing()
+        {
+            var html = "<head></head>";
+            var headerParser = TestFactory.InitHeadParser();
+
+            headerParser.Parse(html);
+            bool isValid = headerParser.IsValid();
+
+            Assert.False(isValid);
+        }
+
+        [Fact]
+        public void ValidationThrowsException()
+        {
+            var headParser = TestFactory.InitHeadParser();
+
+            var exception = Assert.Throws<ValidationParsingException>(() => headParser.IsValid());
+
+            Assert.Equal("Header validation is failing because parsing is not did", exception.Message);
+            Assert.Equal(ErrorTypeParsing.validation, exception.ErrorType);
+
         }
     }
 }
