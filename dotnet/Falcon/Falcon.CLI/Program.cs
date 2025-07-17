@@ -22,6 +22,7 @@ string html = @"<!DOCTYPE html>
                         </body>
                     </html>";
 
+var attributeTagManager = new AttributeTagManager();
 var identifyTagName = new IdentifyTagName();
 var determinateContent = new DeterminateContent();
 var identifyStartTagEndTag = new IdentifyStartTagEndTag();
@@ -30,10 +31,10 @@ var deleteUselessSpace = new DeleteUselessSpace(identifyStartTagEndTag);
 var attributeTagParser = new AttributeTagParser(identifyStartTagEndTag);
 var identifyTag = new IdentifyTag(deleteUselessSpace, attributeTagParser, identifyTagName, identifyStartTagEndTag, determinateContent);
 var doctypeParser = new DoctypeParser(identifyTag);
-var htmlParser = new HtmlTagParser(identifyTag, determinateContent);
-var determinateChildren = new DeterminateChildren(deleteUselessSpace, identifyTag, identifyStartTagEndTag, attributeTagParser, determinateContent, extractHtmlRemaining);
+var htmlParser = new HtmlTagParser(identifyTag, determinateContent, attributeTagManager);
+var determinateChildren = new DeterminateChildren(deleteUselessSpace, identifyTag, identifyStartTagEndTag, attributeTagParser, determinateContent, extractHtmlRemaining, attributeTagManager);
 var headParser = new HeadParser(deleteUselessSpace, identifyTag, determinateChildren);
-var htmlParsing = new HtmlParsing(doctypeParser, htmlParser, headParser, extractHtmlRemaining);
+var htmlParsing = new HtmlParsing(doctypeParser, htmlParser, headParser, extractHtmlRemaining, attributeTagManager);
 var engine = new HtmlEngine(htmlParsing);
 var result = engine.Calculate(html);
 Console.WriteLine(JsonConvert.SerializeObject(result));

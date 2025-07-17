@@ -14,19 +14,23 @@ namespace FalconEngine.DomParsing
         private ITagParser _htmlParse;
         private ITagParser _headParse;
         private IExtractHtmlRemaining _extractHtmlRemaining;
+        private IAttributeTagManager _attributeTagManager;
         private string _html;
 
-        public HtmlParsing(ITagParser doctypeParse, ITagParser htmlParse, ITagParser headParse, IExtractHtmlRemaining extractHtmlRemaining)
+        public HtmlParsing(ITagParser doctypeParse, ITagParser htmlParse, ITagParser headParse,
+            IExtractHtmlRemaining extractHtmlRemaining, IAttributeTagManager attributeTagManager)
         {
             _doctypeParse = doctypeParse;
             _htmlParse = htmlParse;
             _extractHtmlRemaining = extractHtmlRemaining;
             _headParse = headParse;
+            _attributeTagManager = attributeTagManager;
         }
 
         public HtmlPage Parse(string html)
         {
             _html = html;
+            _attributeTagManager.SetAttributes();
             var doctypeTag = GetDoctypeTag();
             RemoveUselessHtml(doctypeTag);
             var htmlTag = GetTagHtml();

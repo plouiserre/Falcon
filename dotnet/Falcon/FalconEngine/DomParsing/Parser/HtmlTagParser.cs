@@ -16,11 +16,14 @@ namespace FalconEngine.DomParsing.Parser
         private TagModel _tag;
         private IIdentifyTag _identifyTag;
         private IDeterminateContent _determinateContent;
+        private IAttributeTagManager _attributeTagManager;
 
-        public HtmlTagParser(IIdentifyTag identifyTag, IDeterminateContent determinateContent)
+        public HtmlTagParser(IIdentifyTag identifyTag, IDeterminateContent determinateContent,
+            IAttributeTagManager attributeTagManager)
         {
             _identifyTag = identifyTag;
             _determinateContent = determinateContent;
+            _attributeTagManager = attributeTagManager;
         }
 
         public TagModel Parse(string html)
@@ -53,21 +56,15 @@ namespace FalconEngine.DomParsing.Parser
             bool isOk = true;
             if (_tag.Attributes == null || _tag.Attributes.Count == 0)
                 return isOk;
+            var allAttributesAutorized = _attributeTagManager.GetAttributes(NameTagEnum.html);
+            if (allAttributesAutorized == null || allAttributesAutorized.Count == 0)
+                return false;
             foreach (var attribut in _tag.Attributes)
             {
                 var attributKey = attribut.FamilyAttribute;
-                if (attributKey != FamilyAttributeEnum.lang && attributKey != FamilyAttributeEnum.dir &&
-                        attributKey != FamilyAttributeEnum.xmlns && attributKey != FamilyAttributeEnum.manifest &&
-                        attributKey != FamilyAttributeEnum.style && attributKey != FamilyAttributeEnum.id &&
-                        attributKey != FamilyAttributeEnum.classCss && attributKey != FamilyAttributeEnum.datapage &&
-                        attributKey != FamilyAttributeEnum.datatheme && attributKey != FamilyAttributeEnum.datauser &&
-                        attributKey != FamilyAttributeEnum.accesskey && attributKey != FamilyAttributeEnum.tabindex &&
-                        attributKey != FamilyAttributeEnum.contenteditable && attributKey != FamilyAttributeEnum.draggable &&
-                        attributKey != FamilyAttributeEnum.spellcheck)
-                {
-                    isOk = false;
+                isOk = allAttributesAutorized.Any(o => o == attributKey);
+                if (!isOk)
                     break;
-                }
             }
             return isOk;
         }

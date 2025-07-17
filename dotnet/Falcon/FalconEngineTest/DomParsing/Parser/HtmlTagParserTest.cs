@@ -26,7 +26,7 @@ namespace FalconEngineTest.DomParsing.Parser
         public void ParseSimpleHtmlOneLine()
         {
             string html = HtmlData.HtmlSimple;
-            var htmlTagParser = new HtmlTagParser(_identifyTag, _determinateContent);
+            var htmlTagParser = TestFactory.InitHtmlTagParser(true);
 
             var tagHtml = htmlTagParser.Parse(html);
             bool isValid = htmlTagParser.IsValid();
@@ -42,7 +42,7 @@ namespace FalconEngineTest.DomParsing.Parser
         public void ParseSimpleHtmlWithSpaceAndEscapment()
         {
             string html = HtmlData.HtmlSimpleWithSpace;
-            var htmlTagParser = new HtmlTagParser(_identifyTag, _determinateContent);
+            var htmlTagParser = TestFactory.InitHtmlTagParser(true);
 
             var tagHtml = htmlTagParser.Parse(html);
             bool isValid = htmlTagParser.IsValid();
@@ -58,7 +58,7 @@ namespace FalconEngineTest.DomParsing.Parser
         public void ErrorDuringParsingHtmlTag()
         {
             string html = "<html>test";
-            var htmlTagParser = new HtmlTagParser(_identifyTag, _determinateContent);
+            var htmlTagParser = TestFactory.InitHtmlTagParser(true);
 
             var exception = Assert.Throws<HtmlParsingException>(() => htmlTagParser.Parse(html));
 
@@ -75,7 +75,7 @@ namespace FalconEngineTest.DomParsing.Parser
         // [InlineData("<html hidden translate=\"no\" title=\"Page cachée\">Hello world</html>")]
         public void HtmlTagValidationIsTrue(string html)
         {
-            var htmlTagParser = new HtmlTagParser(_identifyTag, _determinateContent);
+            var htmlTagParser = TestFactory.InitHtmlTagParser(true);
 
             htmlTagParser.Parse(html);
             bool isValid = htmlTagParser.IsValid();
@@ -86,7 +86,7 @@ namespace FalconEngineTest.DomParsing.Parser
         [Fact]
         public void HtmlTagValidationIsFalse()
         {
-            var htmlTagParser = new HtmlTagParser(_identifyTag, _determinateContent);
+            var htmlTagParser = TestFactory.InitHtmlTagParser(true);
 
             htmlTagParser.Parse("<html></html>");
             bool isValid = htmlTagParser.IsValid();

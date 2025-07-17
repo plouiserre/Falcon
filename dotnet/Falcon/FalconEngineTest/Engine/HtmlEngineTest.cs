@@ -18,14 +18,14 @@ namespace FalconEngineTest.Engine
         public HtmlEngineTest()
         {
             var deleteUselessSpace = TestFactory.InitDeleteUselessSpace();
-            var determinateContent = TestFactory.InitDeterminateContent();
             var determinateChildren = TestFactory.InitDeterminateChildren();
             var identifyTag = TestFactory.InitIdentifyTag();
             var doctypeParser = new DoctypeParser(identifyTag);
-            var htmlTagParser = new HtmlTagParser(identifyTag, determinateContent);
+            var htmlTagParser = TestFactory.InitHtmlTagParser(true);
             var extractHtmlRemaining = new ExtractHtmlRemaining();
             var headParser = new HeadParser(deleteUselessSpace, identifyTag, determinateChildren);
-            _htmlParsing = new HtmlParsing(doctypeParser, htmlTagParser, headParser, extractHtmlRemaining);
+            _htmlParsing = new HtmlParsing(doctypeParser, htmlTagParser, headParser,
+                        extractHtmlRemaining, TestFactory.InitAttributeTagManager(true));
         }
 
         [Fact]

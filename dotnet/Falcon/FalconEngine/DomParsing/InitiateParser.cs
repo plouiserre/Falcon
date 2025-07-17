@@ -19,11 +19,12 @@ namespace FalconEngine.DomParsing
         private IDeterminateContent _determinateContent;
         private IDeterminateChildren _determinateChildren;
         private IExtractHtmlRemaining _extractHtmlRemaining;
+        private IAttributeTagManager _attributeTagManager;
 
         public InitiateParser(IDeleteUselessSpace deleteUselessSpace, IIdentifyTag identifyTag,
             IIdentifyStartTagEndTag identifyStartTagEndTag, IAttributeTagParser attributeTagParser,
             IDeterminateContent determinateContent, IDeterminateChildren determinateChildren,
-            IExtractHtmlRemaining extractHtmlRemaining)
+            IExtractHtmlRemaining extractHtmlRemaining, IAttributeTagManager attributeTagManager)
         {
             _deleteUselessSpace = deleteUselessSpace;
             _identifyTag = identifyTag;
@@ -32,6 +33,7 @@ namespace FalconEngine.DomParsing
             _determinateContent = determinateContent;
             _determinateChildren = determinateChildren;
             _extractHtmlRemaining = extractHtmlRemaining;
+            _attributeTagManager = attributeTagManager;
         }
 
         public List<ITagParser> GetTagParsers(string html)
@@ -63,7 +65,7 @@ namespace FalconEngine.DomParsing
                 case string tag when tag.ToLower().Contains("doctype"):
                     return new DoctypeParser(_identifyTag);
                 case string tag when tag.ToLower().Contains("html"):
-                    return new HtmlTagParser(_identifyTag, _determinateContent);
+                    return new HtmlTagParser(_identifyTag, _determinateContent, _attributeTagManager);
                 case string tag when tag.ToLower().Contains("head"):
                     return new HeadParser(_deleteUselessSpace, _identifyTag, _determinateChildren);
                 case string tag when tag.ToLower().Contains("meta"):
