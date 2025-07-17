@@ -25,7 +25,6 @@ namespace FalconEngine.DomParsing.Parser
             return _tag;
         }
 
-        //TODO if _tag null throw exception!!!!
         public bool IsValid()
         {
             if (_tag == null)

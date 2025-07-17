@@ -17,10 +17,12 @@ namespace FalconEngine.DomParsing.IdentifyTagParsing
         private IAttributeTagParser _attributeTagParser;
         private IDeterminateContent _determinateContent;
         private IExtractHtmlRemaining _extractHtmlRemaining;
+        private IAttributeTagManager _attributeTagManager;
 
         public DeterminateChildren(IDeleteUselessSpace deleteUselessSpace, IIdentifyTag identifyTag,
             IIdentifyStartTagEndTag identifyStartTagEndTag, IAttributeTagParser attributeTagParser,
-            IDeterminateContent determinateContent, IExtractHtmlRemaining extractHtmlRemaining)
+            IDeterminateContent determinateContent, IExtractHtmlRemaining extractHtmlRemaining,
+            IAttributeTagManager attributeTagManager)
         {
             _identifyTag = identifyTag;
             _deleteUselessSpace = deleteUselessSpace;
@@ -28,6 +30,7 @@ namespace FalconEngine.DomParsing.IdentifyTagParsing
             _attributeTagParser = attributeTagParser;
             _determinateContent = determinateContent;
             _extractHtmlRemaining = extractHtmlRemaining;
+            _attributeTagManager = attributeTagManager;
         }
 
         public List<TagModel> Find(string html)
@@ -35,7 +38,7 @@ namespace FalconEngine.DomParsing.IdentifyTagParsing
             var children = new List<TagModel>();
             try
             {
-                var initiateParser = new InitiateParser(_deleteUselessSpace, _identifyTag, _identitfyStartEndTag, _attributeTagParser, _determinateContent, this, _extractHtmlRemaining);
+                var initiateParser = new InitiateParser(_deleteUselessSpace, _identifyTag, _identitfyStartEndTag, _attributeTagParser, _determinateContent, this, _extractHtmlRemaining, _attributeTagManager);
                 var parsers = initiateParser.GetTagParsers(html);
                 foreach (var parser in parsers)
                 {

@@ -22,6 +22,20 @@ namespace FalconEngineTest.Utils
             return new IdentifyStartTagEndTag();
         }
 
+        public static AttributeTagManager InitAttributeTagManager(bool isSettingAttributes)
+        {
+            var attributeTagManager = new AttributeTagManager();
+            if (isSettingAttributes)
+                attributeTagManager.SetAttributes();
+            return attributeTagManager;
+        }
+
+        public static HtmlTagParser InitHtmlTagParser(bool isSettingAttributes)
+        {
+            return new HtmlTagParser(TestFactory.InitIdentifyTag(), TestFactory.InitDeterminateContent(),
+                TestFactory.InitAttributeTagManager(isSettingAttributes));
+        }
+
         public static DeterminateContent InitDeterminateContent()
         {
             return new DeterminateContent();
@@ -53,7 +67,8 @@ namespace FalconEngineTest.Utils
         {
             var identifyTag = InitIdentifyTag();
             var initiate = new InitiateParser(InitDeleteUselessSpace(), identifyTag, InitIdentifyStartTagEndTag(),
-                InitAttributeTagParser(), InitDeterminateContent(), InitDeterminateChildren(), InitExtractHtmlRemaining());
+                InitAttributeTagParser(), InitDeterminateContent(), InitDeterminateChildren(),
+                InitExtractHtmlRemaining(), InitAttributeTagManager(false));
             return initiate;
         }
 
@@ -65,8 +80,9 @@ namespace FalconEngineTest.Utils
 
         public static DeterminateChildren InitDeterminateChildren()
         {
-            var determinateChildren = new DeterminateChildren(InitDeleteUselessSpace(), InitIdentifyTag(), InitIdentifyStartTagEndTag(),
-            InitAttributeTagParser(), InitDeterminateContent(), InitExtractHtmlRemaining());
+            var determinateChildren = new DeterminateChildren(InitDeleteUselessSpace(), InitIdentifyTag(),
+            InitIdentifyStartTagEndTag(), InitAttributeTagParser(), InitDeterminateContent(), InitExtractHtmlRemaining(),
+            InitAttributeTagManager(false));
             return determinateChildren;
         }
 
