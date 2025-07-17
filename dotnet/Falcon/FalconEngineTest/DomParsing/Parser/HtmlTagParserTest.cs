@@ -29,7 +29,7 @@ namespace FalconEngineTest.DomParsing.Parser
             var htmlTagParser = new HtmlTagParser(_identifyTag, _determinateContent);
 
             var tagHtml = htmlTagParser.Parse(html);
-            bool isValid = true;  //htmlTagParser.IsValid(tagHtml);
+            bool isValid = htmlTagParser.IsValid();
 
             Assert.Equal(NameTagEnum.html, tagHtml.NameTag);
             Assert.Equal(HtmlData.ContentHtmlSimple, tagHtml.Content);
@@ -45,7 +45,7 @@ namespace FalconEngineTest.DomParsing.Parser
             var htmlTagParser = new HtmlTagParser(_identifyTag, _determinateContent);
 
             var tagHtml = htmlTagParser.Parse(html);
-            bool isValid = true; //htmlTagParser.IsValid(tagHtml);
+            bool isValid = htmlTagParser.IsValid();
 
             Assert.Equal(HtmlData.ContentHtmlSimpleWithSpace, tagHtml.Content);
             Assert.Equal(NameTagEnum.html, tagHtml.NameTag);
@@ -66,5 +66,32 @@ namespace FalconEngineTest.DomParsing.Parser
             Assert.Equal(ErrorTypeParsing.html, exception.ErrorType);
         }
 
+        [Theory]
+        [InlineData("<html lang=\"fr\" dir=\"ltr\" xmlns=\"http://www.w3.org/1999/xhtml\">Hello world</html>")]
+        [InlineData("<html manifest=\"app.manifest\">Hello world</html>")]
+        [InlineData("<html id=\"root-html\" class=\"theme-light responsive\" style=\"background-color: #f0f0f0;\">Hello world</html>")]
+        [InlineData("<html accesskey=\"h\" tabindex=\"0\" contenteditable=\"false\" draggable=\"false\" spellcheck=\"true\">\">Hello world</html>")]
+        [InlineData("<html data-theme=\"dark\" data-user=\"admin\" data-page=\"home\">Hello world</html>")]
+        // [InlineData("<html hidden translate=\"no\" title=\"Page cachée\">Hello world</html>")]
+        public void HtmlTagValidationIsTrue(string html)
+        {
+            var htmlTagParser = new HtmlTagParser(_identifyTag, _determinateContent);
+
+            htmlTagParser.Parse(html);
+            bool isValid = htmlTagParser.IsValid();
+
+            Assert.True(isValid);
+        }
+
+        [Fact]
+        public void HtmlTagValidationIsFalse()
+        {
+            var htmlTagParser = new HtmlTagParser(_identifyTag, _determinateContent);
+
+            htmlTagParser.Parse("<html></html>");
+            bool isValid = htmlTagParser.IsValid();
+
+            Assert.False(isValid);
+        }
     }
 }

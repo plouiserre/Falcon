@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Threading.Tasks;
 using FalconEngine.CleanData;
 using FalconEngine.DomParsing.CustomException;
@@ -41,11 +42,34 @@ namespace FalconEngine.DomParsing.Parser
 
         public bool IsValid()
         {
-            // if (tag.TagEnd == "</html>" && tag.TagStart.Contains("html"))
-            //     return true;
-            // else
-            //     return false;
-            return true;
+            bool isTagGoodFormatted = !string.IsNullOrEmpty(_tag.TagStart) && !string.IsNullOrEmpty(_tag.TagEnd);
+            bool isContent = !string.IsNullOrEmpty(_tag.Content);
+            bool attributesAreAutorized = AreAttributesAreAutorized();
+            return isTagGoodFormatted && isContent && attributesAreAutorized;
+        }
+
+        private bool AreAttributesAreAutorized()
+        {
+            bool isOk = true;
+            if (_tag.Attributes == null || _tag.Attributes.Count == 0)
+                return isOk;
+            foreach (var attribut in _tag.Attributes)
+            {
+                var attributKey = attribut.FamilyAttribute;
+                if (attributKey != FamilyAttributeEnum.lang && attributKey != FamilyAttributeEnum.dir &&
+                        attributKey != FamilyAttributeEnum.xmlns && attributKey != FamilyAttributeEnum.manifest &&
+                        attributKey != FamilyAttributeEnum.style && attributKey != FamilyAttributeEnum.id &&
+                        attributKey != FamilyAttributeEnum.classCss && attributKey != FamilyAttributeEnum.datapage &&
+                        attributKey != FamilyAttributeEnum.datatheme && attributKey != FamilyAttributeEnum.datauser &&
+                        attributKey != FamilyAttributeEnum.accesskey && attributKey != FamilyAttributeEnum.tabindex &&
+                        attributKey != FamilyAttributeEnum.contenteditable && attributKey != FamilyAttributeEnum.draggable &&
+                        attributKey != FamilyAttributeEnum.spellcheck)
+                {
+                    isOk = false;
+                    break;
+                }
+            }
+            return isOk;
         }
 
         public string CleanHtml(TagModel tag, string html)

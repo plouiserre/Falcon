@@ -105,7 +105,7 @@ namespace FalconEngine.DomParsing.Parser
                 case "href":
                     familyAttribute = FamilyAttributeEnum.href;
                     break;
-                case "classCss":
+                case "class":
                     familyAttribute = FamilyAttributeEnum.classCss;
                     break;
                 case "dir":
@@ -113,6 +113,36 @@ namespace FalconEngine.DomParsing.Parser
                     break;
                 case "xmlns":
                     familyAttribute = FamilyAttributeEnum.xmlns;
+                    break;
+                case "manifest":
+                    familyAttribute = FamilyAttributeEnum.manifest;
+                    break;
+                case "style":
+                    familyAttribute = FamilyAttributeEnum.style;
+                    break;
+                case "data-user":
+                    familyAttribute = FamilyAttributeEnum.datauser;
+                    break;
+                case "data-theme":
+                    familyAttribute = FamilyAttributeEnum.datatheme;
+                    break;
+                case "data-page":
+                    familyAttribute = FamilyAttributeEnum.datapage;
+                    break;
+                case "accesskey":
+                    familyAttribute = FamilyAttributeEnum.accesskey;
+                    break;
+                case "tabindex":
+                    familyAttribute = FamilyAttributeEnum.tabindex;
+                    break;
+                case "contenteditable":
+                    familyAttribute = FamilyAttributeEnum.contenteditable;
+                    break;
+                case "draggable":
+                    familyAttribute = FamilyAttributeEnum.draggable;
+                    break;
+                case "spellcheck":
+                    familyAttribute = FamilyAttributeEnum.spellcheck;
                     break;
                 default:
                     parseIsOk = false;
