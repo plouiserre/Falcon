@@ -15,6 +15,7 @@ namespace FalconEngine.DomParsing
         {
             _allAttributesAutorizedByTag = new Dictionary<NameTagEnum, List<FamilyAttributeEnum>>();
             _allAttributesAutorizedByTag[NameTagEnum.html] = new List<FamilyAttributeEnum>();
+            _allAttributesAutorizedByTag[NameTagEnum.meta] = new List<FamilyAttributeEnum>();
         }
 
         public List<FamilyAttributeEnum> GetAttributes(NameTagEnum tag)
@@ -25,6 +26,7 @@ namespace FalconEngine.DomParsing
         public void SetAttributes()
         {
             SetHtmlAttributesAutorized();
+            SetMetaAttributesAutorized();
         }
 
         private void SetHtmlAttributesAutorized()
@@ -45,6 +47,23 @@ namespace FalconEngine.DomParsing
             _allAttributesAutorizedByTag[NameTagEnum.html].Add(FamilyAttributeEnum.contenteditable);
             _allAttributesAutorizedByTag[NameTagEnum.html].Add(FamilyAttributeEnum.draggable);
             _allAttributesAutorizedByTag[NameTagEnum.html].Add(FamilyAttributeEnum.spellcheck);
+        }
+
+        private void SetMetaAttributesAutorized()
+        {
+            _allAttributesAutorizedByTag[NameTagEnum.meta].Add(FamilyAttributeEnum.charset);
+            _allAttributesAutorizedByTag[NameTagEnum.meta].Add(FamilyAttributeEnum.name);
+            _allAttributesAutorizedByTag[NameTagEnum.meta].Add(FamilyAttributeEnum.content);
+            _allAttributesAutorizedByTag[NameTagEnum.meta].Add(FamilyAttributeEnum.httpequiv);
+            _allAttributesAutorizedByTag[NameTagEnum.meta].Add(FamilyAttributeEnum.scheme);
+            _allAttributesAutorizedByTag[NameTagEnum.meta].Add(FamilyAttributeEnum.id);
+            _allAttributesAutorizedByTag[NameTagEnum.meta].Add(FamilyAttributeEnum.classCss);
+            _allAttributesAutorizedByTag[NameTagEnum.meta].Add(FamilyAttributeEnum.datapage);
+            _allAttributesAutorizedByTag[NameTagEnum.meta].Add(FamilyAttributeEnum.datatheme);
+            _allAttributesAutorizedByTag[NameTagEnum.meta].Add(FamilyAttributeEnum.datauser);
+            _allAttributesAutorizedByTag[NameTagEnum.meta].Add(FamilyAttributeEnum.lang);
+            _allAttributesAutorizedByTag[NameTagEnum.meta].Add(FamilyAttributeEnum.dir);
+            _allAttributesAutorizedByTag[NameTagEnum.meta].Add(FamilyAttributeEnum.title);
         }
     }
 }

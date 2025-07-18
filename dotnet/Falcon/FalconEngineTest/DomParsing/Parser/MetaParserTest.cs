@@ -20,7 +20,8 @@ namespace FalconEngineTest.DomParsing.Parser
         {
             var identifyTag = TestFactory.InitIdentifyTag();
             var attributeTagParser = TestFactory.InitAttributeTagParser();
-            _metaParser = new MetaParser(identifyTag, attributeTagParser);
+            var attributeTagManager = TestFactory.InitAttributeTagManager(true);
+            _metaParser = new MetaParser(identifyTag, attributeTagParser, attributeTagManager);
         }
 
         [Fact]
@@ -77,6 +78,31 @@ namespace FalconEngineTest.DomParsing.Parser
             Assert.Equal(FamilyAttributeEnum.charset, tag.Attributes[0].FamilyAttribute);
             Assert.Equal("UTF-8", tag.Attributes[0].Value);
             Assert.Null(tag.Children);
+        }
+
+        [Theory]
+        [InlineData("<meta charset=\"UTF-8\">")]
+        [InlineData("<meta name=\"description\" content=\"Ceci est une description de la page.\">")]
+        [InlineData("<meta http-equiv=\"refresh\" content=\"30;url=https://example.com\">")]
+        [InlineData("<meta name=\"author\" content=\"Jean Dupont\" id=\"meta-author\" class=\"meta-info\" lang=\"fr\" dir=\"ltr\" title=\"Auteur du document\" style=\"display: none;\">")]
+        [InlineData("<meta name=\"example\" content=\"1234\" scheme=\"URI\">")]
+        public void ParseMetaAndValidateHtml(string html)
+        {
+            _metaParser.Parse(html);
+            bool isValid = _metaParser.IsValid();
+
+            Assert.True(isValid);
+        }
+
+        [Fact]
+        public void ParseMetaAndNoValidateHtml()
+        {
+            string html = "<meta charset=\"UTF-8\"></meta>";
+
+            _metaParser.Parse(html);
+            bool isValid = _metaParser.IsValid();
+
+            Assert.False(isValid);
         }
     }
 }

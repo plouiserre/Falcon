@@ -11,14 +11,23 @@ namespace FalconEngine.DomParsing.Parser
     {
 
         private string _html;
-        private string _tagStart;
+        private TagModel _tag;
         private IAttributeTagParser _attributeTagParser;
         private IIdentifyTag _identifyTag;
+        private IAttributeTagManager _attributeTagManager;
 
-        public MetaParser(IIdentifyTag identifyTag, IAttributeTagParser attributeTagParser)
+        public MetaParser(IIdentifyTag identifyTag, IAttributeTagParser attributeTagParser, IAttributeTagManager attributeTagManager)
         {
             _attributeTagParser = attributeTagParser;
             _identifyTag = identifyTag;
+            _attributeTagManager = attributeTagManager;
+        }
+
+        public TagModel Parse(string html)
+        {
+            _html = html;
+            _tag = _identifyTag.Analyze(_html);
+            return _tag;
         }
 
         public string CleanHtml(TagModel tag, string html)
@@ -33,14 +42,28 @@ namespace FalconEngine.DomParsing.Parser
 
         public bool IsValid()
         {
-            throw new NotImplementedException();
+            bool noTagEnd = string.IsNullOrEmpty(_tag.TagEnd);
+            bool tagAreOk = AreAttributesAreAutorized();
+            return noTagEnd;
         }
 
-        public TagModel Parse(string html)
+        //TODO factorized in a mastertagparser
+        private bool AreAttributesAreAutorized()
         {
-            _html = html;
-            var tag = _identifyTag.Analyze(_html);
-            return tag;
+            bool isOk = true;
+            if (_tag.Attributes == null || _tag.Attributes.Count == 0)
+                return isOk;
+            var allAttributesAutorized = _attributeTagManager.GetAttributes(NameTagEnum.meta);
+            if (allAttributesAutorized == null || allAttributesAutorized.Count == 0)
+                return false;
+            foreach (var attribut in _tag.Attributes)
+            {
+                var attributKey = attribut.FamilyAttribute;
+                isOk = allAttributesAutorized.Any(o => o == attributKey);
+                if (!isOk)
+                    break;
+            }
+            return isOk;
         }
     }
 }
