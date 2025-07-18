@@ -144,6 +144,15 @@ namespace FalconEngine.DomParsing.Parser
                 case "spellcheck":
                     familyAttribute = FamilyAttributeEnum.spellcheck;
                     break;
+                case "http-equiv":
+                    familyAttribute = FamilyAttributeEnum.httpequiv;
+                    break;
+                case "scheme":
+                    familyAttribute = FamilyAttributeEnum.scheme;
+                    break;
+                case "title":
+                    familyAttribute = FamilyAttributeEnum.title;
+                    break;
                 default:
                     parseIsOk = false;
                     break;
