@@ -81,7 +81,7 @@ namespace FalconEngine.DomParsing
             _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.datapurpose);
             _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.datatheme);
             _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.datauser);
-            _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.disable);
+            _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.disabled);
             _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.draggable);
             _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.dir);
             _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.id);

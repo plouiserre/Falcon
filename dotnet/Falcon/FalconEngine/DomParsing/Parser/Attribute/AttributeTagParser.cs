@@ -68,7 +68,7 @@ namespace FalconEngine.DomParsing.Parser.Attribute
             return new AttributeModel()
             {
                 FamilyAttribute = familyAttribute,
-                Value = CalculateValueAttribute(candidate, firstElementToMove)
+                Value = candidate.Contains("=") ? CalculateValueAttribute(candidate, firstElementToMove) : null
             };
         }
 
@@ -121,6 +121,9 @@ namespace FalconEngine.DomParsing.Parser.Attribute
                     break;
                 case "dir":
                     familyAttribute = FamilyAttributeEnum.dir;
+                    break;
+                case "disabled":
+                    familyAttribute = FamilyAttributeEnum.disabled;
                     break;
                 case "draggable":
                     familyAttribute = FamilyAttributeEnum.draggable;
