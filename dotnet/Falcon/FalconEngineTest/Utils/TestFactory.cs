@@ -6,6 +6,7 @@ using FalconEngine.CleanData;
 using FalconEngine.DomParsing;
 using FalconEngine.DomParsing.IdentifyTagParsing;
 using FalconEngine.DomParsing.Parser;
+using FalconEngine.DomParsing.Parser.Attribute;
 
 namespace FalconEngineTest.Utils
 {

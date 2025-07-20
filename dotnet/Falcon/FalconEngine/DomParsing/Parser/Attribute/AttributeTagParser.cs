@@ -6,7 +6,7 @@ using FalconEngine.DomParsing.CustomException;
 using FalconEngine.DomParsing.IdentifyTagParsing;
 using FalconEngine.Models;
 
-namespace FalconEngine.DomParsing.Parser
+namespace FalconEngine.DomParsing.Parser.Attribute
 {
     public class AttributeTagParser : IAttributeTagParser
     {

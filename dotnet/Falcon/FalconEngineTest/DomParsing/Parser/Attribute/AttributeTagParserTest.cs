@@ -8,7 +8,7 @@ using FalconEngine.DomParsing.Parser;
 using FalconEngine.Models;
 using FalconEngineTest.Utils;
 
-namespace FalconEngineTest.DomParsing.Parser
+namespace FalconEngineTest.DomParsing.Parser.Attribute
 {
     public class AttributeTagParserTest
     {

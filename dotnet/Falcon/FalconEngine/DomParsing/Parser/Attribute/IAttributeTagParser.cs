@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FalconEngine.Models;
 
-namespace FalconEngine.DomParsing.Parser
+namespace FalconEngine.DomParsing.Parser.Attribute
 {
     public interface IAttributeTagParser
     {

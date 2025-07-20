@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using FalconEngine.CleanData;
 using FalconEngine.DomParsing.CustomException;
 using FalconEngine.DomParsing.Parser;
+using FalconEngine.DomParsing.Parser.Attribute;
 using FalconEngine.Models;
 
 namespace FalconEngine.DomParsing.IdentifyTagParsing
