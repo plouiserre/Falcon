@@ -23,6 +23,11 @@ namespace FalconEngineTest.Utils
             return new IdentifyStartTagEndTag();
         }
 
+        public static AnalyzeAttributes InitAnalyzeAttributes()
+        {
+            return new AnalyzeAttributes();
+        }
+
         public static LinkParser InitLinkParser()
         {
             return new LinkParser(InitIdentifyTag(), InitAttributeTagManager(true));
@@ -54,7 +59,7 @@ namespace FalconEngineTest.Utils
 
         public static AttributeTagParser InitAttributeTagParser()
         {
-            return new AttributeTagParser(InitIdentifyStartTagEndTag());
+            return new AttributeTagParser(InitIdentifyStartTagEndTag(), InitAnalyzeAttributes());
         }
 
         public static IdentifyTagName InitIdentifyTagName()

@@ -14,10 +14,12 @@ namespace FalconEngine.DomParsing.Parser.Attribute
         private string _startTag { get; set; }
         private List<AttributeModel> _attributes { get; set; }
         private IIdentifyStartTagEndTag _identifyStartTagEndTag;
+        private IAnalyzeAttributes _analyzeAttributes;
 
-        public AttributeTagParser(IIdentifyStartTagEndTag identifyStartTagEndTag)
+        public AttributeTagParser(IIdentifyStartTagEndTag identifyStartTagEndTag, IAnalyzeAttributes analyzeAttributes)
         {
             _identifyStartTagEndTag = identifyStartTagEndTag;
+            _analyzeAttributes = analyzeAttributes;
         }
 
         public List<AttributeModel> Parse(string html)
@@ -32,8 +34,8 @@ namespace FalconEngine.DomParsing.Parser.Attribute
 
         private void GetAttributes()
         {
-            var attributes = _startTag.Split("\" ");
-            for (int i = 0; i < attributes.Length; i++)
+            var attributes = _analyzeAttributes.Study(_startTag);
+            for (int i = 0; i < attributes.Count; i++)
             {
                 var candidate = CleanCandidateAttribute(attributes[i]);
                 var attribute = GetAttribute(candidate);
