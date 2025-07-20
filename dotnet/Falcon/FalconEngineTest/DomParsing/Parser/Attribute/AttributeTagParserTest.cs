@@ -41,9 +41,6 @@ namespace FalconEngineTest.DomParsing.Parser.Attribute
             Assert.Equal("width=device-width, initial-scale=1.0", attributs[1].Value);
         }
 
-
-
-
         [Fact]
         public void HtmlAttribute()
         {
