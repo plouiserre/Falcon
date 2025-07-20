@@ -94,11 +94,11 @@ namespace FalconEngineTest.DomParsing.Parser
             Assert.True(isValid);
         }
 
-        [Fact]
-        public void ParseMetaAndNoValidateHtml()
+        [Theory]
+        [InlineData("<meta charset=\"UTF-8\"></meta>")]
+        [InlineData("<meta name=\"description\" spellcheck=\"Ceci est une description de la page.\">")]
+        public void ParseMetaAndNoValidateHtml(string html)
         {
-            string html = "<meta charset=\"UTF-8\"></meta>";
-
             _metaParser.Parse(html);
             bool isValid = _metaParser.IsValid();
 

@@ -43,8 +43,8 @@ namespace FalconEngine.DomParsing.Parser
         public bool IsValid()
         {
             bool noTagEnd = string.IsNullOrEmpty(_tag.TagEnd);
-            bool tagAreOk = AreAttributesAreAutorized();
-            return noTagEnd;
+            bool tagsAreOk = AreAttributesAreAutorized();
+            return noTagEnd && tagsAreOk;
         }
 
         //TODO factorized in a mastertagparser

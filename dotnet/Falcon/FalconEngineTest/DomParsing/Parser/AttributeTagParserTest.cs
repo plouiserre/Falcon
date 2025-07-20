@@ -63,6 +63,25 @@ namespace FalconEngineTest.DomParsing.Parser
         }
 
 
+        // [Fact]
+        // public void LinkAttributesParsingComplexe()
+        // {
+        //     string html = "<link rel=\"manifest\" href=\" / site.webmanifest\" type=\"application / manifest + json\" crossorigin=\"use - credentials\" referrerpolicy=\"origin - when - cross - origin\" id=\"web - app - manifest\">";
+
+        //     var attributeTagParser = TestFactory.InitAttributeTagParser();
+
+        //     var attributs = attributeTagParser.Parse(html);
+
+        //     Assert.Equal(3, attributs.Count);
+        //     Assert.Equal(FamilyAttributeEnum.lang, attributs[0].FamilyAttribute);
+        //     Assert.Equal("en", attributs[0].Value);
+        //     Assert.Equal(FamilyAttributeEnum.dir, attributs[1].FamilyAttribute);
+        //     Assert.Equal("auto", attributs[1].Value);
+        //     Assert.Equal(FamilyAttributeEnum.xmlns, attributs[2].FamilyAttribute);
+        //     Assert.Equal("http://www.w3.org/1999/xhtml", attributs[2].Value);
+        // }
+
+
         [Theory]
         [InlineData("<meta name=\"viewport\" wrong content=\"width=device-width, initial-scale=1.0\">")]
         [InlineData("<meta bigname=\"viewport\" content=\"width=device-width, initial-scale=1.0\">")]

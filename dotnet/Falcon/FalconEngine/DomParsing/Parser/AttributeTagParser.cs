@@ -84,41 +84,29 @@ namespace FalconEngine.DomParsing.Parser
             FamilyAttributeEnum familyAttribute = FamilyAttributeEnum.lang;
             switch (key)
             {
-                case "lang":
-                    familyAttribute = FamilyAttributeEnum.lang;
+                case "accesskey":
+                    familyAttribute = FamilyAttributeEnum.accesskey;
                     break;
-                case "name":
-                    familyAttribute = FamilyAttributeEnum.name;
-                    break;
-                case "rel":
-                    familyAttribute = FamilyAttributeEnum.rel;
-                    break;
-                case "id":
-                    familyAttribute = FamilyAttributeEnum.id;
+                case "as":
+                    familyAttribute = FamilyAttributeEnum.asAttr;
                     break;
                 case "charset":
                     familyAttribute = FamilyAttributeEnum.charset;
                     break;
-                case "content":
-                    familyAttribute = FamilyAttributeEnum.content;
-                    break;
-                case "href":
-                    familyAttribute = FamilyAttributeEnum.href;
-                    break;
                 case "class":
                     familyAttribute = FamilyAttributeEnum.classCss;
                     break;
-                case "dir":
-                    familyAttribute = FamilyAttributeEnum.dir;
+                case "content":
+                    familyAttribute = FamilyAttributeEnum.content;
                     break;
-                case "xmlns":
-                    familyAttribute = FamilyAttributeEnum.xmlns;
+                case "contenteditable":
+                    familyAttribute = FamilyAttributeEnum.contenteditable;
                     break;
-                case "manifest":
-                    familyAttribute = FamilyAttributeEnum.manifest;
+                case "data-preload":
+                    familyAttribute = FamilyAttributeEnum.datapreload;
                     break;
-                case "style":
-                    familyAttribute = FamilyAttributeEnum.style;
+                case "data-purpose":
+                    familyAttribute = FamilyAttributeEnum.datapurpose;
                     break;
                 case "data-user":
                     familyAttribute = FamilyAttributeEnum.datauser;
@@ -129,29 +117,77 @@ namespace FalconEngine.DomParsing.Parser
                 case "data-page":
                     familyAttribute = FamilyAttributeEnum.datapage;
                     break;
-                case "accesskey":
-                    familyAttribute = FamilyAttributeEnum.accesskey;
-                    break;
-                case "tabindex":
-                    familyAttribute = FamilyAttributeEnum.tabindex;
-                    break;
-                case "contenteditable":
-                    familyAttribute = FamilyAttributeEnum.contenteditable;
+                case "dir":
+                    familyAttribute = FamilyAttributeEnum.dir;
                     break;
                 case "draggable":
                     familyAttribute = FamilyAttributeEnum.draggable;
                     break;
-                case "spellcheck":
-                    familyAttribute = FamilyAttributeEnum.spellcheck;
+                case "href":
+                    familyAttribute = FamilyAttributeEnum.href;
                     break;
                 case "http-equiv":
                     familyAttribute = FamilyAttributeEnum.httpequiv;
+                    break;
+                case "id":
+                    familyAttribute = FamilyAttributeEnum.id;
+                    break;
+                case "integrity":
+                    familyAttribute = FamilyAttributeEnum.integrity;
+                    break;
+                case "lang":
+                    familyAttribute = FamilyAttributeEnum.lang;
+                    break;
+                case "manifest":
+                    familyAttribute = FamilyAttributeEnum.manifest;
+                    break;
+                case "name":
+                    familyAttribute = FamilyAttributeEnum.name;
+                    break;
+                case "referrerpolicy":
+                    familyAttribute = FamilyAttributeEnum.referrerpolicy;
+                    break;
+                case "rel":
+                    familyAttribute = FamilyAttributeEnum.rel;
+                    break;
+                case "role":
+                    familyAttribute = FamilyAttributeEnum.role;
+                    break;
+                case "sizes":
+                    familyAttribute = FamilyAttributeEnum.sizes;
+                    break;
+                case "spellcheck":
+                    familyAttribute = FamilyAttributeEnum.spellcheck;
+                    break;
+                case "style":
+                    familyAttribute = FamilyAttributeEnum.style;
+                    break;
+                case "tabindex":
+                    familyAttribute = FamilyAttributeEnum.tabindex;
+                    break;
+                case "translate":
+                    familyAttribute = FamilyAttributeEnum.translate;
+                    break;
+                case "xmlns":
+                    familyAttribute = FamilyAttributeEnum.xmlns;
                     break;
                 case "scheme":
                     familyAttribute = FamilyAttributeEnum.scheme;
                     break;
                 case "title":
                     familyAttribute = FamilyAttributeEnum.title;
+                    break;
+                case "type":
+                    familyAttribute = FamilyAttributeEnum.type;
+                    break;
+                case "media":
+                    familyAttribute = FamilyAttributeEnum.media;
+                    break;
+                case "hreflang":
+                    familyAttribute = FamilyAttributeEnum.hreflang;
+                    break;
+                case "crossorigin":
+                    familyAttribute = FamilyAttributeEnum.crossorigin;
                     break;
                 default:
                     parseIsOk = false;
