@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using FalconEngine.CleanData;
 using FalconEngine.DomParsing.IdentifyTagParsing;
 using FalconEngine.DomParsing.Parser;
+using FalconEngine.DomParsing.Parser.Attribute;
 
 namespace FalconEngine.DomParsing
 {

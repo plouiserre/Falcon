@@ -8,7 +8,7 @@ using FalconEngine.DomParsing.Parser;
 using FalconEngine.Models;
 using FalconEngineTest.Utils;
 
-namespace FalconEngineTest.DomParsing.Parser
+namespace FalconEngineTest.DomParsing.Parser.Attribute
 {
     public class AttributeTagParserTest
     {
@@ -41,9 +41,6 @@ namespace FalconEngineTest.DomParsing.Parser
             Assert.Equal("width=device-width, initial-scale=1.0", attributs[1].Value);
         }
 
-
-
-
         [Fact]
         public void HtmlAttribute()
         {
@@ -63,23 +60,29 @@ namespace FalconEngineTest.DomParsing.Parser
         }
 
 
-        // [Fact]
-        // public void LinkAttributesParsingComplexe()
-        // {
-        //     string html = "<link rel=\"manifest\" href=\" / site.webmanifest\" type=\"application / manifest + json\" crossorigin=\"use - credentials\" referrerpolicy=\"origin - when - cross - origin\" id=\"web - app - manifest\">";
+        [Fact]
+        public void LinkAttributesParsingComplexe()
+        {
+            string html = "<link rel=\"manifest\" href=\" / site.webmanifest\" type=\"application / manifest + json\" crossorigin=\"use - credentials\" referrerpolicy=\"origin - when - cross - origin\" id=\"web - app - manifest\">";
 
-        //     var attributeTagParser = TestFactory.InitAttributeTagParser();
+            var attributeTagParser = TestFactory.InitAttributeTagParser();
 
-        //     var attributs = attributeTagParser.Parse(html);
+            var attributs = attributeTagParser.Parse(html);
 
-        //     Assert.Equal(3, attributs.Count);
-        //     Assert.Equal(FamilyAttributeEnum.lang, attributs[0].FamilyAttribute);
-        //     Assert.Equal("en", attributs[0].Value);
-        //     Assert.Equal(FamilyAttributeEnum.dir, attributs[1].FamilyAttribute);
-        //     Assert.Equal("auto", attributs[1].Value);
-        //     Assert.Equal(FamilyAttributeEnum.xmlns, attributs[2].FamilyAttribute);
-        //     Assert.Equal("http://www.w3.org/1999/xhtml", attributs[2].Value);
-        // }
+            Assert.Equal(6, attributs.Count);
+            Assert.Equal(FamilyAttributeEnum.rel, attributs[0].FamilyAttribute);
+            Assert.Equal("manifest", attributs[0].Value);
+            Assert.Equal(FamilyAttributeEnum.href, attributs[1].FamilyAttribute);
+            Assert.Equal(" / site.webmanifest", attributs[1].Value);
+            Assert.Equal(FamilyAttributeEnum.type, attributs[2].FamilyAttribute);
+            Assert.Equal("application / manifest + json", attributs[2].Value);
+            Assert.Equal(FamilyAttributeEnum.crossorigin, attributs[3].FamilyAttribute);
+            Assert.Equal("use - credentials", attributs[3].Value);
+            Assert.Equal(FamilyAttributeEnum.referrerpolicy, attributs[4].FamilyAttribute);
+            Assert.Equal("origin - when - cross - origin", attributs[4].Value);
+            Assert.Equal(FamilyAttributeEnum.id, attributs[5].FamilyAttribute);
+            Assert.Equal("web - app - manifest", attributs[5].Value);
+        }
 
 
         [Theory]

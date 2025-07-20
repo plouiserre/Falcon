@@ -6,6 +6,7 @@ using FalconEngine.CleanData;
 using FalconEngine.DomParsing;
 using FalconEngine.DomParsing.IdentifyTagParsing;
 using FalconEngine.DomParsing.Parser;
+using FalconEngine.DomParsing.Parser.Attribute;
 
 namespace FalconEngineTest.Utils
 {
@@ -20,6 +21,11 @@ namespace FalconEngineTest.Utils
         private static IdentifyStartTagEndTag InitIdentifyStartTagEndTag()
         {
             return new IdentifyStartTagEndTag();
+        }
+
+        public static AnalyzeAttributes InitAnalyzeAttributes()
+        {
+            return new AnalyzeAttributes();
         }
 
         public static LinkParser InitLinkParser()
@@ -53,7 +59,7 @@ namespace FalconEngineTest.Utils
 
         public static AttributeTagParser InitAttributeTagParser()
         {
-            return new AttributeTagParser(InitIdentifyStartTagEndTag());
+            return new AttributeTagParser(InitIdentifyStartTagEndTag(), InitAnalyzeAttributes());
         }
 
         public static IdentifyTagName InitIdentifyTagName()

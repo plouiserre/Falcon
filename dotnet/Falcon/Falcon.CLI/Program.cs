@@ -3,6 +3,7 @@ using FalconEngine.CleanData;
 using FalconEngine.DomParsing;
 using FalconEngine.DomParsing.IdentifyTagParsing;
 using FalconEngine.DomParsing.Parser;
+using FalconEngine.DomParsing.Parser.Attribute;
 using FalconEngine.Engine;
 using Newtonsoft.Json;
 
@@ -27,8 +28,9 @@ var identifyTagName = new IdentifyTagName();
 var determinateContent = new DeterminateContent();
 var identifyStartTagEndTag = new IdentifyStartTagEndTag();
 var extractHtmlRemaining = new ExtractHtmlRemaining();
+var analyzeAttributes = new AnalyzeAttributes();
 var deleteUselessSpace = new DeleteUselessSpace(identifyStartTagEndTag);
-var attributeTagParser = new AttributeTagParser(identifyStartTagEndTag);
+var attributeTagParser = new AttributeTagParser(identifyStartTagEndTag, analyzeAttributes);
 var identifyTag = new IdentifyTag(deleteUselessSpace, attributeTagParser, identifyTagName, identifyStartTagEndTag, determinateContent);
 var doctypeParser = new DoctypeParser(identifyTag);
 var htmlParser = new HtmlTagParser(identifyTag, determinateContent, attributeTagManager);
