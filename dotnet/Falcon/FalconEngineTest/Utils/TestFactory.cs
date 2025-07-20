@@ -22,6 +22,11 @@ namespace FalconEngineTest.Utils
             return new IdentifyStartTagEndTag();
         }
 
+        public static LinkParser InitLinkParser()
+        {
+            return new LinkParser(InitIdentifyTag(), InitAttributeTagManager(true));
+        }
+
         public static AttributeTagManager InitAttributeTagManager(bool isSettingAttributes)
         {
             var attributeTagManager = new AttributeTagManager();

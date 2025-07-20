@@ -16,6 +16,7 @@ namespace FalconEngine.DomParsing
             _allAttributesAutorizedByTag = new Dictionary<NameTagEnum, List<FamilyAttributeEnum>>();
             _allAttributesAutorizedByTag[NameTagEnum.html] = new List<FamilyAttributeEnum>();
             _allAttributesAutorizedByTag[NameTagEnum.meta] = new List<FamilyAttributeEnum>();
+            _allAttributesAutorizedByTag[NameTagEnum.link] = new List<FamilyAttributeEnum>();
         }
 
         public List<FamilyAttributeEnum> GetAttributes(NameTagEnum tag)
@@ -27,6 +28,7 @@ namespace FalconEngine.DomParsing
         {
             SetHtmlAttributesAutorized();
             SetMetaAttributesAutorized();
+            SetLinkAttributesAutorized();
         }
 
         private void SetHtmlAttributesAutorized()
@@ -58,12 +60,47 @@ namespace FalconEngine.DomParsing
             _allAttributesAutorizedByTag[NameTagEnum.meta].Add(FamilyAttributeEnum.scheme);
             _allAttributesAutorizedByTag[NameTagEnum.meta].Add(FamilyAttributeEnum.id);
             _allAttributesAutorizedByTag[NameTagEnum.meta].Add(FamilyAttributeEnum.classCss);
+            _allAttributesAutorizedByTag[NameTagEnum.meta].Add(FamilyAttributeEnum.style);
             _allAttributesAutorizedByTag[NameTagEnum.meta].Add(FamilyAttributeEnum.datapage);
             _allAttributesAutorizedByTag[NameTagEnum.meta].Add(FamilyAttributeEnum.datatheme);
             _allAttributesAutorizedByTag[NameTagEnum.meta].Add(FamilyAttributeEnum.datauser);
             _allAttributesAutorizedByTag[NameTagEnum.meta].Add(FamilyAttributeEnum.lang);
             _allAttributesAutorizedByTag[NameTagEnum.meta].Add(FamilyAttributeEnum.dir);
             _allAttributesAutorizedByTag[NameTagEnum.meta].Add(FamilyAttributeEnum.title);
+        }
+
+        private void SetLinkAttributesAutorized()
+        {
+            _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.accesskey);
+            _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.asAttr);
+            _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.blocking);
+            _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.classCss);
+            _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.crossorigin);
+            _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.datapage);
+            _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.datapreload);
+            _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.datapurpose);
+            _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.datatheme);
+            _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.datauser);
+            _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.disable);
+            _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.draggable);
+            _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.dir);
+            _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.id);
+            _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.integrity);
+            _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.href);
+            _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.hreflang);
+            _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.lang);
+            _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.media);
+            _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.referrerpolicy);
+            _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.rel);
+            _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.role);
+            _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.sizes);
+            _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.spellcheck);
+            _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.style);
+            _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.title);
+            _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.tabindex);
+            //_allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.hidden);
+            _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.translate);
+            _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.type);
         }
     }
 }
