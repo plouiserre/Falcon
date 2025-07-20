@@ -38,8 +38,6 @@ namespace FalconEngineTest.DomParsing.Parser
         [InlineData("<link rel=\"stylesheet\" href=\"styles.css\" type=\"text / css\" media=\"screen\" hreflang=\"en\" crossorigin=\"anonymous\" integrity=\"sha384 - abc123...\" referrerpolicy=\"no - referrer\" title=\"Thème clair\" id=\"main - stylesheet\" class=\"theme - style\" style=\"\" lang=\"en\" dir=\"ltr\" accesskey=\"l\" tabindex=\"0\" draggable=\"false\" spellcheck=\"false\" translate=\"no\" role=\"presentation\" data-theme=\"light\">")]
         [InlineData("<link rel=\"icon\" href=\"favicon - 32x32.png\" type=\"image / png\" sizes=\"32x32\" hreflang=\"en\" crossorigin=\"use - credentials\" referrerpolicy=\"origin\" id=\"site - icon\" class=\"favicon\" lang=\"fr\" data-purpose=\"favicon\">")]
         [InlineData("<link rel=\"preload\" href=\"script.js\" as=\"script\" type=\"application / javascript\" crossorigin=\"anonymous\" integrity=\"sha384 - xyz456...\" referrerpolicy=\"strict - origin\" media=\"all\" id=\"preload - script\" data-preload=\"true\">")]
-        // [InlineData("<link rel=\"manifest\" href=\" / site.webmanifest\" type=\"application / manifest + json\" crossorigin=\"use - credentials\" referrerpolicy=\"origin - when - cross - origin\" id=\"web - app - manifest\">")]
-        // [InlineData("<link rel=\"stylesheet\" href=\"alt-theme.css\" type=\"text/css\" title=\"Thème alternatif\" disabled media=\"screen\">")]
         public void ParseLinkTagValidate(string html)
         {
             var linkTagParser = TestFactory.InitLinkParser();
@@ -48,6 +46,31 @@ namespace FalconEngineTest.DomParsing.Parser
             bool isValid = linkTagParser.IsValid();
 
             Assert.True(isValid);
+        }
+
+        [Fact]
+        public void ParseLinkTableAndValidateWithOneAttributePresent()
+        {
+            string html = "<link rel=\"stylesheet\" href=\"alt-theme.css\" type=\"text/css\" title=\"Thème alternatif\" disabled media=\"screen\">";
+            var linkTagParser = TestFactory.InitLinkParser();
+
+            var tag = linkTagParser.Parse(html);
+            bool isValid = linkTagParser.IsValid();
+
+            Assert.True(isValid);
+            Assert.Equal(6, tag.Attributes.Count);
+            Assert.Equal(FamilyAttributeEnum.rel, tag.Attributes[0].FamilyAttribute);
+            Assert.Equal("stylesheet", tag.Attributes[0].Value);
+            Assert.Equal(FamilyAttributeEnum.href, tag.Attributes[1].FamilyAttribute);
+            Assert.Equal("alt-theme.css", tag.Attributes[1].Value);
+            Assert.Equal(FamilyAttributeEnum.type, tag.Attributes[2].FamilyAttribute);
+            Assert.Equal("text/css", tag.Attributes[2].Value);
+            Assert.Equal(FamilyAttributeEnum.title, tag.Attributes[3].FamilyAttribute);
+            Assert.Equal("Thème alternatif", tag.Attributes[3].Value);
+            Assert.Equal(FamilyAttributeEnum.disabled, tag.Attributes[4].FamilyAttribute);
+            Assert.Null(tag.Attributes[4].Value);
+            Assert.Equal(FamilyAttributeEnum.media, tag.Attributes[5].FamilyAttribute);
+            Assert.Equal("screen", tag.Attributes[5].Value);
         }
 
         [Theory]

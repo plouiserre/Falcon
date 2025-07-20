@@ -40,5 +40,25 @@ namespace FalconEngineTest.DomParsing.Parser.Attribute
             Assert.Equal("referrerpolicy=\"origin - when - cross - origin\"", parts[4]);
             Assert.Equal("id=\"web - app - manifest\"", parts[5]);
         }
+
+        [Fact]
+        public void IdentifyPartCorrecltyComplexeWithOneAttributeStartTag()
+        {
+            string html = "<link rel=\"stylesheet\" href=\"alt-theme.css\" type=\"text/css\" title=\"Thème alternatif\" disabled media=\"screen\">";
+
+            var analyze = new AnalyzeAttributes();
+
+            var parts = analyze.Study(html);
+
+            Assert.Equal(6, parts.Count);
+            Assert.Equal("rel=\"stylesheet\"", parts[0]);
+            Assert.Equal("href=\"alt-theme.css\"", parts[1]);
+            Assert.Equal("type=\"text/css\"", parts[2]);
+            Assert.Equal("title=\"Thème alternatif\"", parts[3]);
+            Assert.Equal("disabled", parts[4]);
+            Assert.Equal("media=\"screen\"", parts[5]);
+        }
+
+
     }
 }

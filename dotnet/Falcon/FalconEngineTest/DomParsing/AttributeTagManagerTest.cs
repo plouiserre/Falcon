@@ -82,7 +82,7 @@ namespace FalconEngineTest.DomParsing
             Assert.Contains(attributes, o => o == FamilyAttributeEnum.datapurpose);
             Assert.Contains(attributes, o => o == FamilyAttributeEnum.datatheme);
             Assert.Contains(attributes, o => o == FamilyAttributeEnum.datauser);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.disable);
+            Assert.Contains(attributes, o => o == FamilyAttributeEnum.disabled);
             Assert.Contains(attributes, o => o == FamilyAttributeEnum.draggable);
             Assert.Contains(attributes, o => o == FamilyAttributeEnum.dir);
             Assert.Contains(attributes, o => o == FamilyAttributeEnum.id);

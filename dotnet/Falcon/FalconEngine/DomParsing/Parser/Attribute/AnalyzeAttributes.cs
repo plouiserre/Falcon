@@ -42,12 +42,7 @@ namespace FalconEngine.DomParsing.Parser.Attribute
         {
             var parts = new List<string>();
             var partsNotClean = GetAllParts();
-            foreach (var part in partsNotClean)
-            {
-                var partClean = part.TrimStart();
-                partClean = partClean.TrimEnd();
-                parts.Add(partClean);
-            }
+            parts = CleanAllParts(partsNotClean);
             return parts;
         }
 
@@ -72,6 +67,44 @@ namespace FalconEngine.DomParsing.Parser.Attribute
                 }
             }
             return parts;
+        }
+
+        private List<string> CleanAllParts(List<string> partsNotClean)
+        {
+            var parts = new List<string>();
+            foreach (var part in partsNotClean)
+            {
+                var partClean = part.TrimStart();
+                partClean = partClean.TrimEnd();
+                bool isSpace = CheckElementAlone(partClean);
+                if (isSpace)
+                {
+                    string elementAlone = partClean.Split(" ")[0];
+                    string restElements = partClean.Replace(elementAlone, string.Empty);
+                    restElements = restElements.TrimEnd().TrimStart();
+                    parts.Add(elementAlone);
+                    parts.Add(restElements);
+                }
+                else
+                {
+                    parts.Add(partClean);
+                }
+            }
+            return parts;
+        }
+
+        private bool CheckElementAlone(string html)
+        {
+            bool isSpaceBeforeEqual = false;
+            for (int i = 0; i < html.Length; i++)
+            {
+                var caracter = html[i];
+                if (caracter == ' ')
+                    isSpaceBeforeEqual = true;
+                if (caracter == '=')
+                    break;
+            }
+            return isSpaceBeforeEqual;
         }
     }
 }
