@@ -3,13 +3,11 @@ using FalconEngine.Models;
 
 namespace FalconEngine.DomParsing.Parser
 {
-    public class LinkParser : ITagParser
+    public class LinkParser : TagParser, ITagParser
     {
         private IIdentifyTag _identifyTag;
-        private TagModel _tag;
-        private IAttributeTagManager _attributeTagManager;
 
-        public LinkParser(IIdentifyTag identifyTag, IAttributeTagManager attributeTagManager)
+        public LinkParser(IIdentifyTag identifyTag, IAttributeTagManager attributeTagManager) : base(attributeTagManager)
         {
             _identifyTag = identifyTag;
             _attributeTagManager = attributeTagManager;
@@ -27,30 +25,10 @@ namespace FalconEngine.DomParsing.Parser
 
         public bool IsValid()
         {
-            bool noTagEnd = string.IsNullOrEmpty(_tag.TagEnd);
-            bool tagsAreOk = AreAttributesAreAutorized();
-            return noTagEnd && tagsAreOk;
+            return base.IsValid();
         }
 
-        private bool AreAttributesAreAutorized()
-        {
-            bool isOk = true;
-            if (_tag.Attributes == null || _tag.Attributes.Count == 0)
-                return isOk;
-            var allAttributesAutorized = _attributeTagManager.GetAttributes(NameTagEnum.link);
-            if (allAttributesAutorized == null || allAttributesAutorized.Count == 0)
-                return false;
-            foreach (var attribut in _tag.Attributes)
-            {
-                var attributKey = attribut.FamilyAttribute;
-                isOk = allAttributesAutorized.Any(o => o == attributKey) || attributKey.Contains("data-");
-                if (!isOk)
-                    break;
-            }
-            return isOk;
-        }
-
-        public TagModel Parse(string html)
+        public override TagModel Parse(string html)
         {
             _tag = _identifyTag.Analyze(html);
             return _tag;

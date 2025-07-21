@@ -8,23 +8,19 @@ using FalconEngine.Models;
 
 namespace FalconEngine.DomParsing.Parser
 {
-    public class MetaParser : ITagParser
+    public class MetaParser : TagParser, ITagParser
     {
 
         private string _html;
         private TagModel _tag;
-        private IAttributeTagParser _attributeTagParser;
         private IIdentifyTag _identifyTag;
-        private IAttributeTagManager _attributeTagManager;
 
-        public MetaParser(IIdentifyTag identifyTag, IAttributeTagParser attributeTagParser, IAttributeTagManager attributeTagManager)
+        public MetaParser(IIdentifyTag identifyTag, IAttributeTagManager attributeTagManager) : base(attributeTagManager)
         {
-            _attributeTagParser = attributeTagParser;
             _identifyTag = identifyTag;
-            _attributeTagManager = attributeTagManager;
         }
 
-        public TagModel Parse(string html)
+        public override TagModel Parse(string html)
         {
             _html = html;
             _tag = _identifyTag.Analyze(_html);

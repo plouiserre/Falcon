@@ -19,9 +19,8 @@ namespace FalconEngineTest.DomParsing.Parser
         public MetaParserTest()
         {
             var identifyTag = TestFactory.InitIdentifyTag();
-            var attributeTagParser = TestFactory.InitAttributeTagParser();
             var attributeTagManager = TestFactory.InitAttributeTagManager(true);
-            _metaParser = new MetaParser(identifyTag, attributeTagParser, attributeTagManager);
+            _metaParser = new MetaParser(identifyTag, attributeTagManager);
         }
 
         [Fact]
