@@ -15,7 +15,8 @@ namespace FalconEngine.DomParsing.Parser
         private TagModel _tag;
         private IIdentifyTag _identifyTag;
 
-        public MetaParser(IIdentifyTag identifyTag, IAttributeTagManager attributeTagManager) : base(attributeTagManager)
+        public MetaParser(IIdentifyTag identifyTag, IAttributeTagManager attributeTagManager) :
+                    base(attributeTagManager, NameTagEnum.meta)
         {
             _identifyTag = identifyTag;
         }
