@@ -24,13 +24,30 @@ namespace FalconEngineTest.DomParsing.Parser
             var parseTitle = new TitleParser(identifyTag, determinateContent);
 
             var tag = parseTitle.Parse(html);
+            bool validation = parseTitle.IsValid();
 
+            Assert.True(validation);
             Assert.Null(tag.Attributes);
             Assert.Equal(NameTagEnum.title, tag.NameTag);
             Assert.Equal(titleName, tag.Content);
             Assert.Equal(TagFamilyEnum.WithEnd, tag.TagFamily);
             Assert.Equal("<title>", tag.TagStart);
             Assert.Equal("</title>", tag.TagEnd);
+        }
+
+        [Theory]
+        [InlineData("<title class=\"test\">My WebPage</title>")]
+        [InlineData("<title>")]
+        public void TitleTagNotValid(string html)
+        {
+            var identifyTag = TestFactory.InitIdentifyTag();
+            var determinateContent = TestFactory.InitDeterminateContent();
+            var parseTitle = new TitleParser(identifyTag, determinateContent);
+
+            parseTitle.Parse(html);
+            bool validation = parseTitle.IsValid();
+
+            Assert.False(validation);
         }
     }
 }

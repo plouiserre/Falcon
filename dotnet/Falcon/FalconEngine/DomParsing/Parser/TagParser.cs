@@ -10,10 +10,12 @@ namespace FalconEngine.DomParsing.Parser
     {
         protected TagModel _tag;
         protected IAttributeTagManager _attributeTagManager;
+        private NameTagEnum _nametag;
 
-        protected TagParser(IAttributeTagManager attributeTagManager)
+        protected TagParser(IAttributeTagManager attributeTagManager, NameTagEnum nameTag)
         {
             _attributeTagManager = attributeTagManager;
+            _nametag = nameTag;
         }
 
         public virtual bool IsValid()
@@ -28,7 +30,7 @@ namespace FalconEngine.DomParsing.Parser
             bool isOk = true;
             if (_tag.Attributes == null || _tag.Attributes.Count == 0)
                 return isOk;
-            var allAttributesAutorized = _attributeTagManager.GetAttributes(NameTagEnum.link);
+            var allAttributesAutorized = _attributeTagManager.GetAttributes(_nametag);
             if (allAttributesAutorized == null || allAttributesAutorized.Count == 0)
                 return false;
             foreach (var attribut in _tag.Attributes)

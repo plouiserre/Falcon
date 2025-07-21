@@ -7,7 +7,8 @@ namespace FalconEngine.DomParsing.Parser
     {
         private IIdentifyTag _identifyTag;
 
-        public LinkParser(IIdentifyTag identifyTag, IAttributeTagManager attributeTagManager) : base(attributeTagManager)
+        public LinkParser(IIdentifyTag identifyTag, IAttributeTagManager attributeTagManager) :
+                    base(attributeTagManager, NameTagEnum.link)
         {
             _identifyTag = identifyTag;
             _attributeTagManager = attributeTagManager;

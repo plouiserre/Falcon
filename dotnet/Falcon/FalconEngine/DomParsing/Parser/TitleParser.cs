@@ -32,7 +32,9 @@ namespace FalconEngine.DomParsing.Parser
 
         public bool IsValid()
         {
-            throw new NotImplementedException();
+            bool noAttributes = _tag.Attributes == null || _tag.Attributes.Count == 0;
+            bool tagEndPresent = !string.IsNullOrEmpty(_tag.TagEnd);
+            return noAttributes && tagEndPresent;
         }
 
         public TagModel Parse(string html)
