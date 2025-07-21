@@ -19,9 +19,9 @@ namespace FalconEngine.DomParsing
             _allAttributesAutorizedByTag[NameTagEnum.link] = new List<FamilyAttributeEnum>();
         }
 
-        public List<FamilyAttributeEnum> GetAttributes(NameTagEnum tag)
+        public List<string> GetAttributes(NameTagEnum tag)
         {
-            return _allAttributesAutorizedByTag[tag];
+            return _allAttributesAutorizedByTag[tag].Select(o => o.ToString()).ToList();
         }
 
         public void SetAttributes()
@@ -41,9 +41,7 @@ namespace FalconEngine.DomParsing
             _allAttributesAutorizedByTag[NameTagEnum.html].Add(FamilyAttributeEnum.style);
             _allAttributesAutorizedByTag[NameTagEnum.html].Add(FamilyAttributeEnum.id);
             _allAttributesAutorizedByTag[NameTagEnum.html].Add(FamilyAttributeEnum.classCss);
-            _allAttributesAutorizedByTag[NameTagEnum.html].Add(FamilyAttributeEnum.datapage);
-            _allAttributesAutorizedByTag[NameTagEnum.html].Add(FamilyAttributeEnum.datatheme);
-            _allAttributesAutorizedByTag[NameTagEnum.html].Add(FamilyAttributeEnum.datauser);
+            _allAttributesAutorizedByTag[NameTagEnum.html].Add(FamilyAttributeEnum.data_);
             _allAttributesAutorizedByTag[NameTagEnum.html].Add(FamilyAttributeEnum.accesskey);
             _allAttributesAutorizedByTag[NameTagEnum.html].Add(FamilyAttributeEnum.tabindex);
             _allAttributesAutorizedByTag[NameTagEnum.html].Add(FamilyAttributeEnum.contenteditable);
@@ -61,9 +59,7 @@ namespace FalconEngine.DomParsing
             _allAttributesAutorizedByTag[NameTagEnum.meta].Add(FamilyAttributeEnum.id);
             _allAttributesAutorizedByTag[NameTagEnum.meta].Add(FamilyAttributeEnum.classCss);
             _allAttributesAutorizedByTag[NameTagEnum.meta].Add(FamilyAttributeEnum.style);
-            _allAttributesAutorizedByTag[NameTagEnum.meta].Add(FamilyAttributeEnum.datapage);
-            _allAttributesAutorizedByTag[NameTagEnum.meta].Add(FamilyAttributeEnum.datatheme);
-            _allAttributesAutorizedByTag[NameTagEnum.meta].Add(FamilyAttributeEnum.datauser);
+            _allAttributesAutorizedByTag[NameTagEnum.meta].Add(FamilyAttributeEnum.data_);
             _allAttributesAutorizedByTag[NameTagEnum.meta].Add(FamilyAttributeEnum.lang);
             _allAttributesAutorizedByTag[NameTagEnum.meta].Add(FamilyAttributeEnum.dir);
             _allAttributesAutorizedByTag[NameTagEnum.meta].Add(FamilyAttributeEnum.title);
@@ -76,11 +72,7 @@ namespace FalconEngine.DomParsing
             _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.blocking);
             _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.classCss);
             _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.crossorigin);
-            _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.datapage);
-            _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.datapreload);
-            _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.datapurpose);
-            _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.datatheme);
-            _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.datauser);
+            _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.data_);
             _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.disabled);
             _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.draggable);
             _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.dir);

@@ -7,7 +7,7 @@ namespace FalconEngine.Models
 {
     public class AttributeModel
     {
-        public FamilyAttributeEnum FamilyAttribute { get; set; }
+        public string FamilyAttribute { get; set; }
         public string Value { get; set; }
     }
 }

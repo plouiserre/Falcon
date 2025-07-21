@@ -62,7 +62,7 @@ namespace FalconEngineTest.Data
                 Attributes = new List<AttributeModel>(){
                     new AttributeModel()
                     {
-                        FamilyAttribute = FamilyAttributeEnum.href,
+                        FamilyAttribute = FamilyAttributeEnum.href.ToString(),
                         Value = "declaration.html"
                     }
                 },
@@ -94,9 +94,9 @@ namespace FalconEngineTest.Data
 
         private static TagModel GetTagHtml()
         {
-            var attributLang = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.lang, Value = "en" };
-            var attributDir = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.dir, Value = "auto" };
-            var attributXmlns = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.xmlns, Value = "http://www.w3.org/1999/xhtml" };
+            var attributLang = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.lang.ToString(), Value = "en" };
+            var attributDir = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.dir.ToString(), Value = "auto" };
+            var attributXmlns = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.xmlns.ToString(), Value = "http://www.w3.org/1999/xhtml" };
             var htmlTag = new TagModel()
             {
                 Attributes = new List<AttributeModel>() { attributLang, attributDir, attributXmlns },
@@ -114,7 +114,7 @@ namespace FalconEngineTest.Data
             _metaCharsetTag = new TagModel()
             {
                 TagFamily = TagFamilyEnum.NoEnd,
-                Attributes = new List<AttributeModel>() { new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.charset, Value = "UTF-8" } },
+                Attributes = new List<AttributeModel>() { new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.charset.ToString(), Value = "UTF-8" } },
                 NameTag = NameTagEnum.meta,
                 TagStart = HtmlData.MetaCharset
             };
@@ -122,8 +122,8 @@ namespace FalconEngineTest.Data
             {
                 TagFamily = TagFamilyEnum.NoEnd,
                 Attributes = new List<AttributeModel>() {
-                        new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.name, Value = "viewport" } ,
-                        new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.content, Value = "width=device-width, initial-scale=1.0" }
+                        new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.name.ToString(), Value = "viewport" } ,
+                        new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.content.ToString(), Value = "width=device-width, initial-scale=1.0" }
                 },
                 NameTag = NameTagEnum.meta,
                 TagStart = HtmlData.MetaViewPort
@@ -140,11 +140,12 @@ namespace FalconEngineTest.Data
             {
                 TagFamily = TagFamilyEnum.NoEnd,
                 Attributes = new List<AttributeModel>() {
-                        new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.rel, Value = "stylesheet" } ,
-                        new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.href, Value = "main.css" }
+                        new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.rel.ToString(), Value = "stylesheet" } ,
+                        new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.href.ToString(), Value = "main.css" },
+                        new AttributeModel(){ FamilyAttribute = "data-preload", Value = "true"}
                 },
                 NameTag = NameTagEnum.link,
-                TagStart = @"<link rel=""stylesheet"" href=""main.css"">",
+                TagStart = "<link rel=\"stylesheet\" href=\"main.css\" data-preload=\"true\">",
             };
             var headTag = new TagModel()
             {
@@ -171,7 +172,7 @@ namespace FalconEngineTest.Data
 
         private static TagModel GetDivContent()
         {
-            var attributId = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.id, Value = "content" };
+            var attributId = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.id.ToString(), Value = "content" };
             string content = HtmlData.firstPHtmlSimple;
             var divTag = new TagModel()
             {
@@ -185,7 +186,7 @@ namespace FalconEngineTest.Data
 
         private static TagModel GetFirstPContent()
         {
-            var attributClass = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.classCss, Value = "declarationText" };
+            var attributClass = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.classCss.ToString(), Value = "declarationText" };
             var pTag = new TagModel()
             {
                 Attributes = new List<AttributeModel>() { attributClass },

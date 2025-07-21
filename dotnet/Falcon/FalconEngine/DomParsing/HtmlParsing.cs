@@ -52,7 +52,7 @@ namespace FalconEngine.DomParsing
                 Attributes = new List<AttributeModel>(){
                     new AttributeModel()
                     {
-                        FamilyAttribute = FamilyAttributeEnum.href,
+                        FamilyAttribute = FamilyAttributeEnum.href.ToString(),
                         Value = "declaration.html"
                     }
                 },
@@ -130,7 +130,7 @@ namespace FalconEngine.DomParsing
 
         private TagModel GetDivContent()
         {
-            var attributId = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.id, Value = "content" };
+            var attributId = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.id.ToString(), Value = "content" };
             string content = @"<p class=""declarationText"">
                                     Ceci est un 
                                         <span>
@@ -152,7 +152,7 @@ namespace FalconEngine.DomParsing
 
         private TagModel GetFirstPContent()
         {
-            var attributClass = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.classCss, Value = "declarationText" };
+            var attributClass = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.classCss.ToString(), Value = "declarationText" };
             string contentHtml = @"Ceci est un 
                                     <span>
                                         <a href=""declaration.html"">

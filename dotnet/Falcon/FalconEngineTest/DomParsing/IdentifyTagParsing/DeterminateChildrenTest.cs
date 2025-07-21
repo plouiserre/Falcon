@@ -31,7 +31,7 @@ namespace FalconEngineTest.DomParsing.IdentifyTagParsing
         {
             Assert.Equal(NameTagEnum.meta, metaCharsetChild.NameTag);
             Assert.Null(metaCharsetChild.Content);
-            Assert.Equal(FamilyAttributeEnum.charset, metaCharsetChild.Attributes[0].FamilyAttribute);
+            Assert.Equal(FamilyAttributeEnum.charset.ToString(), metaCharsetChild.Attributes[0].FamilyAttribute);
             Assert.Equal("UTF-8", metaCharsetChild.Attributes[0].Value);
             Assert.Equal(TagFamilyEnum.NoEnd, metaCharsetChild.TagFamily);
             Assert.Equal(HtmlData.MetaCharset, metaCharsetChild.TagStart);
@@ -43,9 +43,9 @@ namespace FalconEngineTest.DomParsing.IdentifyTagParsing
         {
             Assert.Equal(NameTagEnum.meta, metaViewPort.NameTag);
             Assert.Null(metaViewPort.Content);
-            Assert.Equal(FamilyAttributeEnum.name, metaViewPort.Attributes[0].FamilyAttribute);
+            Assert.Equal(FamilyAttributeEnum.name.ToString(), metaViewPort.Attributes[0].FamilyAttribute);
             Assert.Equal("viewport", metaViewPort.Attributes[0].Value);
-            Assert.Equal(FamilyAttributeEnum.content, metaViewPort.Attributes[1].FamilyAttribute);
+            Assert.Equal(FamilyAttributeEnum.content.ToString(), metaViewPort.Attributes[1].FamilyAttribute);
             Assert.Equal("width=device-width, initial-scale=1.0", metaViewPort.Attributes[1].Value);
             Assert.Equal(TagFamilyEnum.NoEnd, metaViewPort.TagFamily);
             Assert.Equal(HtmlData.MetaViewPort, metaViewPort.TagStart);
@@ -68,12 +68,12 @@ namespace FalconEngineTest.DomParsing.IdentifyTagParsing
         {
             Assert.Equal(NameTagEnum.link, linkCss.NameTag);
             Assert.Null(linkCss.Content);
-            Assert.Equal(FamilyAttributeEnum.rel, linkCss.Attributes[0].FamilyAttribute);
+            Assert.Equal(FamilyAttributeEnum.rel.ToString(), linkCss.Attributes[0].FamilyAttribute);
             Assert.Equal("stylesheet", linkCss.Attributes[0].Value);
-            Assert.Equal(FamilyAttributeEnum.href, linkCss.Attributes[1].FamilyAttribute);
+            Assert.Equal(FamilyAttributeEnum.href.ToString(), linkCss.Attributes[1].FamilyAttribute);
             Assert.Equal("main.css", linkCss.Attributes[1].Value);
             Assert.Equal(TagFamilyEnum.NoEnd, linkCss.TagFamily);
-            Assert.Equal("<link rel=\"stylesheet\" href=\"main.css\">", linkCss.TagStart);
+            Assert.Equal("<link rel=\"stylesheet\" href=\"main.css\" data-preload=\"true\">", linkCss.TagStart);
             Assert.Null(linkCss.TagEnd);
             Assert.Null(linkCss.Children);
         }

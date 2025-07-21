@@ -37,7 +37,7 @@ namespace FalconEngineTest.DomParsing.Parser
             Assert.Null(tag.Content);
             Assert.Equal(TagFamilyEnum.NoEnd, tag.TagFamily);
             Assert.Single(tag.Attributes);
-            Assert.Equal(FamilyAttributeEnum.charset, tag.Attributes[0].FamilyAttribute);
+            Assert.Equal(FamilyAttributeEnum.charset.ToString(), tag.Attributes[0].FamilyAttribute);
             Assert.Equal("UTF-8", tag.Attributes[0].Value);
             Assert.Null(tag.Children);
         }
@@ -55,9 +55,9 @@ namespace FalconEngineTest.DomParsing.Parser
             Assert.Null(tag.Content);
             Assert.Equal(TagFamilyEnum.NoEnd, tag.TagFamily);
             Assert.Equal(2, tag.Attributes.Count);
-            Assert.Equal(FamilyAttributeEnum.name, tag.Attributes[0].FamilyAttribute);
+            Assert.Equal(FamilyAttributeEnum.name.ToString(), tag.Attributes[0].FamilyAttribute);
             Assert.Equal("viewport", tag.Attributes[0].Value);
-            Assert.Equal(FamilyAttributeEnum.content, tag.Attributes[1].FamilyAttribute);
+            Assert.Equal(FamilyAttributeEnum.content.ToString(), tag.Attributes[1].FamilyAttribute);
             Assert.Equal("width=device-width, initial-scale=1.0", tag.Attributes[1].Value);
             Assert.Null(tag.Children);
         }
@@ -75,7 +75,7 @@ namespace FalconEngineTest.DomParsing.Parser
             Assert.Null(tag.Content);
             Assert.Equal(TagFamilyEnum.NoEnd, tag.TagFamily);
             Assert.Single(tag.Attributes);
-            Assert.Equal(FamilyAttributeEnum.charset, tag.Attributes[0].FamilyAttribute);
+            Assert.Equal(FamilyAttributeEnum.charset.ToString(), tag.Attributes[0].FamilyAttribute);
             Assert.Equal("UTF-8", tag.Attributes[0].Value);
             Assert.Null(tag.Children);
         }
