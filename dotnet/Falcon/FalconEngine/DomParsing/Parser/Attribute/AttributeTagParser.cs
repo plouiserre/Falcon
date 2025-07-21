@@ -63,7 +63,7 @@ namespace FalconEngine.DomParsing.Parser.Attribute
             string separator = "=";
             var elements = candidate.Split(separator);
             string key = elements[0];
-            FamilyAttributeEnum familyAttribute = GetFamilyAttributeEnum(key);
+            string familyAttribute = GetFamilyAttributeEnum(key);
             string firstElementToMove = string.Concat(key, separator);
             return new AttributeModel()
             {
@@ -80,7 +80,7 @@ namespace FalconEngine.DomParsing.Parser.Attribute
             return value;
         }
 
-        private FamilyAttributeEnum GetFamilyAttributeEnum(string key)
+        private string GetFamilyAttributeEnum(string key)
         {
             bool parseIsOk = true;
             FamilyAttributeEnum familyAttribute = FamilyAttributeEnum.lang;
@@ -103,21 +103,6 @@ namespace FalconEngine.DomParsing.Parser.Attribute
                     break;
                 case "contenteditable":
                     familyAttribute = FamilyAttributeEnum.contenteditable;
-                    break;
-                case "data-preload":
-                    familyAttribute = FamilyAttributeEnum.datapreload;
-                    break;
-                case "data-purpose":
-                    familyAttribute = FamilyAttributeEnum.datapurpose;
-                    break;
-                case "data-user":
-                    familyAttribute = FamilyAttributeEnum.datauser;
-                    break;
-                case "data-theme":
-                    familyAttribute = FamilyAttributeEnum.datatheme;
-                    break;
-                case "data-page":
-                    familyAttribute = FamilyAttributeEnum.datapage;
                     break;
                 case "dir":
                     familyAttribute = FamilyAttributeEnum.dir;
@@ -198,10 +183,17 @@ namespace FalconEngine.DomParsing.Parser.Attribute
                     parseIsOk = false;
                     break;
             }
+            string familyAttributeValue = string.Empty;
             if (!parseIsOk)
-                throw new AttributeTagParserException(ErrorTypeParsing.attributes, $"We fail to parse the attributes of {_html}");
+            {
+                if (key.Contains("data"))
+                    familyAttributeValue = key;
+                else
+                    throw new AttributeTagParserException(ErrorTypeParsing.attributes, $"We fail to parse the attributes of {_html}");
+            }
 
-            return familyAttribute;
+            familyAttributeValue = familyAttributeValue == string.Empty ? familyAttribute.ToString() : familyAttributeValue;
+            return familyAttributeValue;
         }
 
         public bool IsAttributePresent(string html)

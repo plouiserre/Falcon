@@ -43,7 +43,7 @@ namespace FalconEngine.DomParsing.Parser
             foreach (var attribut in _tag.Attributes)
             {
                 var attributKey = attribut.FamilyAttribute;
-                isOk = allAttributesAutorized.Any(o => o == attributKey);
+                isOk = allAttributesAutorized.Any(o => o == attributKey) || attributKey.Contains("data-");
                 if (!isOk)
                     break;
             }

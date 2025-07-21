@@ -21,7 +21,7 @@ namespace FalconEngineTest.DomParsing.Parser.Attribute
             var attributs = attributeTagParser.Parse(html);
 
             Assert.Single(attributs);
-            Assert.Equal(FamilyAttributeEnum.charset, attributs[0].FamilyAttribute);
+            Assert.Equal(FamilyAttributeEnum.charset.ToString(), attributs[0].FamilyAttribute);
             Assert.Equal("UTF-8", attributs[0].Value);
         }
 
@@ -35,9 +35,9 @@ namespace FalconEngineTest.DomParsing.Parser.Attribute
             var attributs = attributeTagParser.Parse(html);
 
             Assert.Equal(2, attributs.Count);
-            Assert.Equal(FamilyAttributeEnum.name, attributs[0].FamilyAttribute);
+            Assert.Equal(FamilyAttributeEnum.name.ToString(), attributs[0].FamilyAttribute);
             Assert.Equal("viewport", attributs[0].Value);
-            Assert.Equal(FamilyAttributeEnum.content, attributs[1].FamilyAttribute);
+            Assert.Equal(FamilyAttributeEnum.content.ToString(), attributs[1].FamilyAttribute);
             Assert.Equal("width=device-width, initial-scale=1.0", attributs[1].Value);
         }
 
@@ -51,11 +51,11 @@ namespace FalconEngineTest.DomParsing.Parser.Attribute
             var attributs = attributeTagParser.Parse(html);
 
             Assert.Equal(3, attributs.Count);
-            Assert.Equal(FamilyAttributeEnum.lang, attributs[0].FamilyAttribute);
+            Assert.Equal(FamilyAttributeEnum.lang.ToString(), attributs[0].FamilyAttribute);
             Assert.Equal("en", attributs[0].Value);
-            Assert.Equal(FamilyAttributeEnum.dir, attributs[1].FamilyAttribute);
+            Assert.Equal(FamilyAttributeEnum.dir.ToString(), attributs[1].FamilyAttribute);
             Assert.Equal("auto", attributs[1].Value);
-            Assert.Equal(FamilyAttributeEnum.xmlns, attributs[2].FamilyAttribute);
+            Assert.Equal(FamilyAttributeEnum.xmlns.ToString(), attributs[2].FamilyAttribute);
             Assert.Equal("http://www.w3.org/1999/xhtml", attributs[2].Value);
         }
 
@@ -70,17 +70,17 @@ namespace FalconEngineTest.DomParsing.Parser.Attribute
             var attributs = attributeTagParser.Parse(html);
 
             Assert.Equal(6, attributs.Count);
-            Assert.Equal(FamilyAttributeEnum.rel, attributs[0].FamilyAttribute);
+            Assert.Equal(FamilyAttributeEnum.rel.ToString(), attributs[0].FamilyAttribute);
             Assert.Equal("manifest", attributs[0].Value);
-            Assert.Equal(FamilyAttributeEnum.href, attributs[1].FamilyAttribute);
+            Assert.Equal(FamilyAttributeEnum.href.ToString(), attributs[1].FamilyAttribute);
             Assert.Equal(" / site.webmanifest", attributs[1].Value);
-            Assert.Equal(FamilyAttributeEnum.type, attributs[2].FamilyAttribute);
+            Assert.Equal(FamilyAttributeEnum.type.ToString(), attributs[2].FamilyAttribute);
             Assert.Equal("application / manifest + json", attributs[2].Value);
-            Assert.Equal(FamilyAttributeEnum.crossorigin, attributs[3].FamilyAttribute);
+            Assert.Equal(FamilyAttributeEnum.crossorigin.ToString(), attributs[3].FamilyAttribute);
             Assert.Equal("use - credentials", attributs[3].Value);
-            Assert.Equal(FamilyAttributeEnum.referrerpolicy, attributs[4].FamilyAttribute);
+            Assert.Equal(FamilyAttributeEnum.referrerpolicy.ToString(), attributs[4].FamilyAttribute);
             Assert.Equal("origin - when - cross - origin", attributs[4].Value);
-            Assert.Equal(FamilyAttributeEnum.id, attributs[5].FamilyAttribute);
+            Assert.Equal(FamilyAttributeEnum.id.ToString(), attributs[5].FamilyAttribute);
             Assert.Equal("web - app - manifest", attributs[5].Value);
         }
 

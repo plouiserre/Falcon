@@ -29,11 +29,11 @@ namespace FalconEngineTest.DomParsing.IdentifyTagParsing
             Assert.Equal("<html lang=\"en\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\">", tag.TagStart);
             Assert.Equal("</html>", tag.TagEnd);
             Assert.Equal(3, tag.Attributes.Count);
-            Assert.Equal(FamilyAttributeEnum.lang, tag.Attributes[0].FamilyAttribute);
+            Assert.Equal(FamilyAttributeEnum.lang.ToString(), tag.Attributes[0].FamilyAttribute);
             Assert.Equal("en", tag.Attributes[0].Value);
-            Assert.Equal(FamilyAttributeEnum.dir, tag.Attributes[1].FamilyAttribute);
+            Assert.Equal(FamilyAttributeEnum.dir.ToString(), tag.Attributes[1].FamilyAttribute);
             Assert.Equal("auto", tag.Attributes[1].Value);
-            Assert.Equal(FamilyAttributeEnum.xmlns, tag.Attributes[2].FamilyAttribute);
+            Assert.Equal(FamilyAttributeEnum.xmlns.ToString(), tag.Attributes[2].FamilyAttribute);
             Assert.Equal("http://www.w3.org/1999/xhtml", tag.Attributes[2].Value);
             Assert.Equal(NameTagEnum.html, tag.NameTag);
             Assert.Equal(TagFamilyEnum.WithEnd, tag.TagFamily);

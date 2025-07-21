@@ -18,22 +18,20 @@ namespace FalconEngineTest.DomParsing
 
             var attributes = attributeTagManager.GetAttributes(NameTagEnum.html);
 
-            Assert.Equal(16, attributes.Count);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.lang);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.dir);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.xmlns);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.manifest);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.style);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.id);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.classCss);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.datapage);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.datatheme);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.datauser);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.accesskey);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.tabindex);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.contenteditable);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.draggable);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.spellcheck);
+            Assert.Equal(14, attributes.Count);
+            AssertContains(attributes, FamilyAttributeEnum.lang);
+            AssertContains(attributes, FamilyAttributeEnum.dir);
+            AssertContains(attributes, FamilyAttributeEnum.xmlns);
+            AssertContains(attributes, FamilyAttributeEnum.manifest);
+            AssertContains(attributes, FamilyAttributeEnum.style);
+            AssertContains(attributes, FamilyAttributeEnum.id);
+            AssertContains(attributes, FamilyAttributeEnum.classCss);
+            AssertContains(attributes, FamilyAttributeEnum.data_);
+            AssertContains(attributes, FamilyAttributeEnum.accesskey);
+            AssertContains(attributes, FamilyAttributeEnum.tabindex);
+            AssertContains(attributes, FamilyAttributeEnum.contenteditable);
+            AssertContains(attributes, FamilyAttributeEnum.draggable);
+            AssertContains(attributes, FamilyAttributeEnum.spellcheck);
         }
 
         [Fact]
@@ -45,21 +43,19 @@ namespace FalconEngineTest.DomParsing
 
             var attributes = attributeTagManager.GetAttributes(NameTagEnum.meta);
 
-            Assert.Equal(14, attributes.Count);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.charset);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.name);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.content);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.httpequiv);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.scheme);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.id);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.classCss);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.datapage);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.datatheme);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.datauser);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.lang);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.dir);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.title);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.style);
+            Assert.Equal(12, attributes.Count);
+            AssertContains(attributes, FamilyAttributeEnum.charset);
+            AssertContains(attributes, FamilyAttributeEnum.name);
+            AssertContains(attributes, FamilyAttributeEnum.content);
+            AssertContains(attributes, FamilyAttributeEnum.httpequiv);
+            AssertContains(attributes, FamilyAttributeEnum.scheme);
+            AssertContains(attributes, FamilyAttributeEnum.id);
+            AssertContains(attributes, FamilyAttributeEnum.classCss);
+            AssertContains(attributes, FamilyAttributeEnum.data_);
+            AssertContains(attributes, FamilyAttributeEnum.lang);
+            AssertContains(attributes, FamilyAttributeEnum.dir);
+            AssertContains(attributes, FamilyAttributeEnum.title);
+            AssertContains(attributes, FamilyAttributeEnum.style);
         }
 
         [Fact]
@@ -71,37 +67,39 @@ namespace FalconEngineTest.DomParsing
 
             var attributes = attributeTagManager.GetAttributes(NameTagEnum.link);
 
-            Assert.Equal(29, attributes.Count);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.accesskey);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.asAttr);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.blocking);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.classCss);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.crossorigin);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.datapage);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.datapreload);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.datapurpose);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.datatheme);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.datauser);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.disabled);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.draggable);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.dir);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.id);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.integrity);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.href);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.hreflang);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.lang);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.media);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.referrerpolicy);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.rel);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.role);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.sizes);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.spellcheck);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.style);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.title);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.tabindex);
-            //Assert.Contains(attributes, o => o == FamilyAttributeEnum.hidden);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.translate);
-            Assert.Contains(attributes, o => o == FamilyAttributeEnum.type);
+            Assert.Equal(25, attributes.Count);
+            AssertContains(attributes, FamilyAttributeEnum.accesskey);
+            AssertContains(attributes, FamilyAttributeEnum.asAttr);
+            AssertContains(attributes, FamilyAttributeEnum.blocking);
+            AssertContains(attributes, FamilyAttributeEnum.classCss);
+            AssertContains(attributes, FamilyAttributeEnum.crossorigin);
+            AssertContains(attributes, FamilyAttributeEnum.data_);
+            AssertContains(attributes, FamilyAttributeEnum.disabled);
+            AssertContains(attributes, FamilyAttributeEnum.draggable);
+            AssertContains(attributes, FamilyAttributeEnum.dir);
+            AssertContains(attributes, FamilyAttributeEnum.id);
+            AssertContains(attributes, FamilyAttributeEnum.integrity);
+            AssertContains(attributes, FamilyAttributeEnum.href);
+            AssertContains(attributes, FamilyAttributeEnum.hreflang);
+            AssertContains(attributes, FamilyAttributeEnum.lang);
+            AssertContains(attributes, FamilyAttributeEnum.media);
+            AssertContains(attributes, FamilyAttributeEnum.referrerpolicy);
+            AssertContains(attributes, FamilyAttributeEnum.rel);
+            AssertContains(attributes, FamilyAttributeEnum.role);
+            AssertContains(attributes, FamilyAttributeEnum.sizes);
+            AssertContains(attributes, FamilyAttributeEnum.spellcheck);
+            AssertContains(attributes, FamilyAttributeEnum.style);
+            AssertContains(attributes, FamilyAttributeEnum.title);
+            AssertContains(attributes, FamilyAttributeEnum.tabindex);
+            //AssertContains(attributes,  FamilyAttributeEnum.hidden);
+            AssertContains(attributes, FamilyAttributeEnum.translate);
+            AssertContains(attributes, FamilyAttributeEnum.type);
+        }
+
+        private void AssertContains(List<string> attributes, FamilyAttributeEnum family)
+        {
+            string value = family.ToString();
+            Assert.Contains(attributes, o => o == value);
         }
     }
 }

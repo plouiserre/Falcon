@@ -26,18 +26,20 @@ namespace FalconEngineTest.DomParsing.Parser
             Assert.Equal(NameTagEnum.link, tag.NameTag);
             Assert.Null(tag.Content);
             Assert.Equal(TagFamilyEnum.NoEnd, tag.TagFamily);
-            Assert.Equal(2, tag.Attributes.Count);
-            Assert.Equal(FamilyAttributeEnum.rel, tag.Attributes[0].FamilyAttribute);
+            Assert.Equal(3, tag.Attributes.Count);
+            Assert.Equal(FamilyAttributeEnum.rel.ToString(), tag.Attributes[0].FamilyAttribute);
             Assert.Equal("stylesheet", tag.Attributes[0].Value);
-            Assert.Equal(FamilyAttributeEnum.href, tag.Attributes[1].FamilyAttribute);
+            Assert.Equal(FamilyAttributeEnum.href.ToString(), tag.Attributes[1].FamilyAttribute);
             Assert.Equal("main.css", tag.Attributes[1].Value);
+            Assert.Equal("data-preload", tag.Attributes[2].FamilyAttribute);
+            Assert.Equal("true", tag.Attributes[2].Value);
             Assert.Null(tag.Children);
         }
 
         [Theory]
         [InlineData("<link rel=\"stylesheet\" href=\"styles.css\" type=\"text / css\" media=\"screen\" hreflang=\"en\" crossorigin=\"anonymous\" integrity=\"sha384 - abc123...\" referrerpolicy=\"no - referrer\" title=\"Thème clair\" id=\"main - stylesheet\" class=\"theme - style\" style=\"\" lang=\"en\" dir=\"ltr\" accesskey=\"l\" tabindex=\"0\" draggable=\"false\" spellcheck=\"false\" translate=\"no\" role=\"presentation\" data-theme=\"light\">")]
         [InlineData("<link rel=\"icon\" href=\"favicon - 32x32.png\" type=\"image / png\" sizes=\"32x32\" hreflang=\"en\" crossorigin=\"use - credentials\" referrerpolicy=\"origin\" id=\"site - icon\" class=\"favicon\" lang=\"fr\" data-purpose=\"favicon\">")]
-        [InlineData("<link rel=\"preload\" href=\"script.js\" as=\"script\" type=\"application / javascript\" crossorigin=\"anonymous\" integrity=\"sha384 - xyz456...\" referrerpolicy=\"strict - origin\" media=\"all\" id=\"preload - script\" data-preload=\"true\">")]
+        [InlineData("<link rel=\"preload\" href=\"script.js\" as=\"script\" type=\"application / javascript\" crossorigin=\"anonymous\" integrity=\"sha384 - xyz456...\" referrerpolicy=\"strict - origin\" media=\"all\" id=\"preload - script\" data-preload=\"true\" data-purpose=\"favicon\">")]
         public void ParseLinkTagValidate(string html)
         {
             var linkTagParser = TestFactory.InitLinkParser();
@@ -59,17 +61,17 @@ namespace FalconEngineTest.DomParsing.Parser
 
             Assert.True(isValid);
             Assert.Equal(6, tag.Attributes.Count);
-            Assert.Equal(FamilyAttributeEnum.rel, tag.Attributes[0].FamilyAttribute);
+            Assert.Equal(FamilyAttributeEnum.rel.ToString(), tag.Attributes[0].FamilyAttribute);
             Assert.Equal("stylesheet", tag.Attributes[0].Value);
-            Assert.Equal(FamilyAttributeEnum.href, tag.Attributes[1].FamilyAttribute);
+            Assert.Equal(FamilyAttributeEnum.href.ToString(), tag.Attributes[1].FamilyAttribute);
             Assert.Equal("alt-theme.css", tag.Attributes[1].Value);
-            Assert.Equal(FamilyAttributeEnum.type, tag.Attributes[2].FamilyAttribute);
+            Assert.Equal(FamilyAttributeEnum.type.ToString(), tag.Attributes[2].FamilyAttribute);
             Assert.Equal("text/css", tag.Attributes[2].Value);
-            Assert.Equal(FamilyAttributeEnum.title, tag.Attributes[3].FamilyAttribute);
+            Assert.Equal(FamilyAttributeEnum.title.ToString(), tag.Attributes[3].FamilyAttribute);
             Assert.Equal("Thème alternatif", tag.Attributes[3].Value);
-            Assert.Equal(FamilyAttributeEnum.disabled, tag.Attributes[4].FamilyAttribute);
+            Assert.Equal(FamilyAttributeEnum.disabled.ToString(), tag.Attributes[4].FamilyAttribute);
             Assert.Null(tag.Attributes[4].Value);
-            Assert.Equal(FamilyAttributeEnum.media, tag.Attributes[5].FamilyAttribute);
+            Assert.Equal(FamilyAttributeEnum.media.ToString(), tag.Attributes[5].FamilyAttribute);
             Assert.Equal("screen", tag.Attributes[5].Value);
         }
 

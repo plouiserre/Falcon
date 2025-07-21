@@ -16,7 +16,7 @@ namespace FalconEngineTest.Utils
         public static string MetaCharset = @"<meta charset=""UTF-8"">";
         public static string MetaViewPort = @"<meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">";
         public static string TitleDocument = @"<title>Document</title>";
-        public static string LinkHead = @"<link rel=""stylesheet"" href=""main.css"">";
+        public static string LinkHead = "<link rel=\"stylesheet\" href=\"main.css\" data-preload=\"true\">";
         public static string ContentHeadSimple = string.Concat(MetaCharset, MetaViewPort, TitleDocument, LinkHead);
 
         public static string HeadSimple = string.Concat("<head>", ContentHeadSimple, "</head>");

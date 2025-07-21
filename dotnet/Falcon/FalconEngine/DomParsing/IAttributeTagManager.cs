@@ -8,7 +8,7 @@ namespace FalconEngine.DomParsing
 {
     public interface IAttributeTagManager
     {
-        List<FamilyAttributeEnum> GetAttributes(NameTagEnum key);
+        List<string> GetAttributes(NameTagEnum key);
         void SetAttributes();
     }
 }
