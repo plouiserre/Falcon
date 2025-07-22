@@ -18,6 +18,7 @@ namespace FalconEngineTest.Data
         private static TagModel _htmlTag;
         private static TagModel _headTag;
         private static HtmlPage _htmlPage { get; set; }
+        private static TagModel _metaCharsetTag { get; set; }
 
         public static TagModel GetTagModel(TagData tag)
         {
@@ -28,6 +29,8 @@ namespace FalconEngineTest.Data
                     return _doctypeTag;
                 case TagData.head:
                     return _headTag;
+                case TagData.metaCharset:
+                    return _metaCharsetTag;
                 default:
                     return _htmlTag;
             }
@@ -82,7 +85,7 @@ namespace FalconEngineTest.Data
 
         private static TagModel GetHeadTag()
         {
-            var metaCharsetTag = new TagModel()
+            _metaCharsetTag = new TagModel()
             {
                 TagFamily = TagFamilyEnum.NoEnd,
                 Attributes = new List<AttributeModel>() { new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.charset.ToString(), Value = "UTF-8" } },
@@ -123,7 +126,7 @@ namespace FalconEngineTest.Data
                 NameTag = NameTagEnum.head,
                 TagFamily = TagFamilyEnum.WithEnd,
                 Content = HtmlData.ContentHeadSimple,
-                Children = new List<TagModel>() { metaCharsetTag, metaViewPort, title, link },
+                Children = new List<TagModel>() { _metaCharsetTag, metaViewPort, title, link },
                 TagStart = "<head>",
                 TagEnd = "</head>"
             };
