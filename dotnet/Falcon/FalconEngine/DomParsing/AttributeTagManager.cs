@@ -17,6 +17,7 @@ namespace FalconEngine.DomParsing
             _allAttributesAutorizedByTag[NameTagEnum.html] = new List<FamilyAttributeEnum>();
             _allAttributesAutorizedByTag[NameTagEnum.meta] = new List<FamilyAttributeEnum>();
             _allAttributesAutorizedByTag[NameTagEnum.link] = new List<FamilyAttributeEnum>();
+            _allAttributesAutorizedByTag[NameTagEnum.a] = new List<FamilyAttributeEnum>();
         }
 
         public List<string> GetAttributes(NameTagEnum tag)
@@ -29,6 +30,7 @@ namespace FalconEngine.DomParsing
             SetHtmlAttributesAutorized();
             SetMetaAttributesAutorized();
             SetLinkAttributesAutorized();
+            SetAAttributesAutorized();
         }
 
         private void SetHtmlAttributesAutorized()
@@ -93,6 +95,33 @@ namespace FalconEngine.DomParsing
             //_allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.hidden);
             _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.translate);
             _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.type);
+        }
+
+        private void SetAAttributesAutorized()
+        {
+            _allAttributesAutorizedByTag[NameTagEnum.a].Add(FamilyAttributeEnum.href);
+            _allAttributesAutorizedByTag[NameTagEnum.a].Add(FamilyAttributeEnum.target);
+            _allAttributesAutorizedByTag[NameTagEnum.a].Add(FamilyAttributeEnum.download);
+            _allAttributesAutorizedByTag[NameTagEnum.a].Add(FamilyAttributeEnum.rel);
+            _allAttributesAutorizedByTag[NameTagEnum.a].Add(FamilyAttributeEnum.hreflang);
+            _allAttributesAutorizedByTag[NameTagEnum.a].Add(FamilyAttributeEnum.type);
+            _allAttributesAutorizedByTag[NameTagEnum.a].Add(FamilyAttributeEnum.referrerpolicy);
+            _allAttributesAutorizedByTag[NameTagEnum.a].Add(FamilyAttributeEnum.id);
+            //TODO centralize in one methode
+            _allAttributesAutorizedByTag[NameTagEnum.a].Add(FamilyAttributeEnum.classCss);
+            _allAttributesAutorizedByTag[NameTagEnum.a].Add(FamilyAttributeEnum.style);
+            _allAttributesAutorizedByTag[NameTagEnum.a].Add(FamilyAttributeEnum.title);
+            //TODO m'occuper des attributs aria-* et hidden
+            _allAttributesAutorizedByTag[NameTagEnum.a].Add(FamilyAttributeEnum.data_);
+            _allAttributesAutorizedByTag[NameTagEnum.a].Add(FamilyAttributeEnum.tabindex);
+            _allAttributesAutorizedByTag[NameTagEnum.a].Add(FamilyAttributeEnum.accesskey);
+            _allAttributesAutorizedByTag[NameTagEnum.a].Add(FamilyAttributeEnum.role);
+            _allAttributesAutorizedByTag[NameTagEnum.a].Add(FamilyAttributeEnum.draggable);
+            _allAttributesAutorizedByTag[NameTagEnum.a].Add(FamilyAttributeEnum.lang);
+            _allAttributesAutorizedByTag[NameTagEnum.a].Add(FamilyAttributeEnum.dir);
+
+
+
         }
     }
 }

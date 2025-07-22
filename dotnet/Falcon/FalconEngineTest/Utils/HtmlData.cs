@@ -44,15 +44,9 @@ namespace FalconEngineTest.Utils
 
         public static string HtmlSimpleWithSpaceDoctype = string.Concat("<!DOCTYPE html>", HtmlSimpleWithSpace);
 
-        public static string firstPHtmlSimple = @"<p class=""declarationText"">
-                                    Ceci est un 
-                                        <span>
-                                            <a href=""declaration.html"">
-                                                paragraphe
-                                            </a>
-                                        </span>
-                                </p>
-                                <p>Allez-vous apprécier mon article?</p>";
+        public static string ALink = "<a href=\"declaration.html\">paragraphe</a>";
+
+        public static string firstPHtmlSimple = string.Concat("<p class=\"declarationText\"> Ceci est un <span>", ALink, "</span></p><p>Allez-vous apprécier mon article?</p>");
 
         public static string secondPHtmlSimple = @"Ceci est un 
                                     <span>
