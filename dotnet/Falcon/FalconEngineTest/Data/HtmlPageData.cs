@@ -14,10 +14,6 @@ namespace FalconEngineTest.Data
 
     public class HtmlPageData
     {
-        private static TagModel _metaCharsetTag;
-        private static TagModel _metaViewPort;
-        private static TagModel _title;
-        private static TagModel _link;
         private static TagModel _doctypeTag;
         private static TagModel _htmlTag;
         private static TagModel _headTag;
@@ -30,8 +26,6 @@ namespace FalconEngineTest.Data
             {
                 case TagData.doctype:
                     return _doctypeTag;
-                case TagData.metaCharset:
-                    return _metaCharsetTag;
                 case TagData.head:
                     return _headTag;
                 default:
@@ -44,8 +38,6 @@ namespace FalconEngineTest.Data
             _doctypeTag = GetDoctypeTag();
             _htmlTag = GetTagHtml();
             _headTag = GetHeadTag();
-
-
             var body = GetBodyTag();
             var divContent = GetDivContent();
             var firstP = GetFirstPContent();
@@ -55,7 +47,7 @@ namespace FalconEngineTest.Data
                 TagFamily = TagFamilyEnum.WithEnd,
                 Content = "Allez-vous apprécier mon article?"
             };
-            var tags = new List<TagModel>() { _doctypeTag, _htmlTag, _headTag, _metaCharsetTag, _metaViewPort, _title, _link, body, divContent, firstP, secondP };
+            var tags = new List<TagModel>() { _doctypeTag, _htmlTag, _headTag, body, divContent, firstP, secondP };
             _htmlPage = new HtmlPage() { Tags = tags };
             return _htmlPage;
         }
@@ -90,14 +82,14 @@ namespace FalconEngineTest.Data
 
         private static TagModel GetHeadTag()
         {
-            _metaCharsetTag = new TagModel()
+            var metaCharsetTag = new TagModel()
             {
                 TagFamily = TagFamilyEnum.NoEnd,
                 Attributes = new List<AttributeModel>() { new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.charset.ToString(), Value = "UTF-8" } },
                 NameTag = NameTagEnum.meta,
                 TagStart = HtmlData.MetaCharset
             };
-            _metaViewPort = new TagModel()
+            var metaViewPort = new TagModel()
             {
                 TagFamily = TagFamilyEnum.NoEnd,
                 Attributes = new List<AttributeModel>() {
@@ -107,7 +99,7 @@ namespace FalconEngineTest.Data
                 NameTag = NameTagEnum.meta,
                 TagStart = HtmlData.MetaViewPort
             };
-            _title = new TagModel()
+            var title = new TagModel()
             {
                 TagFamily = TagFamilyEnum.WithEnd,
                 NameTag = NameTagEnum.title,
@@ -115,7 +107,7 @@ namespace FalconEngineTest.Data
                 TagStart = "<title>",
                 TagEnd = "</title>"
             };
-            _link = new TagModel()
+            var link = new TagModel()
             {
                 TagFamily = TagFamilyEnum.NoEnd,
                 Attributes = new List<AttributeModel>() {
@@ -131,7 +123,7 @@ namespace FalconEngineTest.Data
                 NameTag = NameTagEnum.head,
                 TagFamily = TagFamilyEnum.WithEnd,
                 Content = HtmlData.ContentHeadSimple,
-                Children = new List<TagModel>() { _metaCharsetTag, _metaViewPort, _title, _link },
+                Children = new List<TagModel>() { metaCharsetTag, metaViewPort, title, link },
                 TagStart = "<head>",
                 TagEnd = "</head>"
             };
