@@ -23,9 +23,11 @@ namespace FalconEngineTest.Engine
             var doctypeParser = new DoctypeParser(identifyTag);
             var htmlTagParser = TestFactory.InitHtmlTagParser(true);
             var extractHtmlRemaining = new ExtractHtmlRemaining();
+            var attributeTagManager = new AttributeTagManager();
             var headParser = new HeadParser(deleteUselessSpace, identifyTag, determinateChildren);
+            var aParser = new AParser(identifyTag, attributeTagManager, deleteUselessSpace);
             _htmlParsing = new HtmlParsing(doctypeParser, htmlTagParser, headParser,
-                        extractHtmlRemaining, TestFactory.InitAttributeTagManager(true));
+                        extractHtmlRemaining, TestFactory.InitAttributeTagManager(true), aParser);
         }
 
         [Fact]
