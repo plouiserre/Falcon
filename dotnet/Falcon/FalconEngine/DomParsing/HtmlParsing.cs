@@ -49,8 +49,7 @@ namespace FalconEngine.DomParsing
                 TagFamily = TagFamilyEnum.WithEnd,
                 Content = "Allez-vous apprécier mon article?"
             };
-            var tags = new List<TagModel>() { doctypeTag, htmlTag, headTag, headTag.Children[0], headTag.Children[1],
-                    headTag.Children[2], headTag.Children[3], body, divContent, firstP, secondP };
+            var tags = new List<TagModel>() { doctypeTag, htmlTag, headTag, body, divContent, firstP, secondP };
 
             var htmlPage = new HtmlPage() { Tags = tags };
             return htmlPage;
@@ -83,8 +82,7 @@ namespace FalconEngine.DomParsing
         private TagModel GetHeadTag()
         {
             var headTag = _headParse.Parse(_html);
-            // bool isValid = _headParse.IsValid(headTag);
-            bool isValid = true;
+            bool isValid = _headParse.IsValid();
             if (!isValid)
                 throw new Exception("Head tag is not valid!!!");
             return headTag;
