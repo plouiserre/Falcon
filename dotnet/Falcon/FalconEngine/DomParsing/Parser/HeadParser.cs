@@ -11,19 +11,18 @@ namespace FalconEngine.DomParsing.Parser
 {
     public class HeadParser : ITagParser
     {
-
         private string _html;
         private IDeleteUselessSpace _deleteUselessSpace;
         private IIdentifyTag _identifyTag;
-        private IDeterminateChildren _determinateChildren;
+        private IManageChildrenTag _manageChildrenTag;
         private TagModel _tag;
 
         public HeadParser(IDeleteUselessSpace deleteUselessSpace, IIdentifyTag identifyTag,
-         IDeterminateChildren determinateChildren)
+         IManageChildrenTag manageChildrenTag)
         {
             _identifyTag = identifyTag;
             _deleteUselessSpace = deleteUselessSpace;
-            _determinateChildren = determinateChildren;
+            _manageChildrenTag = manageChildrenTag;
         }
 
         public bool IsValid()
@@ -32,7 +31,8 @@ namespace FalconEngine.DomParsing.Parser
                 throw new ValidationParsingException(ErrorTypeParsing.validation, "Header validation is failing because parsing is not did");
             bool isLimitTagPresent = !string.IsNullOrEmpty(_tag.TagEnd) && !string.IsNullOrEmpty(_tag.TagStart);
             bool isContent = !string.IsNullOrEmpty(_tag.Content);
-            return isContent && isLimitTagPresent;
+            bool areChildrenValid = _manageChildrenTag.ValidateChildren();
+            return isContent && isLimitTagPresent && areChildrenValid;
         }
 
         public TagModel Parse(string html)
@@ -42,7 +42,7 @@ namespace FalconEngine.DomParsing.Parser
                 _html = html;
                 _html = CleanHtml();
                 _tag = _identifyTag.Analyze(_html);
-                _tag.Children = _determinateChildren.Find(_tag.Content);
+                _tag.Children = _manageChildrenTag.Identify(_tag.Content);
                 return _tag;
             }
             catch (Exception ex)

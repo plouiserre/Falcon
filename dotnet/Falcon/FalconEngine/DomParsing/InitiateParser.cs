@@ -18,13 +18,13 @@ namespace FalconEngine.DomParsing
         private IIdentifyStartTagEndTag _identifyStartTagEndTag;
         private IAttributeTagParser _attributeTagParser;
         private IDeterminateContent _determinateContent;
-        private IDeterminateChildren _determinateChildren;
+        private IManageChildrenTag _manageChildrenTag;
         private IExtractHtmlRemaining _extractHtmlRemaining;
         private IAttributeTagManager _attributeTagManager;
 
         public InitiateParser(IDeleteUselessSpace deleteUselessSpace, IIdentifyTag identifyTag,
             IIdentifyStartTagEndTag identifyStartTagEndTag, IAttributeTagParser attributeTagParser,
-            IDeterminateContent determinateContent, IDeterminateChildren determinateChildren,
+            IDeterminateContent determinateContent, IManageChildrenTag manageChildrenTag,
             IExtractHtmlRemaining extractHtmlRemaining, IAttributeTagManager attributeTagManager)
         {
             _deleteUselessSpace = deleteUselessSpace;
@@ -32,7 +32,7 @@ namespace FalconEngine.DomParsing
             _identifyStartTagEndTag = identifyStartTagEndTag;
             _attributeTagParser = attributeTagParser;
             _determinateContent = determinateContent;
-            _determinateChildren = determinateChildren;
+            _manageChildrenTag = manageChildrenTag;
             _extractHtmlRemaining = extractHtmlRemaining;
             _attributeTagManager = attributeTagManager;
         }
@@ -68,7 +68,7 @@ namespace FalconEngine.DomParsing
                 case string tag when tag.ToLower().Contains("html"):
                     return new HtmlTagParser(_identifyTag, _determinateContent, _attributeTagManager);
                 case string tag when tag.ToLower().Contains("head"):
-                    return new HeadParser(_deleteUselessSpace, _identifyTag, _determinateChildren);
+                    return new HeadParser(_deleteUselessSpace, _identifyTag, _manageChildrenTag);
                 case string tag when tag.ToLower().Contains("meta"):
                     return new MetaParser(_identifyTag, _attributeTagManager);
                 case string tag when tag.ToLower().Contains("link"):

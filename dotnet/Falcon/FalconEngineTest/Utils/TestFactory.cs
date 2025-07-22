@@ -89,12 +89,12 @@ namespace FalconEngineTest.Utils
             return headParser;
         }
 
-        public static DeterminateChildren InitDeterminateChildren()
+        public static ManageChildrenTag InitDeterminateChildren()
         {
-            var determinateChildren = new DeterminateChildren(InitDeleteUselessSpace(), InitIdentifyTag(),
+            var manageChildrenTag = new ManageChildrenTag(InitDeleteUselessSpace(), InitIdentifyTag(),
             InitIdentifyStartTagEndTag(), InitAttributeTagParser(), InitDeterminateContent(), InitExtractHtmlRemaining(),
             InitAttributeTagManager(false));
-            return determinateChildren;
+            return manageChildrenTag;
         }
 
     }
