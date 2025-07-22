@@ -163,5 +163,18 @@ namespace FalconEngineTest.DomParsing.Parser
             Assert.Equal(ErrorTypeParsing.validation, exception.ErrorType);
 
         }
+
+        [Fact]
+        public void HeadValidationFailBecauseOneChildIsNotValid()
+        {
+            var headerParser = TestFactory.InitHeadParser();
+
+            var html = "<head><meta charset=\"UTF-8\"><title class=\"thetitle\">My Website</title></head>";
+
+            headerParser.Parse(html);
+            bool isValid = headerParser.IsValid();
+
+            Assert.False(isValid);
+        }
     }
 }

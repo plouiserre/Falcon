@@ -7,16 +7,19 @@ using FalconEngine.DomParsing.IdentifyTagParsing;
 using FalconEngine.Models;
 using FalconEngineTest.Utils;
 
-namespace FalconEngineTest.DomParsing.IdentifyTagParsing
+namespace FalconEngineTest.DomParsing
 {
-    public class DeterminateChildrenTest
+    public class ManageChildrenTest
     {
         [Fact]
         public void FindHeaderChildren()
         {
             var determinateChildren = TestFactory.InitDeterminateChildren();
 
-            var children = determinateChildren.Find(HtmlData.ContentHeadSimple);
+            var children = determinateChildren.Identify(HtmlData.ContentHeadSimple);
+            bool areValid = determinateChildren.ValidateChildren();
+
+            Assert.True(areValid);
 
             AssertMetaCharsetChild(children[0]);
 
@@ -85,10 +88,23 @@ namespace FalconEngineTest.DomParsing.IdentifyTagParsing
             string html = "<head><test<title>Document</title></head>";
 
             var determinateChildren = TestFactory.InitDeterminateChildren();
-            var error = Assert.Throws<DeterminateChildrenException>(() => determinateChildren.Find(html));
+            var error = Assert.Throws<DeterminateChildrenException>(() => determinateChildren.Identify(html));
 
             Assert.Equal(error.Message, $"Error parsing for the children of  {html}");
             Assert.Equal(ErrorTypeParsing.children, error.ErrorType);
+        }
+
+        [Fact]
+        public void HeaderValidationFailedBecauseTitleIsNotValid()
+        {
+
+            var html = "<head><meta charset=\"UTF-8\"><title class=\"thetitle\">My Website</title></head>";
+            var determinateChildren = TestFactory.InitDeterminateChildren();
+
+            determinateChildren.Identify(html);
+            bool isValid = determinateChildren.ValidateChildren();
+
+            Assert.False(isValid);
         }
     }
 }
