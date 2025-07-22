@@ -110,6 +110,9 @@ namespace FalconEngine.DomParsing.Parser.Attribute
                 case "disabled":
                     familyAttribute = FamilyAttributeEnum.disabled;
                     break;
+                case "download":
+                    familyAttribute = FamilyAttributeEnum.download;
+                    break;
                 case "draggable":
                     familyAttribute = FamilyAttributeEnum.draggable;
                     break;
@@ -154,6 +157,9 @@ namespace FalconEngine.DomParsing.Parser.Attribute
                     break;
                 case "tabindex":
                     familyAttribute = FamilyAttributeEnum.tabindex;
+                    break;
+                case "target":
+                    familyAttribute = FamilyAttributeEnum.target;
                     break;
                 case "translate":
                     familyAttribute = FamilyAttributeEnum.translate;

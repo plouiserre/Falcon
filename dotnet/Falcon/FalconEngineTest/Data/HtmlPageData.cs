@@ -49,34 +49,13 @@ namespace FalconEngineTest.Data
             var body = GetBodyTag();
             var divContent = GetDivContent();
             var firstP = GetFirstPContent();
-            var span = new TagModel()
-            {
-                TagFamily = TagFamilyEnum.WithEnd,
-                NameTag = NameTagEnum.span,
-                Content = @"<a href=""declaration.html"">
-                                                            paragraphe
-                                                        </a>"
-            };
-            var a = new TagModel()
-            {
-                Attributes = new List<AttributeModel>(){
-                    new AttributeModel()
-                    {
-                        FamilyAttribute = FamilyAttributeEnum.href.ToString(),
-                        Value = "declaration.html"
-                    }
-                },
-                TagFamily = TagFamilyEnum.WithEnd,
-                NameTag = NameTagEnum.a,
-                Content = "paragraphe"
-            };
             var secondP = new TagModel()
             {
                 NameTag = NameTagEnum.p,
                 TagFamily = TagFamilyEnum.WithEnd,
                 Content = "Allez-vous apprécier mon article?"
             };
-            var tags = new List<TagModel>() { _doctypeTag, _htmlTag, _headTag, _metaCharsetTag, _metaViewPort, _title, _link, body, divContent, firstP, span, a, secondP };
+            var tags = new List<TagModel>() { _doctypeTag, _htmlTag, _headTag, _metaCharsetTag, _metaViewPort, _title, _link, body, divContent, firstP, secondP };
             _htmlPage = new HtmlPage() { Tags = tags };
             return _htmlPage;
         }
@@ -187,15 +166,53 @@ namespace FalconEngineTest.Data
         private static TagModel GetFirstPContent()
         {
             var attributClass = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.classCss.ToString(), Value = "declarationText" };
+            var child = GetSpanParagraph();
             var pTag = new TagModel()
             {
                 Attributes = new List<AttributeModel>() { attributClass },
                 NameTag = NameTagEnum.p,
                 TagFamily = TagFamilyEnum.WithEnd,
-                Content = HtmlData.secondPHtmlSimple
+                Content = HtmlData.secondPHtmlSimple,
+                Children = new List<TagModel>() { child }
             };
 
             return pTag;
+        }
+
+        private static TagModel GetSpanParagraph()
+        {
+            string contentHtml = "<a href=\"declaration.html\">paragraphe</a>";
+
+            var child = GetAParagraph();
+
+            var spanTag = new TagModel()
+            {
+                NameTag = NameTagEnum.span,
+                TagFamily = TagFamilyEnum.WithEnd,
+                Content = contentHtml,
+                Children = new List<TagModel>() { child }
+            };
+
+            return spanTag;
+        }
+
+        private static TagModel GetAParagraph()
+        {
+            string html = "<a href=\"declaration.html\">paragraphe</a>";
+            var aTag = new TagModel()
+            {
+                NameTag = NameTagEnum.a,
+                TagFamily = TagFamilyEnum.WithEnd,
+                Content = "paragraphe",
+                TagStart = "<a href=\"declaration.html\">",
+                TagEnd = "</a>",
+                Attributes = new List<AttributeModel>()
+                {
+                    new AttributeModel(){ FamilyAttribute = "href", Value="declaration.html"}
+                }
+            };
+
+            return aTag;
         }
     }
 }

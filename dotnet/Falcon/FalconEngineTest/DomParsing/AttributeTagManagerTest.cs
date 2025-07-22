@@ -96,6 +96,36 @@ namespace FalconEngineTest.DomParsing
             AssertContains(attributes, FamilyAttributeEnum.type);
         }
 
+        [Fact]
+        public void GetAllAttributesAcceptedA()
+        {
+            var attributeTagManager = new AttributeTagManager();
+
+            attributeTagManager.SetAttributes();
+
+            var attributes = attributeTagManager.GetAttributes(NameTagEnum.a);
+
+            Assert.Equal(18, attributes.Count);
+            AssertContains(attributes, FamilyAttributeEnum.href);
+            AssertContains(attributes, FamilyAttributeEnum.target);
+            AssertContains(attributes, FamilyAttributeEnum.download);
+            AssertContains(attributes, FamilyAttributeEnum.rel);
+            AssertContains(attributes, FamilyAttributeEnum.hreflang);
+            AssertContains(attributes, FamilyAttributeEnum.type);
+            AssertContains(attributes, FamilyAttributeEnum.referrerpolicy);
+            AssertContains(attributes, FamilyAttributeEnum.id);
+            AssertContains(attributes, FamilyAttributeEnum.classCss);
+            AssertContains(attributes, FamilyAttributeEnum.style);
+            AssertContains(attributes, FamilyAttributeEnum.title);
+            AssertContains(attributes, FamilyAttributeEnum.data_);
+            AssertContains(attributes, FamilyAttributeEnum.tabindex);
+            AssertContains(attributes, FamilyAttributeEnum.accesskey);
+            AssertContains(attributes, FamilyAttributeEnum.role);
+            AssertContains(attributes, FamilyAttributeEnum.draggable);
+            AssertContains(attributes, FamilyAttributeEnum.lang);
+            AssertContains(attributes, FamilyAttributeEnum.dir);
+        }
+
         private void AssertContains(List<string> attributes, FamilyAttributeEnum family)
         {
             string value = family.ToString();

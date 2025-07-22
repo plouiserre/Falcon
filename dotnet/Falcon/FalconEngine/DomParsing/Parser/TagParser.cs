@@ -25,7 +25,7 @@ namespace FalconEngine.DomParsing.Parser
             return noTagEnd && tagsAreOk;
         }
 
-        private bool AreAttributesAreAutorized()
+        protected bool AreAttributesAreAutorized()
         {
             bool isOk = true;
             if (_tag.Attributes == null || _tag.Attributes.Count == 0)
