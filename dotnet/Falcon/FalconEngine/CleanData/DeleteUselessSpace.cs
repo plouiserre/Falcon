@@ -10,6 +10,7 @@ namespace FalconEngine.CleanData
     public class DeleteUselessSpace : IDeleteUselessSpace
     {
         private string _startTag;
+        private string _startTagCleaned;
         private string _endTag;
         private IIdentifyStartTagEndTag _identifyStartTagEndTag;
 
@@ -23,6 +24,11 @@ namespace FalconEngine.CleanData
             string htmlPurgeBeforeTag = PurgeBeforeTag(html);
             string htmlPurgeWrongCaracter = PurgeWrongCaracterInsideTag(htmlPurgeBeforeTag);
             string htmlPurge = PurgeAfterTag(htmlPurgeWrongCaracter);
+            if (!_startTag.ToLower().Contains("doctype"))
+            {
+                _startTagCleaned = CleanStartTag();
+                htmlPurge = htmlPurge.Replace(_startTag, _startTagCleaned);
+            }
             return htmlPurge;
         }
 
@@ -74,6 +80,57 @@ namespace FalconEngine.CleanData
                 return html.Substring(0, index + _endTag.Length);
             }
             return _startTag;
+        }
+
+        private string CleanStartTag()
+        {
+            string cleanContent = string.Empty;
+            bool isBracketOpen = false;
+            int numberSpace = 0;
+            for (int i = 0; i < _startTag.Length; i++)
+            {
+                char caracter = _startTag[i];
+                if (IsOpenBracket(caracter, isBracketOpen))
+                    isBracketOpen = true;
+                else if (IsClosedBracket(caracter, isBracketOpen))
+                {
+                    isBracketOpen = false;
+                    numberSpace = 0;
+                }
+                if (IsASpaceCanBeRemoved(caracter, isBracketOpen, numberSpace))
+                    continue;
+                else if (IsAFirstSpace(caracter, isBracketOpen))
+                {
+                    numberSpace += 1;
+                    cleanContent += caracter;
+                }
+                else
+                {
+                    numberSpace = 0;
+                    cleanContent += caracter;
+                }
+            }
+            return cleanContent;
+        }
+
+        private bool IsOpenBracket(char caracter, bool isBracketOpen)
+        {
+            return caracter == '"' && isBracketOpen == false;
+        }
+
+        private bool IsClosedBracket(char caracter, bool isBracketOpen)
+        {
+            return caracter == '"' && isBracketOpen == true;
+        }
+
+        private bool IsASpaceCanBeRemoved(char caracter, bool isBracketOpen, int numberSpace)
+        {
+            return caracter == ' ' && !isBracketOpen && numberSpace > 0;
+        }
+
+        private bool IsAFirstSpace(char caracter, bool isBracketOpen)
+        {
+            return caracter == ' ' && !isBracketOpen;
         }
     }
 }

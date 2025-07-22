@@ -38,6 +38,78 @@ namespace FalconEngineTest.CleanData
         }
 
         [Fact]
+        public void PurgeUselessCaractersInsideTagStartOnlyWithOneWord()
+        {
+            string htmlNotClean = "<link     rel=\"stylesheet\"   href=\"main.css\">            \r\n         ";
+
+            var cleaner = TestFactory.InitDeleteUselessSpace();
+
+            string htmlClean = cleaner.PurgeUselessCaractersAroundTag(htmlNotClean);
+
+            string htmlExpected = "<link rel=\"stylesheet\" href=\"main.css\">";
+            Assert.Equal(htmlExpected, htmlClean);
+        }
+
+        [Fact]
+        public void PurgeUselessCaractersWithAttributesWithMoreThanOneSpaceInsideTagStartOnlyWithOneWord()
+        {
+            string htmlNotClean = "<a   title=\"Visiter le site\"    href=\"monsite.html\"> Mon site </a>";
+
+            var cleaner = TestFactory.InitDeleteUselessSpace();
+
+            string htmlClean = cleaner.PurgeUselessCaractersAroundTag(htmlNotClean);
+
+            string htmlExpected = "<a title=\"Visiter le site\" href=\"monsite.html\"> Mon site </a>";
+            Assert.Equal(htmlExpected, htmlClean);
+        }
+
+
+        [Fact]
+        public void PurgeUselessCaractersWithAttributesWithOneAttributeWithoutProperty()
+        {
+            string htmlNotClean = "<link rel=\"stylesheet\"  href=\"alt-theme.css\" type=\"text/css\" title=\"Thème alternatif\" disabled media=\"screen\">";
+
+            var cleaner = TestFactory.InitDeleteUselessSpace();
+
+            string htmlClean = cleaner.PurgeUselessCaractersAroundTag(htmlNotClean);
+
+            string htmlExpected = "<link rel=\"stylesheet\" href=\"alt-theme.css\" type=\"text/css\" title=\"Thème alternatif\" disabled media=\"screen\">";
+            Assert.Equal(htmlExpected, htmlClean);
+        }
+
+
+
+        // [Fact]
+        // public void PurgeUselessCaractersInsideTagStartOnlyWithManyWords()
+        // {
+        //     string htmlNotClean = "<p  class=\"declaration blue\"     id=\"main\"  > Je suis ton père</p>            \r\n         ";
+
+        //     var cleaner = TestFactory.InitDeleteUselessSpace();
+
+        //     string htmlClean = cleaner.PurgeUselessCaractersAroundTag(htmlNotClean);
+
+        //     string htmlExpected = "<p class=\"declaration blue\" id=\"main\" > Je suis ton père</p>";
+        //     Assert.Equal(htmlExpected, htmlClean);
+        // }
+
+
+
+        [Fact]
+        public void NoPurgeUselessCaractersTagStartDoctype()
+        {
+            string htmlNotClean = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Frameset//EN\" \"http://www.w3.org/TR/html4/frameset.dtd\">";
+
+            var cleaner = TestFactory.InitDeleteUselessSpace();
+
+            string htmlClean = cleaner.PurgeUselessCaractersAroundTag(htmlNotClean);
+
+            string htmlExpected = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Frameset//EN\" \"http://www.w3.org/TR/html4/frameset.dtd\">";
+            Assert.Equal(htmlExpected, htmlClean);
+        }
+
+
+
+        [Fact]
         public void PurgeUselessCaractersAfterTagComplexe()
         {
             string htmlNotClean = "<head><title>Document</title>\r\n</head>            \r\n         ";
