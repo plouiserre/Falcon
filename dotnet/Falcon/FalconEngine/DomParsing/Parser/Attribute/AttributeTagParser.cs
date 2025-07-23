@@ -116,6 +116,9 @@ namespace FalconEngine.DomParsing.Parser.Attribute
                 case "draggable":
                     familyAttribute = FamilyAttributeEnum.draggable;
                     break;
+                case "hidden":
+                    familyAttribute = FamilyAttributeEnum.hidden;
+                    break;
                 case "href":
                     familyAttribute = FamilyAttributeEnum.href;
                     break;
