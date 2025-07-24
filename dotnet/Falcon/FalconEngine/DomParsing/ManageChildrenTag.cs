@@ -21,6 +21,8 @@ namespace FalconEngine.DomParsing
         private IExtractHtmlRemaining _extractHtmlRemaining;
         private IAttributeTagManager _attributeTagManager;
         private IList<ITagParser> _tagParsers;
+        private string _html;
+        private List<TagModel> _children;
 
         public ManageChildrenTag(IDeleteUselessSpace deleteUselessSpace, IIdentifyTag identifyTag,
             IIdentifyStartTagEndTag identifyStartTagEndTag, IAttributeTagParser attributeTagParser,
@@ -38,24 +40,34 @@ namespace FalconEngine.DomParsing
 
         public List<TagModel> Identify(string html)
         {
-            var children = new List<TagModel>();
+            _html = html;
+            _children = new List<TagModel>();
             try
             {
-                var initiateParser = new InitiateParser(_deleteUselessSpace, _identifyTag, _identitfyStartEndTag, _attributeTagParser, _determinateContent, this, _extractHtmlRemaining, _attributeTagManager);
-                _attributeTagManager.SetAttributes();
-                _tagParsers = initiateParser.GetTagParsers(html);
-                foreach (var parser in _tagParsers)
-                {
-                    var tagChild = parser.Parse(html);
-                    children.Add(tagChild);
-                    html = _extractHtmlRemaining.Extract(tagChild, html, ExtractionMode.ASide);
-                }
+                SearchChildren();
+            }
+            catch (NoStartTagException ex)
+            {
+                return _children;
             }
             catch (Exception ex)
             {
                 throw new DeterminateChildrenException(ErrorTypeParsing.children, $"Error parsing for the children of  {html}");
             }
-            return children;
+            return _children;
+        }
+
+        private void SearchChildren()
+        {
+            var initiateParser = new InitiateParser(_deleteUselessSpace, _identifyTag, _identitfyStartEndTag, _determinateContent, this, _attributeTagManager);
+            _attributeTagManager.SetAttributes();
+            _tagParsers = initiateParser.GetTagParsers(_html);
+            foreach (var parser in _tagParsers)
+            {
+                var tagChild = parser.Parse(_html);
+                _children.Add(tagChild);
+                _html = _extractHtmlRemaining.Extract(tagChild, _html, ExtractionMode.ASide);
+            }
         }
 
         public bool ValidateChildren()

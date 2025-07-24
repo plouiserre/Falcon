@@ -38,6 +38,12 @@ namespace FalconEngineTest.Utils
             return new AParser(InitIdentifyTag(), InitAttributeTagManager(true), InitDeleteUselessSpace());
         }
 
+        public static SpanParser InitSpanParser()
+        {
+            return new SpanParser(TestFactory.InitIdentifyTag(), TestFactory.InitAttributeTagManager(false),
+                            TestFactory.InitDeterminateChildren(), FalconEngine.Models.NameTagEnum.span);
+        }
+
         public static AttributeTagManager InitAttributeTagManager(bool isSettingAttributes)
         {
             var attributeTagManager = new AttributeTagManager();
@@ -83,8 +89,7 @@ namespace FalconEngineTest.Utils
         {
             var identifyTag = InitIdentifyTag();
             var initiate = new InitiateParser(InitDeleteUselessSpace(), identifyTag, InitIdentifyStartTagEndTag(),
-                InitAttributeTagParser(), InitDeterminateContent(), InitDeterminateChildren(),
-                InitExtractHtmlRemaining(), InitAttributeTagManager(false));
+                InitDeterminateContent(), InitDeterminateChildren(), InitAttributeTagManager(false));
             return initiate;
         }
 

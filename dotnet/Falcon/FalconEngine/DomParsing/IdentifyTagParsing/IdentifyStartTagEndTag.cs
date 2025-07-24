@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FalconEngine.DomParsing.CustomException;
 
 namespace FalconEngine.DomParsing.IdentifyTagParsing
 {
@@ -24,6 +25,8 @@ namespace FalconEngine.DomParsing.IdentifyTagParsing
             string htmlWorking = _html;
             int startStartTag = _html.IndexOf('<');
             int endStartTag = _html.IndexOf('>');
+            if (startStartTag == -1 || endStartTag == -1)
+                throw new NoStartTagException(ErrorTypeParsing.starttagmissing, $"{_html} doesn't contains tags");
             return htmlWorking.Substring(startStartTag, endStartTag + 1);
         }
 

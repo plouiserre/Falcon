@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FalconEngine.DomParsing.CustomException;
 using FalconEngine.DomParsing.IdentifyTagParsing;
 using FalconEngineTest.Utils;
 
@@ -40,6 +41,17 @@ namespace FalconEngineTest.DomParsing.IdentifyTagParsing
 
             Assert.Equal("<head>", identifyTag.StartTag);
             Assert.Equal("</head>", identifyTag.EndTag);
+        }
+
+        [Fact]
+        public void TryIdentifyStartAndEndTagWithNoTags()
+        {
+            var identifyTag = new IdentifyStartTagEndTag();
+
+            var exception = Assert.Throws<NoStartTagException>(() => identifyTag.DetermineStartEndTags("Hello world!!!"));
+
+            Assert.Equal(ErrorTypeParsing.starttagmissing, exception.ErrorType);
+            Assert.Equal("Hello world!!! doesn't contains tags", exception.Message);
         }
     }
 }
