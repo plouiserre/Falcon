@@ -147,7 +147,7 @@ namespace FalconEngineTest.Data
         private static TagModel GetDivContent()
         {
             var attributId = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.id.ToString(), Value = "content" };
-            string content = HtmlData.firstPHtmlSimple;
+            string content = HtmlData.FirstPHtmlSimple;
             var divTag = new TagModel()
             {
                 Attributes = new List<AttributeModel>() { attributId },
@@ -167,7 +167,7 @@ namespace FalconEngineTest.Data
                 Attributes = new List<AttributeModel>() { attributClass },
                 NameTag = NameTagEnum.p,
                 TagFamily = TagFamilyEnum.WithEnd,
-                Content = HtmlData.secondPHtmlSimple,
+                Content = HtmlData.SecondPHtmlSimple,
                 Children = new List<TagModel>() { child }
             };
 
