@@ -18,6 +18,7 @@ namespace FalconEngine.DomParsing
             _allAttributesAutorizedByTag[NameTagEnum.meta] = new List<FamilyAttributeEnum>();
             _allAttributesAutorizedByTag[NameTagEnum.link] = new List<FamilyAttributeEnum>();
             _allAttributesAutorizedByTag[NameTagEnum.a] = new List<FamilyAttributeEnum>();
+            _allAttributesAutorizedByTag[NameTagEnum.span] = new List<FamilyAttributeEnum>();
         }
 
         public List<string> GetAttributes(NameTagEnum tag)
@@ -31,6 +32,7 @@ namespace FalconEngine.DomParsing
             SetMetaAttributesAutorized();
             SetLinkAttributesAutorized();
             SetAAttributesAutorized();
+            SetSpanAttributes();
         }
 
         private void SetHtmlAttributesAutorized()
@@ -99,6 +101,11 @@ namespace FalconEngine.DomParsing
             _allAttributesAutorizedByTag[NameTagEnum.a].Add(FamilyAttributeEnum.tabindex);
             _allAttributesAutorizedByTag[NameTagEnum.a].Add(FamilyAttributeEnum.target);
             _allAttributesAutorizedByTag[NameTagEnum.a].Add(FamilyAttributeEnum.type);
+        }
+
+        private void SetSpanAttributes()
+        {
+            setGlobalAttributes(NameTagEnum.span);
         }
 
         private void setGlobalAttributes(NameTagEnum nameTag)

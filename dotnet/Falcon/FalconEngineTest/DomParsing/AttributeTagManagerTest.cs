@@ -105,8 +105,9 @@ namespace FalconEngineTest.DomParsing
 
             var attributes = attributeTagManager.GetAttributes(NameTagEnum.a);
 
-            Assert.Equal(18, attributes.Count);
+            Assert.Equal(19, attributes.Count);
             AssertContains(attributes, FamilyAttributeEnum.href);
+            AssertContains(attributes, FamilyAttributeEnum.hidden);
             AssertContains(attributes, FamilyAttributeEnum.target);
             AssertContains(attributes, FamilyAttributeEnum.download);
             AssertContains(attributes, FamilyAttributeEnum.rel);

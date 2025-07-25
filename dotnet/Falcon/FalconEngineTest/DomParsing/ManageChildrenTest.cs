@@ -106,5 +106,17 @@ namespace FalconEngineTest.DomParsing
 
             Assert.False(isValid);
         }
+
+        [Fact]
+        public void NoChildrenPresents()
+        {
+            var html = "A simple text";
+            var determinateChildren = TestFactory.InitDeterminateChildren();
+
+            var children = determinateChildren.Identify(html);
+
+            Assert.Empty(children);
+        }
+
     }
 }
