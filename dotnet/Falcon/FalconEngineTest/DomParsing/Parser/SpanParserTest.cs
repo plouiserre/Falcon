@@ -13,7 +13,7 @@ namespace FalconEngineTest.DomParsing.Parser
         [Fact]
         public void ParseAndValidateSimpleSpan()
         {
-            var html = "<span>A simple text</span>";
+            var html = "<span     class=\"blueText\">A simple text</span>";
 
             var parser = TestFactory.InitSpanParser();
 
@@ -21,11 +21,14 @@ namespace FalconEngineTest.DomParsing.Parser
             bool isValid = parser.IsValid();
 
             Assert.True(isValid);
-            Assert.Equal("<span>", tag.TagStart);
+            Assert.Equal("<span class=\"blueText\">", tag.TagStart);
             Assert.Equal("</span>", tag.TagEnd);
             Assert.Equal(TagFamilyEnum.WithEnd, tag.TagFamily);
             Assert.Equal(NameTagEnum.span, tag.NameTag);
             Assert.Equal("A simple text", tag.Content);
+            Assert.Single(tag.Attributes);
+            Assert.Equal("classCss", tag.Attributes[0].FamilyAttribute);
+            Assert.Equal("blueText", tag.Attributes[0].Value);
             Assert.Empty(tag.Children);
         }
 
@@ -54,21 +57,17 @@ namespace FalconEngineTest.DomParsing.Parser
             Assert.Equal("</a>", tag.Children[0].TagEnd);
         }
 
-        //Test validation false
-        // [Theory]
-        // [InlineData("<span>")]
-        // public void ParseAndFailValidationSimpleSpan(string html)
-        // {
-        //     var parser = TestFactory.InitSpanParser();
+        [Fact]
+        public void ParseAndFailValidationSimpleSpan()
+        {
+            string html = "<span charset=\"UTF-8\"> Hello world </span>";
+            var parser = TestFactory.InitSpanParser();
 
-        //     parser.Parse(html);
-        //     bool isValid = parser.IsValid();
+            parser.Parse(html);
+            bool isValid = parser.IsValid();
 
-        //     Assert.False(isValid);
-        // }
+            Assert.False(isValid);
+        }
 
-        //test enfant validation false
-
-        //test avec des espaces dans le tagstart
     }
 }

@@ -38,6 +38,7 @@ namespace FalconEngine.DomParsing.IdentifyTagParsing
         {
             _html = html;
             _attributes = null;
+            CleanHtml();
             FindTagStartEnd();
             FindAttributes();
             IdentifyTagName();
@@ -54,10 +55,15 @@ namespace FalconEngine.DomParsing.IdentifyTagParsing
             };
         }
 
-        private void FindTagStartEnd()
+        private void CleanHtml()
         {
             var htmlCleaned = _deleteUselessSpace.PurgeUselessCaractersAroundTag(_html);
-            _identifyStartTagEndTag.DetermineStartEndTags(htmlCleaned);
+            _html = htmlCleaned;
+        }
+
+        private void FindTagStartEnd()
+        {
+            _identifyStartTagEndTag.DetermineStartEndTags(_html);
             _tagStart = _identifyStartTagEndTag.StartTag;
             _tagEnd = _identifyStartTagEndTag.EndTag;
         }

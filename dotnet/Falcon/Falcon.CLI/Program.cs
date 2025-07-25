@@ -5,6 +5,7 @@ using FalconEngine.DomParsing.IdentifyTagParsing;
 using FalconEngine.DomParsing.Parser;
 using FalconEngine.DomParsing.Parser.Attribute;
 using FalconEngine.Engine;
+using FalconEngine.Models;
 using Newtonsoft.Json;
 
 string html = @"<!DOCTYPE html>
@@ -32,12 +33,12 @@ var analyzeAttributes = new AnalyzeAttributes();
 var deleteUselessSpace = new DeleteUselessSpace(identifyStartTagEndTag);
 var attributeTagParser = new AttributeTagParser(identifyStartTagEndTag, analyzeAttributes);
 var identifyTag = new IdentifyTag(deleteUselessSpace, attributeTagParser, identifyTagName, identifyStartTagEndTag, determinateContent);
-var aParser = new AParser(identifyTag, attributeTagManager, deleteUselessSpace);
 var doctypeParser = new DoctypeParser(identifyTag);
 var htmlParser = new HtmlTagParser(identifyTag, determinateContent, attributeTagManager);
 var manageChildrenTag = new ManageChildrenTag(deleteUselessSpace, identifyTag, identifyStartTagEndTag, attributeTagParser, determinateContent, extractHtmlRemaining, attributeTagManager);
+var spanParse = new SpanParser(identifyTag, attributeTagManager, manageChildrenTag, NameTagEnum.span);
 var headParser = new HeadParser(deleteUselessSpace, identifyTag, manageChildrenTag);
-var htmlParsing = new HtmlParsing(doctypeParser, htmlParser, headParser, extractHtmlRemaining, attributeTagManager, aParser);
+var htmlParsing = new HtmlParsing(doctypeParser, htmlParser, headParser, extractHtmlRemaining, attributeTagManager, spanParse);
 var engine = new HtmlEngine(htmlParsing);
 var result = engine.Calculate(html);
 Console.WriteLine(JsonConvert.SerializeObject(result));

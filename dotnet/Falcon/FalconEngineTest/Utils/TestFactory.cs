@@ -40,7 +40,7 @@ namespace FalconEngineTest.Utils
 
         public static SpanParser InitSpanParser()
         {
-            return new SpanParser(TestFactory.InitIdentifyTag(), TestFactory.InitAttributeTagManager(false),
+            return new SpanParser(TestFactory.InitIdentifyTag(), TestFactory.InitAttributeTagManager(true),
                             TestFactory.InitDeterminateChildren(), FalconEngine.Models.NameTagEnum.span);
         }
 
