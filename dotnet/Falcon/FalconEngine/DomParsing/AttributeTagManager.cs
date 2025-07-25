@@ -19,6 +19,7 @@ namespace FalconEngine.DomParsing
             _allAttributesAutorizedByTag[NameTagEnum.link] = new List<FamilyAttributeEnum>();
             _allAttributesAutorizedByTag[NameTagEnum.a] = new List<FamilyAttributeEnum>();
             _allAttributesAutorizedByTag[NameTagEnum.span] = new List<FamilyAttributeEnum>();
+            _allAttributesAutorizedByTag[NameTagEnum.p] = new List<FamilyAttributeEnum>();
         }
 
         public List<string> GetAttributes(NameTagEnum tag)
@@ -33,11 +34,12 @@ namespace FalconEngine.DomParsing
             SetLinkAttributesAutorized();
             SetAAttributesAutorized();
             SetSpanAttributes();
+            SetPAttributes();
         }
 
         private void SetHtmlAttributesAutorized()
         {
-            setGlobalAttributes(NameTagEnum.html);
+            SetGlobalAttributes(NameTagEnum.html);
             _allAttributesAutorizedByTag[NameTagEnum.html].Add(FamilyAttributeEnum.accesskey);
             _allAttributesAutorizedByTag[NameTagEnum.html].Add(FamilyAttributeEnum.contenteditable);
             _allAttributesAutorizedByTag[NameTagEnum.html].Add(FamilyAttributeEnum.dir);
@@ -50,7 +52,7 @@ namespace FalconEngine.DomParsing
 
         private void SetMetaAttributesAutorized()
         {
-            setGlobalAttributes(NameTagEnum.meta);
+            SetGlobalAttributes(NameTagEnum.meta);
             _allAttributesAutorizedByTag[NameTagEnum.meta].Add(FamilyAttributeEnum.charset);
             _allAttributesAutorizedByTag[NameTagEnum.meta].Add(FamilyAttributeEnum.content);
             _allAttributesAutorizedByTag[NameTagEnum.meta].Add(FamilyAttributeEnum.dir);
@@ -62,7 +64,7 @@ namespace FalconEngine.DomParsing
         private void SetLinkAttributesAutorized()
         {
 
-            setGlobalAttributes(NameTagEnum.link);
+            SetGlobalAttributes(NameTagEnum.link);
             _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.accesskey);
             _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.asAttr);
             _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.blocking);
@@ -87,7 +89,7 @@ namespace FalconEngine.DomParsing
         //TODO m'occuper des attributs aria-* et hidden
         private void SetAAttributesAutorized()
         {
-            setGlobalAttributes(NameTagEnum.a);
+            SetGlobalAttributes(NameTagEnum.a);
             _allAttributesAutorizedByTag[NameTagEnum.a].Add(FamilyAttributeEnum.accesskey);
             _allAttributesAutorizedByTag[NameTagEnum.a].Add(FamilyAttributeEnum.dir);
             _allAttributesAutorizedByTag[NameTagEnum.a].Add(FamilyAttributeEnum.download);
@@ -105,10 +107,15 @@ namespace FalconEngine.DomParsing
 
         private void SetSpanAttributes()
         {
-            setGlobalAttributes(NameTagEnum.span);
+            SetGlobalAttributes(NameTagEnum.span);
         }
 
-        private void setGlobalAttributes(NameTagEnum nameTag)
+        private void SetPAttributes()
+        {
+            SetGlobalAttributes(NameTagEnum.p);
+        }
+
+        private void SetGlobalAttributes(NameTagEnum nameTag)
         {
             _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.classCss);
             _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.data_);

@@ -44,6 +44,12 @@ namespace FalconEngineTest.Utils
                             TestFactory.InitDeterminateChildren(), FalconEngine.Models.NameTagEnum.span);
         }
 
+        public static PParser InitPParser()
+        {
+            return new PParser(TestFactory.InitIdentifyTag(), TestFactory.InitDeterminateChildren(),
+                                TestFactory.InitAttributeTagManager(true), FalconEngine.Models.NameTagEnum.p);
+        }
+
         public static AttributeTagManager InitAttributeTagManager(bool isSettingAttributes)
         {
             var attributeTagManager = new AttributeTagManager();
