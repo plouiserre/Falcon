@@ -123,5 +123,18 @@ namespace FalconEngineTest.DomParsing
             Assert.IsType<LinkParser>(parsers[3]);
         }
 
+
+        [Fact]
+        public void ShouldInitiateParserWithSomeBadTextBeforeFirstTag()
+        {
+            string html = " Ceci est un <span><a href=\"declaration.html\">paragraphe</a></span>";
+            var initiate = TestFactory.InitInitiateParser();
+
+            var parsers = initiate.GetTagParsers(html);
+
+            Assert.Single(parsers);
+            Assert.IsType<SpanParser>(parsers[0]);
+        }
+
     }
 }
