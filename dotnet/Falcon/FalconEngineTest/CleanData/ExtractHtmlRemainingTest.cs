@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using FalconEngine.CleanData;
+using FalconEngine.DomParsing.Parser;
+using FalconEngine.Models;
 using FalconEngineTest.Data;
 using FalconEngineTest.Utils;
 
@@ -65,6 +67,44 @@ namespace FalconEngineTest.CleanData
             var htmlRemaining = extraction.Extract(head, html, ExtractionMode.Inside);
 
             Assert.Equal(string.Concat(HtmlData.HeadSimple, HtmlData.BodySimple), htmlRemaining);
+        }
+
+        [Fact]
+        public void ManageRemoveFirstMetalInChildrenSearchTagHeader()
+        {
+            string html = HtmlData.ContentHeadSimple;
+            var extraction = new ExtractHtmlRemaining();
+
+            var htmlRemaining = extraction.Extract(html, NameTagEnum.meta);
+
+            string htmlExpected = HtmlData.ContentHeadSimple.Replace(HtmlData.MetaCharset, string.Empty);
+            Assert.Equal(htmlExpected, htmlRemaining);
+        }
+
+        [Fact]
+        public void ManageRemoveTitleInChildrenSearchTagHeader()
+        {
+            string html = HtmlData.ContentHeadSimple.Replace(HtmlData.MetaCharset, string.Empty)
+                                                    .Replace(HtmlData.MetaViewPort, string.Empty);
+            var extraction = new ExtractHtmlRemaining();
+
+            var htmlRemaining = extraction.Extract(html, NameTagEnum.title);
+
+            string htmlExpected = html.Replace(HtmlData.TitleDocument, string.Empty);
+            Assert.Equal(htmlExpected, htmlRemaining);
+        }
+
+        [Fact]
+        public void ManageRemoveLinkInChildrenSearchTagHeader()
+        {
+            string html = HtmlData.ContentHeadSimple.Replace(HtmlData.MetaCharset, string.Empty)
+                                                    .Replace(HtmlData.MetaViewPort, string.Empty)
+                                                    .Replace(HtmlData.TitleDocument, string.Empty);
+            var extraction = new ExtractHtmlRemaining();
+
+            var htmlRemaining = extraction.Extract(html, NameTagEnum.link);
+
+            Assert.Equal(string.Empty, htmlRemaining);
         }
     }
 }

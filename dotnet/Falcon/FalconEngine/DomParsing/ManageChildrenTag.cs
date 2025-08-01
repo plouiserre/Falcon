@@ -41,7 +41,6 @@ namespace FalconEngine.DomParsing
         public List<TagModel> Identify(string html)
         {
             _html = html;
-            _children = new List<TagModel>();
             try
             {
                 SearchChildren();
@@ -64,10 +63,27 @@ namespace FalconEngine.DomParsing
             _tagParsers = initiateParser.GetTagParsers(_html);
             foreach (var parser in _tagParsers)
             {
+                _html = RemoveUselessHtml();
                 var tagChild = parser.Parse(_html);
+                _children = new List<TagModel>();
                 _children.Add(tagChild);
                 _html = _extractHtmlRemaining.Extract(tagChild, _html, ExtractionMode.ASide);
             }
+        }
+
+        private string RemoveUselessHtml()
+        {
+            string htmlCleaned = string.Empty;
+            bool isBeginTag = false;
+            for (int i = 0; i < _html.Length; i++)
+            {
+                char caracter = _html[i];
+                if (caracter == '<')
+                    isBeginTag = true;
+                if (isBeginTag)
+                    htmlCleaned += caracter;
+            }
+            return htmlCleaned;
         }
 
         public bool ValidateChildren()

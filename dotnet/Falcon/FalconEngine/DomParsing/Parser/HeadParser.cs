@@ -16,6 +16,7 @@ namespace FalconEngine.DomParsing.Parser
         private IIdentifyTag _identifyTag;
         private IManageChildrenTag _manageChildrenTag;
         private TagModel _tag;
+        private NameTagEnum _nameTag;
 
         public HeadParser(IDeleteUselessSpace deleteUselessSpace, IIdentifyTag identifyTag,
          IManageChildrenTag manageChildrenTag)
@@ -23,6 +24,12 @@ namespace FalconEngine.DomParsing.Parser
             _identifyTag = identifyTag;
             _deleteUselessSpace = deleteUselessSpace;
             _manageChildrenTag = manageChildrenTag;
+            _nameTag = NameTagEnum.head;
+        }
+
+        public NameTagEnum GetNameTag()
+        {
+            return _nameTag;
         }
 
         public bool IsValid()

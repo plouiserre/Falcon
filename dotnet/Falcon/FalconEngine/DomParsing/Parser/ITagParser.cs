@@ -10,5 +10,6 @@ namespace FalconEngine.DomParsing.Parser
     {
         TagModel Parse(string html);
         bool IsValid();
+        NameTagEnum GetNameTag();
     }
 }

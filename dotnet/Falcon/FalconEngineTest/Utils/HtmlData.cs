@@ -53,5 +53,8 @@ namespace FalconEngineTest.Utils
         public static string SecondPHtmlSimple = @"Ceci est un <span> <a href=""declaration.html""> paragraphe </a> </span>";
 
         public static string ThirdPHtmlSimple = "<p class=\"declarationText\"> Ceci est un <span><a href=\"declaration.html\">paragraphe</a></span></p>";
+
+        public static string FourthPHtmlSimple = "<p class=\"declarationText\"> Ceci est un <span><a href=\"declaration.html\">paragraphe</a></span><span class=\"red\">Et il raconte des supers trucs!!!</span></p>";
+
     }
 }
