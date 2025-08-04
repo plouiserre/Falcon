@@ -21,8 +21,7 @@ namespace FalconEngine.DomParsing
         private IExtractHtmlRemaining _extractHtmlRemaining;
         private IAttributeTagManager _attributeTagManager;
         private IList<ITagParser> _tagParsers;
-        private string _html;
-        //private List<TagModel> _children;
+        private Dictionary<TagModel, string> _htmlByParents;
         private Dictionary<TagModel, List<TagModel>> _childrenWithParents;
         private List<TagModel> _parents;
         private TagModel _parent;
@@ -41,15 +40,16 @@ namespace FalconEngine.DomParsing
             _attributeTagManager = attributeTagManager;
             _parents = new List<TagModel>();
             _childrenWithParents = new Dictionary<TagModel, List<TagModel>>();
+            _htmlByParents = new Dictionary<TagModel, string>();
         }
 
         public List<TagModel> Identify(TagModel parent, string html)
         {
             _parents.Add(parent);
-            _html = html;
+            _htmlByParents.Add(parent, html);
             try
             {
-                SearchChildren();
+                SearchChildren(parent);
             }
             catch (NoStartTagException ex)
             {
@@ -63,23 +63,24 @@ namespace FalconEngine.DomParsing
         }
 
         //TODO subdivise this method
-        private void SearchChildren()
+        private void SearchChildren(TagModel parent)
         {
             var initiateParser = new InitiateParser(_deleteUselessSpace, _identifyTag, _identitfyStartEndTag, _determinateContent, this, _attributeTagManager);
             _attributeTagManager.SetAttributes();
-            _tagParsers = initiateParser.GetTagParsers(_html);
+            string html = _htmlByParents[parent];
+            _tagParsers = initiateParser.GetTagParsers(html);
             if (_tagParsers != null && _tagParsers.Count > 0)
             {
                 foreach (var parser in _tagParsers)
                 {
-                    _html = RemoveUselessHtml();
-                    var childTag = parser.Parse(_html);
+                    html = RemoveUselessHtml(html);
+                    var childTag = parser.Parse(html);
                     string htmlToParse = ChildTagHtml(childTag);
                     _parent = _parents.Last();
                     if (!_childrenWithParents.ContainsKey(_parent))
                         _childrenWithParents[_parent] = new List<TagModel>();
                     _childrenWithParents[_parent].Add(childTag);
-                    _html = _html.Replace(htmlToParse, string.Empty);
+                    html = html.Replace(htmlToParse, string.Empty);
                 }
             }
         }
@@ -94,13 +95,13 @@ namespace FalconEngine.DomParsing
                 return string.Concat(childTag.TagStart, childTag.Content, childTag.TagEnd);
         }
 
-        private string RemoveUselessHtml()
+        private string RemoveUselessHtml(string html)
         {
             string htmlCleaned = string.Empty;
             bool isBeginTag = false;
-            for (int i = 0; i < _html.Length; i++)
+            for (int i = 0; i < html.Length; i++)
             {
-                char caracter = _html[i];
+                char caracter = html[i];
                 if (caracter == '<')
                     isBeginTag = true;
                 if (isBeginTag)
