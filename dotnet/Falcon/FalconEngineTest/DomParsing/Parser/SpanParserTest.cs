@@ -29,7 +29,7 @@ namespace FalconEngineTest.DomParsing.Parser
             Assert.Single(tag.Attributes);
             Assert.Equal("classCss", tag.Attributes[0].FamilyAttribute);
             Assert.Equal("blueText", tag.Attributes[0].Value);
-            Assert.Empty(tag.Children);
+            Assert.Null(tag.Children);
         }
 
         [Fact]

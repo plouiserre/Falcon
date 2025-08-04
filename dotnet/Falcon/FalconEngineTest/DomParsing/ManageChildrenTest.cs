@@ -115,7 +115,7 @@ namespace FalconEngineTest.DomParsing
 
             var children = determinateChildren.Identify(new TagModel(), html);
 
-            Assert.Empty(children);
+            Assert.Null(children);
         }
 
     }
