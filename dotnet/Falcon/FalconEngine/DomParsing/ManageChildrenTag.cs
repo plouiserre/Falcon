@@ -61,14 +61,35 @@ namespace FalconEngine.DomParsing
             var initiateParser = new InitiateParser(_deleteUselessSpace, _identifyTag, _identitfyStartEndTag, _determinateContent, this, _attributeTagManager);
             _attributeTagManager.SetAttributes();
             _tagParsers = initiateParser.GetTagParsers(_html);
+            _children = new List<TagModel>();
             foreach (var parser in _tagParsers)
             {
                 _html = RemoveUselessHtml();
-                var tagChild = parser.Parse(_html);
-                _children = new List<TagModel>();
-                _children.Add(tagChild);
-                _html = _extractHtmlRemaining.Extract(tagChild, _html, ExtractionMode.ASide);
+                //var htmlToParse = _extractHtmlRemaining.Extract(_html, NameTagEnum.meta);
+                var childTag = _identifyTag.Analyze(_html);
+                string htmlToParse = ChildTagHtml(childTag);
+                //var tagChild = parser.Parse(htmlToParse);
+                //_children.Add(tagChild);
+                _children.Add(childTag);
+                _html = _html.Replace(htmlToParse, string.Empty);
+                //_html = _extractHtmlRemaining.Extract(tagChild, _html, ExtractionMode.ASide);
             }
+        }
+
+        private string ChildTagHtml(TagModel childTag)
+        {
+            if (string.IsNullOrEmpty(childTag.TagEnd))
+                return childTag.TagStart;
+            else if (string.IsNullOrEmpty(childTag.Content))
+                return string.Concat(childTag.TagStart, childTag.TagEnd);
+            else
+                return string.Concat(childTag.TagStart, childTag.Content, childTag.TagEnd);
+        }
+
+        private string KeepOnlyImportantHtml()
+        {
+            string htmlImportant = _extractHtmlRemaining.Extract(_html, NameTagEnum.meta);
+            return htmlImportant;
         }
 
         private string RemoveUselessHtml()

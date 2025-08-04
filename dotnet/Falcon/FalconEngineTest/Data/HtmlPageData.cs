@@ -7,6 +7,7 @@ using FalconEngineTest.Utils;
 
 namespace FalconEngineTest.Data
 {
+    //TODO delete
     public enum TagData
     {
         html, doctype, metaCharset, head

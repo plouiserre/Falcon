@@ -105,5 +105,27 @@ namespace FalconEngine.CleanData
             htmlCleaned = html.Replace(uselessHtml, string.Empty);
             return htmlCleaned;
         }
+
+        public string FindHtmlParse(string html)
+        {
+            string htmlToParse = string.Empty;
+            int indexToExtract = 0;
+            for (int i = 0; i < html.Length; i++)
+            {
+                char caracter = html[i];
+                if (caracter == '>')
+                {
+                    indexToExtract = i;
+                    break;
+                }
+            }
+            htmlToParse = html.Substring(0, indexToExtract + 1);
+            return htmlToParse;
+        }
+
+        public NameTagEnum GetNameTag(string html)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

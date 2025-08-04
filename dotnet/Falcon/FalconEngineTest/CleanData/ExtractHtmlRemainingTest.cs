@@ -106,5 +106,30 @@ namespace FalconEngineTest.CleanData
 
             Assert.Equal(string.Empty, htmlRemaining);
         }
+
+        [Fact]
+        public void GetHtmlParseMeta()
+        {
+            string html = HtmlData.ContentHeadSimple;
+
+            var extraction = new ExtractHtmlRemaining();
+
+            string htmlToParse = extraction.FindHtmlParse(html);
+
+            Assert.Equal(HtmlData.MetaCharset, htmlToParse);
+        }
+
+        [Fact]
+        public void GetHtmlParseTitle()
+        {
+            string html = HtmlData.ContentHeadSimple.Replace(HtmlData.MetaCharset, string.Empty)
+                                                    .Replace(HtmlData.MetaViewPort, string.Empty);
+
+            var extraction = new ExtractHtmlRemaining();
+
+            string htmlToParse = extraction.FindHtmlParse(html);
+
+            Assert.Equal(HtmlData.TitleDocument, htmlToParse);
+        }
     }
 }
