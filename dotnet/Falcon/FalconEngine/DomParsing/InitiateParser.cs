@@ -6,6 +6,7 @@ using FalconEngine.CleanData;
 using FalconEngine.DomParsing.IdentifyTagParsing;
 using FalconEngine.DomParsing.Parser;
 using FalconEngine.DomParsing.Parser.Attribute;
+using FalconEngine.Models;
 
 namespace FalconEngine.DomParsing
 {
@@ -35,6 +36,7 @@ namespace FalconEngine.DomParsing
         public List<ITagParser> GetTagParsers(string html)
         {
             _html = html;
+            _html = RemoveUselessHtml();
             var parsers = new List<ITagParser>();
             while (_html.Length > 0)
             {
@@ -42,6 +44,21 @@ namespace FalconEngine.DomParsing
                 parsers.Add(parser);
             }
             return parsers;
+        }
+
+        private string RemoveUselessHtml()
+        {
+            string htmlCleaned = string.Empty;
+            bool isBeginTag = false;
+            for (int i = 0; i < _html.Length; i++)
+            {
+                char caracter = _html[i];
+                if (caracter == '<')
+                    isBeginTag = true;
+                if (isBeginTag)
+                    htmlCleaned += caracter;
+            }
+            return htmlCleaned;
         }
 
         private ITagParser GetTagParser()
@@ -70,6 +87,8 @@ namespace FalconEngine.DomParsing
                     return new LinkParser(_identifyTag, _attributeTagManager);
                 case string tag when tag.ToLower().Contains("title"):
                     return new TitleParser(_identifyTag, _determinateContent);
+                case string tag when tag.ToLower().Contains("span"):
+                    return new SpanParser(_identifyTag, _attributeTagManager, _manageChildrenTag, NameTagEnum.span);
                 default:
                     return null;
             }

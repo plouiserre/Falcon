@@ -6,6 +6,7 @@ using FalconEngine.Models;
 
 namespace FalconEngine.DomParsing.Parser
 {
+
     public abstract class TagParser : ITagParser
     {
         protected TagModel _tag;
@@ -44,5 +45,10 @@ namespace FalconEngine.DomParsing.Parser
         }
 
         public abstract TagModel Parse(string html);
+
+        public NameTagEnum GetNameTag()
+        {
+            return _nametag;
+        }
     }
 }

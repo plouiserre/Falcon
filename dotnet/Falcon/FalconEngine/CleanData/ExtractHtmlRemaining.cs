@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FalconEngine.DomParsing.Parser;
 using FalconEngine.Models;
 
 namespace FalconEngine.CleanData
@@ -56,6 +57,5 @@ namespace FalconEngine.CleanData
             string textCleaned = content.Substring(startHtml, content.Length - startHtml);
             return textCleaned;
         }
-
     }
 }

@@ -11,12 +11,14 @@ namespace FalconEngine.DomParsing.Parser
 {
     public class DoctypeParser : ITagParser
     {
+        private NameTagEnum _nameTag;
         private IIdentifyTag _identifyTag;
         private TagModel _tag;
 
         public DoctypeParser(IIdentifyTag identifyTag)
         {
             _identifyTag = identifyTag;
+            _nameTag = NameTagEnum.doctype;
         }
 
         public TagModel Parse(string html)
@@ -70,6 +72,11 @@ namespace FalconEngine.DomParsing.Parser
         public List<TagModel> DeterminateChildren(string html)
         {
             throw new NotImplementedException();
+        }
+
+        public NameTagEnum GetNameTag()
+        {
+            return _nameTag;
         }
     }
 }

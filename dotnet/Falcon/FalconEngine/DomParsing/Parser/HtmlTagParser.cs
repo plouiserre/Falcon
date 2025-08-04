@@ -17,6 +17,7 @@ namespace FalconEngine.DomParsing.Parser
         private IIdentifyTag _identifyTag;
         private IDeterminateContent _determinateContent;
         private IAttributeTagManager _attributeTagManager;
+        private NameTagEnum _nameTag;
 
         public HtmlTagParser(IIdentifyTag identifyTag, IDeterminateContent determinateContent,
             IAttributeTagManager attributeTagManager)
@@ -24,6 +25,7 @@ namespace FalconEngine.DomParsing.Parser
             _identifyTag = identifyTag;
             _determinateContent = determinateContent;
             _attributeTagManager = attributeTagManager;
+            _nameTag = NameTagEnum.html;
         }
 
         public TagModel Parse(string html)
@@ -77,6 +79,11 @@ namespace FalconEngine.DomParsing.Parser
         public List<TagModel> DeterminateChildren(string html)
         {
             throw new NotImplementedException();
+        }
+
+        public NameTagEnum GetNameTag()
+        {
+            return _nameTag;
         }
     }
 }

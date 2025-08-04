@@ -7,13 +7,14 @@ using FalconEngine.Models;
 
 namespace FalconEngine.DomParsing.Parser
 {
-    public class SpanParser : TagParser, ITagParser
+    public class PParser : TagParser, ITagParser
     {
         private IIdentifyTag _identifyTag;
         private IManageChildrenTag _manageChildrenTag;
 
-        public SpanParser(IIdentifyTag identifyTag, IAttributeTagManager attributeTagManager,
-                IManageChildrenTag manageChildrenTag, NameTagEnum nameTag) : base(attributeTagManager, nameTag)
+        public PParser(IIdentifyTag identifyTag, IManageChildrenTag manageChildrenTag,
+                        IAttributeTagManager attributeTagManager, NameTagEnum nameTag) :
+                        base(attributeTagManager, nameTag)
         {
             _identifyTag = identifyTag;
             _manageChildrenTag = manageChildrenTag;
@@ -21,9 +22,9 @@ namespace FalconEngine.DomParsing.Parser
 
         public override bool IsValid()
         {
-            bool noTagEnd = !string.IsNullOrEmpty(_tag.TagEnd);
+            bool tagEnd = !string.IsNullOrEmpty(_tag.TagEnd);
             bool tagsAreOk = AreAttributesAreAutorized();
-            return noTagEnd && tagsAreOk;
+            return tagEnd && tagsAreOk;
         }
 
         public override TagModel Parse(string html)

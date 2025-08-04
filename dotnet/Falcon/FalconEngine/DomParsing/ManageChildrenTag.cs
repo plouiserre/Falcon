@@ -21,8 +21,10 @@ namespace FalconEngine.DomParsing
         private IExtractHtmlRemaining _extractHtmlRemaining;
         private IAttributeTagManager _attributeTagManager;
         private IList<ITagParser> _tagParsers;
-        private string _html;
-        private List<TagModel> _children;
+        private Dictionary<TagModel, string> _htmlByParents;
+        private Dictionary<TagModel, List<TagModel>> _childrenWithParents;
+        private List<TagModel> _parents;
+        private TagModel _parent;
 
         public ManageChildrenTag(IDeleteUselessSpace deleteUselessSpace, IIdentifyTag identifyTag,
             IIdentifyStartTagEndTag identifyStartTagEndTag, IAttributeTagParser attributeTagParser,
@@ -36,38 +38,86 @@ namespace FalconEngine.DomParsing
             _determinateContent = determinateContent;
             _extractHtmlRemaining = extractHtmlRemaining;
             _attributeTagManager = attributeTagManager;
+            _parents = new List<TagModel>();
+            _childrenWithParents = new Dictionary<TagModel, List<TagModel>>();
+            _htmlByParents = new Dictionary<TagModel, string>();
         }
 
-        public List<TagModel> Identify(string html)
+        public List<TagModel> Identify(TagModel parent, string html)
         {
-            _html = html;
-            _children = new List<TagModel>();
+            _parents.Add(parent);
+            _htmlByParents.Add(parent, html);
             try
             {
-                SearchChildren();
+                SearchChildren(parent);
             }
             catch (NoStartTagException ex)
             {
-                return _children;
+                return GetChildren();
             }
             catch (Exception ex)
             {
                 throw new DeterminateChildrenException(ErrorTypeParsing.children, $"Error parsing for the children of  {html}");
             }
-            return _children;
+            return GetChildren();
         }
 
-        private void SearchChildren()
+        //TODO subdivise this method
+        private void SearchChildren(TagModel parent)
         {
             var initiateParser = new InitiateParser(_deleteUselessSpace, _identifyTag, _identitfyStartEndTag, _determinateContent, this, _attributeTagManager);
             _attributeTagManager.SetAttributes();
-            _tagParsers = initiateParser.GetTagParsers(_html);
-            foreach (var parser in _tagParsers)
+            string html = _htmlByParents[parent];
+            _tagParsers = initiateParser.GetTagParsers(html);
+            if (_tagParsers != null && _tagParsers.Count > 0)
             {
-                var tagChild = parser.Parse(_html);
-                _children.Add(tagChild);
-                _html = _extractHtmlRemaining.Extract(tagChild, _html, ExtractionMode.ASide);
+                foreach (var parser in _tagParsers)
+                {
+                    html = RemoveUselessHtml(html);
+                    var childTag = parser.Parse(html);
+                    string htmlToParse = ChildTagHtml(childTag);
+                    _parent = _parents.Last();
+                    if (!_childrenWithParents.ContainsKey(_parent))
+                        _childrenWithParents[_parent] = new List<TagModel>();
+                    _childrenWithParents[_parent].Add(childTag);
+                    html = html.Replace(htmlToParse, string.Empty);
+                }
             }
+        }
+
+        private string ChildTagHtml(TagModel childTag)
+        {
+            if (string.IsNullOrEmpty(childTag.TagEnd))
+                return childTag.TagStart;
+            else if (string.IsNullOrEmpty(childTag.Content))
+                return string.Concat(childTag.TagStart, childTag.TagEnd);
+            else
+                return string.Concat(childTag.TagStart, childTag.Content, childTag.TagEnd);
+        }
+
+        private string RemoveUselessHtml(string html)
+        {
+            string htmlCleaned = string.Empty;
+            bool isBeginTag = false;
+            for (int i = 0; i < html.Length; i++)
+            {
+                char caracter = html[i];
+                if (caracter == '<')
+                    isBeginTag = true;
+                if (isBeginTag)
+                    htmlCleaned += caracter;
+            }
+            return htmlCleaned;
+        }
+
+        private List<TagModel> GetChildren()
+        {
+            var parent = _parents.Last();
+            _parents.RemoveAt(_parents.Count - 1);
+            if (_childrenWithParents.ContainsKey(parent))
+                return _childrenWithParents[parent];
+            else
+                return null;
         }
 
         public bool ValidateChildren()

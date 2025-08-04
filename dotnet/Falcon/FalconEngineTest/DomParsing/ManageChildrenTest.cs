@@ -16,7 +16,7 @@ namespace FalconEngineTest.DomParsing
         {
             var determinateChildren = TestFactory.InitDeterminateChildren();
 
-            var children = determinateChildren.Identify(HtmlData.ContentHeadSimple);
+            var children = determinateChildren.Identify(new TagModel(), HtmlData.ContentHeadSimple);
             bool areValid = determinateChildren.ValidateChildren();
 
             Assert.True(areValid);
@@ -88,7 +88,7 @@ namespace FalconEngineTest.DomParsing
             string html = "<head><test<title>Document</title></head>";
 
             var determinateChildren = TestFactory.InitDeterminateChildren();
-            var error = Assert.Throws<DeterminateChildrenException>(() => determinateChildren.Identify(html));
+            var error = Assert.Throws<DeterminateChildrenException>(() => determinateChildren.Identify(new TagModel(), html));
 
             Assert.Equal(error.Message, $"Error parsing for the children of  {html}");
             Assert.Equal(ErrorTypeParsing.children, error.ErrorType);
@@ -101,7 +101,7 @@ namespace FalconEngineTest.DomParsing
             var html = "<head><meta charset=\"UTF-8\"><title class=\"thetitle\">My Website</title></head>";
             var determinateChildren = TestFactory.InitDeterminateChildren();
 
-            determinateChildren.Identify(html);
+            determinateChildren.Identify(new TagModel(), html);
             bool isValid = determinateChildren.ValidateChildren();
 
             Assert.False(isValid);
@@ -113,9 +113,9 @@ namespace FalconEngineTest.DomParsing
             var html = "A simple text";
             var determinateChildren = TestFactory.InitDeterminateChildren();
 
-            var children = determinateChildren.Identify(html);
+            var children = determinateChildren.Identify(new TagModel(), html);
 
-            Assert.Empty(children);
+            Assert.Null(children);
         }
 
     }

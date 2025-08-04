@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using FalconEngine.CleanData;
+using FalconEngine.DomParsing.Parser;
+using FalconEngine.Models;
 using FalconEngineTest.Data;
 using FalconEngineTest.Utils;
 
@@ -54,9 +56,8 @@ namespace FalconEngineTest.CleanData
             Assert.Equal(htmlRemainingExpected, htmlRemaining);
         }
 
-        //head autour
         [Fact]
-        public void RemoveHtmlTags()
+        public void RemoveHeadTags()
         {
             string html = HtmlData.HeadSimple;
             var head = HtmlPageData.GetTagModel(TagData.html);
