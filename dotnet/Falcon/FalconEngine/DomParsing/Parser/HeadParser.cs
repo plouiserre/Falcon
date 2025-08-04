@@ -49,7 +49,7 @@ namespace FalconEngine.DomParsing.Parser
                 _html = html;
                 _html = CleanHtml();
                 _tag = _identifyTag.Analyze(_html);
-                _tag.Children = _manageChildrenTag.Identify(_tag.Content);
+                _tag.Children = _manageChildrenTag.Identify(_tag, _tag.Content);
                 return _tag;
             }
             catch (Exception ex)

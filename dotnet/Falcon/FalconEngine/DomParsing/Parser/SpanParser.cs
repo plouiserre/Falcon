@@ -29,7 +29,7 @@ namespace FalconEngine.DomParsing.Parser
         public override TagModel Parse(string html)
         {
             _tag = _identifyTag.Analyze(html);
-            _tag.Children = _manageChildrenTag.Identify(_tag.Content);
+            _tag.Children = _manageChildrenTag.Identify(_tag, _tag.Content);
             return _tag;
         }
     }

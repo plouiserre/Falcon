@@ -8,7 +8,7 @@ namespace FalconEngine.DomParsing
 {
     public interface IManageChildrenTag
     {
-        List<TagModel> Identify(string html);
+        List<TagModel> Identify(TagModel parent, string html);
         bool ValidateChildren();
     }
 }

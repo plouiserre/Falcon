@@ -22,7 +22,10 @@ namespace FalconEngine.DomParsing
         private IAttributeTagManager _attributeTagManager;
         private IList<ITagParser> _tagParsers;
         private string _html;
-        private List<TagModel> _children;
+        //private List<TagModel> _children;
+        private Dictionary<TagModel, List<TagModel>> _childrenWithParents;
+        private List<TagModel> _parents;
+        private TagModel _parent;
 
         public ManageChildrenTag(IDeleteUselessSpace deleteUselessSpace, IIdentifyTag identifyTag,
             IIdentifyStartTagEndTag identifyStartTagEndTag, IAttributeTagParser attributeTagParser,
@@ -36,10 +39,13 @@ namespace FalconEngine.DomParsing
             _determinateContent = determinateContent;
             _extractHtmlRemaining = extractHtmlRemaining;
             _attributeTagManager = attributeTagManager;
+            _parents = new List<TagModel>();
+            _childrenWithParents = new Dictionary<TagModel, List<TagModel>>();
         }
 
-        public List<TagModel> Identify(string html)
+        public List<TagModel> Identify(TagModel parent, string html)
         {
+            _parents.Add(parent);
             _html = html;
             try
             {
@@ -47,15 +53,16 @@ namespace FalconEngine.DomParsing
             }
             catch (NoStartTagException ex)
             {
-                return _children;
+                return GetChildren();
             }
             catch (Exception ex)
             {
                 throw new DeterminateChildrenException(ErrorTypeParsing.children, $"Error parsing for the children of  {html}");
             }
-            return _children;
+            return GetChildren();
         }
 
+        //TODO subdivise this method
         private void SearchChildren()
         {
             var initiateParser = new InitiateParser(_deleteUselessSpace, _identifyTag, _identitfyStartEndTag, _determinateContent, this, _attributeTagManager);
@@ -63,13 +70,15 @@ namespace FalconEngine.DomParsing
             _tagParsers = initiateParser.GetTagParsers(_html);
             if (_tagParsers != null && _tagParsers.Count > 0)
             {
-                _children = new List<TagModel>();
                 foreach (var parser in _tagParsers)
                 {
                     _html = RemoveUselessHtml();
                     var childTag = parser.Parse(_html);
                     string htmlToParse = ChildTagHtml(childTag);
-                    _children.Add(childTag);
+                    _parent = _parents.Last();
+                    if (!_childrenWithParents.ContainsKey(_parent))
+                        _childrenWithParents[_parent] = new List<TagModel>();
+                    _childrenWithParents[_parent].Add(childTag);
                     _html = _html.Replace(htmlToParse, string.Empty);
                 }
             }
@@ -98,6 +107,16 @@ namespace FalconEngine.DomParsing
                     htmlCleaned += caracter;
             }
             return htmlCleaned;
+        }
+
+        private List<TagModel> GetChildren()
+        {
+            var parent = _parents.Last();
+            _parents.RemoveAt(_parents.Count - 1);
+            if (_childrenWithParents.ContainsKey(parent))
+                return _childrenWithParents[parent];
+            else
+                return null;
         }
 
         public bool ValidateChildren()
