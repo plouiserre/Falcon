@@ -89,6 +89,8 @@ namespace FalconEngine.DomParsing
                     return new TitleParser(_identifyTag, _determinateContent);
                 case string tag when tag.ToLower().Contains("span"):
                     return new SpanParser(_identifyTag, _attributeTagManager, _manageChildrenTag, NameTagEnum.span);
+                case string tag when tag.ToLower().Contains("p"):
+                    return new PParser(_identifyTag, _manageChildrenTag, _attributeTagManager);
                 default:
                     return null;
             }

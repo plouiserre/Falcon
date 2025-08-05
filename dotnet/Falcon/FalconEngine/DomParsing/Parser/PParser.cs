@@ -13,8 +13,8 @@ namespace FalconEngine.DomParsing.Parser
         private IManageChildrenTag _manageChildrenTag;
 
         public PParser(IIdentifyTag identifyTag, IManageChildrenTag manageChildrenTag,
-                        IAttributeTagManager attributeTagManager, NameTagEnum nameTag) :
-                        base(attributeTagManager, nameTag)
+                        IAttributeTagManager attributeTagManager) :
+                        base(attributeTagManager, NameTagEnum.p)
         {
             _identifyTag = identifyTag;
             _manageChildrenTag = manageChildrenTag;

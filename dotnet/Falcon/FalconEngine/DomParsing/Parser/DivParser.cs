@@ -10,11 +10,13 @@ namespace FalconEngine.DomParsing.Parser
     public class DivParser : TagParser, ITagParser
     {
         private IdentifyTag _identifyTag;
+        private IManageChildrenTag _manageChildrenTag;
 
-        public DivParser(IAttributeTagManager attributeTagManager, IdentifyTag identifyTag) :
-                    base(attributeTagManager, NameTagEnum.div)
+        public DivParser(IdentifyTag identifyTag, IManageChildrenTag manageChildrenTag,
+            IAttributeTagManager attributeTagManager) : base(attributeTagManager, NameTagEnum.div)
         {
             _identifyTag = identifyTag;
+            _manageChildrenTag = manageChildrenTag;
         }
 
         public override bool IsValid()
@@ -27,6 +29,7 @@ namespace FalconEngine.DomParsing.Parser
         public override TagModel Parse(string html)
         {
             _tag = _identifyTag.Analyze(html);
+            _tag.Children = _manageChildrenTag.Identify(_tag, _tag.Content);
             return _tag;
         }
     }
