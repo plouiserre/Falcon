@@ -14,13 +14,14 @@ namespace FalconEngine.DomParsing
         private ITagParser _htmlParse;
         private ITagParser _headParse;
         private ITagParser _spanParse;
+        private ITagParser _pParse;
         private IExtractHtmlRemaining _extractHtmlRemaining;
         private IAttributeTagManager _attributeTagManager;
         private string _html;
 
         public HtmlParsing(ITagParser doctypeParse, ITagParser htmlParse, ITagParser headParse,
             IExtractHtmlRemaining extractHtmlRemaining, IAttributeTagManager attributeTagManager,
-            ITagParser spanParse)
+            ITagParser spanParse, ITagParser pParse)
         {
             _doctypeParse = doctypeParse;
             _htmlParse = htmlParse;
@@ -28,6 +29,7 @@ namespace FalconEngine.DomParsing
             _headParse = headParse;
             _attributeTagManager = attributeTagManager;
             _spanParse = spanParse;
+            _pParse = pParse;
         }
 
         //TODO reprendre le rendu de cette page avec els enfants et les tests
@@ -43,12 +45,7 @@ namespace FalconEngine.DomParsing
             var body = GetBodyTag();
             var divContent = GetDivContent();
             var firstP = GetFirstPContent();
-            var secondP = new TagModel()
-            {
-                NameTag = NameTagEnum.p,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = "Allez-vous apprécier mon article?"
-            };
+            var secondP = GetSecondPContent();
             var tags = new List<TagModel>() { doctypeTag, htmlTag, headTag, body, divContent, firstP, secondP };
 
             var htmlPage = new HtmlPage() { Tags = tags };
@@ -60,7 +57,6 @@ namespace FalconEngine.DomParsing
         private TagModel GetDoctypeTag()
         {
             var doctypeTag = _doctypeParse.Parse(_html);
-            //bool isValid = _doctypeParse.IsValid(doctypeTag);
             bool isValid = true;
             if (!isValid)
                 throw new Exception("Doctype tag is not valid!!!");
@@ -72,7 +68,6 @@ namespace FalconEngine.DomParsing
         private TagModel GetTagHtml()
         {
             var htmlTag = _htmlParse.Parse(_html);
-            // bool isValid = _htmlParse.IsValid(htmlTag);
             bool isValid = true;
             if (!isValid)
                 throw new Exception("Html tag is not valid!!!");
@@ -126,29 +121,19 @@ namespace FalconEngine.DomParsing
 
         private TagModel GetFirstPContent()
         {
-            var attributClass = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.classCss.ToString(), Value = "declarationText" };
             string contentHtml = @"Ceci est un <span> <a href=""declaration.html""> paragraphe </a> </span>";
-
-            var child = GetSpanParagraph();
-            var pTag = new TagModel()
-            {
-                Attributes = new List<AttributeModel>() { attributClass },
-                NameTag = NameTagEnum.p,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = contentHtml,
-                Children = new List<TagModel>() { child }
-            };
+            string html = string.Concat("<p class=\"declarationText\"> ", contentHtml, "</p>");
+            var pTag = _pParse.Parse(html);
 
             return pTag;
         }
 
-        private TagModel GetSpanParagraph()
+        private TagModel GetSecondPContent()
         {
-            string html = "<span> <a href=\"declaration.html\"> paragraphe </a> </span>";
+            string html = @"<p>Allez-vous apprécier mon article?</p>";
+            var pTag = _pParse.Parse(html);
 
-            var spanTag = _spanParse.Parse(html);
-
-            return spanTag;
+            return pTag;
         }
 
         private void RemoveUselessHtml(TagModel tag)

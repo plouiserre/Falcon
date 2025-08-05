@@ -50,7 +50,7 @@ namespace FalconEngineTest.Utils
 
         public static string FirstPHtmlSimple = string.Concat("<p class=\"declarationText\"> Ceci est un ", SpanA, "</p><p>Allez-vous apprécier mon article?</p>");
 
-        public static string SecondPHtmlSimple = @"Ceci est un <span> <a href=""declaration.html""> paragraphe </a> </span>";
+        public static string SecondPHtmlSimple = @" Ceci est un <span> <a href=""declaration.html""> paragraphe </a> </span>";
 
         public static string ThirdPHtmlSimple = "<p class=\"declarationText\"> Ceci est un <span><a href=\"declaration.html\">paragraphe</a></span></p>";
 
