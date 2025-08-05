@@ -45,12 +45,7 @@ namespace FalconEngineTest.Data
             var body = GetBodyTag();
             var divContent = GetDivContent();
             var firstP = GetFirstPContent();
-            var secondP = new TagModel()
-            {
-                NameTag = NameTagEnum.p,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = "Allez-vous apprécier mon article?"
-            };
+            var secondP = GetSecondPContent();
             var tags = new List<TagModel>() { _doctypeTag, _htmlTag, _headTag, body, divContent, firstP, secondP };
             _htmlPage = new HtmlPage() { Tags = tags };
             return _htmlPage;
@@ -169,10 +164,25 @@ namespace FalconEngineTest.Data
                 NameTag = NameTagEnum.p,
                 TagFamily = TagFamilyEnum.WithEnd,
                 Content = HtmlData.SecondPHtmlSimple,
-                Children = new List<TagModel>() { child }
+                Children = new List<TagModel>() { child },
+                TagStart = "<p class=\"declarationText\">",
+                TagEnd = "</p>"
             };
 
             return pTag;
+        }
+
+        private static TagModel GetSecondPContent()
+        {
+            var secondP = new TagModel()
+            {
+                NameTag = NameTagEnum.p,
+                TagFamily = TagFamilyEnum.WithEnd,
+                Content = "Allez-vous apprécier mon article?",
+                TagStart = "<p>",
+                TagEnd = "</p>"
+            };
+            return secondP;
         }
 
         private static TagModel GetSpanParagraph()
