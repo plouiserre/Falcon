@@ -85,17 +85,7 @@ namespace FalconEngine.DomParsing
 
         private TagModel GetBodyTag()
         {
-            string content = @"<div id=""content"">
-                                    <p class=""declarationText"">
-                                        Ceci est un 
-                                            <span>
-                                                <a href=""declaration.html"">
-                                                    paragraphe
-                                                </a>
-                                            </span>
-                                    </p>
-                                    <p>Allez-vous apprécier mon article?</p>
-                                </div>";
+            string content = @"<div id=""content""><p class=""declarationText""> Ceci est un <span><a href=""declaration.html"">paragraphe</a></span></p><p>Allez-vous apprécier mon article?</p></div>";
             var bodyTag = new TagModel()
             {
                 NameTag = NameTagEnum.body,

@@ -135,7 +135,7 @@ namespace FalconEngineTest.Data
             {
                 NameTag = NameTagEnum.body,
                 TagFamily = TagFamilyEnum.WithEnd,
-                Content = HtmlData.ContentBodyHtmlSimple
+                Content = HtmlData.DivContent
             };
             return bodyTag;
         }

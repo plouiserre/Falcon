@@ -21,21 +21,7 @@ namespace FalconEngineTest.Utils
 
         public static string HeadSimple = string.Concat("<head>", ContentHeadSimple, "</head>");
 
-
-
-        public static string ContentBodyHtmlSimple = @"<div id=""content"">
-                                    <p class=""declarationText"">
-                                        Ceci est un 
-                                            <span>
-                                                <a href=""declaration.html"">
-                                                    paragraphe
-                                                </a>
-                                            </span>
-                                    </p>
-                                    <p>Allez-vous apprécier mon article?</p>
-                                </div>";
-
-        public static string BodySimple = string.Concat("<body>", ContentBodyHtmlSimple, "</body>");
+        public static string BodySimple = string.Concat("<body>", DivContent, "</body>");
 
         public static string ContentHtmlSimpleWithSpace = string.Concat(HeadSimple, BodySimple);
 
@@ -55,6 +41,7 @@ namespace FalconEngineTest.Utils
         public static string ThirdPHtmlSimple = "<p class=\"declarationText\"> Ceci est un <span><a href=\"declaration.html\">paragraphe</a></span></p>";
 
         public static string FourthPHtmlSimple = "<p class=\"declarationText\"> Ceci est un <span><a href=\"declaration.html\">paragraphe</a></span><span class=\"red\">Et il raconte des supers trucs!!!</span></p>";
+        public static string DivContent = string.Concat("<div id=\"content\">", FirstPHtmlSimple, "</div>");
 
     }
 }
