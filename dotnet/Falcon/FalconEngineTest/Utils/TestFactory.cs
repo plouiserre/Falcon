@@ -47,7 +47,12 @@ namespace FalconEngineTest.Utils
         public static PParser InitPParser()
         {
             return new PParser(TestFactory.InitIdentifyTag(), TestFactory.InitDeterminateChildren(),
-                                TestFactory.InitAttributeTagManager(true), FalconEngine.Models.NameTagEnum.p);
+                                TestFactory.InitAttributeTagManager(true));
+        }
+
+        public static DivParser InitDivParser()
+        {
+            return new DivParser(InitIdentifyTag(), InitDeterminateChildren(), InitAttributeTagManager(true));
         }
 
         public static AttributeTagManager InitAttributeTagManager(bool isSettingAttributes)
@@ -112,6 +117,5 @@ namespace FalconEngineTest.Utils
             InitAttributeTagManager(false));
             return manageChildrenTag;
         }
-
     }
 }

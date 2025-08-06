@@ -136,5 +136,17 @@ namespace FalconEngineTest.DomParsing
             Assert.IsType<SpanParser>(parsers[0]);
         }
 
+        [Fact]
+        public void ShouldInitiateTwoParagraphs()
+        {
+            string html = "<p class=\"declarationText\"> Ceci est un <span><a href=\"declaration.html\">paragraphe</a></span></p><p>Allez-vous apprécier mon article?</p>";
+            var initiate = TestFactory.InitInitiateParser();
+
+            var parsers = initiate.GetTagParsers(html);
+
+            Assert.Equal(2, parsers.Count);
+            Assert.IsType<PParser>(parsers[0]);
+            Assert.IsType<PParser>(parsers[1]);
+        }
     }
 }

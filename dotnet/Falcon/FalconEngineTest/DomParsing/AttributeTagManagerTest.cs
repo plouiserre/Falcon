@@ -127,6 +127,33 @@ namespace FalconEngineTest.DomParsing
             AssertContains(attributes, FamilyAttributeEnum.dir);
         }
 
+        //TODO faire les tests pour span et p 
+
+        [Fact]
+        public void GetAllAttributesAcceptedDiv()
+        {
+            var attributeTagManager = new AttributeTagManager();
+
+            attributeTagManager.SetAttributes();
+
+            var attributes = attributeTagManager.GetAttributes(NameTagEnum.div);
+
+            Assert.Equal(13, attributes.Count);
+            AssertContains(attributes, FamilyAttributeEnum.id);
+            AssertContains(attributes, FamilyAttributeEnum.classCss);
+            AssertContains(attributes, FamilyAttributeEnum.style);
+            AssertContains(attributes, FamilyAttributeEnum.title);
+            AssertContains(attributes, FamilyAttributeEnum.lang);
+            AssertContains(attributes, FamilyAttributeEnum.dir);
+            AssertContains(attributes, FamilyAttributeEnum.hidden);
+            AssertContains(attributes, FamilyAttributeEnum.tabindex);
+            AssertContains(attributes, FamilyAttributeEnum.accesskey);
+            AssertContains(attributes, FamilyAttributeEnum.draggable);
+            AssertContains(attributes, FamilyAttributeEnum.contenteditable);
+            AssertContains(attributes, FamilyAttributeEnum.spellcheck);
+            AssertContains(attributes, FamilyAttributeEnum.data_);
+        }
+
         private void AssertContains(List<string> attributes, FamilyAttributeEnum family)
         {
             string value = family.ToString();
