@@ -15,13 +15,14 @@ namespace FalconEngine.DomParsing
         private ITagParser _headParse;
         private ITagParser _spanParse;
         private ITagParser _pParse;
+        private ITagParser _divParse;
         private IExtractHtmlRemaining _extractHtmlRemaining;
         private IAttributeTagManager _attributeTagManager;
         private string _html;
 
         public HtmlParsing(ITagParser doctypeParse, ITagParser htmlParse, ITagParser headParse,
             IExtractHtmlRemaining extractHtmlRemaining, IAttributeTagManager attributeTagManager,
-            ITagParser spanParse, ITagParser pParse)
+            ITagParser spanParse, ITagParser pParse, ITagParser divParse)
         {
             _doctypeParse = doctypeParse;
             _htmlParse = htmlParse;
@@ -30,6 +31,7 @@ namespace FalconEngine.DomParsing
             _attributeTagManager = attributeTagManager;
             _spanParse = spanParse;
             _pParse = pParse;
+            _divParse = divParse;
         }
 
         //TODO reprendre le rendu de cette page avec els enfants et les tests
@@ -97,15 +99,10 @@ namespace FalconEngine.DomParsing
 
         private TagModel GetDivContent()
         {
-            var attributId = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.id.ToString(), Value = "content" };
-            string content = @"<p class=""declarationText""> Ceci est un <span><a href=""declaration.html"">paragraphe</a></span></p><p>Allez-vous apprécier mon article?</p>";
-            var divTag = new TagModel()
-            {
-                Attributes = new List<AttributeModel>() { attributId },
-                NameTag = NameTagEnum.div,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = content
-            };
+            string contentHtml = @"<p class=""declarationText""> Ceci est un <span><a href=""declaration.html"">paragraphe</a></span></p><p>Allez-vous apprécier mon article?</p>";
+            string html = string.Concat("<div id=\"content\">", contentHtml, "</div>");
+            var divTag = _divParse.Parse(html);
+
             return divTag;
         }
 

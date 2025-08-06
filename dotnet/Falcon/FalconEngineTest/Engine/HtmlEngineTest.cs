@@ -28,8 +28,9 @@ namespace FalconEngineTest.Engine
             var headParser = new HeadParser(deleteUselessSpace, identifyTag, determinateChildren);
             var spanParse = new SpanParser(identifyTag, attributeTagManager, manageChildrenTag, NameTagEnum.span);
             var pParse = new PParser(identifyTag, manageChildrenTag, attributeTagManager);
+            var divParse = new DivParser(identifyTag, manageChildrenTag, attributeTagManager);
             _htmlParsing = new HtmlParsing(doctypeParser, htmlTagParser, headParser,
-                        extractHtmlRemaining, TestFactory.InitAttributeTagManager(true), spanParse, pParse);
+                        extractHtmlRemaining, TestFactory.InitAttributeTagManager(true), spanParse, pParse, divParse);
         }
 
         [Fact]
@@ -50,6 +51,10 @@ namespace FalconEngineTest.Engine
                 return false;
             for (int i = 0; i < allExpected.Count; i++)
             {
+                if (i == 4)
+                {
+                    var test = "aezf";
+                }
                 var expectedTag = allExpected[i];
                 var resultTag = results[i];
                 if (!CheckTagModel(expectedTag, resultTag))
