@@ -23,14 +23,7 @@ namespace FalconEngineTest.DomParsing.Parser
             var tagHtml = headParser.Parse(HtmlData.HeadSimple);
             bool isValid = headParser.IsValid();
 
-            Assert.Equal(NameTagEnum.head, tagHtml.NameTag);
-            Assert.Equal(HtmlData.ContentHeadSimple, tagHtml.Content);
-            Assert.Equal(TagFamilyEnum.WithEnd, tagHtml.TagFamily);
-            Assert.Equal("<head>", tagHtml.TagStart);
-            Assert.Equal("</head>", tagHtml.TagEnd);
-            Assert.NotNull(tagHtml.Children);
-
-            AssertHtml.AssertHead(tagHtml.Children);
+            AssertHtml.AssertHeader(tagHtml, HtmlData.ContentHeadSimple);
 
             Assert.True(isValid);
         }
@@ -45,14 +38,7 @@ namespace FalconEngineTest.DomParsing.Parser
             var tagHtml = headParser.Parse(htmlNotClean);
             bool isValid = headParser.IsValid();
 
-            Assert.Equal(NameTagEnum.head, tagHtml.NameTag);
-            Assert.Equal(content, tagHtml.Content);
-            Assert.Equal(TagFamilyEnum.WithEnd, tagHtml.TagFamily);
-            Assert.Equal("<head>", tagHtml.TagStart);
-            Assert.Equal("</head>", tagHtml.TagEnd);
-            Assert.NotNull(tagHtml.Children);
-
-            AssertHtml.AssertHead(tagHtml.Children);
+            AssertHtml.AssertHeader(tagHtml, content);
 
             Assert.True(isValid);
         }

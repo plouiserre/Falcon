@@ -16,12 +16,12 @@ namespace FalconEngineTest.DomParsing
         {
             var determinateChildren = TestFactory.InitDeterminateChildren();
 
-            var header = determinateChildren.Identify(new TagModel(), HtmlData.ContentHeadSimple);
+            var headerChildren = determinateChildren.Identify(new TagModel(), HtmlData.ContentHeadSimple);
             bool areValid = determinateChildren.ValidateChildren();
 
             Assert.True(areValid);
 
-            AssertHtml.AssertHead(header);
+            AssertHtml.AssertHeaderChildren(headerChildren);
         }
 
         [Fact]

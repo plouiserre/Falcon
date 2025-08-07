@@ -8,7 +8,19 @@ namespace FalconEngineTest.Utils
 {
     public static class AssertHtml
     {
-        public static void AssertHead(List<TagModel> contentHeader)
+        public static void AssertHeader(TagModel header, string contentHeader)
+        {
+            Assert.Equal(NameTagEnum.head, header.NameTag);
+            Assert.Equal(contentHeader, header.Content);
+            Assert.Equal(TagFamilyEnum.WithEnd, header.TagFamily);
+            Assert.Equal("<head>", header.TagStart);
+            Assert.Equal("</head>", header.TagEnd);
+            Assert.NotNull(header.Children);
+
+            AssertHeaderChildren(header.Children);
+        }
+
+        public static void AssertHeaderChildren(List<TagModel> contentHeader)
         {
             AssertMetaCharsetChild(contentHeader[0]);
 
@@ -19,7 +31,7 @@ namespace FalconEngineTest.Utils
             AssertLinkCss(contentHeader[3]);
         }
 
-        private static void AssertMetaCharsetChild(TagModel metaCharsetChild)
+        public static void AssertMetaCharsetChild(TagModel metaCharsetChild)
         {
             Assert.Equal(NameTagEnum.meta, metaCharsetChild.NameTag);
             Assert.Null(metaCharsetChild.Content);
@@ -31,7 +43,7 @@ namespace FalconEngineTest.Utils
             Assert.Null(metaCharsetChild.Children);
         }
 
-        private static void AssertMetaViewPortChild(TagModel metaViewPort)
+        public static void AssertMetaViewPortChild(TagModel metaViewPort)
         {
             Assert.Equal(NameTagEnum.meta, metaViewPort.NameTag);
             Assert.Null(metaViewPort.Content);
@@ -56,7 +68,7 @@ namespace FalconEngineTest.Utils
             Assert.Null(documentChild.Children);
         }
 
-        private static void AssertLinkCss(TagModel linkCss)
+        public static void AssertLinkCss(TagModel linkCss)
         {
             Assert.Equal(NameTagEnum.link, linkCss.NameTag);
             Assert.Null(linkCss.Content);
@@ -69,5 +81,73 @@ namespace FalconEngineTest.Utils
             Assert.Null(linkCss.TagEnd);
             Assert.Null(linkCss.Children);
         }
+
+        public static void AssertDivContent(TagModel div)
+        {
+            Assert.Equal(HtmlData.FirstPHtmlSimple, div.Content);
+            Assert.Single(div.Attributes);
+            Assert.Equal("id", div.Attributes[0].FamilyAttribute);
+            Assert.Equal("content", div.Attributes[0].Value);
+            Assert.Equal("<div id=\"content\">", div.TagStart);
+            Assert.Equal("</div>", div.TagEnd);
+            Assert.Equal(2, div.Children.Count);
+            Assert.Equal(TagFamilyEnum.WithEnd, div.TagFamily);
+            Assert.Equal(NameTagEnum.div, div.NameTag);
+
+            AssertPDeclarationText(div.Children[0]);
+            AssertPQuestion(div.Children[1]);
+        }
+
+        public static void AssertPDeclarationText(TagModel pDeclarationText)
+        {
+            Assert.Equal("<p class=\"declarationText\">", pDeclarationText.TagStart);
+            Assert.Equal("</p>", pDeclarationText.TagEnd);
+            Assert.Equal(TagFamilyEnum.WithEnd, pDeclarationText.TagFamily);
+            Assert.Equal(NameTagEnum.p, pDeclarationText.NameTag);
+            Assert.Equal(" Ceci est un <span><a href=\"declaration.html\">paragraphe</a></span>", pDeclarationText.Content);
+            Assert.Single(pDeclarationText.Attributes);
+            Assert.Equal("classCss", pDeclarationText.Attributes[0].FamilyAttribute);
+            Assert.Equal("declarationText", pDeclarationText.Attributes[0].Value);
+            Assert.Single(pDeclarationText.Children);
+
+            AssertSpanLinkParagraph(pDeclarationText.Children[0]);
+
+        }
+
+        public static void AssertSpanLinkParagraph(TagModel spanLink)
+        {
+            Assert.Equal("<span>", spanLink.TagStart);
+            Assert.Equal("</span>", spanLink.TagEnd);
+            Assert.Null(spanLink.Attributes);
+            Assert.Equal("<a href=\"declaration.html\">paragraphe</a>", spanLink.Content);
+            Assert.Equal(TagFamilyEnum.WithEnd, spanLink.TagFamily);
+            Assert.Equal(NameTagEnum.span, spanLink.NameTag);
+            Assert.Single(spanLink.Children);
+
+            AssertLinkDeclaration(spanLink.Children[0]);
+        }
+
+        public static void AssertLinkDeclaration(TagModel aLink)
+        {
+            Assert.Equal("<a href=\"declaration.html\">", aLink.TagStart);
+            Assert.Equal("</a>", aLink.TagEnd);
+            Assert.Equal("paragraphe", aLink.Content);
+            Assert.Equal(TagFamilyEnum.WithEnd, aLink.TagFamily);
+            Assert.Equal(NameTagEnum.a, aLink.NameTag);
+            Assert.Equal("href", aLink.Attributes[0].FamilyAttribute);
+            Assert.Equal("declaration.html", aLink.Attributes[0].Value);
+            Assert.Null(aLink.Children);
+        }
+
+        public static void AssertPQuestion(TagModel pQuestion)
+        {
+            Assert.Equal("<p>", pQuestion.TagStart);
+            Assert.Equal("</p>", pQuestion.TagEnd);
+            Assert.Equal(TagFamilyEnum.WithEnd, pQuestion.TagFamily);
+            Assert.Equal(NameTagEnum.p, pQuestion.NameTag);
+            Assert.Equal("Allez-vous apprécier mon article?", pQuestion.Content);
+            Assert.Null(pQuestion.Attributes);
+        }
+
     }
 }
