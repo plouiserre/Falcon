@@ -25,7 +25,6 @@ namespace FalconEngineTest.Utils
 
         public static string ContentHtmlSimpleWithSpace = string.Concat(HeadSimple, BodySimple);
 
-
         public static string HtmlSimpleWithSpace = string.Concat("<html lang=\"en\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\">", ContentHtmlSimpleWithSpace, "</html>");
 
         public static string HtmlSimpleWithSpaceDoctype = string.Concat("<!DOCTYPE html>", HtmlSimpleWithSpace);
@@ -36,11 +35,12 @@ namespace FalconEngineTest.Utils
 
         public static string FirstPHtmlSimple = string.Concat("<p class=\"declarationText\"> Ceci est un ", SpanA, "</p><p>Allez-vous apprécier mon article?</p>");
 
-        public static string SecondPHtmlSimple = @" Ceci est un <span> <a href=""declaration.html""> paragraphe </a> </span>";
+        public static string SecondPHtmlSimple = @" Ceci est un <span><a href=""declaration.html"">paragraphe</a></span>";
 
         public static string ThirdPHtmlSimple = "<p class=\"declarationText\"> Ceci est un <span><a href=\"declaration.html\">paragraphe</a></span></p>";
 
-        public static string FourthPHtmlSimple = "<p class=\"declarationText\"> Ceci est un <span><a href=\"declaration.html\">paragraphe</a></span><span class=\"red\">Et il raconte des supers trucs!!!</span></p>";
+        public static string spanRed = "<span class=\"red\">Et il raconte des supers trucs!!!</span>";
+        public static string PHtmlSimple = string.Concat("<p class=\"declarationText\">", SecondPHtmlSimple, spanRed, "</p>");
         public static string DivIdContent = string.Concat("<div id=\"content\">", FirstPHtmlSimple, "</div>");
 
     }

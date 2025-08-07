@@ -108,7 +108,7 @@ namespace FalconEngine.DomParsing
 
         private TagModel GetFirstPContent()
         {
-            string contentHtml = @"Ceci est un <span> <a href=""declaration.html""> paragraphe </a> </span>";
+            string contentHtml = @"Ceci est un <span><a href=""declaration.html"">paragraphe</a></span>";
             string html = string.Concat("<p class=\"declarationText\"> ", contentHtml, "</p>");
             var pTag = _pParse.Parse(html);
 

@@ -189,7 +189,7 @@ namespace FalconEngineTest.Data
 
         private static TagModel GetSpanParagraph()
         {
-            string contentHtml = " <a href=\"declaration.html\"> paragraphe </a> ";
+            string contentHtml = "<a href=\"declaration.html\">paragraphe</a>";
 
             var child = GetAParagraph();
 
@@ -212,7 +212,7 @@ namespace FalconEngineTest.Data
             {
                 NameTag = NameTagEnum.a,
                 TagFamily = TagFamilyEnum.WithEnd,
-                Content = " paragraphe ",
+                Content = "paragraphe",
                 TagStart = "<a href=\"declaration.html\">",
                 TagEnd = "</a>",
                 Attributes = new List<AttributeModel>()
