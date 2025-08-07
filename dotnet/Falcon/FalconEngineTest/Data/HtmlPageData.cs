@@ -165,7 +165,7 @@ namespace FalconEngineTest.Data
                 Attributes = new List<AttributeModel>() { attributClass },
                 NameTag = NameTagEnum.p,
                 TagFamily = TagFamilyEnum.WithEnd,
-                Content = HtmlData.SecondPHtmlSimple,
+                Content = HtmlData.ContentPHtmlSimple,
                 Children = new List<TagModel>() { child },
                 TagStart = "<p class=\"declarationText\">",
                 TagEnd = "</p>"
