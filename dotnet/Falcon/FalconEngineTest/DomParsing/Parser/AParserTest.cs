@@ -21,12 +21,7 @@ namespace FalconEngineTest.DomParsing.Parser
             bool isValid = aParser.IsValid();
 
             Assert.True(isValid);
-            Assert.Equal("paragraphe", tag.Content);
-            Assert.Single(tag.Attributes);
-            Assert.Equal("href", tag.Attributes[0].FamilyAttribute);
-            Assert.Equal("declaration.html", tag.Attributes[0].Value);
-            Assert.Equal("<a href=\"declaration.html\">", tag.TagStart);
-            Assert.Equal("</a>", tag.TagEnd);
+            AssertHtml.AssertLinkDeclaration(tag);
         }
 
         [Fact]

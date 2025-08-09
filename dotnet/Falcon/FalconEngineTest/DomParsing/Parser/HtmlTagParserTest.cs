@@ -14,14 +14,6 @@ namespace FalconEngineTest.DomParsing.Parser
 {
     public class HtmlTagParserTest
     {
-        private IdentifyTag _identifyTag;
-        private DeterminateContent _determinateContent;
-        public HtmlTagParserTest()
-        {
-            _identifyTag = TestFactory.InitIdentifyTag();
-            _determinateContent = TestFactory.InitDeterminateContent();
-        }
-
         [Fact]
         public void ParseSimpleHtmlOneLine()
         {
@@ -72,7 +64,6 @@ namespace FalconEngineTest.DomParsing.Parser
         [InlineData("<html id=\"root-html\" class=\"theme-light responsive\" style=\"background-color: #f0f0f0;\">Hello world</html>")]
         [InlineData("<html accesskey=\"h\" tabindex=\"0\" contenteditable=\"false\" draggable=\"false\" spellcheck=\"true\">\">Hello world</html>")]
         [InlineData("<html data-theme=\"dark\" data-user=\"admin\" data-page=\"home\">Hello world</html>")]
-        // [InlineData("<html hidden translate=\"no\" title=\"Page cachée\">Hello world</html>")]
         public void HtmlTagValidationIsTrue(string html)
         {
             var htmlTagParser = TestFactory.InitHtmlTagParser(true);

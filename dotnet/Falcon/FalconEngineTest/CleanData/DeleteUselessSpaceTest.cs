@@ -78,22 +78,6 @@ namespace FalconEngineTest.CleanData
         }
 
 
-
-        // [Fact]
-        // public void PurgeUselessCaractersInsideTagStartOnlyWithManyWords()
-        // {
-        //     string htmlNotClean = "<p  class=\"declaration blue\"     id=\"main\"  > Je suis ton père</p>            \r\n         ";
-
-        //     var cleaner = TestFactory.InitDeleteUselessSpace();
-
-        //     string htmlClean = cleaner.PurgeUselessCaractersAroundTag(htmlNotClean);
-
-        //     string htmlExpected = "<p class=\"declaration blue\" id=\"main\" > Je suis ton père</p>";
-        //     Assert.Equal(htmlExpected, htmlClean);
-        // }
-
-
-
         [Fact]
         public void NoPurgeUselessCaractersTagStartDoctype()
         {

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using FalconEngine.Models;
 using FalconEngineTest.Utils;
@@ -143,7 +144,7 @@ namespace FalconEngineTest.Data
         private static TagModel GetDivContent()
         {
             var attributId = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.id.ToString(), Value = "content" };
-            string content = HtmlData.FirstPHtmlSimple;
+            string content = string.Concat(HtmlData.PHtmlSimple, HtmlData.QuestionPHtml);
             var divTag = new TagModel()
             {
                 Attributes = new List<AttributeModel>() { attributId },
@@ -159,14 +160,15 @@ namespace FalconEngineTest.Data
         private static TagModel GetFirstPContent()
         {
             var attributClass = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.classCss.ToString(), Value = "declarationText" };
-            var child = GetSpanParagraph();
+            var childFirst = GetSpanParagraph();
+            var childSecond = GetSpanRed();
             var pTag = new TagModel()
             {
                 Attributes = new List<AttributeModel>() { attributClass },
                 NameTag = NameTagEnum.p,
                 TagFamily = TagFamilyEnum.WithEnd,
-                Content = HtmlData.SecondPHtmlSimple,
-                Children = new List<TagModel>() { child },
+                Content = string.Concat(HtmlData.ContentPHtmlSimple, HtmlData.spanRed),
+                Children = new List<TagModel>() { childFirst, childSecond },
                 TagStart = "<p class=\"declarationText\">",
                 TagEnd = "</p>"
             };
@@ -189,7 +191,7 @@ namespace FalconEngineTest.Data
 
         private static TagModel GetSpanParagraph()
         {
-            string contentHtml = " <a href=\"declaration.html\"> paragraphe </a> ";
+            string contentHtml = "<a href=\"declaration.html\">paragraphe</a>";
 
             var child = GetAParagraph();
 
@@ -206,13 +208,30 @@ namespace FalconEngineTest.Data
             return spanTag;
         }
 
+        private static TagModel GetSpanRed()
+        {
+            string contentHtml = "Et il raconte des supers trucs!!!";
+
+            var spanTag = new TagModel()
+            {
+                Attributes = new List<AttributeModel>() { new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.classCss.ToString(), Value = "red" } },
+                NameTag = NameTagEnum.span,
+                TagFamily = TagFamilyEnum.WithEnd,
+                Content = contentHtml,
+                TagStart = "<span class=\"red\">",
+                TagEnd = "</span>"
+            };
+
+            return spanTag;
+        }
+
         private static TagModel GetAParagraph()
         {
             var aTag = new TagModel()
             {
                 NameTag = NameTagEnum.a,
                 TagFamily = TagFamilyEnum.WithEnd,
-                Content = " paragraphe ",
+                Content = "paragraphe",
                 TagStart = "<a href=\"declaration.html\">",
                 TagEnd = "</a>",
                 Attributes = new List<AttributeModel>()

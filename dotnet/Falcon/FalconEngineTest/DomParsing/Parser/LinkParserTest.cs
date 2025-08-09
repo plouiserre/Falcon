@@ -21,19 +21,7 @@ namespace FalconEngineTest.DomParsing.Parser
 
             var tag = linkTagParser.Parse(html);
 
-            Assert.Equal(html, tag.TagStart);
-            Assert.Null(tag.TagEnd);
-            Assert.Equal(NameTagEnum.link, tag.NameTag);
-            Assert.Null(tag.Content);
-            Assert.Equal(TagFamilyEnum.NoEnd, tag.TagFamily);
-            Assert.Equal(3, tag.Attributes.Count);
-            Assert.Equal(FamilyAttributeEnum.rel.ToString(), tag.Attributes[0].FamilyAttribute);
-            Assert.Equal("stylesheet", tag.Attributes[0].Value);
-            Assert.Equal(FamilyAttributeEnum.href.ToString(), tag.Attributes[1].FamilyAttribute);
-            Assert.Equal("main.css", tag.Attributes[1].Value);
-            Assert.Equal("data-preload", tag.Attributes[2].FamilyAttribute);
-            Assert.Equal("true", tag.Attributes[2].Value);
-            Assert.Null(tag.Children);
+            AssertHtml.AssertLinkCss(tag);
         }
 
         [Theory]

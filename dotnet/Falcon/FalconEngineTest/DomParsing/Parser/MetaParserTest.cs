@@ -30,15 +30,7 @@ namespace FalconEngineTest.DomParsing.Parser
 
             var tag = _metaParser.Parse(html);
 
-            Assert.Equal(html, tag.TagStart);
-            Assert.Null(tag.TagEnd);
-            Assert.Equal(NameTagEnum.meta, tag.NameTag);
-            Assert.Null(tag.Content);
-            Assert.Equal(TagFamilyEnum.NoEnd, tag.TagFamily);
-            Assert.Single(tag.Attributes);
-            Assert.Equal(FamilyAttributeEnum.charset.ToString(), tag.Attributes[0].FamilyAttribute);
-            Assert.Equal("UTF-8", tag.Attributes[0].Value);
-            Assert.Null(tag.Children);
+            AssertHtml.AssertMetaCharsetChild(tag);
         }
 
         [Fact]
@@ -48,17 +40,7 @@ namespace FalconEngineTest.DomParsing.Parser
 
             var tag = _metaParser.Parse(html);
 
-            Assert.Equal(html, tag.TagStart);
-            Assert.Null(tag.TagEnd);
-            Assert.Equal(NameTagEnum.meta, tag.NameTag);
-            Assert.Null(tag.Content);
-            Assert.Equal(TagFamilyEnum.NoEnd, tag.TagFamily);
-            Assert.Equal(2, tag.Attributes.Count);
-            Assert.Equal(FamilyAttributeEnum.name.ToString(), tag.Attributes[0].FamilyAttribute);
-            Assert.Equal("viewport", tag.Attributes[0].Value);
-            Assert.Equal(FamilyAttributeEnum.content.ToString(), tag.Attributes[1].FamilyAttribute);
-            Assert.Equal("width=device-width, initial-scale=1.0", tag.Attributes[1].Value);
-            Assert.Null(tag.Children);
+            AssertHtml.AssertMetaViewPortChild(tag);
         }
 
         [Fact]
@@ -68,15 +50,7 @@ namespace FalconEngineTest.DomParsing.Parser
 
             var tag = _metaParser.Parse(HtmlData.ContentHeadSimple);
 
-            Assert.Equal(html, tag.TagStart);
-            Assert.Null(tag.TagEnd);
-            Assert.Equal(NameTagEnum.meta, tag.NameTag);
-            Assert.Null(tag.Content);
-            Assert.Equal(TagFamilyEnum.NoEnd, tag.TagFamily);
-            Assert.Single(tag.Attributes);
-            Assert.Equal(FamilyAttributeEnum.charset.ToString(), tag.Attributes[0].FamilyAttribute);
-            Assert.Equal("UTF-8", tag.Attributes[0].Value);
-            Assert.Null(tag.Children);
+            AssertHtml.AssertMetaCharsetChild(tag);
         }
 
         [Theory]
