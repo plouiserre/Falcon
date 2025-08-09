@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using FalconEngine.CleanData;
 using FalconEngine.DomParsing.Parser;
@@ -87,7 +88,7 @@ namespace FalconEngine.DomParsing
 
         private TagModel GetBodyTag()
         {
-            string content = @"<div id=""content""><p class=""declarationText""> Ceci est un <span><a href=""declaration.html"">paragraphe</a></span></p><p>Allez-vous apprécier mon article?</p></div>";
+            string content = "<div id=\"content\"><p class=\"declarationText\"> Ceci est un <span><a href=\"declaration.html\">paragraphe</a></span><span class=\"red\">Et il raconte des supers trucs!!!</span></p><p>Allez-vous apprécier mon article?</p></div>";
             var bodyTag = new TagModel()
             {
                 NameTag = NameTagEnum.body,
@@ -99,7 +100,7 @@ namespace FalconEngine.DomParsing
 
         private TagModel GetDivContent()
         {
-            string contentHtml = @"<p class=""declarationText""> Ceci est un <span><a href=""declaration.html"">paragraphe</a></span></p><p>Allez-vous apprécier mon article?</p>";
+            string contentHtml = "<p class=\"declarationText\"> Ceci est un <span><a href=\"declaration.html\">paragraphe</a></span><span class=\"red\">Et il raconte des supers trucs!!!</span></p><p>Allez-vous apprécier mon article?</p>";
             string html = string.Concat("<div id=\"content\">", contentHtml, "</div>");
             var divTag = _divParse.Parse(html);
 
@@ -108,7 +109,7 @@ namespace FalconEngine.DomParsing
 
         private TagModel GetFirstPContent()
         {
-            string contentHtml = @"Ceci est un <span><a href=""declaration.html"">paragraphe</a></span>";
+            string contentHtml = "Ceci est un <span><a href=\"declaration.html\">paragraphe</a></span><span class=\"red\">Et il raconte des supers trucs!!!</span>";
             string html = string.Concat("<p class=\"declarationText\"> ", contentHtml, "</p>");
             var pTag = _pParse.Parse(html);
 

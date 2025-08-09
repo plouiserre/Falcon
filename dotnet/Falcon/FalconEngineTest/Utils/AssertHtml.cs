@@ -84,7 +84,8 @@ namespace FalconEngineTest.Utils
 
         public static void AssertDivContent(TagModel div)
         {
-            Assert.Equal(HtmlData.FirstPHtmlSimple, div.Content);
+            string content = string.Concat(HtmlData.PHtmlSimple, HtmlData.QuestionPHtml);
+            Assert.Equal(content, div.Content);
             Assert.Single(div.Attributes);
             Assert.Equal("id", div.Attributes[0].FamilyAttribute);
             Assert.Equal("content", div.Attributes[0].Value);
@@ -104,11 +105,12 @@ namespace FalconEngineTest.Utils
             Assert.Equal("</p>", pDeclarationText.TagEnd);
             Assert.Equal(TagFamilyEnum.WithEnd, pDeclarationText.TagFamily);
             Assert.Equal(NameTagEnum.p, pDeclarationText.NameTag);
-            Assert.Equal(" Ceci est un <span><a href=\"declaration.html\">paragraphe</a></span>", pDeclarationText.Content);
+            //Assert.Equal(" Ceci est un <span><a href=\"declaration.html\">paragraphe</a></span>", pDeclarationText.Content);
+            Assert.Equal(" Ceci est un <span><a href=\"declaration.html\">paragraphe</a></span><span class=\"red\">Et il raconte des supers trucs!!!</span>", pDeclarationText.Content);
             Assert.Single(pDeclarationText.Attributes);
             Assert.Equal("classCss", pDeclarationText.Attributes[0].FamilyAttribute);
             Assert.Equal("declarationText", pDeclarationText.Attributes[0].Value);
-            Assert.Single(pDeclarationText.Children);
+            Assert.Equal(2, pDeclarationText.Children.Count);
 
             AssertSpanLinkParagraph(pDeclarationText.Children[0]);
 
