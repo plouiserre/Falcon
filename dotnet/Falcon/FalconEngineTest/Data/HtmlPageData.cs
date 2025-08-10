@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using FalconEngine.Models;
 using FalconEngineTest.Utils;
+using Xunit.Sdk;
 
 namespace FalconEngineTest.Data
 {
@@ -42,12 +43,7 @@ namespace FalconEngineTest.Data
         {
             _doctypeTag = GetDoctypeTag();
             _htmlTag = GetTagHtml();
-            _headTag = GetHeadTag();
-            var body = GetBodyTag();
-            var divContent = GetDivContent();
-            var firstP = GetFirstPContent();
-            var secondP = GetSecondPContent();
-            var tags = new List<TagModel>() { _doctypeTag, _htmlTag, _headTag, body, divContent, firstP, secondP };
+            var tags = new List<TagModel>() { _doctypeTag, _htmlTag };
             _htmlPage = new HtmlPage() { Tags = tags };
             return _htmlPage;
         }
@@ -68,6 +64,8 @@ namespace FalconEngineTest.Data
             var attributLang = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.lang.ToString(), Value = "en" };
             var attributDir = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.dir.ToString(), Value = "auto" };
             var attributXmlns = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.xmlns.ToString(), Value = "http://www.w3.org/1999/xhtml" };
+            _headTag = GetHeadTag();
+            var body = GetBodyTag();
             var htmlTag = new TagModel()
             {
                 Attributes = new List<AttributeModel>() { attributLang, attributDir, attributXmlns },
@@ -75,7 +73,8 @@ namespace FalconEngineTest.Data
                 TagFamily = TagFamilyEnum.WithEnd,
                 Content = HtmlData.ContentHtmlSimpleWithSpace,
                 TagStart = "<html lang=\"en\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\">",
-                TagEnd = "</html>"
+                TagEnd = "</html>",
+                Children = new List<TagModel>() { _headTag, body }
             };
             return htmlTag;
         }
@@ -132,11 +131,13 @@ namespace FalconEngineTest.Data
 
         private static TagModel GetBodyTag()
         {
+            var divContent = GetDivContent();
             var bodyTag = new TagModel()
             {
                 NameTag = NameTagEnum.body,
                 TagFamily = TagFamilyEnum.WithEnd,
-                Content = HtmlData.DivIdContent
+                Content = HtmlData.DivIdContent,
+                Children = new List<TagModel>() { divContent }
             };
             return bodyTag;
         }
@@ -145,6 +146,8 @@ namespace FalconEngineTest.Data
         {
             var attributId = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.id.ToString(), Value = "content" };
             string content = string.Concat(HtmlData.PHtmlSimple, HtmlData.QuestionPHtml);
+            var firstP = GetFirstPContent();
+            var secondP = GetSecondPContent();
             var divTag = new TagModel()
             {
                 Attributes = new List<AttributeModel>() { attributId },
@@ -152,7 +155,8 @@ namespace FalconEngineTest.Data
                 TagFamily = TagFamilyEnum.WithEnd,
                 Content = content,
                 TagStart = "<div id=\"content\">",
-                TagEnd = "</div>"
+                TagEnd = "</div>",
+                Children = new List<TagModel>() { firstP, secondP }
             };
             return divTag;
         }

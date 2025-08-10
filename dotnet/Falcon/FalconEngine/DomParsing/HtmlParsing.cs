@@ -44,12 +44,7 @@ namespace FalconEngine.DomParsing
             RemoveUselessHtml(doctypeTag);
             var htmlTag = GetTagHtml();
             RemoveTagOpenCloed(htmlTag);
-            var headTag = GetHeadTag();
-            var body = GetBodyTag();
-            var divContent = GetDivContent();
-            var firstP = GetFirstPContent();
-            var secondP = GetSecondPContent();
-            var tags = new List<TagModel>() { doctypeTag, htmlTag, headTag, body, divContent, firstP, secondP };
+            var tags = new List<TagModel>() { doctypeTag, htmlTag };
 
             var htmlPage = new HtmlPage() { Tags = tags };
             return htmlPage;
@@ -70,16 +65,20 @@ namespace FalconEngine.DomParsing
         //TODO c'est ici qu'il faut modifier pour gérer la validation!!!!
         private TagModel GetTagHtml()
         {
+            var body = GetBodyTag();
             var htmlTag = _htmlParse.Parse(_html);
+            string htmlInsideHtmlTag = _extractHtmlRemaining.Extract(htmlTag, _html, ExtractionMode.Inside);
+            var headTag = GetHeadTag(htmlInsideHtmlTag);
+            htmlTag.Children = new List<TagModel>() { headTag, body };
             bool isValid = true;
             if (!isValid)
                 throw new Exception("Html tag is not valid!!!");
             return htmlTag;
         }
 
-        private TagModel GetHeadTag()
+        private TagModel GetHeadTag(string htmlHeader)
         {
-            var headTag = _headParse.Parse(_html);
+            var headTag = _headParse.Parse(htmlHeader);
             bool isValid = _headParse.IsValid();
             if (!isValid)
                 throw new Exception("Head tag is not valid!!!");
@@ -89,11 +88,13 @@ namespace FalconEngine.DomParsing
         private TagModel GetBodyTag()
         {
             string content = "<div id=\"content\"><p class=\"declarationText\"> Ceci est un <span><a href=\"declaration.html\">paragraphe</a></span><span class=\"red\">Et il raconte des supers trucs!!!</span></p><p>Allez-vous apprécier mon article?</p></div>";
+            var divContent = GetDivContent();
             var bodyTag = new TagModel()
             {
                 NameTag = NameTagEnum.body,
                 TagFamily = TagFamilyEnum.WithEnd,
-                Content = content
+                Content = content,
+                Children = new List<TagModel>() { divContent }
             };
             return bodyTag;
         }
@@ -105,23 +106,6 @@ namespace FalconEngine.DomParsing
             var divTag = _divParse.Parse(html);
 
             return divTag;
-        }
-
-        private TagModel GetFirstPContent()
-        {
-            string contentHtml = "Ceci est un <span><a href=\"declaration.html\">paragraphe</a></span><span class=\"red\">Et il raconte des supers trucs!!!</span>";
-            string html = string.Concat("<p class=\"declarationText\"> ", contentHtml, "</p>");
-            var pTag = _pParse.Parse(html);
-
-            return pTag;
-        }
-
-        private TagModel GetSecondPContent()
-        {
-            string html = @"<p>Allez-vous apprécier mon article?</p>";
-            var pTag = _pParse.Parse(html);
-
-            return pTag;
         }
 
         private void RemoveUselessHtml(TagModel tag)
