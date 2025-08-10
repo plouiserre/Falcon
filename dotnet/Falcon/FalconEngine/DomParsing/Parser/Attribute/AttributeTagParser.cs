@@ -82,116 +82,9 @@ namespace FalconEngine.DomParsing.Parser.Attribute
 
         private string GetFamilyAttributeEnum(string key)
         {
-            bool parseIsOk = true;
             FamilyAttributeEnum familyAttribute = FamilyAttributeEnum.lang;
-            switch (key)
-            {
-                case "accesskey":
-                    familyAttribute = FamilyAttributeEnum.accesskey;
-                    break;
-                case "as":
-                    familyAttribute = FamilyAttributeEnum.asAttr;
-                    break;
-                case "charset":
-                    familyAttribute = FamilyAttributeEnum.charset;
-                    break;
-                case "class":
-                    familyAttribute = FamilyAttributeEnum.classCss;
-                    break;
-                case "content":
-                    familyAttribute = FamilyAttributeEnum.content;
-                    break;
-                case "contenteditable":
-                    familyAttribute = FamilyAttributeEnum.contenteditable;
-                    break;
-                case "dir":
-                    familyAttribute = FamilyAttributeEnum.dir;
-                    break;
-                case "disabled":
-                    familyAttribute = FamilyAttributeEnum.disabled;
-                    break;
-                case "download":
-                    familyAttribute = FamilyAttributeEnum.download;
-                    break;
-                case "draggable":
-                    familyAttribute = FamilyAttributeEnum.draggable;
-                    break;
-                case "hidden":
-                    familyAttribute = FamilyAttributeEnum.hidden;
-                    break;
-                case "href":
-                    familyAttribute = FamilyAttributeEnum.href;
-                    break;
-                case "http-equiv":
-                    familyAttribute = FamilyAttributeEnum.httpequiv;
-                    break;
-                case "id":
-                    familyAttribute = FamilyAttributeEnum.id;
-                    break;
-                case "integrity":
-                    familyAttribute = FamilyAttributeEnum.integrity;
-                    break;
-                case "lang":
-                    familyAttribute = FamilyAttributeEnum.lang;
-                    break;
-                case "manifest":
-                    familyAttribute = FamilyAttributeEnum.manifest;
-                    break;
-                case "name":
-                    familyAttribute = FamilyAttributeEnum.name;
-                    break;
-                case "referrerpolicy":
-                    familyAttribute = FamilyAttributeEnum.referrerpolicy;
-                    break;
-                case "rel":
-                    familyAttribute = FamilyAttributeEnum.rel;
-                    break;
-                case "role":
-                    familyAttribute = FamilyAttributeEnum.role;
-                    break;
-                case "sizes":
-                    familyAttribute = FamilyAttributeEnum.sizes;
-                    break;
-                case "spellcheck":
-                    familyAttribute = FamilyAttributeEnum.spellcheck;
-                    break;
-                case "style":
-                    familyAttribute = FamilyAttributeEnum.style;
-                    break;
-                case "tabindex":
-                    familyAttribute = FamilyAttributeEnum.tabindex;
-                    break;
-                case "target":
-                    familyAttribute = FamilyAttributeEnum.target;
-                    break;
-                case "translate":
-                    familyAttribute = FamilyAttributeEnum.translate;
-                    break;
-                case "xmlns":
-                    familyAttribute = FamilyAttributeEnum.xmlns;
-                    break;
-                case "scheme":
-                    familyAttribute = FamilyAttributeEnum.scheme;
-                    break;
-                case "title":
-                    familyAttribute = FamilyAttributeEnum.title;
-                    break;
-                case "type":
-                    familyAttribute = FamilyAttributeEnum.type;
-                    break;
-                case "media":
-                    familyAttribute = FamilyAttributeEnum.media;
-                    break;
-                case "hreflang":
-                    familyAttribute = FamilyAttributeEnum.hreflang;
-                    break;
-                case "crossorigin":
-                    familyAttribute = FamilyAttributeEnum.crossorigin;
-                    break;
-                default:
-                    parseIsOk = false;
-                    break;
-            }
+            key = ManageAttributsCssNeedTransformationBeforeConversationEnum(key);
+            bool parseIsOk = Enum.TryParse(key, out familyAttribute);
             string familyAttributeValue = string.Empty;
             if (!parseIsOk)
             {
@@ -203,6 +96,18 @@ namespace FalconEngine.DomParsing.Parser.Attribute
 
             familyAttributeValue = familyAttributeValue == string.Empty ? familyAttribute.ToString() : familyAttributeValue;
             return familyAttributeValue;
+        }
+
+        private string ManageAttributsCssNeedTransformationBeforeConversationEnum(string key)
+        {
+            if (key == "class")
+                return "classCss";
+            else if (key == "as")
+                return "asAttr";
+            else if (key == "http-equiv")
+                return "httpequiv";
+            else
+                return key;
         }
 
         public bool IsAttributePresent(string html)
