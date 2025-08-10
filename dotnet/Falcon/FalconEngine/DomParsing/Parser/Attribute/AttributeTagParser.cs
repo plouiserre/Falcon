@@ -82,248 +82,9 @@ namespace FalconEngine.DomParsing.Parser.Attribute
 
         private string GetFamilyAttributeEnum(string key)
         {
-            bool parseIsOk = true;
             FamilyAttributeEnum familyAttribute = FamilyAttributeEnum.lang;
-            switch (key)
-            {
-                case "accesskey":
-                    familyAttribute = FamilyAttributeEnum.accesskey;
-                    break;
-                case "as":
-                    familyAttribute = FamilyAttributeEnum.asAttr;
-                    break;
-                case "charset":
-                    familyAttribute = FamilyAttributeEnum.charset;
-                    break;
-                case "class":
-                    familyAttribute = FamilyAttributeEnum.classCss;
-                    break;
-                case "content":
-                    familyAttribute = FamilyAttributeEnum.content;
-                    break;
-                case "contenteditable":
-                    familyAttribute = FamilyAttributeEnum.contenteditable;
-                    break;
-                case "dir":
-                    familyAttribute = FamilyAttributeEnum.dir;
-                    break;
-                case "disabled":
-                    familyAttribute = FamilyAttributeEnum.disabled;
-                    break;
-                case "download":
-                    familyAttribute = FamilyAttributeEnum.download;
-                    break;
-                case "draggable":
-                    familyAttribute = FamilyAttributeEnum.draggable;
-                    break;
-                case "hidden":
-                    familyAttribute = FamilyAttributeEnum.hidden;
-                    break;
-                case "href":
-                    familyAttribute = FamilyAttributeEnum.href;
-                    break;
-                case "http-equiv":
-                    familyAttribute = FamilyAttributeEnum.httpequiv;
-                    break;
-                case "id":
-                    familyAttribute = FamilyAttributeEnum.id;
-                    break;
-                case "integrity":
-                    familyAttribute = FamilyAttributeEnum.integrity;
-                    break;
-                case "lang":
-                    familyAttribute = FamilyAttributeEnum.lang;
-                    break;
-                case "manifest":
-                    familyAttribute = FamilyAttributeEnum.manifest;
-                    break;
-                case "name":
-                    familyAttribute = FamilyAttributeEnum.name;
-                    break;
-                case "onclick":
-                    familyAttribute = FamilyAttributeEnum.onclick;
-                    break;
-                case "ondblclick":
-                    familyAttribute = FamilyAttributeEnum.ondblclick;
-                    break;
-                case "onmousedown":
-                    familyAttribute = FamilyAttributeEnum.onmousedown;
-                    break;
-                case "onmouseup":
-                    familyAttribute = FamilyAttributeEnum.onmouseup;
-                    break;
-                case "onmouseover":
-                    familyAttribute = FamilyAttributeEnum.onmouseover;
-                    break;
-                case "onmouseout":
-                    familyAttribute = FamilyAttributeEnum.onmouseout;
-                    break;
-                case "onmousemove":
-                    familyAttribute = FamilyAttributeEnum.onmousemove;
-                    break;
-                case "oncontextmenu":
-                    familyAttribute = FamilyAttributeEnum.oncontextmenu;
-                    break;
-                case "onmouseenter":
-                    familyAttribute = FamilyAttributeEnum.onmouseenter;
-                    break;
-                case "onmouseleave":
-                    familyAttribute = FamilyAttributeEnum.onmouseleave;
-                    break;
-                case "onkeydown":
-                    familyAttribute = FamilyAttributeEnum.onkeydown;
-                    break;
-                case "onkeypress":
-                    familyAttribute = FamilyAttributeEnum.onkeypress;
-                    break;
-                case "onkeyup":
-                    familyAttribute = FamilyAttributeEnum.onkeyup;
-                    break;
-                case "onfocus":
-                    familyAttribute = FamilyAttributeEnum.onfocus;
-                    break;
-                case "onblur":
-                    familyAttribute = FamilyAttributeEnum.onblur;
-                    break;
-                case "onchange":
-                    familyAttribute = FamilyAttributeEnum.onchange;
-                    break;
-                case "oninput":
-                    familyAttribute = FamilyAttributeEnum.oninput;
-                    break;
-                case "onselect":
-                    familyAttribute = FamilyAttributeEnum.onselect;
-                    break;
-                case "onsubmit":
-                    familyAttribute = FamilyAttributeEnum.onsubmit;
-                    break;
-                case "onreset":
-                    familyAttribute = FamilyAttributeEnum.onreset;
-                    break;
-                case "ondrag":
-                    familyAttribute = FamilyAttributeEnum.ondrag;
-                    break;
-                case "ondragstart":
-                    familyAttribute = FamilyAttributeEnum.ondragstart;
-                    break;
-                case "ondragend":
-                    familyAttribute = FamilyAttributeEnum.ondragend;
-                    break;
-                case "ondragenter":
-                    familyAttribute = FamilyAttributeEnum.ondragenter;
-                    break;
-                case "ondragover":
-                    familyAttribute = FamilyAttributeEnum.ondragover;
-                    break;
-                case "ondragleave":
-                    familyAttribute = FamilyAttributeEnum.ondragleave;
-                    break;
-                case "ondrop":
-                    familyAttribute = FamilyAttributeEnum.ondrop;
-                    break;
-                case "oncopy":
-                    familyAttribute = FamilyAttributeEnum.oncopy;
-                    break;
-                case "oncut":
-                    familyAttribute = FamilyAttributeEnum.oncut;
-                    break;
-                case "onpast":
-                    familyAttribute = FamilyAttributeEnum.onpast;
-                    break;
-                case "onplay":
-                    familyAttribute = FamilyAttributeEnum.onplay;
-                    break;
-                case "onpause":
-                    familyAttribute = FamilyAttributeEnum.onpause;
-                    break;
-                case "onended":
-                    familyAttribute = FamilyAttributeEnum.onended;
-                    break;
-                case "onvolumechange":
-                    familyAttribute = FamilyAttributeEnum.onvolumechange;
-                    break;
-                case "onwheel":
-                    familyAttribute = FamilyAttributeEnum.onwheel;
-                    break;
-                case "onscroll":
-                    familyAttribute = FamilyAttributeEnum.onscroll;
-                    break;
-                case "onresize":
-                    familyAttribute = FamilyAttributeEnum.onresize;
-                    break;
-                case "onerror":
-                    familyAttribute = FamilyAttributeEnum.onerror;
-                    break;
-                case "onoad":
-                    familyAttribute = FamilyAttributeEnum.onoad;
-                    break;
-                case "onunload":
-                    familyAttribute = FamilyAttributeEnum.onunload;
-                    break;
-                case "ontransitionend":
-                    familyAttribute = FamilyAttributeEnum.ontransitionend;
-                    break;
-                case "onanimationstart":
-                    familyAttribute = FamilyAttributeEnum.onanimationstart;
-                    break;
-                case "onanimationend":
-                    familyAttribute = FamilyAttributeEnum.onanimationend;
-                    break;
-                case "onanimationiteration":
-                    familyAttribute = FamilyAttributeEnum.onanimationiteration;
-                    break;
-                case "referrerpolicy":
-                    familyAttribute = FamilyAttributeEnum.referrerpolicy;
-                    break;
-                case "rel":
-                    familyAttribute = FamilyAttributeEnum.rel;
-                    break;
-                case "role":
-                    familyAttribute = FamilyAttributeEnum.role;
-                    break;
-                case "sizes":
-                    familyAttribute = FamilyAttributeEnum.sizes;
-                    break;
-                case "spellcheck":
-                    familyAttribute = FamilyAttributeEnum.spellcheck;
-                    break;
-                case "style":
-                    familyAttribute = FamilyAttributeEnum.style;
-                    break;
-                case "tabindex":
-                    familyAttribute = FamilyAttributeEnum.tabindex;
-                    break;
-                case "target":
-                    familyAttribute = FamilyAttributeEnum.target;
-                    break;
-                case "translate":
-                    familyAttribute = FamilyAttributeEnum.translate;
-                    break;
-                case "xmlns":
-                    familyAttribute = FamilyAttributeEnum.xmlns;
-                    break;
-                case "scheme":
-                    familyAttribute = FamilyAttributeEnum.scheme;
-                    break;
-                case "title":
-                    familyAttribute = FamilyAttributeEnum.title;
-                    break;
-                case "type":
-                    familyAttribute = FamilyAttributeEnum.type;
-                    break;
-                case "media":
-                    familyAttribute = FamilyAttributeEnum.media;
-                    break;
-                case "hreflang":
-                    familyAttribute = FamilyAttributeEnum.hreflang;
-                    break;
-                case "crossorigin":
-                    familyAttribute = FamilyAttributeEnum.crossorigin;
-                    break;
-                default:
-                    parseIsOk = false;
-                    break;
-            }
+            key = ManageAttributsCssNeedTransformationBeforeConversationEnum(key);
+            bool parseIsOk = Enum.TryParse(key, out familyAttribute);
             string familyAttributeValue = string.Empty;
             if (!parseIsOk)
             {
@@ -335,6 +96,18 @@ namespace FalconEngine.DomParsing.Parser.Attribute
 
             familyAttributeValue = familyAttributeValue == string.Empty ? familyAttribute.ToString() : familyAttributeValue;
             return familyAttributeValue;
+        }
+
+        private string ManageAttributsCssNeedTransformationBeforeConversationEnum(string key)
+        {
+            if (key == "class")
+                return "classCss";
+            else if (key == "as")
+                return "asAttr";
+            else if (key == "http-equiv")
+                return "httpequiv";
+            else
+                return key;
         }
 
         public bool IsAttributePresent(string html)
