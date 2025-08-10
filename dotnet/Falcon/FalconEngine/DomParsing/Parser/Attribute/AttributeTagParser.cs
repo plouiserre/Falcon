@@ -140,6 +140,138 @@ namespace FalconEngine.DomParsing.Parser.Attribute
                 case "name":
                     familyAttribute = FamilyAttributeEnum.name;
                     break;
+                case "onclick":
+                    familyAttribute = FamilyAttributeEnum.onclick;
+                    break;
+                case "ondblclick":
+                    familyAttribute = FamilyAttributeEnum.ondblclick;
+                    break;
+                case "onmousedown":
+                    familyAttribute = FamilyAttributeEnum.onmousedown;
+                    break;
+                case "onmouseup":
+                    familyAttribute = FamilyAttributeEnum.onmouseup;
+                    break;
+                case "onmouseover":
+                    familyAttribute = FamilyAttributeEnum.onmouseover;
+                    break;
+                case "onmouseout":
+                    familyAttribute = FamilyAttributeEnum.onmouseout;
+                    break;
+                case "onmousemove":
+                    familyAttribute = FamilyAttributeEnum.onmousemove;
+                    break;
+                case "oncontextmenu":
+                    familyAttribute = FamilyAttributeEnum.oncontextmenu;
+                    break;
+                case "onmouseenter":
+                    familyAttribute = FamilyAttributeEnum.onmouseenter;
+                    break;
+                case "onmouseleave":
+                    familyAttribute = FamilyAttributeEnum.onmouseleave;
+                    break;
+                case "onkeydown":
+                    familyAttribute = FamilyAttributeEnum.onkeydown;
+                    break;
+                case "onkeypress":
+                    familyAttribute = FamilyAttributeEnum.onkeypress;
+                    break;
+                case "onkeyup":
+                    familyAttribute = FamilyAttributeEnum.onkeyup;
+                    break;
+                case "onfocus":
+                    familyAttribute = FamilyAttributeEnum.onfocus;
+                    break;
+                case "onblur":
+                    familyAttribute = FamilyAttributeEnum.onblur;
+                    break;
+                case "onchange":
+                    familyAttribute = FamilyAttributeEnum.onchange;
+                    break;
+                case "oninput":
+                    familyAttribute = FamilyAttributeEnum.oninput;
+                    break;
+                case "onselect":
+                    familyAttribute = FamilyAttributeEnum.onselect;
+                    break;
+                case "onsubmit":
+                    familyAttribute = FamilyAttributeEnum.onsubmit;
+                    break;
+                case "onreset":
+                    familyAttribute = FamilyAttributeEnum.onreset;
+                    break;
+                case "ondrag":
+                    familyAttribute = FamilyAttributeEnum.ondrag;
+                    break;
+                case "ondragstart":
+                    familyAttribute = FamilyAttributeEnum.ondragstart;
+                    break;
+                case "ondragend":
+                    familyAttribute = FamilyAttributeEnum.ondragend;
+                    break;
+                case "ondragenter":
+                    familyAttribute = FamilyAttributeEnum.ondragenter;
+                    break;
+                case "ondragover":
+                    familyAttribute = FamilyAttributeEnum.ondragover;
+                    break;
+                case "ondragleave":
+                    familyAttribute = FamilyAttributeEnum.ondragleave;
+                    break;
+                case "ondrop":
+                    familyAttribute = FamilyAttributeEnum.ondrop;
+                    break;
+                case "oncopy":
+                    familyAttribute = FamilyAttributeEnum.oncopy;
+                    break;
+                case "oncut":
+                    familyAttribute = FamilyAttributeEnum.oncut;
+                    break;
+                case "onpast":
+                    familyAttribute = FamilyAttributeEnum.onpast;
+                    break;
+                case "onplay":
+                    familyAttribute = FamilyAttributeEnum.onplay;
+                    break;
+                case "onpause":
+                    familyAttribute = FamilyAttributeEnum.onpause;
+                    break;
+                case "onended":
+                    familyAttribute = FamilyAttributeEnum.onended;
+                    break;
+                case "onvolumechange":
+                    familyAttribute = FamilyAttributeEnum.onvolumechange;
+                    break;
+                case "onwheel":
+                    familyAttribute = FamilyAttributeEnum.onwheel;
+                    break;
+                case "onscroll":
+                    familyAttribute = FamilyAttributeEnum.onscroll;
+                    break;
+                case "onresize":
+                    familyAttribute = FamilyAttributeEnum.onresize;
+                    break;
+                case "onerror":
+                    familyAttribute = FamilyAttributeEnum.onerror;
+                    break;
+                case "onoad":
+                    familyAttribute = FamilyAttributeEnum.onoad;
+                    break;
+                case "onunload":
+                    familyAttribute = FamilyAttributeEnum.onunload;
+                    break;
+                case "ontransitionend":
+                    familyAttribute = FamilyAttributeEnum.ontransitionend;
+                    break;
+                case "onanimationstart":
+                    familyAttribute = FamilyAttributeEnum.onanimationstart;
+                    break;
+                case "onanimationend":
+                    familyAttribute = FamilyAttributeEnum.onanimationend;
+                    break;
+                case "onanimationiteration":
+                    familyAttribute = FamilyAttributeEnum.onanimationiteration;
+                    break;
                 case "referrerpolicy":
                     familyAttribute = FamilyAttributeEnum.referrerpolicy;
                     break;

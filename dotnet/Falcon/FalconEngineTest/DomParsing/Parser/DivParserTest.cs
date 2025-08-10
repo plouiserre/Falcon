@@ -12,7 +12,7 @@ namespace FalconEngineTest.DomParsing.Parser
         [Fact]
         public void ParseSimpleDivAndValidateIt()
         {
-            string html = "<div class=\"main\"> hello world!!!</div>";
+            string html = "<div class=\"main\" onclick=\"popup()\"> hello world!!!</div>";
 
             var divParser = TestFactory.InitDivParser();
 
@@ -21,10 +21,12 @@ namespace FalconEngineTest.DomParsing.Parser
 
             Assert.True(isValid);
             Assert.Equal(" hello world!!!", tag.Content);
-            Assert.Single(tag.Attributes);
+            Assert.Equal(2, tag.Attributes.Count);
             Assert.Equal("classCss", tag.Attributes[0].FamilyAttribute);
             Assert.Equal("main", tag.Attributes[0].Value);
-            Assert.Equal("<div class=\"main\">", tag.TagStart);
+            Assert.Equal("onclick", tag.Attributes[1].FamilyAttribute);
+            Assert.Equal("popup()", tag.Attributes[1].Value);
+            Assert.Equal("<div class=\"main\" onclick=\"popup()\">", tag.TagStart);
             Assert.Equal("</div>", tag.TagEnd);
         }
 
