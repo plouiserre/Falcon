@@ -65,7 +65,6 @@ namespace FalconEngine.DomParsing
 
         private void SetLinkAttributesAutorized()
         {
-
             SetGlobalAttributes(NameTagEnum.link);
             _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.accesskey);
             _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.asAttr);
@@ -92,6 +91,7 @@ namespace FalconEngine.DomParsing
         private void SetAAttributesAutorized()
         {
             SetGlobalAttributes(NameTagEnum.a);
+            SetOnEventAttribut(NameTagEnum.a);
             _allAttributesAutorizedByTag[NameTagEnum.a].Add(FamilyAttributeEnum.accesskey);
             _allAttributesAutorizedByTag[NameTagEnum.a].Add(FamilyAttributeEnum.dir);
             _allAttributesAutorizedByTag[NameTagEnum.a].Add(FamilyAttributeEnum.download);
@@ -110,6 +110,7 @@ namespace FalconEngine.DomParsing
         private void SetSpanAttributes()
         {
             SetGlobalAttributes(NameTagEnum.span);
+            SetOnEventAttribut(NameTagEnum.span);
         }
 
         private void SetPAttributes()
@@ -120,6 +121,7 @@ namespace FalconEngine.DomParsing
         private void SetDivAttributes()
         {
             SetGlobalAttributes(NameTagEnum.div);
+            SetOnEventAttribut(NameTagEnum.div);
             _allAttributesAutorizedByTag[NameTagEnum.div].Add(FamilyAttributeEnum.dir);
             _allAttributesAutorizedByTag[NameTagEnum.div].Add(FamilyAttributeEnum.hidden);
             _allAttributesAutorizedByTag[NameTagEnum.div].Add(FamilyAttributeEnum.tabindex);
@@ -137,6 +139,54 @@ namespace FalconEngine.DomParsing
             _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.lang);
             _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.style);
             _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.title);
+        }
+
+        private void SetOnEventAttribut(NameTagEnum nameTag)
+        {
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.onclick);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.ondblclick);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.onmousedown);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.onmouseup);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.onmouseover);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.onmouseout);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.onmousemove);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.oncontextmenu);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.onmouseenter);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.onmouseleave);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.onkeydown);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.onkeypress);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.onkeyup);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.onfocus);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.onblur);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.onchange);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.oninput);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.onselect);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.onsubmit);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.onreset);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.ondrag);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.ondragstart);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.ondragend);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.ondragenter);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.ondragover);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.ondragleave);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.ondrop);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.oncopy);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.oncut);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.onpast);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.onplay);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.onpause);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.onended);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.onvolumechange);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.onwheel);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.onscroll);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.onresize);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.onerror);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.onoad);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.onunload);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.ontransitionend);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.onanimationstart);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.onanimationend);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.onanimationiteration);
         }
     }
 }
