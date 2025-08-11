@@ -157,6 +157,31 @@ namespace FalconEngineTest.DomParsing
             AssertOnClickEvent(attributes);
         }
 
+        [Fact]
+        public void GetAllAttributesAcceptedBody()
+        {
+            var attributeTagManager = new AttributeTagManager();
+
+            attributeTagManager.SetAttributes();
+
+            var attributes = attributeTagManager.GetAttributes(NameTagEnum.body);
+
+            Assert.Equal(61, attributes.Count);
+            AssertContains(attributes, FamilyAttributeEnum.translate);
+            AssertContains(attributes, FamilyAttributeEnum.tabindex);
+            AssertContains(attributes, FamilyAttributeEnum.accesskey);
+            AssertContains(attributes, FamilyAttributeEnum.draggable);
+            AssertContains(attributes, FamilyAttributeEnum.hidden);
+            AssertContains(attributes, FamilyAttributeEnum.inert);
+            AssertContains(attributes, FamilyAttributeEnum.enterkeyhint);
+            AssertContains(attributes, FamilyAttributeEnum.inputmode);
+            AssertContains(attributes, FamilyAttributeEnum.isAttr);
+            AssertContains(attributes, FamilyAttributeEnum.popover);
+            AssertContains(attributes, FamilyAttributeEnum.data_);
+            AssertGlobalAttributes(attributes);
+            AssertOnClickEvent(attributes);
+        }
+
         private void AssertGlobalAttributes(List<string> attributes)
         {
             AssertContains(attributes, FamilyAttributeEnum.classCss);

@@ -21,8 +21,6 @@ namespace FalconEngineTest.Utils
 
         public static string HeadSimple = string.Concat("<head>", ContentHeadSimple, "</head>");
 
-        public static string BodySimple = string.Concat("<body>", DivIdContent, "</body>");
-
         public static string ContentHtmlSimpleWithSpace = string.Concat(HeadSimple, BodySimple);
 
         public static string HtmlSimpleWithSpace = string.Concat("<html lang=\"en\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\">", ContentHtmlSimpleWithSpace, "</html>");
@@ -43,6 +41,6 @@ namespace FalconEngineTest.Utils
         public static string spanRed = "<span class=\"red\">Et il raconte des supers trucs!!!</span>";
         public static string PHtmlSimple = string.Concat("<p class=\"declarationText\">", ContentPHtmlSimple, spanRed, "</p>");
         public static string DivIdContent = string.Concat("<div id=\"content\">", PHtmlSimple, QuestionPHtml, "</div>");
-
+        public static string BodySimple = string.Concat("<body class=\"main\">", DivIdContent, "</body>");
     }
 }

@@ -26,11 +26,8 @@ namespace FalconEngineTest.Engine
             var attributeTagManager = new AttributeTagManager();
             var manageChildrenTag = TestFactory.InitDeterminateChildren();
             var headParser = new HeadParser(deleteUselessSpace, identifyTag, determinateChildren);
-            var spanParse = new SpanParser(identifyTag, attributeTagManager, manageChildrenTag, NameTagEnum.span);
-            var pParse = new PParser(identifyTag, manageChildrenTag, attributeTagManager);
-            var divParse = new DivParser(identifyTag, manageChildrenTag, attributeTagManager);
-            _htmlParsing = new HtmlParsing(doctypeParser, htmlTagParser, headParser,
-                        extractHtmlRemaining, TestFactory.InitAttributeTagManager(true), spanParse, pParse, divParse);
+            var bodyParse = new BodyParser(identifyTag, manageChildrenTag, attributeTagManager);
+            _htmlParsing = new HtmlParsing(doctypeParser, htmlTagParser, headParser, extractHtmlRemaining, TestFactory.InitAttributeTagManager(true), bodyParse);
         }
 
         [Fact]

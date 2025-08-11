@@ -106,6 +106,8 @@ namespace FalconEngine.DomParsing.Parser.Attribute
                 return "asAttr";
             else if (key == "http-equiv")
                 return "httpequiv";
+            else if (key == "is")
+                return "isAttr";
             else
                 return key;
         }

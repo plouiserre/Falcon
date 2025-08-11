@@ -82,6 +82,18 @@ namespace FalconEngineTest.Utils
             Assert.Null(linkCss.Children);
         }
 
+        public static void AssertBodyClassMain(TagModel body)
+        {
+            Assert.Equal(NameTagEnum.body, body.NameTag);
+            Assert.Equal(TagFamilyEnum.WithEnd, body.TagFamily);
+            Assert.Equal("<body class=\"main\">", body.TagStart);
+            Assert.Equal("</body>", body.TagEnd);
+            Assert.Equal("classCss", body.Attributes[0].FamilyAttribute);
+            Assert.Equal("main", body.Attributes[0].Value);
+            Assert.Equal(HtmlData.DivIdContent, body.Content);
+            AssertDivContent(body.Children[0]);
+        }
+
         public static void AssertDivContent(TagModel div)
         {
             string content = string.Concat(HtmlData.PHtmlSimple, HtmlData.QuestionPHtml);

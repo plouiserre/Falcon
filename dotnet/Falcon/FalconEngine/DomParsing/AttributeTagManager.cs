@@ -21,6 +21,7 @@ namespace FalconEngine.DomParsing
             _allAttributesAutorizedByTag[NameTagEnum.span] = new List<FamilyAttributeEnum>();
             _allAttributesAutorizedByTag[NameTagEnum.p] = new List<FamilyAttributeEnum>();
             _allAttributesAutorizedByTag[NameTagEnum.div] = new List<FamilyAttributeEnum>();
+            _allAttributesAutorizedByTag[NameTagEnum.body] = new List<FamilyAttributeEnum>();
         }
 
         public List<string> GetAttributes(NameTagEnum tag)
@@ -37,6 +38,7 @@ namespace FalconEngine.DomParsing
             SetSpanAttributes();
             SetPAttributes();
             SetDivAttributes();
+            SetBodyAttributes();
         }
 
         private void SetHtmlAttributesAutorized()
@@ -129,6 +131,23 @@ namespace FalconEngine.DomParsing
             _allAttributesAutorizedByTag[NameTagEnum.div].Add(FamilyAttributeEnum.draggable);
             _allAttributesAutorizedByTag[NameTagEnum.div].Add(FamilyAttributeEnum.contenteditable);
             _allAttributesAutorizedByTag[NameTagEnum.div].Add(FamilyAttributeEnum.spellcheck);
+        }
+
+        private void SetBodyAttributes()
+        {
+            SetGlobalAttributes(NameTagEnum.body);
+            SetOnEventAttribut(NameTagEnum.body);
+            _allAttributesAutorizedByTag[NameTagEnum.body].Add(FamilyAttributeEnum.translate);
+            _allAttributesAutorizedByTag[NameTagEnum.body].Add(FamilyAttributeEnum.tabindex);
+            _allAttributesAutorizedByTag[NameTagEnum.body].Add(FamilyAttributeEnum.accesskey);
+            _allAttributesAutorizedByTag[NameTagEnum.body].Add(FamilyAttributeEnum.draggable);
+            _allAttributesAutorizedByTag[NameTagEnum.body].Add(FamilyAttributeEnum.hidden);
+            _allAttributesAutorizedByTag[NameTagEnum.body].Add(FamilyAttributeEnum.inert);
+            _allAttributesAutorizedByTag[NameTagEnum.body].Add(FamilyAttributeEnum.enterkeyhint);
+            _allAttributesAutorizedByTag[NameTagEnum.body].Add(FamilyAttributeEnum.inputmode);
+            _allAttributesAutorizedByTag[NameTagEnum.body].Add(FamilyAttributeEnum.isAttr);
+            _allAttributesAutorizedByTag[NameTagEnum.body].Add(FamilyAttributeEnum.popover);
+            _allAttributesAutorizedByTag[NameTagEnum.body].Add(FamilyAttributeEnum.data_);
         }
 
         private void SetGlobalAttributes(NameTagEnum nameTag)
