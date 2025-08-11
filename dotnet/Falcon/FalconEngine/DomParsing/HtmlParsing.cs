@@ -14,7 +14,7 @@ namespace FalconEngine.DomParsing
         private ITagParser _doctypeParse;
         private ITagParser _htmlParse;
         private ITagParser _headParse;
-        private ITagParser _spanParse;
+        private ITagParser _bodyParse;
         private ITagParser _pParse;
         private ITagParser _divParse;
         private IExtractHtmlRemaining _extractHtmlRemaining;
@@ -23,16 +23,14 @@ namespace FalconEngine.DomParsing
 
         public HtmlParsing(ITagParser doctypeParse, ITagParser htmlParse, ITagParser headParse,
             IExtractHtmlRemaining extractHtmlRemaining, IAttributeTagManager attributeTagManager,
-            ITagParser spanParse, ITagParser pParse, ITagParser divParse)
+            ITagParser bodyParse)
         {
             _doctypeParse = doctypeParse;
             _htmlParse = htmlParse;
             _extractHtmlRemaining = extractHtmlRemaining;
             _headParse = headParse;
             _attributeTagManager = attributeTagManager;
-            _spanParse = spanParse;
-            _pParse = pParse;
-            _divParse = divParse;
+            _bodyParse = bodyParse;
         }
 
         //TODO reprendre le rendu de cette page avec els enfants et les tests
@@ -88,24 +86,9 @@ namespace FalconEngine.DomParsing
         private TagModel GetBodyTag()
         {
             string content = "<div id=\"content\"><p class=\"declarationText\"> Ceci est un <span><a href=\"declaration.html\">paragraphe</a></span><span class=\"red\">Et il raconte des supers trucs!!!</span></p><p>Allez-vous apprécier mon article?</p></div>";
-            var divContent = GetDivContent();
-            var bodyTag = new TagModel()
-            {
-                NameTag = NameTagEnum.body,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = content,
-                Children = new List<TagModel>() { divContent }
-            };
+            string html = string.Concat("<body>", content, "</body>");
+            var bodyTag = _bodyParse.Parse(html);
             return bodyTag;
-        }
-
-        private TagModel GetDivContent()
-        {
-            string contentHtml = "<p class=\"declarationText\"> Ceci est un <span><a href=\"declaration.html\">paragraphe</a></span><span class=\"red\">Et il raconte des supers trucs!!!</span></p><p>Allez-vous apprécier mon article?</p>";
-            string html = string.Concat("<div id=\"content\">", contentHtml, "</div>");
-            var divTag = _divParse.Parse(html);
-
-            return divTag;
         }
 
         private void RemoveUselessHtml(TagModel tag)

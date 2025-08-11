@@ -38,5 +38,20 @@ namespace FalconEngineTest.DomParsing.Parser
             Assert.Equal("world-count", html.Attributes[0].Value);
             Assert.True(isValid);
         }
+
+        [Fact]
+        public void ParseBodyParseAndFailValidation()
+        {
+            string body = "<body contenteditable=\"false\">Hello World!!!</body>";
+            var bodyParser = TestFactory.InitBodyParser();
+
+            bodyParser.Parse(body);
+            bool isValid = bodyParser.IsValid();
+
+            Assert.False(isValid);
+        }
+
+
+
     }
 }
