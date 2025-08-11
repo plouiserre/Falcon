@@ -7,13 +7,12 @@ using FalconEngine.Models;
 
 namespace FalconEngine.DomParsing.Parser
 {
-    public class DivParser : TagParser, ITagParser
+    public class BodyParser : TagParser, ITagParser
     {
         private IIdentifyTag _identifyTag;
         private IManageChildrenTag _manageChildrenTag;
-
-        public DivParser(IIdentifyTag identifyTag, IManageChildrenTag manageChildrenTag,
-            IAttributeTagManager attributeTagManager) : base(attributeTagManager, NameTagEnum.div)
+        public BodyParser(IIdentifyTag identifyTag, IManageChildrenTag manageChildrenTag, IAttributeTagManager attributeTagManager) :
+                base(attributeTagManager, NameTagEnum.body)
         {
             _identifyTag = identifyTag;
             _manageChildrenTag = manageChildrenTag;

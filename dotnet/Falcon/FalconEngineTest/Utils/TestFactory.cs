@@ -7,6 +7,7 @@ using FalconEngine.DomParsing;
 using FalconEngine.DomParsing.IdentifyTagParsing;
 using FalconEngine.DomParsing.Parser;
 using FalconEngine.DomParsing.Parser.Attribute;
+using FalconEngine.Models;
 
 namespace FalconEngineTest.Utils
 {
@@ -41,7 +42,7 @@ namespace FalconEngineTest.Utils
         public static SpanParser InitSpanParser()
         {
             return new SpanParser(TestFactory.InitIdentifyTag(), TestFactory.InitAttributeTagManager(true),
-                            TestFactory.InitDeterminateChildren(), FalconEngine.Models.NameTagEnum.span);
+                            TestFactory.InitDeterminateChildren(), NameTagEnum.span);
         }
 
         public static PParser InitPParser()
@@ -53,6 +54,11 @@ namespace FalconEngineTest.Utils
         public static DivParser InitDivParser()
         {
             return new DivParser(InitIdentifyTag(), InitDeterminateChildren(), InitAttributeTagManager(true));
+        }
+
+        public static BodyParser InitBodyParser()
+        {
+            return new BodyParser(InitIdentifyTag(), InitDeterminateChildren(), InitAttributeTagManager(true));
         }
 
         public static AttributeTagManager InitAttributeTagManager(bool isSettingAttributes)
