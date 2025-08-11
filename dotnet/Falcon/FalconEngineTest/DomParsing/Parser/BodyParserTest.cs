@@ -21,5 +21,22 @@ namespace FalconEngineTest.DomParsing.Parser
             AssertHtml.AssertBodyClassMain(html);
             Assert.True(isValid);
         }
+
+        [Fact]
+        public void ParseBodyWithIsAttributAndValidate()
+        {
+            string body = "<body is=\"world-count\">Hello World!!!</body>";
+            var bodyParser = TestFactory.InitBodyParser();
+
+            var html = bodyParser.Parse(body);
+            bool isValid = bodyParser.IsValid();
+
+            Assert.Equal("<body is=\"world-count\">", html.TagStart);
+            Assert.Equal("</body>", html.TagEnd);
+            Assert.Equal("Hello World!!!", html.Content);
+            Assert.Equal("isAttr", html.Attributes[0].FamilyAttribute);
+            Assert.Equal("world-count", html.Attributes[0].Value);
+            Assert.True(isValid);
+        }
     }
 }

@@ -59,13 +59,20 @@ namespace FalconEngineTest.CleanData
         [Fact]
         public void RemoveHeadTags()
         {
-            string html = HtmlData.HeadSimple;
-            var head = HtmlPageData.GetTagModel(TagData.html);
+            string html = HtmlData.HtmlSimple;
+            var htmlTag = new TagModel()
+            {
+                TagStart = "<html lang=\"en\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\">",
+                TagEnd = "</html>",
+                TagFamily = TagFamilyEnum.WithEnd
+            };
+            string content = html.Replace(htmlTag.TagStart, string.Empty).Replace(htmlTag.TagEnd, string.Empty);
+            htmlTag.Content = content;
             var extraction = new ExtractHtmlRemaining();
 
-            var htmlRemaining = extraction.Extract(head, html, ExtractionMode.Inside);
+            var htmlRemaining = extraction.Extract(htmlTag, html, ExtractionMode.Inside);
 
-            Assert.Equal(string.Concat(HtmlData.HeadSimple, HtmlData.BodySimple), htmlRemaining);
+            Assert.Equal(content, htmlRemaining);
         }
     }
 }
