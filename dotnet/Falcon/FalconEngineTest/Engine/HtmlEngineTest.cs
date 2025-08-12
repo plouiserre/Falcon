@@ -33,7 +33,7 @@ namespace FalconEngineTest.Engine
         [Fact]
         public void IsSimplePageIsAnalyzedCorrectly()
         {
-            HtmlPage htmlPage = HtmlPageData.InitHtmlPage();
+            HtmlPage htmlPage = SimulateParsingSimplePage.InitHtmlPage();
             var engine = new HtmlEngine(_htmlParsing);
 
             var engineResult = engine.Calculate(HtmlData.HtmlSimpleWithSpaceDoctype);
