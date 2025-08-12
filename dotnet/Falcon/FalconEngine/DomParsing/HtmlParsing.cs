@@ -59,36 +59,13 @@ namespace FalconEngine.DomParsing
             return doctypeTag;
         }
 
-        //TODO ajouter des tests
-        //TODO c'est ici qu'il faut modifier pour gérer la validation!!!!
         private TagModel GetTagHtml()
         {
-            var body = GetBodyTag();
             var htmlTag = _htmlParse.Parse(_html);
-            string htmlInsideHtmlTag = _extractHtmlRemaining.Extract(htmlTag, _html, ExtractionMode.Inside);
-            var headTag = GetHeadTag(htmlInsideHtmlTag);
-            htmlTag.Children = new List<TagModel>() { headTag, body };
             bool isValid = true;
             if (!isValid)
                 throw new Exception("Html tag is not valid!!!");
             return htmlTag;
-        }
-
-        private TagModel GetHeadTag(string htmlHeader)
-        {
-            var headTag = _headParse.Parse(htmlHeader);
-            bool isValid = _headParse.IsValid();
-            if (!isValid)
-                throw new Exception("Head tag is not valid!!!");
-            return headTag;
-        }
-
-        private TagModel GetBodyTag()
-        {
-            string content = "<div id=\"content\"><p class=\"declarationText\"> Ceci est un <span><a href=\"declaration.html\">paragraphe</a></span><span class=\"red\">Et il raconte des supers trucs!!!</span></p><p>Allez-vous apprécier mon article?</p></div>";
-            string html = string.Concat("<body>", content, "</body>");
-            var bodyTag = _bodyParse.Parse(html);
-            return bodyTag;
         }
 
         private void RemoveUselessHtml(TagModel tag)

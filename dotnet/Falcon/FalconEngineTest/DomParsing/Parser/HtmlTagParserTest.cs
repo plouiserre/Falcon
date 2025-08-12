@@ -103,7 +103,5 @@ namespace FalconEngineTest.DomParsing.Parser
             Assert.Single(tag.Children);
             AssertHtml.AssertDivContent(tag.Children[0]);
         }
-
-        //TODO ajouter un test avec HtmlSimpleWithSpaceDoctype
     }
 }
