@@ -22,13 +22,14 @@ namespace FalconEngineTest.DomParsing
         [Fact]
         public void ShouldInitiateHtmlParser()
         {
-            string html = HtmlData.HtmlSimple;
+            string html = HtmlData.HtmlSimpleWithSpaceDoctype;
             var initiate = TestFactory.InitInitiateParser();
 
             var parsers = initiate.GetTagParsers(html);
 
-            Assert.Single(parsers);
-            Assert.IsType<HtmlTagParser>(parsers[0]);
+            Assert.Equal(2, parsers.Count);
+            Assert.IsType<DoctypeParser>(parsers[0]);
+            Assert.IsType<HtmlTagParser>(parsers[1]);
         }
 
         [Fact]
