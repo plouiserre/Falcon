@@ -78,7 +78,7 @@ namespace FalconEngine.DomParsing
                 case string tag when tag.ToLower().Contains("doctype"):
                     return new DoctypeParser(_identifyTag);
                 case string tag when tag.ToLower().Contains("html"):
-                    return new HtmlTagParser(_identifyTag, _determinateContent, _attributeTagManager);
+                    return new HtmlTagParser(_identifyTag, _manageChildrenTag, _attributeTagManager);
                 case string tag when tag.ToLower().Contains("head"):
                     return new HeadParser(_deleteUselessSpace, _identifyTag, _manageChildrenTag);
                 case string tag when tag.ToLower().Contains("meta"):
@@ -93,6 +93,8 @@ namespace FalconEngine.DomParsing
                     return new PParser(_identifyTag, _manageChildrenTag, _attributeTagManager);
                 case string tag when tag.ToLower().Contains("div"):
                     return new DivParser(_identifyTag, _manageChildrenTag, _attributeTagManager);
+                case string tag when tag.ToLower().Contains("body"):
+                    return new BodyParser(_identifyTag, _manageChildrenTag, _attributeTagManager);
                 default:
                     return null;
             }

@@ -12,19 +12,20 @@ using FalconEngineTest.Utils;
 
 namespace FalconEngineTest.DomParsing.Parser
 {
+    //TODO revoir ces tests
     public class HtmlTagParserTest
     {
         [Fact]
         public void ParseSimpleHtmlOneLine()
         {
-            string html = HtmlData.HtmlSimple;
+            string html = HtmlData.HtmlSimpleWithSpace;
             var htmlTagParser = TestFactory.InitHtmlTagParser(true);
 
             var tagHtml = htmlTagParser.Parse(html);
             bool isValid = htmlTagParser.IsValid();
 
             Assert.Equal(NameTagEnum.html, tagHtml.NameTag);
-            Assert.Equal(HtmlData.ContentHtmlSimple, tagHtml.Content);
+            Assert.Equal(HtmlData.ContentHtmlSimpleWithSpace, tagHtml.Content);
             Assert.Equal(TagFamilyEnum.WithEnd, tagHtml.TagFamily);
             Assert.True(isValid);
         }
@@ -84,5 +85,25 @@ namespace FalconEngineTest.DomParsing.Parser
 
             Assert.False(isValid);
         }
+
+        [Fact]
+        public void HtmlTagWithChildrenIsParsedAndOk()
+        {
+            var html = string.Concat("<html>", HtmlData.DivIdContent, "</html>");
+            var htmlTagParser = TestFactory.InitHtmlTagParser(true);
+
+            var tag = htmlTagParser.Parse(html);
+            bool isValid = htmlTagParser.IsValid();
+
+            Assert.True(isValid);
+            Assert.Equal("<html>", tag.TagStart);
+            Assert.Equal("</html>", tag.TagEnd);
+            Assert.Equal(TagFamilyEnum.WithEnd, tag.TagFamily);
+            Assert.Equal(HtmlData.DivIdContent, tag.Content);
+            Assert.Single(tag.Children);
+            AssertHtml.AssertDivContent(tag.Children[0]);
+        }
+
+        //TODO ajouter un test avec HtmlSimpleWithSpaceDoctype
     }
 }

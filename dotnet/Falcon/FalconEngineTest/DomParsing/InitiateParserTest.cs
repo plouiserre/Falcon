@@ -22,7 +22,7 @@ namespace FalconEngineTest.DomParsing
         [Fact]
         public void ShouldInitiateHtmlParser()
         {
-            string html = HtmlData.HtmlSimple;
+            string html = HtmlData.HtmlSimpleWithSpaceDoctype;
             var initiate = TestFactory.InitInitiateParser();
 
             var parsers = initiate.GetTagParsers(html);

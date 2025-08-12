@@ -20,13 +20,13 @@ namespace FalconEngineTest.CleanData
         [Fact]
         public void RemoveSimpleDoctypeOneLine()
         {
-            string html = HtmlData.HtmlSimpleWithDoctype;
+            string html = HtmlData.HtmlSimpleWithSpaceDoctype;
             var doctypeTag = TagTestFactory.GetSimpleDoctype();
             var extraction = new ExtractHtmlRemaining();
 
             var htmlRemaining = extraction.Extract(doctypeTag, html, ExtractionMode.ASide);
 
-            Assert.Equal(HtmlData.HtmlSimple, htmlRemaining);
+            Assert.Equal(HtmlData.HtmlSimpleWithSpace, htmlRemaining);
         }
 
         [Fact]
@@ -59,7 +59,7 @@ namespace FalconEngineTest.CleanData
         [Fact]
         public void RemoveHeadTags()
         {
-            string html = HtmlData.HtmlSimple;
+            string html = HtmlData.HtmlSimpleWithSpaceDoctype;
             var htmlTag = TagTestFactory.GetSimpleHtmlTag();
             string content = html.Replace(htmlTag.TagStart, string.Empty).Replace(htmlTag.TagEnd, string.Empty);
             htmlTag.Content = content;

@@ -15,15 +15,15 @@ namespace FalconEngine.DomParsing.Parser
 
         private TagModel _tag;
         private IIdentifyTag _identifyTag;
-        private IDeterminateContent _determinateContent;
+        private IManageChildrenTag _manageChildrenTag;
         private IAttributeTagManager _attributeTagManager;
         private NameTagEnum _nameTag;
 
-        public HtmlTagParser(IIdentifyTag identifyTag, IDeterminateContent determinateContent,
+        public HtmlTagParser(IIdentifyTag identifyTag, IManageChildrenTag manageChildrenTag,
             IAttributeTagManager attributeTagManager)
         {
             _identifyTag = identifyTag;
-            _determinateContent = determinateContent;
+            _manageChildrenTag = manageChildrenTag;
             _attributeTagManager = attributeTagManager;
             _nameTag = NameTagEnum.html;
         }
@@ -33,7 +33,7 @@ namespace FalconEngine.DomParsing.Parser
             try
             {
                 _tag = _identifyTag.Analyze(html);
-                _tag.Content = _determinateContent.FindContent(html, _tag.TagStart, _tag.TagEnd);
+                _tag.Children = _manageChildrenTag.Identify(_tag, _tag.Content);
                 if (string.IsNullOrEmpty(_tag.TagEnd))
                     throw new HtmlParsingException(ErrorTypeParsing.html, $"Une erreur a eu lieu lors du parsing de {html}");
             }

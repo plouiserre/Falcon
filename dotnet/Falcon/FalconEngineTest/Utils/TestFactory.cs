@@ -71,7 +71,7 @@ namespace FalconEngineTest.Utils
 
         public static HtmlTagParser InitHtmlTagParser(bool isSettingAttributes)
         {
-            return new HtmlTagParser(TestFactory.InitIdentifyTag(), TestFactory.InitDeterminateContent(),
+            return new HtmlTagParser(TestFactory.InitIdentifyTag(), TestFactory.InitDeterminateChildren(),
                 TestFactory.InitAttributeTagManager(isSettingAttributes));
         }
 
