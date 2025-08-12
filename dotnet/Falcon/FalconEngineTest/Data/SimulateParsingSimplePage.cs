@@ -9,13 +9,7 @@ using Xunit.Sdk;
 
 namespace FalconEngineTest.Data
 {
-    //TODO delete
-    public enum TagData
-    {
-        html, doctype, metaCharset, head
-    }
-
-    public class HtmlPageData
+    public class SimulateParsingSimplePage
     {
         private static TagModel _doctypeTag;
         private static TagModel _htmlTag;
@@ -23,21 +17,6 @@ namespace FalconEngineTest.Data
         private static HtmlPage _htmlPage { get; set; }
         private static TagModel _metaCharsetTag { get; set; }
 
-        public static TagModel GetTagModel(TagData tag)
-        {
-            InitHtmlPage();
-            switch (tag)
-            {
-                case TagData.doctype:
-                    return _doctypeTag;
-                case TagData.head:
-                    return _headTag;
-                case TagData.metaCharset:
-                    return _metaCharsetTag;
-                default:
-                    return _htmlTag;
-            }
-        }
 
         public static HtmlPage InitHtmlPage()
         {

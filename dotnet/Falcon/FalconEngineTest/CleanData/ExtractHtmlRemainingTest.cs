@@ -21,7 +21,7 @@ namespace FalconEngineTest.CleanData
         public void RemoveSimpleDoctypeOneLine()
         {
             string html = HtmlData.HtmlSimpleWithDoctype;
-            var doctypeTag = HtmlPageData.GetTagModel(TagData.doctype);
+            var doctypeTag = TagTestFactory.GetSimpleDoctype();
             var extraction = new ExtractHtmlRemaining();
 
             var htmlRemaining = extraction.Extract(doctypeTag, html, ExtractionMode.ASide);
@@ -33,7 +33,7 @@ namespace FalconEngineTest.CleanData
         public void RemoveSimpleDoctypeMultipleLine()
         {
             string html = HtmlData.HtmlSimpleWithSpaceDoctype;
-            var doctypeTag = HtmlPageData.GetTagModel(TagData.doctype);
+            var doctypeTag = TagTestFactory.GetSimpleDoctype();
             var extraction = new ExtractHtmlRemaining();
 
             var htmlRemaining = extraction.Extract(doctypeTag, html, ExtractionMode.ASide);
@@ -47,7 +47,7 @@ namespace FalconEngineTest.CleanData
         public void RemoveFirstMetaHeadContent()
         {
             string html = HtmlData.ContentHeadSimple;
-            var meta = HtmlPageData.GetTagModel(TagData.metaCharset);
+            var meta = TagTestFactory.GetMetaCharset();
             var extraction = new ExtractHtmlRemaining();
 
             var htmlRemaining = extraction.Extract(meta, html, ExtractionMode.ASide);
@@ -60,12 +60,7 @@ namespace FalconEngineTest.CleanData
         public void RemoveHeadTags()
         {
             string html = HtmlData.HtmlSimple;
-            var htmlTag = new TagModel()
-            {
-                TagStart = "<html lang=\"en\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\">",
-                TagEnd = "</html>",
-                TagFamily = TagFamilyEnum.WithEnd
-            };
+            var htmlTag = TagTestFactory.GetSimpleHtmlTag();
             string content = html.Replace(htmlTag.TagStart, string.Empty).Replace(htmlTag.TagEnd, string.Empty);
             htmlTag.Content = content;
             var extraction = new ExtractHtmlRemaining();
