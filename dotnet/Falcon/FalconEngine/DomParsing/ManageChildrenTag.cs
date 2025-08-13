@@ -16,31 +16,27 @@ namespace FalconEngine.DomParsing
         private IDeleteUselessSpace _deleteUselessSpace;
         private IIdentifyTag _identifyTag;
         private IIdentifyStartTagEndTag _identitfyStartEndTag;
-        private IAttributeTagParser _attributeTagParser;
         private IDeterminateContent _determinateContent;
-        private IExtractHtmlRemaining _extractHtmlRemaining;
         private IAttributeTagManager _attributeTagManager;
-        private IList<ITagParser> _tagParsers;
+        private Dictionary<TagModel, IList<ITagParser>> _tagParsersByParent;
         private Dictionary<TagModel, string> _htmlByParents;
         private Dictionary<TagModel, List<TagModel>> _childrenWithParents;
         private List<TagModel> _parents;
         private TagModel _parent;
 
         public ManageChildrenTag(IDeleteUselessSpace deleteUselessSpace, IIdentifyTag identifyTag,
-            IIdentifyStartTagEndTag identifyStartTagEndTag, IAttributeTagParser attributeTagParser,
-            IDeterminateContent determinateContent, IExtractHtmlRemaining extractHtmlRemaining,
+            IIdentifyStartTagEndTag identifyStartTagEndTag, IDeterminateContent determinateContent,
             IAttributeTagManager attributeTagManager)
         {
             _identifyTag = identifyTag;
             _deleteUselessSpace = deleteUselessSpace;
             _identitfyStartEndTag = identifyStartTagEndTag;
-            _attributeTagParser = attributeTagParser;
             _determinateContent = determinateContent;
-            _extractHtmlRemaining = extractHtmlRemaining;
             _attributeTagManager = attributeTagManager;
             _parents = new List<TagModel>();
             _childrenWithParents = new Dictionary<TagModel, List<TagModel>>();
             _htmlByParents = new Dictionary<TagModel, string>();
+            _tagParsersByParent = new Dictionary<TagModel, IList<ITagParser>>();
         }
 
         public List<TagModel> Identify(TagModel parent, string html)
@@ -65,13 +61,13 @@ namespace FalconEngine.DomParsing
         //TODO subdivise this method
         private void SearchChildren(TagModel parent)
         {
-            var initiateParser = new InitiateParser(_deleteUselessSpace, _identifyTag, _identitfyStartEndTag, _determinateContent, this, _attributeTagManager);
             _attributeTagManager.SetAttributes();
             string html = _htmlByParents[parent];
-            _tagParsers = initiateParser.GetTagParsers(html);
-            if (_tagParsers != null && _tagParsers.Count > 0)
+            SaveTagParsers(parent, html);
+            var tagParsers = _tagParsersByParent[parent];
+            if (tagParsers != null && tagParsers.Count > 0)
             {
-                foreach (var parser in _tagParsers)
+                foreach (var parser in tagParsers)
                 {
                     html = RemoveUselessHtml(html);
                     var childTag = parser.Parse(html);
@@ -83,6 +79,14 @@ namespace FalconEngine.DomParsing
                     html = html.Replace(htmlToParse, string.Empty);
                 }
             }
+        }
+
+        private void SaveTagParsers(TagModel parent, string html)
+        {
+            var initiateParser = new InitiateParser(_deleteUselessSpace, _identifyTag, _identitfyStartEndTag, _determinateContent, this, _attributeTagManager);
+            var tagParsers = initiateParser.GetTagParsers(html);
+            if (!_tagParsersByParent.ContainsKey(parent))
+                _tagParsersByParent[parent] = tagParsers;
         }
 
         private string ChildTagHtml(TagModel childTag)
@@ -120,10 +124,11 @@ namespace FalconEngine.DomParsing
                 return null;
         }
 
-        public bool ValidateChildren()
+        public bool ValidateChildren(TagModel parent)
         {
             bool areValid = true;
-            foreach (var tagParser in _tagParsers)
+            var tagParsers = _tagParsersByParent[parent];
+            foreach (var tagParser in tagParsers)
             {
                 bool isValid = tagParser.IsValid();
                 if (!isValid)

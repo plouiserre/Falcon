@@ -23,7 +23,8 @@ namespace FalconEngine.DomParsing.Parser
         {
             bool tagEnd = !string.IsNullOrEmpty(_tag.TagEnd);
             bool tagsAreOk = AreAttributesAreAutorized();
-            return tagEnd && tagsAreOk;
+            bool areChildrenValids = _manageChildrenTag.ValidateChildren(_tag);
+            return tagEnd && tagsAreOk && areChildrenValids;
         }
 
         public override TagModel Parse(string html)

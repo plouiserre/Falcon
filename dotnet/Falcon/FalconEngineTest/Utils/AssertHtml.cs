@@ -163,5 +163,67 @@ namespace FalconEngineTest.Utils
             Assert.Null(pQuestion.Attributes);
         }
 
+
+        public static bool AssertTagsAreIdenticals(List<TagModel> allExpected, List<TagModel> results)
+        {
+            if (allExpected.Count != results.Count)
+                return false;
+            for (int i = 0; i < allExpected.Count; i++)
+            {
+                var expectedTag = allExpected[i];
+                var resultTag = results[i];
+                if (!CheckTagModel(expectedTag, resultTag))
+                    return false;
+            }
+            return true;
+        }
+
+        private static bool CheckTagModel(TagModel expected, TagModel result)
+        {
+            if (expected.Content != result.Content)
+                return false;
+            if (expected.NameTag != result.NameTag)
+                return false;
+            if (expected.TagFamily != result.TagFamily)
+                return false;
+            if (expected.TagStart != result.TagStart)
+                return false;
+            if (expected.TagEnd != result.TagEnd)
+                return false;
+            if (expected.Attributes != null && result.Attributes != null)
+            {
+                if (expected.Attributes.Count != result.Attributes.Count)
+                    return false;
+                for (int j = 0; j < expected.Attributes.Count; j++)
+                {
+                    if (!CheckAttribute(expected.Attributes[j], result.Attributes[j]))
+                        return false;
+                }
+            }
+            if (expected.Children != null && result.Children != null)
+            {
+                if (expected.Children.Count != result.Children.Count)
+                    return false;
+                for (int j = 0; j < expected.Children.Count; j++)
+                {
+                    if (!CheckTagModel(expected.Children[j], result.Children[j]))
+                        return false;
+                }
+            }
+            else if ((expected.Attributes == null && result.Attributes != null) ||
+                (expected.Attributes != null && result.Attributes == null))
+                return false;
+            return true;
+        }
+
+        private static bool CheckAttribute(AttributeModel expectedAttribute, AttributeModel resultAttribute)
+        {
+            if (expectedAttribute.FamilyAttribute != resultAttribute.FamilyAttribute)
+                return false;
+            if (expectedAttribute.Value != resultAttribute.Value)
+                return false;
+            return true;
+        }
+
     }
 }

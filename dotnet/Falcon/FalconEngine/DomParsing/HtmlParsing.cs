@@ -13,27 +13,21 @@ namespace FalconEngine.DomParsing
     {
         private ITagParser _doctypeParse;
         private ITagParser _htmlParse;
-        private ITagParser _headParse;
-        private ITagParser _bodyParse;
-        private ITagParser _pParse;
-        private ITagParser _divParse;
         private IExtractHtmlRemaining _extractHtmlRemaining;
         private IAttributeTagManager _attributeTagManager;
         private string _html;
+        private bool _isValidDoctype;
+        private bool _isValidHtmlTag;
+        private bool _isValidPage;
 
-        public HtmlParsing(ITagParser doctypeParse, ITagParser htmlParse, ITagParser headParse,
-            IExtractHtmlRemaining extractHtmlRemaining, IAttributeTagManager attributeTagManager,
-            ITagParser bodyParse)
+        public HtmlParsing(ITagParser doctypeParse, ITagParser htmlParse, IExtractHtmlRemaining extractHtmlRemaining, IAttributeTagManager attributeTagManager)
         {
             _doctypeParse = doctypeParse;
             _htmlParse = htmlParse;
             _extractHtmlRemaining = extractHtmlRemaining;
-            _headParse = headParse;
             _attributeTagManager = attributeTagManager;
-            _bodyParse = bodyParse;
         }
 
-        //TODO reprendre le rendu de cette page avec els enfants et les tests
         public HtmlPage Parse(string html)
         {
             _html = html;
@@ -42,29 +36,23 @@ namespace FalconEngine.DomParsing
             RemoveUselessHtml(doctypeTag);
             var htmlTag = GetTagHtml();
             RemoveTagOpenCloed(htmlTag);
+            DeterminateIsValidPage();
             var tags = new List<TagModel>() { doctypeTag, htmlTag };
-
-            var htmlPage = new HtmlPage() { Tags = tags };
+            var htmlPage = new HtmlPage() { Tags = tags, IsValid = _isValidPage };
             return htmlPage;
         }
 
-        //TODO ajouter des tests
-        //TODO c'est ici qu'il faut modifier pour gérer la validation!!!!
         private TagModel GetDoctypeTag()
         {
             var doctypeTag = _doctypeParse.Parse(_html);
-            bool isValid = true;
-            if (!isValid)
-                throw new Exception("Doctype tag is not valid!!!");
+            _isValidDoctype = _doctypeParse.IsValid();
             return doctypeTag;
         }
 
         private TagModel GetTagHtml()
         {
             var htmlTag = _htmlParse.Parse(_html);
-            bool isValid = true;
-            if (!isValid)
-                throw new Exception("Html tag is not valid!!!");
+            _isValidHtmlTag = _htmlParse.IsValid();
             return htmlTag;
         }
 
@@ -76,6 +64,11 @@ namespace FalconEngine.DomParsing
         private void RemoveTagOpenCloed(TagModel tag)
         {
             _html = _extractHtmlRemaining.Extract(tag, _html, ExtractionMode.Inside);
+        }
+
+        private void DeterminateIsValidPage()
+        {
+            _isValidPage = _isValidDoctype && _isValidHtmlTag;
         }
     }
 }

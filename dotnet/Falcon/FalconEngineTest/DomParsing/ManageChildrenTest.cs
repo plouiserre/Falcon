@@ -15,9 +15,10 @@ namespace FalconEngineTest.DomParsing
         public void FindHeaderChildren()
         {
             var determinateChildren = TestFactory.InitDeterminateChildren();
+            var parent = new TagModel();
 
-            var headerChildren = determinateChildren.Identify(new TagModel(), HtmlData.ContentHeadSimple);
-            bool areValid = determinateChildren.ValidateChildren();
+            var headerChildren = determinateChildren.Identify(parent, HtmlData.ContentHeadSimple);
+            bool areValid = determinateChildren.ValidateChildren(parent);
 
             Assert.True(areValid);
 
@@ -42,9 +43,10 @@ namespace FalconEngineTest.DomParsing
 
             var html = "<head><meta charset=\"UTF-8\"><title class=\"thetitle\">My Website</title></head>";
             var determinateChildren = TestFactory.InitDeterminateChildren();
+            var parent = new TagModel();
 
-            determinateChildren.Identify(new TagModel(), html);
-            bool isValid = determinateChildren.ValidateChildren();
+            determinateChildren.Identify(parent, html);
+            bool isValid = determinateChildren.ValidateChildren(parent);
 
             Assert.False(isValid);
         }

@@ -10,10 +10,10 @@ namespace FalconEngine.DomParsing.Parser
 {
     public class AParser : TagParser, ITagParser
     {
-        private IdentifyTag _identifyTag;
+        private IIdentifyTag _identifyTag;
         private IDeleteUselessSpace _deleteUselessSpace;
 
-        public AParser(IdentifyTag identifyTag, IAttributeTagManager attributeTagManager, IDeleteUselessSpace deleteUselessSpace) : base(attributeTagManager, NameTagEnum.a)
+        public AParser(IIdentifyTag identifyTag, IAttributeTagManager attributeTagManager, IDeleteUselessSpace deleteUselessSpace) : base(attributeTagManager, NameTagEnum.a)
         {
             _identifyTag = identifyTag;
             _deleteUselessSpace = deleteUselessSpace;

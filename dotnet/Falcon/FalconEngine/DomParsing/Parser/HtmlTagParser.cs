@@ -50,7 +50,8 @@ namespace FalconEngine.DomParsing.Parser
             bool isTagGoodFormatted = !string.IsNullOrEmpty(_tag.TagStart) && !string.IsNullOrEmpty(_tag.TagEnd);
             bool isContent = !string.IsNullOrEmpty(_tag.Content);
             bool attributesAreAutorized = AreAttributesAreAutorized();
-            return isTagGoodFormatted && isContent && attributesAreAutorized;
+            bool areChildrenValid = _manageChildrenTag.ValidateChildren(_tag);
+            return isTagGoodFormatted && isContent && attributesAreAutorized && areChildrenValid;
         }
 
         private bool AreAttributesAreAutorized()
@@ -69,16 +70,6 @@ namespace FalconEngine.DomParsing.Parser
                     break;
             }
             return isOk;
-        }
-
-        public string CleanHtml(TagModel tag, string html)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<TagModel> DeterminateChildren(string html)
-        {
-            throw new NotImplementedException();
         }
 
         public NameTagEnum GetNameTag()

@@ -69,5 +69,18 @@ namespace FalconEngineTest.DomParsing.Parser
             Assert.False(isValid);
         }
 
+        [Fact]
+        public void ParseComplexeDivAndNotValidateIt()
+        {
+            string html = "<span> <a inputmode=\"false\">Hello World!!!</a></span>";
+
+            var spanParser = TestFactory.InitSpanParser();
+
+            spanParser.Parse(html);
+            bool isValid = spanParser.IsValid();
+
+            Assert.False(isValid);
+        }
+
     }
 }
