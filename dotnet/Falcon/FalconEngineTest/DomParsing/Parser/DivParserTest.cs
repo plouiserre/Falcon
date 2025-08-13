@@ -43,5 +43,19 @@ namespace FalconEngineTest.DomParsing.Parser
             Assert.True(isValid);
             AssertHtml.AssertDivContent(tag);
         }
+
+
+        [Fact]
+        public void ParseComplexeDivAndNotValidateIt()
+        {
+            string html = "<div><p inputmode=\"false\">Hello World!!!</p></div>";
+
+            var divParser = TestFactory.InitDivParser();
+
+            divParser.Parse(html);
+            bool isValid = divParser.IsValid();
+
+            Assert.False(isValid);
+        }
     }
 }

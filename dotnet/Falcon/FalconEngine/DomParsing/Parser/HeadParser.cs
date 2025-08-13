@@ -38,7 +38,7 @@ namespace FalconEngine.DomParsing.Parser
                 throw new ValidationParsingException(ErrorTypeParsing.validation, "Header validation is failing because parsing is not did");
             bool isLimitTagPresent = !string.IsNullOrEmpty(_tag.TagEnd) && !string.IsNullOrEmpty(_tag.TagStart);
             bool isContent = !string.IsNullOrEmpty(_tag.Content);
-            bool areChildrenValid = _manageChildrenTag.ValidateChildren();
+            bool areChildrenValid = _manageChildrenTag.ValidateChildren(_tag);
             return isContent && isLimitTagPresent && areChildrenValid;
         }
 

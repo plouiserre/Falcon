@@ -39,7 +39,6 @@ namespace FalconEngineTest.DomParsing
         [Fact]
         public void IsSimplePageHasBeenNotValidateBecauseOfWrongDoctype()
         {
-            HtmlPage htmlPage = SimulateParsingSimplePage.InitHtmlPage();
             string html = string.Concat("<doctype>", HtmlData.HtmlSimpleWithSpace);
 
             var parsing = _htmlParsing.Parse(html);
@@ -50,7 +49,6 @@ namespace FalconEngineTest.DomParsing
         [Fact]
         public void IsSimpleHtmlHasBeenNotValidateBecauseOfWrongHtml()
         {
-            HtmlPage htmlPage = SimulateParsingSimplePage.InitHtmlPage();
             string html = string.Concat(HtmlData.SimpleDoctype, "<html scheme=\"xml\">Hello World</html>");
 
             var parsing = _htmlParsing.Parse(html);
@@ -59,15 +57,13 @@ namespace FalconEngineTest.DomParsing
         }
 
         [Fact]
-        public void IsSimpleHtmlHasBeenNotValidateBecauseOfWrongBodyHtml()
+        public void IsSimpleWrongHtmlParseAndNotValidate()
         {
-            HtmlPage htmlPage = SimulateParsingSimplePage.InitHtmlPage();
-            string html = string.Concat(HtmlData.SimpleDoctype, "<html><head><meta charset=\"UTF-8\"></head><body><a translate=\"english\">Hello World</a></body></html>");
+            string html = HtmlDataWrong.HtmlNotValidSimpleWithSpaceDoctype;
 
             var parsing = _htmlParsing.Parse(html);
 
             Assert.False(parsing.IsValid);
         }
-
     }
 }
