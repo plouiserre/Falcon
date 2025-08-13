@@ -14,16 +14,6 @@ namespace FalconEngine.DomParsing.Parser
             _attributeTagManager = attributeTagManager;
         }
 
-        public string CleanHtml(TagModel tag, string html)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<TagModel> DeterminateChildren(string html)
-        {
-            throw new NotImplementedException();
-        }
-
         public bool IsValid()
         {
             return base.IsValid();

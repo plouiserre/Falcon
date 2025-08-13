@@ -27,17 +27,6 @@ namespace FalconEngine.DomParsing.Parser
             _tag = _identifyTag.Analyze(_html);
             return _tag;
         }
-
-        public string CleanHtml(TagModel tag, string html)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<TagModel> DeterminateChildren(string html)
-        {
-            throw new NotImplementedException();
-        }
-
         public bool IsValid()
         {
             bool noTagEnd = string.IsNullOrEmpty(_tag.TagEnd);

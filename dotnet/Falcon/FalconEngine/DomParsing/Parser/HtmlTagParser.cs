@@ -71,16 +71,6 @@ namespace FalconEngine.DomParsing.Parser
             return isOk;
         }
 
-        public string CleanHtml(TagModel tag, string html)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<TagModel> DeterminateChildren(string html)
-        {
-            throw new NotImplementedException();
-        }
-
         public NameTagEnum GetNameTag()
         {
             return _nameTag;

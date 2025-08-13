@@ -22,16 +22,6 @@ namespace FalconEngine.DomParsing.Parser
             _nameTag = NameTagEnum.title;
         }
 
-        public string CleanHtml(TagModel tag, string html)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<TagModel> DeterminateChildren(string html)
-        {
-            throw new NotImplementedException();
-        }
-
         public NameTagEnum GetNameTag()
         {
             throw new NotImplementedException();

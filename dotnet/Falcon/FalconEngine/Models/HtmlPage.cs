@@ -8,5 +8,6 @@ namespace FalconEngine.Models
     public class HtmlPage
     {
         public List<TagModel> Tags { get; set; }
+        public bool IsValid { get; set; }
     }
 }
