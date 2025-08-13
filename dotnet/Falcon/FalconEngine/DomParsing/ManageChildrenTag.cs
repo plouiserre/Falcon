@@ -16,9 +16,7 @@ namespace FalconEngine.DomParsing
         private IDeleteUselessSpace _deleteUselessSpace;
         private IIdentifyTag _identifyTag;
         private IIdentifyStartTagEndTag _identitfyStartEndTag;
-        private IAttributeTagParser _attributeTagParser;
         private IDeterminateContent _determinateContent;
-        private IExtractHtmlRemaining _extractHtmlRemaining;
         private IAttributeTagManager _attributeTagManager;
         private IList<ITagParser> _tagParsers;
         private Dictionary<TagModel, string> _htmlByParents;
@@ -27,16 +25,13 @@ namespace FalconEngine.DomParsing
         private TagModel _parent;
 
         public ManageChildrenTag(IDeleteUselessSpace deleteUselessSpace, IIdentifyTag identifyTag,
-            IIdentifyStartTagEndTag identifyStartTagEndTag, IAttributeTagParser attributeTagParser,
-            IDeterminateContent determinateContent, IExtractHtmlRemaining extractHtmlRemaining,
+            IIdentifyStartTagEndTag identifyStartTagEndTag, IDeterminateContent determinateContent,
             IAttributeTagManager attributeTagManager)
         {
             _identifyTag = identifyTag;
             _deleteUselessSpace = deleteUselessSpace;
             _identitfyStartEndTag = identifyStartTagEndTag;
-            _attributeTagParser = attributeTagParser;
             _determinateContent = determinateContent;
-            _extractHtmlRemaining = extractHtmlRemaining;
             _attributeTagManager = attributeTagManager;
             _parents = new List<TagModel>();
             _childrenWithParents = new Dictionary<TagModel, List<TagModel>>();

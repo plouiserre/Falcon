@@ -77,23 +77,23 @@ namespace FalconEngine.DomParsing
             {
                 case string tag when tag.ToLower().Contains("doctype"):
                     return new DoctypeParser(_identifyTag);
-                case string tag when tag.ToLower().Contains("html"):
+                case string tag when tag.ToLower().Contains("<html"):
                     return new HtmlTagParser(_identifyTag, _manageChildrenTag, _attributeTagManager);
-                case string tag when tag.ToLower().Contains("head"):
+                case string tag when tag.ToLower().Contains("<head"):
                     return new HeadParser(_deleteUselessSpace, _identifyTag, _manageChildrenTag);
-                case string tag when tag.ToLower().Contains("meta"):
+                case string tag when tag.ToLower().Contains("<meta"):
                     return new MetaParser(_identifyTag, _attributeTagManager);
-                case string tag when tag.ToLower().Contains("link"):
+                case string tag when tag.ToLower().Contains("<link"):
                     return new LinkParser(_identifyTag, _attributeTagManager);
-                case string tag when tag.ToLower().Contains("title"):
+                case string tag when tag.ToLower().Contains("<title"):
                     return new TitleParser(_identifyTag, _determinateContent);
-                case string tag when tag.ToLower().Contains("span"):
+                case string tag when tag.ToLower().Contains("<span"):
                     return new SpanParser(_identifyTag, _attributeTagManager, _manageChildrenTag, NameTagEnum.span);
-                case string tag when tag.ToLower().Contains("p"):
+                case string tag when tag.ToLower().Contains("<p"):
                     return new PParser(_identifyTag, _manageChildrenTag, _attributeTagManager);
-                case string tag when tag.ToLower().Contains("div"):
+                case string tag when tag.ToLower().Contains("<div"):
                     return new DivParser(_identifyTag, _manageChildrenTag, _attributeTagManager);
-                case string tag when tag.ToLower().Contains("body"):
+                case string tag when tag.ToLower().Contains("<body"):
                     return new BodyParser(_identifyTag, _manageChildrenTag, _attributeTagManager);
                 case string tag when tag.ToLower().Contains("<a"):
                     return new AParser(_identifyTag, _attributeTagManager, _deleteUselessSpace);

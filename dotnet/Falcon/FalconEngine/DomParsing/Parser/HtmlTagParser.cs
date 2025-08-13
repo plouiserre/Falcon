@@ -50,7 +50,8 @@ namespace FalconEngine.DomParsing.Parser
             bool isTagGoodFormatted = !string.IsNullOrEmpty(_tag.TagStart) && !string.IsNullOrEmpty(_tag.TagEnd);
             bool isContent = !string.IsNullOrEmpty(_tag.Content);
             bool attributesAreAutorized = AreAttributesAreAutorized();
-            return isTagGoodFormatted && isContent && attributesAreAutorized;
+            bool areChildrenValid = _manageChildrenTag.ValidateChildren();
+            return isTagGoodFormatted && isContent && attributesAreAutorized && areChildrenValid;
         }
 
         private bool AreAttributesAreAutorized()

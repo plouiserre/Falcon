@@ -18,18 +18,19 @@ namespace FalconEngine.DomParsing.Parser
             _manageChildrenTag = manageChildrenTag;
         }
 
-        public override bool IsValid()
-        {
-            bool tagEnd = !string.IsNullOrEmpty(_tag.TagEnd);
-            bool tagsAreOk = AreAttributesAreAutorized();
-            return tagEnd && tagsAreOk;
-        }
-
         public override TagModel Parse(string html)
         {
             _tag = _identifyTag.Analyze(html);
             _tag.Children = _manageChildrenTag.Identify(_tag, _tag.Content);
             return _tag;
+        }
+
+        public override bool IsValid()
+        {
+            bool tagEnd = !string.IsNullOrEmpty(_tag.TagEnd);
+            bool tagsAreOk = AreAttributesAreAutorized();
+            bool areChildrenValid = _manageChildrenTag.ValidateChildren();
+            return tagEnd && tagsAreOk && areChildrenValid;
         }
     }
 }

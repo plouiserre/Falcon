@@ -51,6 +51,18 @@ namespace FalconEngineTest.DomParsing.Parser
             Assert.False(isValid);
         }
 
+        [Fact]
+        public void ParseBodyParseAndFailValidationBecauseChildrenNotValid()
+        {
+            string body = "<body><div inputmode=\"false\">Hello World!!!</div></body>";
+            var bodyParser = TestFactory.InitBodyParser();
+
+            bodyParser.Parse(body);
+            bool isValid = bodyParser.IsValid();
+
+            Assert.False(isValid);
+        }
+
 
 
     }

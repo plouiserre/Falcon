@@ -119,8 +119,7 @@ namespace FalconEngineTest.Utils
         public static ManageChildrenTag InitDeterminateChildren()
         {
             var manageChildrenTag = new ManageChildrenTag(InitDeleteUselessSpace(), InitIdentifyTag(),
-            InitIdentifyStartTagEndTag(), InitAttributeTagParser(), InitDeterminateContent(), InitExtractHtmlRemaining(),
-            InitAttributeTagManager(false));
+            InitIdentifyStartTagEndTag(), InitDeterminateContent(), InitAttributeTagManager(false));
             return manageChildrenTag;
         }
     }
