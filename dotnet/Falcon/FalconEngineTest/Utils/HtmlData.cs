@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FalconEngineTest.Configuration;
+using Newtonsoft.Json;
 
 namespace FalconEngineTest.Utils
 {
@@ -21,9 +23,7 @@ namespace FalconEngineTest.Utils
 
         public static string HeadSimple = string.Concat("<head>", ContentHeadSimple, "</head>");
 
-        public static string ALink = "<a href=\"declaration.html\">paragraphe</a>";
-
-        public static string SpanA = string.Concat("<span>", ALink, "</span>");
+        public static string SpanA = string.Concat("<span>", GetALink(), "</span>");
 
         public static string QuestionPHtml = "<p>Allez-vous apprécier mon article?</p>";
 
@@ -32,9 +32,9 @@ namespace FalconEngineTest.Utils
         //TODO rename
         public static string ThirdPHtmlSimple = "<p class=\"declarationText\"> Ceci est un <span><a href=\"declaration.html\">paragraphe</a></span></p>";
 
-        public static string spanRed = "<span class=\"red\">Et il raconte des supers trucs!!!</span>";
+        //public static string spanRed = "<span class=\"red\">Et il raconte des supers trucs!!!</span>";
 
-        public static string PHtmlSimple = string.Concat("<p class=\"declarationText\">", ContentPHtmlSimple, spanRed, "</p>");
+        public static string PHtmlSimple = string.Concat("<p class=\"declarationText\">", ContentPHtmlSimple, GetSpanRed(), "</p>");
 
         public static string DivIdContent = string.Concat("<div id=\"content\">", PHtmlSimple, QuestionPHtml, "</div>");
 
@@ -45,5 +45,24 @@ namespace FalconEngineTest.Utils
         public static string HtmlSimpleWithSpace = string.Concat("<html lang=\"en\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\">", ContentHtmlSimpleWithSpace, "</html>");
 
         public static string HtmlSimpleWithSpaceDoctype = string.Concat("<!DOCTYPE html>", HtmlSimpleWithSpace);
+
+        public static string? GetSpanRed()
+        {
+            JsonModel? json = GetData();
+            return json.SpanRed;
+        }
+
+        public static string? GetALink()
+        {
+            JsonModel? json = GetData();
+            return json.ALink;
+        }
+
+        private static JsonModel? GetData()
+        {
+            string dataJson = HtmlDataJson.AllDataJson;
+            JsonModel? data = JsonConvert.DeserializeObject<JsonModel>(dataJson);
+            return data;
+        }
     }
 }
