@@ -26,7 +26,7 @@ namespace FalconEngineTest.CleanData
 
             var htmlRemaining = extraction.Extract(doctypeTag, html, ExtractionMode.ASide);
 
-            Assert.Equal(HtmlData.HtmlSimpleWithSpace, htmlRemaining);
+            Assert.Equal(HtmlData.GetHtmlSimple(), htmlRemaining);
         }
 
         [Fact]
@@ -38,7 +38,7 @@ namespace FalconEngineTest.CleanData
 
             var htmlRemaining = extraction.Extract(doctypeTag, html, ExtractionMode.ASide);
 
-            Assert.Equal(HtmlData.HtmlSimpleWithSpace, htmlRemaining);
+            Assert.Equal(HtmlData.GetHtmlSimple(), htmlRemaining);
         }
 
         //meta

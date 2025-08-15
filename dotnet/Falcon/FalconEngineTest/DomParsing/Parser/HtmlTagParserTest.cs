@@ -18,7 +18,7 @@ namespace FalconEngineTest.DomParsing.Parser
         [Fact]
         public void ParseSimpleHtmlOneLine()
         {
-            string html = HtmlData.HtmlSimpleWithSpace;
+            string html = HtmlData.GetHtmlSimple();
             var htmlTagParser = TestFactory.InitHtmlTagParser(true);
 
             var tagHtml = htmlTagParser.Parse(html);
@@ -34,7 +34,7 @@ namespace FalconEngineTest.DomParsing.Parser
         [Fact]
         public void ParseSimpleHtmlWithSpaceAndEscapment()
         {
-            string html = HtmlData.HtmlSimpleWithSpace;
+            string html = HtmlData.GetHtmlSimple();
             var htmlTagParser = TestFactory.InitHtmlTagParser(true);
 
             var tagHtml = htmlTagParser.Parse(html);

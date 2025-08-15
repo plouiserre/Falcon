@@ -39,7 +39,7 @@ namespace FalconEngineTest.DomParsing
         [Fact]
         public void IsSimplePageHasBeenNotValidateBecauseOfWrongDoctype()
         {
-            string html = string.Concat("<doctype>", HtmlData.HtmlSimpleWithSpace);
+            string html = string.Concat("<doctype>", HtmlData.GetHtmlSimple());
 
             var parsing = _htmlParsing.Parse(html);
 

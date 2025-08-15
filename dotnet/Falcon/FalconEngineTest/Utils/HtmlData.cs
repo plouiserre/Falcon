@@ -17,9 +17,13 @@ namespace FalconEngineTest.Utils
 
         public static string ContentHtmlSimpleWithSpace = string.Concat(GetHead(), GetBodySimple());
 
-        public static string HtmlSimpleWithSpace = string.Concat("<html lang=\"en\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\">", ContentHtmlSimpleWithSpace, "</html>");
+        public static string HtmlSimpleWithSpaceDoctype = string.Concat("<!DOCTYPE html>", GetHtmlSimple());
 
-        public static string HtmlSimpleWithSpaceDoctype = string.Concat("<!DOCTYPE html>", HtmlSimpleWithSpace);
+        public static string? GetHtmlSimple()
+        {
+            JsonModel? json = GetData();
+            return json?.HtmlSimple;
+        }
 
         public static string? GetHead()
         {
