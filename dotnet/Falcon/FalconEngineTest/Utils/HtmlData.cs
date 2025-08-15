@@ -96,7 +96,8 @@ namespace FalconEngineTest.Utils
         public static string? GetSpanA()
         {
             JsonModel? json = GetData();
-            return json.SpanA;
+            string value = TemplatingHtmlData.GetHtmlData(json.SpanA, json);
+            return value;
         }
 
         public static string? GetSpanInputRed()
