@@ -89,7 +89,7 @@ namespace FalconEngineTest.DomParsing.Parser
         [Fact]
         public void HtmlTagWithChildrenIsParsedAndOk()
         {
-            var html = string.Concat("<html>", HtmlData.DivIdContent, "</html>");
+            var html = string.Concat("<html>", HtmlData.GetDivIdContent(), "</html>");
             var htmlTagParser = TestFactory.InitHtmlTagParser(true);
 
             var tag = htmlTagParser.Parse(html);
@@ -99,7 +99,7 @@ namespace FalconEngineTest.DomParsing.Parser
             Assert.Equal("<html>", tag.TagStart);
             Assert.Equal("</html>", tag.TagEnd);
             Assert.Equal(TagFamilyEnum.WithEnd, tag.TagFamily);
-            Assert.Equal(HtmlData.DivIdContent, tag.Content);
+            Assert.Equal(HtmlData.GetDivIdContent(), tag.Content);
             Assert.Single(tag.Children);
             AssertHtml.AssertDivContent(tag.Children[0]);
         }

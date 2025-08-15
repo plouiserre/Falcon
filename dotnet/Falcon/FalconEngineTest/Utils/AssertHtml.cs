@@ -90,7 +90,7 @@ namespace FalconEngineTest.Utils
             Assert.Equal("</body>", body.TagEnd);
             Assert.Equal("classCss", body.Attributes[0].FamilyAttribute);
             Assert.Equal("main", body.Attributes[0].Value);
-            Assert.Equal(HtmlData.DivIdContent, body.Content);
+            Assert.Equal(HtmlData.GetDivIdContent(), body.Content);
             AssertDivContent(body.Children[0]);
         }
 

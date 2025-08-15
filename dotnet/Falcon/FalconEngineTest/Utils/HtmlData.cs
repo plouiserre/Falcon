@@ -28,15 +28,19 @@ namespace FalconEngineTest.Utils
         //TODO rename
         public static string ThirdPHtmlSimple = "<p class=\"declarationText\"> Ceci est un <span><a href=\"declaration.html\">paragraphe</a></span></p>";
 
-        public static string DivIdContent = string.Concat("<div id=\"content\">", GetPDeclarationText(), GetQuestionPHtml(), "</div>");
-
-        public static string BodySimple = string.Concat("<body class=\"main\">", DivIdContent, "</body>");
+        public static string BodySimple = string.Concat("<body class=\"main\">", GetDivIdContent(), "</body>");
 
         public static string ContentHtmlSimpleWithSpace = string.Concat(HeadSimple, BodySimple);
 
         public static string HtmlSimpleWithSpace = string.Concat("<html lang=\"en\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\">", ContentHtmlSimpleWithSpace, "</html>");
 
         public static string HtmlSimpleWithSpaceDoctype = string.Concat("<!DOCTYPE html>", HtmlSimpleWithSpace);
+
+        public static string? GetDivIdContent()
+        {
+            JsonModel? json = GetData();
+            return json.DivIdContent;
+        }
 
         public static string? GetQuestionPHtml()
         {
