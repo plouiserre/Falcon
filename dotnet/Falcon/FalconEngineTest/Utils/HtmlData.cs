@@ -9,15 +9,17 @@ namespace FalconEngineTest.Utils
 {
     public static class HtmlData
     {
-        public static string SimpleDoctype = @"<!DOCTYPE html>";
+        public static string? GetSimpleDoctype()
+        {
+            JsonModel? json = GetData();
+            return json?.SimpleDoctype;
+        }
 
-        public static string ContentHeadSimple = string.Concat(GetMetaCharset(), GetMetaViewPort(), GetTitleDocument(), GetLinkHead());
-
-        public static string ContentPHtmlSimple = @" Ceci est un <span><a href=""declaration.html"">paragraphe</a></span>";
-
-        public static string ContentHtmlSimpleWithSpace = string.Concat(GetHead(), GetBodySimple());
-
-        public static string HtmlSimpleWithSpaceDoctype = string.Concat("<!DOCTYPE html>", GetHtmlSimple());
+        public static string? GetHtmlSimpleWithDoctype()
+        {
+            JsonModel? json = GetData();
+            return json?.HtmlSimpleWithDoctype;
+        }
 
         public static string? GetHtmlSimple()
         {

@@ -24,8 +24,10 @@ namespace FalconEngineTest.DomParsing.Parser
             var tagHtml = htmlTagParser.Parse(html);
             bool isValid = htmlTagParser.IsValid();
 
+            string contentHtmlSimpleWithSpace = HtmlData.GetHtmlSimple().Replace("<html lang=\"en\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\">", string.Empty)
+                                                .Replace("</html>", string.Empty);
             Assert.Equal(NameTagEnum.html, tagHtml.NameTag);
-            Assert.Equal(HtmlData.ContentHtmlSimpleWithSpace, tagHtml.Content);
+            Assert.Equal(contentHtmlSimpleWithSpace, tagHtml.Content);
             Assert.Equal(TagFamilyEnum.WithEnd, tagHtml.TagFamily);
             Assert.True(isValid);
         }
@@ -40,7 +42,9 @@ namespace FalconEngineTest.DomParsing.Parser
             var tagHtml = htmlTagParser.Parse(html);
             bool isValid = htmlTagParser.IsValid();
 
-            Assert.Equal(HtmlData.ContentHtmlSimpleWithSpace, tagHtml.Content);
+            string contentHtmlSimpleWithSpace = HtmlData.GetHtmlSimple().Replace("<html lang=\"en\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\">", string.Empty)
+                                                .Replace("</html>", string.Empty);
+            Assert.Equal(contentHtmlSimpleWithSpace, tagHtml.Content);
             Assert.Equal(NameTagEnum.html, tagHtml.NameTag);
             Assert.Equal(TagFamilyEnum.WithEnd, tagHtml.TagFamily);
             Assert.True(isValid);

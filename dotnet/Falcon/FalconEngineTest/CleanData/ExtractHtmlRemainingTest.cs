@@ -20,7 +20,7 @@ namespace FalconEngineTest.CleanData
         [Fact]
         public void RemoveSimpleDoctypeOneLine()
         {
-            string html = HtmlData.HtmlSimpleWithSpaceDoctype;
+            string html = HtmlData.GetHtmlSimpleWithDoctype();
             var doctypeTag = TagTestFactory.GetSimpleDoctype();
             var extraction = new ExtractHtmlRemaining();
 
@@ -32,7 +32,7 @@ namespace FalconEngineTest.CleanData
         [Fact]
         public void RemoveSimpleDoctypeMultipleLine()
         {
-            string html = HtmlData.HtmlSimpleWithSpaceDoctype;
+            string html = HtmlData.GetHtmlSimpleWithDoctype();
             var doctypeTag = TagTestFactory.GetSimpleDoctype();
             var extraction = new ExtractHtmlRemaining();
 
@@ -46,20 +46,21 @@ namespace FalconEngineTest.CleanData
         [Fact]
         public void RemoveFirstMetaHeadContent()
         {
-            string html = HtmlData.ContentHeadSimple;
+            string contentHeadSimple = HtmlData.GetHead().Replace("<head>", string.Empty).Replace("</head>", string.Empty);
+            string html = contentHeadSimple;
             var meta = TagTestFactory.GetMetaCharset();
             var extraction = new ExtractHtmlRemaining();
 
             var htmlRemaining = extraction.Extract(meta, html, ExtractionMode.ASide);
 
-            string htmlRemainingExpected = HtmlData.ContentHeadSimple.Replace(HtmlData.GetMetaCharset(), string.Empty);
+            string htmlRemainingExpected = contentHeadSimple.Replace(HtmlData.GetMetaCharset(), string.Empty);
             Assert.Equal(htmlRemainingExpected, htmlRemaining);
         }
 
         [Fact]
         public void RemoveHeadTags()
         {
-            string html = HtmlData.HtmlSimpleWithSpaceDoctype;
+            string html = HtmlData.GetHtmlSimpleWithDoctype();
             var htmlTag = TagTestFactory.GetSimpleHtmlTag();
             string content = html.Replace(htmlTag.TagStart, string.Empty).Replace(htmlTag.TagEnd, string.Empty);
             htmlTag.Content = content;

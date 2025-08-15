@@ -30,7 +30,7 @@ namespace FalconEngineTest.DomParsing
         {
             HtmlPage htmlPage = SimulateParsingSimplePage.InitHtmlPage();
 
-            var parsing = _htmlParsing.Parse(HtmlData.HtmlSimpleWithSpaceDoctype);
+            var parsing = _htmlParsing.Parse(HtmlData.GetHtmlSimpleWithDoctype());
 
             Assert.True(AssertHtml.AssertTagsAreIdenticals(htmlPage.Tags, parsing.Tags));
             Assert.True(parsing.IsValid);
@@ -49,7 +49,7 @@ namespace FalconEngineTest.DomParsing
         [Fact]
         public void IsSimpleHtmlHasBeenNotValidateBecauseOfWrongHtml()
         {
-            string html = string.Concat(HtmlData.SimpleDoctype, "<html scheme=\"xml\">Hello World</html>");
+            string html = string.Concat(HtmlData.GetSimpleDoctype(), "<html scheme=\"xml\">Hello World</html>");
 
             var parsing = _htmlParsing.Parse(html);
 

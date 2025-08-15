@@ -11,11 +11,11 @@ namespace FalconEngineTest.Data
 {
     public class SimulateParsingSimplePage
     {
-        private static TagModel _doctypeTag;
-        private static TagModel _htmlTag;
-        private static TagModel _headTag;
-        private static HtmlPage _htmlPage { get; set; }
-        private static TagModel _metaCharsetTag { get; set; }
+        private static TagModel? _doctypeTag;
+        private static TagModel? _htmlTag;
+        private static TagModel? _headTag;
+        private static HtmlPage? _htmlPage { get; set; }
+        private static TagModel? _metaCharsetTag { get; set; }
 
 
         public static HtmlPage InitHtmlPage()
@@ -50,7 +50,7 @@ namespace FalconEngineTest.Data
                 Attributes = new List<AttributeModel>() { attributLang, attributDir, attributXmlns },
                 NameTag = NameTagEnum.html,
                 TagFamily = TagFamilyEnum.WithEnd,
-                Content = HtmlData.ContentHtmlSimpleWithSpace,
+                Content = HtmlData.GetHtmlSimple().Replace("<html lang=\"en\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\">", string.Empty).Replace("</html>", string.Empty),
                 TagStart = "<html lang=\"en\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\">",
                 TagEnd = "</html>",
                 Children = new List<TagModel>() { _headTag, body }
@@ -100,7 +100,7 @@ namespace FalconEngineTest.Data
             {
                 NameTag = NameTagEnum.head,
                 TagFamily = TagFamilyEnum.WithEnd,
-                Content = HtmlData.ContentHeadSimple,
+                Content = HtmlData.GetHead().Replace("<head>", string.Empty).Replace("</head>", string.Empty),
                 Children = new List<TagModel>() { _metaCharsetTag, metaViewPort, title, link },
                 TagStart = "<head>",
                 TagEnd = "</head>"
@@ -152,7 +152,7 @@ namespace FalconEngineTest.Data
                 Attributes = new List<AttributeModel>() { attributClass },
                 NameTag = NameTagEnum.p,
                 TagFamily = TagFamilyEnum.WithEnd,
-                Content = string.Concat(HtmlData.ContentPHtmlSimple, HtmlData.GetSpanRed()),
+                Content = HtmlData.GetPDeclarationText().Replace("<p class=\"declarationText\">", string.Empty).Replace("</p>", string.Empty),
                 Children = new List<TagModel>() { childFirst, childSecond },
                 TagStart = "<p class=\"declarationText\">",
                 TagEnd = "</p>"

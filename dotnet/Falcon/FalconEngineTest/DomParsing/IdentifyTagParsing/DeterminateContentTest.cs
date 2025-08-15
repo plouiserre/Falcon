@@ -28,7 +28,8 @@ namespace FalconEngineTest.DomParsing.IdentifyTagParsing
 
             string content = determinate.FindContent(html, "<head>", "</head>");
 
-            Assert.Equal(HtmlData.ContentHeadSimple, content);
+            string contentHeadSimple = HtmlData.GetHead().Replace("<head>", string.Empty).Replace("</head>", string.Empty);
+            Assert.Equal(contentHeadSimple, content);
         }
 
         [Fact]

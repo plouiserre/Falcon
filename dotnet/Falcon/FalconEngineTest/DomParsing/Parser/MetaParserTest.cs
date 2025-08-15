@@ -48,7 +48,8 @@ namespace FalconEngineTest.DomParsing.Parser
         {
             string html = HtmlData.GetMetaCharset();
 
-            var tag = _metaParser.Parse(HtmlData.ContentHeadSimple);
+            string contentHeadSimple = HtmlData.GetHead().Replace("<head>", string.Empty).Replace("</head>", string.Empty);
+            var tag = _metaParser.Parse(contentHeadSimple);
 
             AssertHtml.AssertMetaCharsetChild(tag);
         }
