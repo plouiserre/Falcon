@@ -14,7 +14,8 @@ namespace FalconEngineTest.Configuration
                   "SpanRed": "<span class=\"red\">Et il raconte des supers trucs!!!</span>",
                   "SpanInputRed" :"<span inputmode=\"false\" class=\"red\">Et il raconte des supers trucs!!!</span>",
                   "SpanA": "<span><a href=\"declaration.html\">paragraphe</a></span>",
-                  "PDeclarationText":"<p class=\"declarationText\"> Ceci est un <span><a href=\"declaration.html\">paragraphe</a></span><span class=\"red\">Et il raconte des supers trucs!!!</span></p>"
+                  "PDeclarationText":"<p class=\"declarationText\"> Ceci est un <span><a href=\"declaration.html\">paragraphe</a></span><span class=\"red\">Et il raconte des supers trucs!!!</span></p>",
+                  "QuestionPHtml":"<p>Allez-vous apprécier mon article?</p>"
                 }
                 """;
     }
@@ -26,5 +27,6 @@ namespace FalconEngineTest.Configuration
         public string? SpanInputRed { get; set; }
         public string? SpanA { get; set; }
         public string? PDeclarationText { get; set; }
+        public string? QuestionPHtml { get; set; }
     }
 }
