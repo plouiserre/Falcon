@@ -20,7 +20,7 @@ namespace FalconEngineTest.DomParsing.Parser
         {
             var headParser = TestFactory.InitHeadParser();
 
-            var tagHtml = headParser.Parse(HtmlData.HeadSimple);
+            var tagHtml = headParser.Parse(HtmlData.GetHead());
             bool isValid = headParser.IsValid();
 
             AssertHtml.AssertHeader(tagHtml, HtmlData.ContentHeadSimple);

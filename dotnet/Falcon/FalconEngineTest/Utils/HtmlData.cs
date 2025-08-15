@@ -13,15 +13,19 @@ namespace FalconEngineTest.Utils
 
         public static string ContentHeadSimple = string.Concat(GetMetaCharset(), GetMetaViewPort(), GetTitleDocument(), GetLinkHead());
 
-        public static string HeadSimple = string.Concat("<head>", ContentHeadSimple, "</head>");
-
         public static string ContentPHtmlSimple = @" Ceci est un <span><a href=""declaration.html"">paragraphe</a></span>";
 
-        public static string ContentHtmlSimpleWithSpace = string.Concat(HeadSimple, GetBodySimple());
+        public static string ContentHtmlSimpleWithSpace = string.Concat(GetHead(), GetBodySimple());
 
         public static string HtmlSimpleWithSpace = string.Concat("<html lang=\"en\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\">", ContentHtmlSimpleWithSpace, "</html>");
 
         public static string HtmlSimpleWithSpaceDoctype = string.Concat("<!DOCTYPE html>", HtmlSimpleWithSpace);
+
+        public static string? GetHead()
+        {
+            JsonModel? json = GetData();
+            return json?.Head;
+        }
 
         public static string? GetMetaCharset()
         {

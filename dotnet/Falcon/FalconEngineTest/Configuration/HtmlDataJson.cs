@@ -22,7 +22,8 @@ namespace FalconEngineTest.Configuration
                   "MetaCharset":"<meta charset=\"UTF-8\">",
                   "MetaViewPort":"<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">",
                   "TitleDocument":"<title>Document</title>",
-                  "LinkHead":"<link rel=\"stylesheet\" href=\"main.css\" data-preload=\"true\">"
+                  "LinkHead":"<link rel=\"stylesheet\" href=\"main.css\" data-preload=\"true\">",
+                  "Head":"<head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>Document</title><link rel=\"stylesheet\" href=\"main.css\" data-preload=\"true\"></head>"
                 }
                 """;
     }
@@ -42,5 +43,6 @@ namespace FalconEngineTest.Configuration
         public string? MetaViewPort { get; set; }
         public string? TitleDocument { get; set; }
         public string? LinkHead { get; set; }
+        public string? Head { get; set; }
     }
 }

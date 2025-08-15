@@ -37,7 +37,7 @@ namespace FalconEngineTest.DomParsing.IdentifyTagParsing
         {
             var identifyTag = new IdentifyStartTagEndTag();
 
-            identifyTag.DetermineStartEndTags(HtmlData.HeadSimple);
+            identifyTag.DetermineStartEndTags(HtmlData.GetHead());
 
             Assert.Equal("<head>", identifyTag.StartTag);
             Assert.Equal("</head>", identifyTag.EndTag);

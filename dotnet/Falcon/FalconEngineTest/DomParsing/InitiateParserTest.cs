@@ -47,7 +47,7 @@ namespace FalconEngineTest.DomParsing
         [Fact]
         public void ShoudInitiateHeadParser()
         {
-            string html = HtmlData.HeadSimple;
+            string html = HtmlData.GetHead();
             var initiate = TestFactory.InitInitiateParser();
 
             var parsers = initiate.GetTagParsers(html);
