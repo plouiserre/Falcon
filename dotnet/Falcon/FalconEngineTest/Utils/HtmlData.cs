@@ -15,6 +15,12 @@ namespace FalconEngineTest.Utils
             return json?.SimpleDoctype;
         }
 
+        public static string? GetHtmlNotValidSimpleWithSpaceDoctype()
+        {
+            JsonModel? json = GetData();
+            return json?.HtmlNotValidSimpleWithSpaceDoctype;
+        }
+
         public static string? GetHtmlSimpleWithDoctype()
         {
             JsonModel? json = GetData();
