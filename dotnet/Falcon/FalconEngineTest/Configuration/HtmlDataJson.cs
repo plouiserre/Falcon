@@ -18,7 +18,11 @@ namespace FalconEngineTest.Configuration
                   "PSimple":"<p class=\"declarationText\"> Ceci est un <span><a href=\"declaration.html\">paragraphe</a></span></p>",
                   "QuestionPHtml":"<p>Allez-vous apprécier mon article?</p>",
                   "DivIdContent":"<div id=\"content\"><p class=\"declarationText\"> Ceci est un <span><a href=\"declaration.html\">paragraphe</a></span><span class=\"red\">Et il raconte des supers trucs!!!</span></p><p>Allez-vous apprécier mon article?</p></div>",
-                  "BodySimple":"<body class=\"main\"><div id=\"content\"><p class=\"declarationText\"> Ceci est un <span><a href=\"declaration.html\">paragraphe</a></span><span class=\"red\">Et il raconte des supers trucs!!!</span></p><p>Allez-vous apprécier mon article?</p></div></body>"
+                  "BodySimple":"<body class=\"main\"><div id=\"content\"><p class=\"declarationText\"> Ceci est un <span><a href=\"declaration.html\">paragraphe</a></span><span class=\"red\">Et il raconte des supers trucs!!!</span></p><p>Allez-vous apprécier mon article?</p></div></body>",
+                  "MetaCharset":"<meta charset=\"UTF-8\">",
+                  "MetaViewPort":"<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">",
+                  "TitleDocument":"<title>Document</title>",
+                  "LinkHead":"<link rel=\"stylesheet\" href=\"main.css\" data-preload=\"true\">"
                 }
                 """;
     }
@@ -34,5 +38,9 @@ namespace FalconEngineTest.Configuration
         public string? QuestionPHtml { get; set; }
         public string? DivIdContent { get; set; }
         public string? BodySimple { get; set; }
+        public string? MetaCharset { get; set; }
+        public string? MetaViewPort { get; set; }
+        public string? TitleDocument { get; set; }
+        public string? LinkHead { get; set; }
     }
 }

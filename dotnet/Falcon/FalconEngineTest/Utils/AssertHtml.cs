@@ -38,7 +38,7 @@ namespace FalconEngineTest.Utils
             Assert.Equal(FamilyAttributeEnum.charset.ToString(), metaCharsetChild.Attributes[0].FamilyAttribute);
             Assert.Equal("UTF-8", metaCharsetChild.Attributes[0].Value);
             Assert.Equal(TagFamilyEnum.NoEnd, metaCharsetChild.TagFamily);
-            Assert.Equal(HtmlData.MetaCharset, metaCharsetChild.TagStart);
+            Assert.Equal(HtmlData.GetMetaCharset(), metaCharsetChild.TagStart);
             Assert.Null(metaCharsetChild.TagEnd);
             Assert.Null(metaCharsetChild.Children);
         }
@@ -52,7 +52,7 @@ namespace FalconEngineTest.Utils
             Assert.Equal(FamilyAttributeEnum.content.ToString(), metaViewPort.Attributes[1].FamilyAttribute);
             Assert.Equal("width=device-width, initial-scale=1.0", metaViewPort.Attributes[1].Value);
             Assert.Equal(TagFamilyEnum.NoEnd, metaViewPort.TagFamily);
-            Assert.Equal(HtmlData.MetaViewPort, metaViewPort.TagStart);
+            Assert.Equal(HtmlData.GetMetaViewPort(), metaViewPort.TagStart);
             Assert.Null(metaViewPort.TagEnd);
             Assert.Null(metaViewPort.Children);
         }

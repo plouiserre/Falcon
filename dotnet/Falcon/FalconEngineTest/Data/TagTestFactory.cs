@@ -27,7 +27,7 @@ namespace FalconEngineTest.Data
                 TagFamily = TagFamilyEnum.NoEnd,
                 Attributes = new List<AttributeModel>() { new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.charset.ToString(), Value = "UTF-8" } },
                 NameTag = NameTagEnum.meta,
-                TagStart = HtmlData.MetaCharset
+                TagStart = HtmlData.GetMetaCharset()
             };
             return metaCharsetTag;
         }

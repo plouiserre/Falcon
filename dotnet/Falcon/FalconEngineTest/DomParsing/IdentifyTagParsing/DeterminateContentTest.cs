@@ -34,10 +34,10 @@ namespace FalconEngineTest.DomParsing.IdentifyTagParsing
         [Fact]
         public void DeterminateContentMeta()
         {
-            string html = HtmlData.MetaViewPort;
+            string html = HtmlData.GetMetaViewPort();
             var determinate = new DeterminateContent();
 
-            string content = determinate.FindContent(html, HtmlData.MetaViewPort, null);
+            string content = determinate.FindContent(html, HtmlData.GetMetaViewPort(), null);
 
             Assert.Null(content);
         }

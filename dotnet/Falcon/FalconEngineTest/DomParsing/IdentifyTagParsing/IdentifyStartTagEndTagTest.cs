@@ -26,9 +26,9 @@ namespace FalconEngineTest.DomParsing.IdentifyTagParsing
         {
             var identifyTag = new IdentifyStartTagEndTag();
 
-            identifyTag.DetermineStartEndTags(HtmlData.MetaViewPort);
+            identifyTag.DetermineStartEndTags(HtmlData.GetMetaViewPort());
 
-            Assert.Equal(HtmlData.MetaViewPort, identifyTag.StartTag);
+            Assert.Equal(HtmlData.GetMetaViewPort(), identifyTag.StartTag);
             Assert.Null(identifyTag.EndTag);
         }
 

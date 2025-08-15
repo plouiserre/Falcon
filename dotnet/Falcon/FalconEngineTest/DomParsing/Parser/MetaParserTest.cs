@@ -26,7 +26,7 @@ namespace FalconEngineTest.DomParsing.Parser
         [Fact]
         public void ParseMetaCharset()
         {
-            string html = HtmlData.MetaCharset;
+            string html = HtmlData.GetMetaCharset();
 
             var tag = _metaParser.Parse(html);
 
@@ -36,7 +36,7 @@ namespace FalconEngineTest.DomParsing.Parser
         [Fact]
         public void ParseMetaProperty()
         {
-            string html = HtmlData.MetaViewPort;
+            string html = HtmlData.GetMetaViewPort();
 
             var tag = _metaParser.Parse(html);
 
@@ -46,7 +46,7 @@ namespace FalconEngineTest.DomParsing.Parser
         [Fact]
         public void ParseMetaCharsetWithTooManyHtml()
         {
-            string html = HtmlData.MetaCharset;
+            string html = HtmlData.GetMetaCharset();
 
             var tag = _metaParser.Parse(HtmlData.ContentHeadSimple);
 

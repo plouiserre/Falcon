@@ -52,7 +52,7 @@ namespace FalconEngineTest.CleanData
 
             var htmlRemaining = extraction.Extract(meta, html, ExtractionMode.ASide);
 
-            string htmlRemainingExpected = HtmlData.ContentHeadSimple.Replace(HtmlData.MetaCharset, string.Empty);
+            string htmlRemainingExpected = HtmlData.ContentHeadSimple.Replace(HtmlData.GetMetaCharset(), string.Empty);
             Assert.Equal(htmlRemainingExpected, htmlRemaining);
         }
 

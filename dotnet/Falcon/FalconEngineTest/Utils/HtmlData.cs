@@ -11,15 +11,7 @@ namespace FalconEngineTest.Utils
     {
         public static string SimpleDoctype = @"<!DOCTYPE html>";
 
-        public static string MetaCharset = @"<meta charset=""UTF-8"">";
-
-        public static string MetaViewPort = @"<meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">";
-
-        public static string TitleDocument = @"<title>Document</title>";
-
-        public static string LinkHead = "<link rel=\"stylesheet\" href=\"main.css\" data-preload=\"true\">";
-
-        public static string ContentHeadSimple = string.Concat(MetaCharset, MetaViewPort, TitleDocument, LinkHead);
+        public static string ContentHeadSimple = string.Concat(GetMetaCharset(), GetMetaViewPort(), GetTitleDocument(), GetLinkHead());
 
         public static string HeadSimple = string.Concat("<head>", ContentHeadSimple, "</head>");
 
@@ -30,6 +22,30 @@ namespace FalconEngineTest.Utils
         public static string HtmlSimpleWithSpace = string.Concat("<html lang=\"en\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\">", ContentHtmlSimpleWithSpace, "</html>");
 
         public static string HtmlSimpleWithSpaceDoctype = string.Concat("<!DOCTYPE html>", HtmlSimpleWithSpace);
+
+        public static string? GetMetaCharset()
+        {
+            JsonModel? json = GetData();
+            return json?.MetaCharset;
+        }
+
+        public static string? GetMetaViewPort()
+        {
+            JsonModel? json = GetData();
+            return json?.MetaViewPort;
+        }
+
+        public static string? GetTitleDocument()
+        {
+            JsonModel? json = GetData();
+            return json?.TitleDocument;
+        }
+
+        public static string? GetLinkHead()
+        {
+            JsonModel? json = GetData();
+            return json?.LinkHead;
+        }
 
         public static string? GetBodySimple()
         {

@@ -72,7 +72,7 @@ namespace FalconEngineTest.DomParsing
         [Fact]
         public void ShoudInitiateLinkParser()
         {
-            string html = HtmlData.LinkHead;
+            string html = HtmlData.GetLinkHead();
             var initiate = TestFactory.InitInitiateParser();
 
             var parsers = initiate.GetTagParsers(html);
@@ -85,7 +85,7 @@ namespace FalconEngineTest.DomParsing
         [Fact]
         public void ShoudInitiateTitleParser()
         {
-            string html = HtmlData.TitleDocument;
+            string html = HtmlData.GetTitleDocument();
             var initiate = TestFactory.InitInitiateParser();
 
             var parsers = initiate.GetTagParsers(html);

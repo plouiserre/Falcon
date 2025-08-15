@@ -65,7 +65,7 @@ namespace FalconEngineTest.Data
                 TagFamily = TagFamilyEnum.NoEnd,
                 Attributes = new List<AttributeModel>() { new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.charset.ToString(), Value = "UTF-8" } },
                 NameTag = NameTagEnum.meta,
-                TagStart = HtmlData.MetaCharset
+                TagStart = HtmlData.GetMetaCharset()
             };
             var metaViewPort = new TagModel()
             {
@@ -75,7 +75,7 @@ namespace FalconEngineTest.Data
                         new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.content.ToString(), Value = "width=device-width, initial-scale=1.0" }
                 },
                 NameTag = NameTagEnum.meta,
-                TagStart = HtmlData.MetaViewPort
+                TagStart = HtmlData.GetMetaViewPort()
             };
             var title = new TagModel()
             {
