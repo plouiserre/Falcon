@@ -29,9 +29,7 @@ namespace FalconEngineTest.Utils
 
         public static string ContentPHtmlSimple = @" Ceci est un <span><a href=""declaration.html"">paragraphe</a></span>";
 
-        public static string spanRed = "<span inputmode=\"false\" class=\"red\">Et il raconte des supers trucs!!!</span>";
-
-        public static string PHtmlSimple = string.Concat("<p class=\"declarationText\">", ContentPHtmlSimple, spanRed, "</p>");
+        public static string PHtmlSimple = string.Concat("<p class=\"declarationText\">", ContentPHtmlSimple, HtmlData.GetSpanInputRed(), "</p>");
 
         public static string DivIdContent = string.Concat("<div id=\"content\">", PHtmlSimple, QuestionPHtml, "</div>");
 

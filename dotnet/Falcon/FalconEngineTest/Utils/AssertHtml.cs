@@ -96,7 +96,7 @@ namespace FalconEngineTest.Utils
 
         public static void AssertDivContent(TagModel div)
         {
-            string content = string.Concat(HtmlData.PHtmlSimple, HtmlData.QuestionPHtml);
+            string content = string.Concat(HtmlData.GetPDeclarationText(), HtmlData.QuestionPHtml);
             Assert.Equal(content, div.Content);
             Assert.Single(div.Attributes);
             Assert.Equal("id", div.Attributes[0].FamilyAttribute);

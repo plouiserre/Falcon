@@ -71,7 +71,7 @@ namespace FalconEngineTest.DomParsing.Parser
         [Fact]
         public void ValidateParagraphWithTwoChildOneGrandChild()
         {
-            var html = HtmlData.PHtmlSimple;
+            var html = HtmlData.GetPDeclarationText();
 
             var parser = TestFactory.InitPParser();
 

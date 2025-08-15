@@ -126,7 +126,7 @@ namespace FalconEngineTest.Data
         private static TagModel GetDivContent()
         {
             var attributId = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.id.ToString(), Value = "content" };
-            string content = string.Concat(HtmlData.PHtmlSimple, HtmlData.QuestionPHtml);
+            string content = string.Concat(HtmlData.GetPDeclarationText(), HtmlData.QuestionPHtml);
             var firstP = GetFirstPContent();
             var secondP = GetSecondPContent();
             var divTag = new TagModel()

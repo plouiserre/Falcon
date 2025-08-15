@@ -35,7 +35,7 @@ namespace FalconEngineTest.DomParsing.Parser
         [Fact]
         public void ParseAndValidateSimpleSpanWithChildren()
         {
-            var html = HtmlData.SpanA;
+            var html = HtmlData.GetSpanA();
 
             var parser = TestFactory.InitSpanParser();
 

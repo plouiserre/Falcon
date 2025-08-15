@@ -23,8 +23,6 @@ namespace FalconEngineTest.Utils
 
         public static string HeadSimple = string.Concat("<head>", ContentHeadSimple, "</head>");
 
-        public static string SpanA = string.Concat("<span>", GetALink(), "</span>");
-
         public static string QuestionPHtml = "<p>Allez-vous apprécier mon article?</p>";
 
         public static string ContentPHtmlSimple = @" Ceci est un <span><a href=""declaration.html"">paragraphe</a></span>";
@@ -32,11 +30,7 @@ namespace FalconEngineTest.Utils
         //TODO rename
         public static string ThirdPHtmlSimple = "<p class=\"declarationText\"> Ceci est un <span><a href=\"declaration.html\">paragraphe</a></span></p>";
 
-        //public static string spanRed = "<span class=\"red\">Et il raconte des supers trucs!!!</span>";
-
-        public static string PHtmlSimple = string.Concat("<p class=\"declarationText\">", ContentPHtmlSimple, GetSpanRed(), "</p>");
-
-        public static string DivIdContent = string.Concat("<div id=\"content\">", PHtmlSimple, QuestionPHtml, "</div>");
+        public static string DivIdContent = string.Concat("<div id=\"content\">", GetPDeclarationText(), QuestionPHtml, "</div>");
 
         public static string BodySimple = string.Concat("<body class=\"main\">", DivIdContent, "</body>");
 
@@ -45,6 +39,24 @@ namespace FalconEngineTest.Utils
         public static string HtmlSimpleWithSpace = string.Concat("<html lang=\"en\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\">", ContentHtmlSimpleWithSpace, "</html>");
 
         public static string HtmlSimpleWithSpaceDoctype = string.Concat("<!DOCTYPE html>", HtmlSimpleWithSpace);
+
+        public static string? GetPDeclarationText()
+        {
+            JsonModel? json = GetData();
+            return json.PDeclarationText;
+        }
+
+        public static string? GetSpanA()
+        {
+            JsonModel? json = GetData();
+            return json.SpanA;
+        }
+
+        public static string? GetSpanInputRed()
+        {
+            JsonModel? json = GetData();
+            return json.SpanInputRed;
+        }
 
         public static string? GetSpanRed()
         {
