@@ -25,9 +25,6 @@ namespace FalconEngineTest.Utils
 
         public static string ContentPHtmlSimple = @" Ceci est un <span><a href=""declaration.html"">paragraphe</a></span>";
 
-        //TODO rename
-        public static string ThirdPHtmlSimple = "<p class=\"declarationText\"> Ceci est un <span><a href=\"declaration.html\">paragraphe</a></span></p>";
-
         public static string ContentHtmlSimpleWithSpace = string.Concat(HeadSimple, GetBodySimple());
 
         public static string HtmlSimpleWithSpace = string.Concat("<html lang=\"en\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\">", ContentHtmlSimpleWithSpace, "</html>");
@@ -37,19 +34,25 @@ namespace FalconEngineTest.Utils
         public static string? GetBodySimple()
         {
             JsonModel? json = GetData();
-            return json.BodySimple;
+            return json?.BodySimple;
         }
 
         public static string? GetDivIdContent()
         {
             JsonModel? json = GetData();
-            return json.DivIdContent;
+            return json?.DivIdContent;
+        }
+
+        public static string? GetPSimple()
+        {
+            JsonModel? json = GetData();
+            return json?.PSimple;
         }
 
         public static string? GetQuestionPHtml()
         {
             JsonModel? json = GetData();
-            return json.QuestionPHtml;
+            return json?.QuestionPHtml;
         }
 
         public static string? GetPDeclarationText()

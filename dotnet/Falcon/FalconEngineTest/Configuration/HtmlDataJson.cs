@@ -15,6 +15,7 @@ namespace FalconEngineTest.Configuration
                   "SpanInputRed" :"<span inputmode=\"false\" class=\"red\">Et il raconte des supers trucs!!!</span>",
                   "SpanA": "<span><a href=\"declaration.html\">paragraphe</a></span>",
                   "PDeclarationText":"<p class=\"declarationText\"> Ceci est un <span><a href=\"declaration.html\">paragraphe</a></span><span class=\"red\">Et il raconte des supers trucs!!!</span></p>",
+                  "PSimple":"<p class=\"declarationText\"> Ceci est un <span><a href=\"declaration.html\">paragraphe</a></span></p>",
                   "QuestionPHtml":"<p>Allez-vous apprécier mon article?</p>",
                   "DivIdContent":"<div id=\"content\"><p class=\"declarationText\"> Ceci est un <span><a href=\"declaration.html\">paragraphe</a></span><span class=\"red\">Et il raconte des supers trucs!!!</span></p><p>Allez-vous apprécier mon article?</p></div>",
                   "BodySimple":"<body class=\"main\"><div id=\"content\"><p class=\"declarationText\"> Ceci est un <span><a href=\"declaration.html\">paragraphe</a></span><span class=\"red\">Et il raconte des supers trucs!!!</span></p><p>Allez-vous apprécier mon article?</p></div></body>"
@@ -29,6 +30,7 @@ namespace FalconEngineTest.Configuration
         public string? SpanInputRed { get; set; }
         public string? SpanA { get; set; }
         public string? PDeclarationText { get; set; }
+        public string? PSimple { get; set; }
         public string? QuestionPHtml { get; set; }
         public string? DivIdContent { get; set; }
         public string? BodySimple { get; set; }
