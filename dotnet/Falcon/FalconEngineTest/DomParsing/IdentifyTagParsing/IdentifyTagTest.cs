@@ -21,7 +21,7 @@ namespace FalconEngineTest.DomParsing.IdentifyTagParsing
         [Fact]
         public void IdentifyClairlyHtmlTagElement()
         {
-            string html = HtmlData.HtmlSimpleWithSpace;
+            string html = HtmlData.GetHtmlSimple();
             var identifyTag = TestFactory.InitIdentifyTag();
 
             var tag = identifyTag.Analyze(html);

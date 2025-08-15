@@ -13,7 +13,7 @@ namespace FalconEngineTest.DomParsing.Parser
         [Fact]
         public void ParseATagAndValidateIt()
         {
-            string html = HtmlData.ALink;
+            string html = HtmlData.GetALink();
 
             var aParser = TestFactory.InitAParser();
 

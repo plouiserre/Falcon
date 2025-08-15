@@ -23,21 +23,22 @@ namespace FalconEngineTest.DomParsing.IdentifyTagParsing
         [Fact]
         public void DeterminateContentHeader()
         {
-            string html = HtmlData.HeadSimple;
+            string html = HtmlData.GetHead();
             var determinate = new DeterminateContent();
 
             string content = determinate.FindContent(html, "<head>", "</head>");
 
-            Assert.Equal(HtmlData.ContentHeadSimple, content);
+            string contentHeadSimple = HtmlData.GetHead().Replace("<head>", string.Empty).Replace("</head>", string.Empty);
+            Assert.Equal(contentHeadSimple, content);
         }
 
         [Fact]
         public void DeterminateContentMeta()
         {
-            string html = HtmlData.MetaViewPort;
+            string html = HtmlData.GetMetaViewPort();
             var determinate = new DeterminateContent();
 
-            string content = determinate.FindContent(html, HtmlData.MetaViewPort, null);
+            string content = determinate.FindContent(html, HtmlData.GetMetaViewPort(), null);
 
             Assert.Null(content);
         }
