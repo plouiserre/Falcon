@@ -16,7 +16,7 @@ namespace FalconEngineTest.DomParsing.Parser
         [Fact]
         public void ParseLinkTag()
         {
-            string html = HtmlData.GetLinkHead();
+            string html = HtmlPageSimpleData.GetLinkHead();
             var linkTagParser = TestFactory.InitLinkParser();
 
             var tag = linkTagParser.Parse(html);

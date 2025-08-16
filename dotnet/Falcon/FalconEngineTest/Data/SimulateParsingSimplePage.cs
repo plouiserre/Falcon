@@ -50,7 +50,7 @@ namespace FalconEngineTest.Data
                 Attributes = new List<AttributeModel>() { attributLang, attributDir, attributXmlns },
                 NameTag = NameTagEnum.html,
                 TagFamily = TagFamilyEnum.WithEnd,
-                Content = HtmlData.GetHtmlSimple().Replace("<html lang=\"en\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\">", string.Empty).Replace("</html>", string.Empty),
+                Content = HtmlPageSimpleData.GetHtmlSimple().Replace("<html lang=\"en\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\">", string.Empty).Replace("</html>", string.Empty),
                 TagStart = "<html lang=\"en\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\">",
                 TagEnd = "</html>",
                 Children = new List<TagModel>() { _headTag, body }
@@ -65,7 +65,7 @@ namespace FalconEngineTest.Data
                 TagFamily = TagFamilyEnum.NoEnd,
                 Attributes = new List<AttributeModel>() { new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.charset.ToString(), Value = "UTF-8" } },
                 NameTag = NameTagEnum.meta,
-                TagStart = HtmlData.GetMetaCharset()
+                TagStart = HtmlPageSimpleData.GetMetaCharset()
             };
             var metaViewPort = new TagModel()
             {
@@ -75,7 +75,7 @@ namespace FalconEngineTest.Data
                         new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.content.ToString(), Value = "width=device-width, initial-scale=1.0" }
                 },
                 NameTag = NameTagEnum.meta,
-                TagStart = HtmlData.GetMetaViewPort()
+                TagStart = HtmlPageSimpleData.GetMetaViewPort()
             };
             var title = new TagModel()
             {
@@ -100,7 +100,7 @@ namespace FalconEngineTest.Data
             {
                 NameTag = NameTagEnum.head,
                 TagFamily = TagFamilyEnum.WithEnd,
-                Content = HtmlData.GetHead().Replace("<head>", string.Empty).Replace("</head>", string.Empty),
+                Content = HtmlPageSimpleData.GetHead().Replace("<head>", string.Empty).Replace("</head>", string.Empty),
                 Children = new List<TagModel>() { _metaCharsetTag, metaViewPort, title, link },
                 TagStart = "<head>",
                 TagEnd = "</head>"
@@ -115,7 +115,7 @@ namespace FalconEngineTest.Data
             {
                 NameTag = NameTagEnum.body,
                 TagFamily = TagFamilyEnum.WithEnd,
-                Content = HtmlData.GetDivIdContent(),
+                Content = HtmlPageSimpleData.GetDivIdContent(),
                 Children = new List<TagModel>() { divContent },
                 TagStart = "<body class=\"main\">",
                 TagEnd = "</body>"
@@ -126,7 +126,7 @@ namespace FalconEngineTest.Data
         private static TagModel GetDivContent()
         {
             var attributId = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.id.ToString(), Value = "content" };
-            string content = string.Concat(HtmlData.GetPDeclarationText(), HtmlData.GetQuestionPHtml());
+            string content = string.Concat(HtmlPageSimpleData.GetPDeclarationText(), HtmlPageSimpleData.GetQuestionPHtml());
             var firstP = GetFirstPContent();
             var secondP = GetSecondPContent();
             var divTag = new TagModel()
@@ -152,7 +152,7 @@ namespace FalconEngineTest.Data
                 Attributes = new List<AttributeModel>() { attributClass },
                 NameTag = NameTagEnum.p,
                 TagFamily = TagFamilyEnum.WithEnd,
-                Content = HtmlData.GetPDeclarationText().Replace("<p class=\"declarationText\">", string.Empty).Replace("</p>", string.Empty),
+                Content = HtmlPageSimpleData.GetPDeclarationText().Replace("<p class=\"declarationText\">", string.Empty).Replace("</p>", string.Empty),
                 Children = new List<TagModel>() { childFirst, childSecond },
                 TagStart = "<p class=\"declarationText\">",
                 TagEnd = "</p>"

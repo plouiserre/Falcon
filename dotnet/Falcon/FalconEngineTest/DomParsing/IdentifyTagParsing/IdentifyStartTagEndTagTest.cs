@@ -26,9 +26,9 @@ namespace FalconEngineTest.DomParsing.IdentifyTagParsing
         {
             var identifyTag = new IdentifyStartTagEndTag();
 
-            identifyTag.DetermineStartEndTags(HtmlData.GetMetaViewPort());
+            identifyTag.DetermineStartEndTags(HtmlPageSimpleData.GetMetaViewPort());
 
-            Assert.Equal(HtmlData.GetMetaViewPort(), identifyTag.StartTag);
+            Assert.Equal(HtmlPageSimpleData.GetMetaViewPort(), identifyTag.StartTag);
             Assert.Null(identifyTag.EndTag);
         }
 
@@ -37,7 +37,7 @@ namespace FalconEngineTest.DomParsing.IdentifyTagParsing
         {
             var identifyTag = new IdentifyStartTagEndTag();
 
-            identifyTag.DetermineStartEndTags(HtmlData.GetHead());
+            identifyTag.DetermineStartEndTags(HtmlPageSimpleData.GetHead());
 
             Assert.Equal("<head>", identifyTag.StartTag);
             Assert.Equal("</head>", identifyTag.EndTag);

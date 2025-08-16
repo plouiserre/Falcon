@@ -12,7 +12,7 @@ namespace FalconEngineTest.DomParsing.Parser
         [Fact]
         public void ParseBodyDivContent()
         {
-            string body = HtmlData.GetBodySimple();
+            string body = HtmlPageSimpleData.GetBodySimple();
             var bodyParser = TestFactory.InitBodyParser();
 
             var html = bodyParser.Parse(body);

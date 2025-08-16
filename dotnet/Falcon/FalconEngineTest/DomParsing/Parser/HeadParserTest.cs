@@ -20,10 +20,10 @@ namespace FalconEngineTest.DomParsing.Parser
         {
             var headParser = TestFactory.InitHeadParser();
 
-            var tagHtml = headParser.Parse(HtmlData.GetHead());
+            var tagHtml = headParser.Parse(HtmlPageSimpleData.GetHead());
             bool isValid = headParser.IsValid();
 
-            string contentHeadSimple = HtmlData.GetHead().Replace("<head>", string.Empty).Replace("</head>", string.Empty);
+            string contentHeadSimple = HtmlPageSimpleData.GetHead().Replace("<head>", string.Empty).Replace("</head>", string.Empty);
             AssertHtml.AssertHeader(tagHtml, contentHeadSimple);
 
             Assert.True(isValid);
@@ -50,7 +50,7 @@ namespace FalconEngineTest.DomParsing.Parser
         {
             var headParser = TestFactory.InitHeadParser();
 
-            string htmlContent = HtmlData.GetHtmlSimple().Replace("<html lang=\"en\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\">", string.Empty).Replace("</html>", string.Empty);
+            string htmlContent = HtmlPageSimpleData.GetHtmlSimple().Replace("<html lang=\"en\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\">", string.Empty).Replace("</html>", string.Empty);
             string badHtml = htmlContent.Replace("</head>", string.Empty);
             var exception = Assert.Throws<HeadParsingException>(() => headParser.Parse(badHtml));
 

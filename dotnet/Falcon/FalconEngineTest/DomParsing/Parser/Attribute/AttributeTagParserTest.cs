@@ -15,7 +15,7 @@ namespace FalconEngineTest.DomParsing.Parser.Attribute
         [Fact]
         public void ParseOneAttribute()
         {
-            string html = HtmlData.GetMetaCharset();
+            string html = HtmlPageSimpleData.GetMetaCharset();
             var attributeTagParser = TestFactory.InitAttributeTagParser();
 
             var attributs = attributeTagParser.Parse(html);
@@ -29,7 +29,7 @@ namespace FalconEngineTest.DomParsing.Parser.Attribute
         [Fact]
         public void ParseTwoAttributes()
         {
-            string html = HtmlData.GetMetaViewPort();
+            string html = HtmlPageSimpleData.GetMetaViewPort();
             var attributeTagParser = TestFactory.InitAttributeTagParser();
 
             var attributs = attributeTagParser.Parse(html);

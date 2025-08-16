@@ -30,7 +30,7 @@ namespace FalconEngineTest.DomParsing
         {
             HtmlPage htmlPage = SimulateParsingSimplePage.InitHtmlPage();
 
-            var parsing = _htmlParsing.Parse(HtmlData.GetHtmlSimpleWithDoctype());
+            var parsing = _htmlParsing.Parse(HtmlPageSimpleData.GetHtmlSimpleWithDoctype());
 
             Assert.True(AssertHtml.AssertTagsAreIdenticals(htmlPage.Tags, parsing.Tags));
             Assert.True(parsing.IsValid);
@@ -39,7 +39,7 @@ namespace FalconEngineTest.DomParsing
         [Fact]
         public void IsSimplePageHasBeenNotValidateBecauseOfWrongDoctype()
         {
-            string html = string.Concat("<doctype>", HtmlData.GetHtmlSimple());
+            string html = string.Concat("<doctype>", HtmlPageSimpleData.GetHtmlSimple());
 
             var parsing = _htmlParsing.Parse(html);
 
@@ -49,7 +49,7 @@ namespace FalconEngineTest.DomParsing
         [Fact]
         public void IsSimpleHtmlHasBeenNotValidateBecauseOfWrongHtml()
         {
-            string html = string.Concat(HtmlData.GetSimpleDoctype(), "<html scheme=\"xml\">Hello World</html>");
+            string html = string.Concat(HtmlPageSimpleData.GetSimpleDoctype(), "<html scheme=\"xml\">Hello World</html>");
 
             var parsing = _htmlParsing.Parse(html);
 
@@ -59,7 +59,7 @@ namespace FalconEngineTest.DomParsing
         [Fact]
         public void IsSimpleWrongHtmlParseAndNotValidate()
         {
-            string html = HtmlData.GetHtmlSimpleWithDoctypeNotValid();
+            string html = HtmlPageSimpleData.GetHtmlSimpleWithDoctypeNotValid();
 
             var parsing = _htmlParsing.Parse(html);
 

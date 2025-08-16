@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace FalconEngineTest.Utils
 {
-    public static class HtmlData
+    public static class HtmlPageSimpleData
     {
         public static string? GetSimpleDoctype()
         {

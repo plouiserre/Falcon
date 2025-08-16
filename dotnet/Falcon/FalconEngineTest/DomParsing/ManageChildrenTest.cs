@@ -17,7 +17,7 @@ namespace FalconEngineTest.DomParsing
             var determinateChildren = TestFactory.InitDeterminateChildren();
             var parent = new TagModel();
 
-            string contentHeadSimple = HtmlData.GetHead().Replace("<head>", string.Empty).Replace("</head>", string.Empty);
+            string contentHeadSimple = HtmlPageSimpleData.GetHead().Replace("<head>", string.Empty).Replace("</head>", string.Empty);
             var headerChildren = determinateChildren.Identify(parent, contentHeadSimple);
             bool areValid = determinateChildren.ValidateChildren(parent);
 
