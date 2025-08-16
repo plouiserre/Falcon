@@ -24,7 +24,8 @@ namespace FalconEngineTest.Utils
         public static string? GetHtmlSimpleWithDoctype()
         {
             JsonModel? json = GetData();
-            return json?.HtmlSimpleWithDoctype;
+            string value = TemplatingHtmlData.GetHtmlData(json.HtmlSimpleWithDoctype, json);
+            return value;
         }
 
         public static string? GetHtmlSimple()

@@ -75,6 +75,8 @@ namespace FalconEngineTest.Utils
                     return jsonModel.LinkHead;
                 case "Head":
                     return jsonModel.Head;
+                case "HtmlSimple":
+                    return jsonModel.HtmlSimple;
                 default:
                     return jsonModel.ALink;
             }
