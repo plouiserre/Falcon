@@ -91,7 +91,8 @@ namespace FalconEngineTest.Utils
         public static string? GetPDeclarationText()
         {
             JsonModel? json = GetData();
-            return json.PDeclarationText;
+            string value = TemplatingHtmlData.GetHtmlData(json.PDeclarationText, json);
+            return value;
         }
 
         public static string? GetSpanA()

@@ -55,6 +55,8 @@ namespace FalconEngineTest.Utils
                     return jsonModel.ALink;
                 case "SpanA":
                     return jsonModel.SpanA;
+                case "SpanRed":
+                    return jsonModel.SpanRed;
                 default:
                     return jsonModel.ALink;
             }

@@ -16,7 +16,7 @@ namespace FalconEngineTest.Configuration
                   //"SpanA": "<span><a href=\"declaration.html\">paragraphe</a></span>",
                   "SpanA": "<span>{ALink}</span>",                  
                   //"PDeclarationText":"<p class=\"declarationText\"> Ceci est un <span><a href=\"declaration.html\">paragraphe</a></span><span class=\"red\">Et il raconte des supers trucs!!!</span></p>",
-                  "PDeclarationText":"<p class=\"declarationText\"> Ceci est un <span><a href=\"declaration.html\">paragraphe</a></span><span class=\"red\">Et il raconte des supers trucs!!!</span></p>",
+                  "PDeclarationText":"<p class=\"declarationText\"> Ceci est un {SpanA}{SpanRed}</p>",
                   //"PSimple":"<p class=\"declarationText\"> Ceci est un <span><a href=\"declaration.html\">paragraphe</a></span></p>",
                   "PSimple":"<p class=\"declarationText\"> Ceci est un {SpanA}</p>",
                   "QuestionPHtml":"<p>Allez-vous apprécier mon article?</p>",
