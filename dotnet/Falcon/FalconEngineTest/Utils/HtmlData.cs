@@ -78,7 +78,8 @@ namespace FalconEngineTest.Utils
         public static string? GetPSimple()
         {
             JsonModel? json = GetData();
-            return json?.PSimple;
+            string value = TemplatingHtmlData.GetHtmlData(json.PSimple, json);
+            return value;
         }
 
         public static string? GetQuestionPHtml()

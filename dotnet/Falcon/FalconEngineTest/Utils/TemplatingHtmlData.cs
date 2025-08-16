@@ -10,13 +10,34 @@ namespace FalconEngineTest.Utils
     {
         public static string GetHtmlData(string html, JsonModel jsonModel)
         {
-            if (!(html.Contains("{") && html.Contains("}")))
+            string htmlResult = string.Empty;
+            string htmlWorking = html;
+            do
+            {
+                htmlResult = ManageHtmlTemplate(htmlWorking, jsonModel);
+                htmlWorking = htmlResult;
+            } while (IsTemplatingPresent(htmlWorking));
+
+            return htmlResult;
+        }
+
+        private static string ManageHtmlTemplate(string html, JsonModel jsonModel)
+        {
+            if (!IsTemplatingPresent(html))
                 return html;
             string templateTag = GetTemplateName(html);
             string template = templateTag.Replace("{", string.Empty).Replace("}", string.Empty);
             string valueHtml = GetValue(template, jsonModel);
             string result = html.Replace(templateTag, valueHtml);
             return result;
+        }
+
+        private static bool IsTemplatingPresent(string html)
+        {
+            if (html.Contains("{") && html.Contains("}"))
+                return true;
+            else
+                return false;
         }
 
         private static string GetTemplateName(string html)
@@ -31,6 +52,9 @@ namespace FalconEngineTest.Utils
             switch (template)
             {
                 case "ALink":
+                    return jsonModel.ALink;
+                case "SpanA":
+                    return jsonModel.SpanA;
                 default:
                     return jsonModel.ALink;
             }
