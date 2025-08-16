@@ -72,7 +72,8 @@ namespace FalconEngineTest.Utils
         public static string? GetDivIdContent()
         {
             JsonModel? json = GetData();
-            return json?.DivIdContent;
+            string value = TemplatingHtmlData.GetHtmlData(json.DivIdContent, json);
+            return value;
         }
 
         public static string? GetPSimple()
