@@ -18,36 +18,31 @@ namespace FalconEngineTest.Utils
         public static string? GetHtmlSimpleWithDoctypeNotValid()
         {
             JsonModel? json = GetData();
-            string value = TemplatingHtmlData.GetHtmlData(json.HtmlSimpleWithDoctypeNotValid, json);
-            return value;
+            return TemplatingHtmlData.GetHtmlData(json.HtmlSimpleWithDoctypeNotValid, json);
         }
 
         public static string? GetHtmlSimpleWithDoctype()
         {
             JsonModel? json = GetData();
-            string value = TemplatingHtmlData.GetHtmlData(json.HtmlSimpleWithDoctype, json);
-            return value;
+            return TemplatingHtmlData.GetHtmlData(json.HtmlSimpleWithDoctype, json);
         }
 
         public static string? GetHtmlSimple()
         {
             JsonModel? json = GetData();
-            string value = TemplatingHtmlData.GetHtmlData(json.HtmlSimple, json);
-            return value;
+            return TemplatingHtmlData.GetHtmlData(json.HtmlSimple, json);
         }
 
         public static string? GetHtmlSimpleNotValid()
         {
             JsonModel? json = GetData();
-            string value = TemplatingHtmlData.GetHtmlData(json.HtmlSimpleNotValid, json);
-            return value;
+            return TemplatingHtmlData.GetHtmlData(json.HtmlSimpleNotValid, json);
         }
 
         public static string? GetHead()
         {
             JsonModel? json = GetData();
-            string value = TemplatingHtmlData.GetHtmlData(json.Head, json);
-            return value;
+            return TemplatingHtmlData.GetHtmlData(json.Head, json);
         }
 
         public static string? GetMetaCharset()
@@ -77,36 +72,31 @@ namespace FalconEngineTest.Utils
         public static string? GetBodySimple()
         {
             JsonModel? json = GetData();
-            string value = TemplatingHtmlData.GetHtmlData(json.BodySimple, json);
-            return value;
+            return TemplatingHtmlData.GetHtmlData(json.BodySimple, json);
         }
 
         public static string? GetBodySimpleNotValid()
         {
             JsonModel? json = GetData();
-            string value = TemplatingHtmlData.GetHtmlData(json.BodySimpleNotValid, json);
-            return value;
+            return TemplatingHtmlData.GetHtmlData(json.BodySimpleNotValid, json);
         }
 
         public static string? GetDivIdContent()
         {
             JsonModel? json = GetData();
-            string value = TemplatingHtmlData.GetHtmlData(json.DivIdContent, json);
-            return value;
+            return TemplatingHtmlData.GetHtmlData(json.DivIdContent, json);
         }
 
         public static string? GetDivIdContentNotValid()
         {
             JsonModel? json = GetData();
-            string value = TemplatingHtmlData.GetHtmlData(json.DivIdContentNotValid, json);
-            return value;
+            return TemplatingHtmlData.GetHtmlData(json.DivIdContentNotValid, json);
         }
 
         public static string? GetPSimple()
         {
             JsonModel? json = GetData();
-            string value = TemplatingHtmlData.GetHtmlData(json.PSimple, json);
-            return value;
+            return TemplatingHtmlData.GetHtmlData(json.PSimple, json);
         }
 
         public static string? GetQuestionPHtml()
@@ -118,15 +108,13 @@ namespace FalconEngineTest.Utils
         public static string? GetPDeclarationText()
         {
             JsonModel? json = GetData();
-            string value = TemplatingHtmlData.GetHtmlData(json.PDeclarationText, json);
-            return value;
+            return TemplatingHtmlData.GetHtmlData(json.PDeclarationText, json);
         }
 
         public static string? GetPDeclarationTextNotValid()
         {
             JsonModel? json = GetData();
-            string value = TemplatingHtmlData.GetHtmlData(json.PDeclarationTextNotValid, json);
-            return value;
+            return TemplatingHtmlData.GetHtmlData(json.PDeclarationTextNotValid, json);
         }
 
         public static string? GetSpanA()
