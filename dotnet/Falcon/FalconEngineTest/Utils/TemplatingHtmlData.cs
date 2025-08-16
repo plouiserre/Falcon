@@ -63,6 +63,14 @@ namespace FalconEngineTest.Utils
                     return jsonModel.QuestionPHtml;
                 case "DivIdContent":
                     return jsonModel.DivIdContent;
+                case "MetaCharset":
+                    return jsonModel.MetaCharset;
+                case "MetaViewPort":
+                    return jsonModel.MetaViewPort;
+                case "TitleDocument":
+                    return jsonModel.TitleDocument;
+                case "LinkHead":
+                    return jsonModel.LinkHead;
                 default:
                     return jsonModel.ALink;
             }

@@ -36,7 +36,8 @@ namespace FalconEngineTest.Utils
         public static string? GetHead()
         {
             JsonModel? json = GetData();
-            return json?.Head;
+            string value = TemplatingHtmlData.GetHtmlData(json.Head, json);
+            return value;
         }
 
         public static string? GetMetaCharset()
