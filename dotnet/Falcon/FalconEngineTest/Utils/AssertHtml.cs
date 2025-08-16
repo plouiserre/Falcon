@@ -39,7 +39,7 @@ namespace FalconEngineTest.Utils
             Assert.Equal(FamilyAttributeEnum.charset.ToString(), metaCharsetChild.Attributes[0].FamilyAttribute);
             Assert.Equal("UTF-8", metaCharsetChild.Attributes[0].Value);
             Assert.Equal(TagFamilyEnum.NoEnd, metaCharsetChild.TagFamily);
-            Assert.Equal(HtmlPageSimpleData.GetMetaCharset(), metaCharsetChild.TagStart);
+            Assert.Equal(HtmlPageSimpleData.GetHtml(TagHtmlSimple.metaCharset), metaCharsetChild.TagStart);
             Assert.Null(metaCharsetChild.TagEnd);
             Assert.Null(metaCharsetChild.Children);
         }
@@ -53,7 +53,7 @@ namespace FalconEngineTest.Utils
             Assert.Equal(FamilyAttributeEnum.content.ToString(), metaViewPort.Attributes[1].FamilyAttribute);
             Assert.Equal("width=device-width, initial-scale=1.0", metaViewPort.Attributes[1].Value);
             Assert.Equal(TagFamilyEnum.NoEnd, metaViewPort.TagFamily);
-            Assert.Equal(HtmlPageSimpleData.GetMetaViewPort(), metaViewPort.TagStart);
+            Assert.Equal(HtmlPageSimpleData.GetHtml(TagHtmlSimple.metaviewPort), metaViewPort.TagStart);
             Assert.Null(metaViewPort.TagEnd);
             Assert.Null(metaViewPort.Children);
         }
@@ -91,13 +91,13 @@ namespace FalconEngineTest.Utils
             Assert.Equal("</body>", body.TagEnd);
             Assert.Equal("classCss", body.Attributes[0].FamilyAttribute);
             Assert.Equal("main", body.Attributes[0].Value);
-            Assert.Equal(HtmlPageSimpleData.GetDivIdContent(), body.Content);
+            Assert.Equal(HtmlPageSimpleData.GetHtml(TagHtmlSimple.divIdContent), body.Content);
             AssertDivContent(body.Children[0]);
         }
 
         public static void AssertDivContent(TagModel div)
         {
-            string content = string.Concat(HtmlPageSimpleData.GetPDeclarationText(), HtmlPageSimpleData.GetQuestionPHtml());
+            string content = string.Concat(HtmlPageSimpleData.GetHtml(TagHtmlSimple.pDeclarationText), HtmlPageSimpleData.GetHtml(TagHtmlSimple.pQuestion));
             Assert.Equal(content, div.Content);
             Assert.Single(div.Attributes);
             Assert.Equal("id", div.Attributes[0].FamilyAttribute);

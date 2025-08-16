@@ -36,7 +36,7 @@ namespace FalconEngineTest.DomParsing.Parser
         [Fact]
         public void ParseAndValidateSimpleSpanWithChildren()
         {
-            var html = HtmlPageSimpleData.GetSpanA();
+            var html = HtmlPageSimpleData.GetHtml(TagHtmlSimple.spanA);
 
             var parser = TestFactory.InitSpanParser();
 
@@ -48,7 +48,7 @@ namespace FalconEngineTest.DomParsing.Parser
             Assert.Equal("</span>", tag.TagEnd);
             Assert.Equal(TagFamilyEnum.WithEnd, tag.TagFamily);
             Assert.Equal(NameTagEnum.span, tag.NameTag);
-            Assert.Equal(HtmlPageSimpleData.GetALink(), tag.Content);
+            Assert.Equal(HtmlPageSimpleData.GetHtml(TagHtmlSimple.aLink), tag.Content);
             Assert.Single(tag.Children);
             Assert.Equal("paragraphe", tag.Children[0].Content);
             Assert.Single(tag.Children[0].Attributes);

@@ -35,7 +35,7 @@ namespace FalconEngineTest.DomParsing.Parser
         [Fact]
         public void ValidateParagraphWithOneChildOneGrandChild()
         {
-            var html = HtmlPageSimpleData.GetPSimple();
+            var html = HtmlPageSimpleData.GetHtml(TagHtmlSimple.pSimple);
 
             var parser = TestFactory.InitPParser();
 
@@ -72,7 +72,7 @@ namespace FalconEngineTest.DomParsing.Parser
         [Fact]
         public void ValidateParagraphWithTwoChildOneGrandChild()
         {
-            var html = HtmlPageSimpleData.GetPDeclarationText();
+            var html = HtmlPageSimpleData.GetHtml(TagHtmlSimple.pDeclarationText);
 
             var parser = TestFactory.InitPParser();
 

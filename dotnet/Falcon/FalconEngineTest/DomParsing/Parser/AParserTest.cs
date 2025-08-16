@@ -14,7 +14,7 @@ namespace FalconEngineTest.DomParsing.Parser
         [Fact]
         public void ParseATagAndValidateIt()
         {
-            string html = HtmlPageSimpleData.GetALink();
+            string html = HtmlPageSimpleData.GetHtml(TagHtmlSimple.aLink);
 
             var aParser = TestFactory.InitAParser();
 

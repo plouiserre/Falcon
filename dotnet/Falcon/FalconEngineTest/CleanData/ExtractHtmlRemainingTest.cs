@@ -20,25 +20,25 @@ namespace FalconEngineTest.CleanData
         [Fact]
         public void RemoveSimpleDoctypeOneLine()
         {
-            string html = HtmlPageSimpleData.GetHtmlSimpleWithDoctype();
+            string html = HtmlPageSimpleData.GetHtml(TagHtmlSimple.htmlPageWithDoctype);
             var doctypeTag = TagTestFactory.GetSimpleDoctype();
             var extraction = new ExtractHtmlRemaining();
 
             var htmlRemaining = extraction.Extract(doctypeTag, html, ExtractionMode.ASide);
 
-            Assert.Equal(HtmlPageSimpleData.GetHtmlSimple(), htmlRemaining);
+            Assert.Equal(HtmlPageSimpleData.GetHtml(TagHtmlSimple.htmlPage), htmlRemaining);
         }
 
         [Fact]
         public void RemoveSimpleDoctypeMultipleLine()
         {
-            string html = HtmlPageSimpleData.GetHtmlSimpleWithDoctype();
+            string html = HtmlPageSimpleData.GetHtml(TagHtmlSimple.htmlPageWithDoctype);
             var doctypeTag = TagTestFactory.GetSimpleDoctype();
             var extraction = new ExtractHtmlRemaining();
 
             var htmlRemaining = extraction.Extract(doctypeTag, html, ExtractionMode.ASide);
 
-            Assert.Equal(HtmlPageSimpleData.GetHtmlSimple(), htmlRemaining);
+            Assert.Equal(HtmlPageSimpleData.GetHtml(TagHtmlSimple.htmlPage), htmlRemaining);
         }
 
         //meta
@@ -46,21 +46,21 @@ namespace FalconEngineTest.CleanData
         [Fact]
         public void RemoveFirstMetaHeadContent()
         {
-            string contentHeadSimple = HtmlPageSimpleData.GetHead().Replace("<head>", string.Empty).Replace("</head>", string.Empty);
+            string contentHeadSimple = HtmlPageSimpleData.GetHtml(TagHtmlSimple.head).Replace("<head>", string.Empty).Replace("</head>", string.Empty);
             string html = contentHeadSimple;
             var meta = TagTestFactory.GetMetaCharset();
             var extraction = new ExtractHtmlRemaining();
 
             var htmlRemaining = extraction.Extract(meta, html, ExtractionMode.ASide);
 
-            string htmlRemainingExpected = contentHeadSimple.Replace(HtmlPageSimpleData.GetMetaCharset(), string.Empty);
+            string htmlRemainingExpected = contentHeadSimple.Replace(HtmlPageSimpleData.GetHtml(TagHtmlSimple.metaCharset), string.Empty);
             Assert.Equal(htmlRemainingExpected, htmlRemaining);
         }
 
         [Fact]
         public void RemoveHeadTags()
         {
-            string html = HtmlPageSimpleData.GetHtmlSimpleWithDoctype();
+            string html = HtmlPageSimpleData.GetHtml(TagHtmlSimple.htmlPageWithDoctype);
             var htmlTag = TagTestFactory.GetSimpleHtmlTag();
             string content = html.Replace(htmlTag.TagStart, string.Empty).Replace(htmlTag.TagEnd, string.Empty);
             htmlTag.Content = content;

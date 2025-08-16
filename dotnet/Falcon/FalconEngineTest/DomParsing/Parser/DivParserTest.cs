@@ -34,7 +34,7 @@ namespace FalconEngineTest.DomParsing.Parser
         [Fact]
         public void ParseComplexeDivAndValidateIt()
         {
-            string html = HtmlPageSimpleData.GetDivIdContent();
+            string html = HtmlPageSimpleData.GetHtml(TagHtmlSimple.divIdContent);
 
             var divParser = TestFactory.InitDivParser();
 

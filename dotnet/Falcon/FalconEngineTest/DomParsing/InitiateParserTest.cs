@@ -23,7 +23,7 @@ namespace FalconEngineTest.DomParsing
         [Fact]
         public void ShouldInitiateHtmlParser()
         {
-            string? html = HtmlPageSimpleData.GetHtmlSimpleWithDoctype();
+            string? html = HtmlPageSimpleData.GetHtml(TagHtmlSimple.htmlPageWithDoctype);
             var initiate = TestFactory.InitInitiateParser();
 
             var parsers = initiate.GetTagParsers(html);
@@ -36,7 +36,7 @@ namespace FalconEngineTest.DomParsing
         [Fact]
         public void ShoudInitiateDoctypeParser()
         {
-            string? html = HtmlPageSimpleData.GetSimpleDoctype();
+            string? html = HtmlPageSimpleData.GetHtml(TagHtmlSimple.doctype);
             var initiate = TestFactory.InitInitiateParser();
 
             var parsers = initiate.GetTagParsers(html);
@@ -48,7 +48,7 @@ namespace FalconEngineTest.DomParsing
         [Fact]
         public void ShoudInitiateHeadParser()
         {
-            string? html = HtmlPageSimpleData.GetHead();
+            string? html = HtmlPageSimpleData.GetHtml(TagHtmlSimple.head);
             var initiate = TestFactory.InitInitiateParser();
 
             var parsers = initiate.GetTagParsers(html);
@@ -73,7 +73,7 @@ namespace FalconEngineTest.DomParsing
         [Fact]
         public void ShoudInitiateLinkParser()
         {
-            string html = HtmlPageSimpleData.GetLinkHead();
+            string html = HtmlPageSimpleData.GetHtml(TagHtmlSimple.link);
             var initiate = TestFactory.InitInitiateParser();
 
             var parsers = initiate.GetTagParsers(html);
@@ -86,7 +86,7 @@ namespace FalconEngineTest.DomParsing
         [Fact]
         public void ShoudInitiateTitleParser()
         {
-            string html = HtmlPageSimpleData.GetTitleDocument();
+            string html = HtmlPageSimpleData.GetHtml(TagHtmlSimple.title);
             var initiate = TestFactory.InitInitiateParser();
 
             var parsers = initiate.GetTagParsers(html);
@@ -98,7 +98,7 @@ namespace FalconEngineTest.DomParsing
         [Fact]
         public void ShouldInitiateAllHeadContentParsers()
         {
-            string html = HtmlPageSimpleData.GetHead().Replace("<head>", string.Empty).Replace("</head>", string.Empty);
+            string html = HtmlPageSimpleData.GetHtml(TagHtmlSimple.head).Replace("<head>", string.Empty).Replace("</head>", string.Empty);
             var initiate = TestFactory.InitInitiateParser();
 
             var parsers = initiate.GetTagParsers(html);
