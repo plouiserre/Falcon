@@ -66,7 +66,8 @@ namespace FalconEngineTest.Utils
         public static string? GetBodySimple()
         {
             JsonModel? json = GetData();
-            return json?.BodySimple;
+            string value = TemplatingHtmlData.GetHtmlData(json.BodySimple, json);
+            return value;
         }
 
         public static string? GetDivIdContent()

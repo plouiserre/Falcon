@@ -47,7 +47,7 @@ namespace FalconEngineTest.Utils
             return html.Substring(firstPartTemplate, secondPartTemplate - firstPartTemplate + 1);
         }
 
-        private static string GetValue(string template, JsonModel jsonModel)
+        private static string? GetValue(string template, JsonModel jsonModel)
         {
             switch (template)
             {
@@ -61,6 +61,8 @@ namespace FalconEngineTest.Utils
                     return jsonModel.PDeclarationText;
                 case "QuestionPHtml":
                     return jsonModel.QuestionPHtml;
+                case "DivIdContent":
+                    return jsonModel.DivIdContent;
                 default:
                     return jsonModel.ALink;
             }
