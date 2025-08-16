@@ -59,7 +59,7 @@ namespace FalconEngineTest.DomParsing
         [Fact]
         public void IsSimpleWrongHtmlParseAndNotValidate()
         {
-            string html = HtmlData.GetHtmlNotValidSimpleWithSpaceDoctype();
+            string html = HtmlData.GetHtmlSimpleWithDoctypeNotValid();
 
             var parsing = _htmlParsing.Parse(html);
 

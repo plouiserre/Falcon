@@ -57,14 +57,22 @@ namespace FalconEngineTest.Utils
                     return jsonModel.SpanA;
                 case "SpanRed":
                     return jsonModel.SpanRed;
+                case "SpanInputRed":
+                    return jsonModel.SpanInputRed;
                 case "PDeclarationText":
                     return jsonModel.PDeclarationText;
+                case "PDeclarationTextNotValid":
+                    return jsonModel.PDeclarationTextNotValid;
                 case "QuestionPHtml":
                     return jsonModel.QuestionPHtml;
                 case "DivIdContent":
                     return jsonModel.DivIdContent;
+                case "DivIdContentNotValid":
+                    return jsonModel.DivIdContentNotValid;
                 case "BodySimple":
                     return jsonModel.BodySimple;
+                case "BodySimpleNotValid":
+                    return jsonModel.BodySimpleNotValid;
                 case "MetaCharset":
                     return jsonModel.MetaCharset;
                 case "MetaViewPort":
@@ -77,6 +85,8 @@ namespace FalconEngineTest.Utils
                     return jsonModel.Head;
                 case "HtmlSimple":
                     return jsonModel.HtmlSimple;
+                case "HtmlSimpleNotValid":
+                    return jsonModel.HtmlSimpleNotValid;
                 default:
                     return jsonModel.ALink;
             }

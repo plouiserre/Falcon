@@ -15,10 +15,11 @@ namespace FalconEngineTest.Utils
             return json?.SimpleDoctype;
         }
 
-        public static string? GetHtmlNotValidSimpleWithSpaceDoctype()
+        public static string? GetHtmlSimpleWithDoctypeNotValid()
         {
             JsonModel? json = GetData();
-            return json?.HtmlNotValidSimpleWithSpaceDoctype;
+            string value = TemplatingHtmlData.GetHtmlData(json.HtmlSimpleWithDoctypeNotValid, json);
+            return value;
         }
 
         public static string? GetHtmlSimpleWithDoctype()
@@ -32,6 +33,13 @@ namespace FalconEngineTest.Utils
         {
             JsonModel? json = GetData();
             string value = TemplatingHtmlData.GetHtmlData(json.HtmlSimple, json);
+            return value;
+        }
+
+        public static string? GetHtmlSimpleNotValid()
+        {
+            JsonModel? json = GetData();
+            string value = TemplatingHtmlData.GetHtmlData(json.HtmlSimpleNotValid, json);
             return value;
         }
 
@@ -73,10 +81,24 @@ namespace FalconEngineTest.Utils
             return value;
         }
 
+        public static string? GetBodySimpleNotValid()
+        {
+            JsonModel? json = GetData();
+            string value = TemplatingHtmlData.GetHtmlData(json.BodySimpleNotValid, json);
+            return value;
+        }
+
         public static string? GetDivIdContent()
         {
             JsonModel? json = GetData();
             string value = TemplatingHtmlData.GetHtmlData(json.DivIdContent, json);
+            return value;
+        }
+
+        public static string? GetDivIdContentNotValid()
+        {
+            JsonModel? json = GetData();
+            string value = TemplatingHtmlData.GetHtmlData(json.DivIdContentNotValid, json);
             return value;
         }
 
@@ -97,6 +119,13 @@ namespace FalconEngineTest.Utils
         {
             JsonModel? json = GetData();
             string value = TemplatingHtmlData.GetHtmlData(json.PDeclarationText, json);
+            return value;
+        }
+
+        public static string? GetPDeclarationTextNotValid()
+        {
+            JsonModel? json = GetData();
+            string value = TemplatingHtmlData.GetHtmlData(json.PDeclarationTextNotValid, json);
             return value;
         }
 
