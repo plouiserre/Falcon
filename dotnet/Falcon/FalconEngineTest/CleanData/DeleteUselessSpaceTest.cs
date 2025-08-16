@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using FalconEngine.CleanData;
 using FalconEngine.Models;
 using FalconEngineTest.Utils;
+using FalconEngineTest.Utils.HtmlData;
 
 namespace FalconEngineTest.CleanData
 {

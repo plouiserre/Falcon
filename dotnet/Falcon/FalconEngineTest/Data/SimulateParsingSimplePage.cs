@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using FalconEngine.Models;
-using FalconEngineTest.Utils;
+using FalconEngineTest.Utils.HtmlData;
 using Xunit.Sdk;
 
 namespace FalconEngineTest.Data

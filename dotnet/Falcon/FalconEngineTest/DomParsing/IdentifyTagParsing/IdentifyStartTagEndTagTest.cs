@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FalconEngine.DomParsing.CustomException;
 using FalconEngine.DomParsing.IdentifyTagParsing;
-using FalconEngineTest.Utils;
+using FalconEngineTest.Utils.HtmlData;
 
 namespace FalconEngineTest.DomParsing.IdentifyTagParsing
 {

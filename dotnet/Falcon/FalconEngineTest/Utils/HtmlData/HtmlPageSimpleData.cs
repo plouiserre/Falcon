@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using FalconEngineTest.Configuration;
 using Newtonsoft.Json;
 
-namespace FalconEngineTest.Utils
+namespace FalconEngineTest.Utils.HtmlData
 {
     public static class HtmlPageSimpleData
     {

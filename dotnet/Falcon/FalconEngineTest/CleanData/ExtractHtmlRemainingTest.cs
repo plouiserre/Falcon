@@ -7,7 +7,7 @@ using FalconEngine.CleanData;
 using FalconEngine.DomParsing.Parser;
 using FalconEngine.Models;
 using FalconEngineTest.Data;
-using FalconEngineTest.Utils;
+using FalconEngineTest.Utils.HtmlData;
 
 namespace FalconEngineTest.CleanData
 {
