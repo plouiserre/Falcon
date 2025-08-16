@@ -63,6 +63,8 @@ namespace FalconEngineTest.Utils
                     return jsonModel.QuestionPHtml;
                 case "DivIdContent":
                     return jsonModel.DivIdContent;
+                case "BodySimple":
+                    return jsonModel.BodySimple;
                 case "MetaCharset":
                     return jsonModel.MetaCharset;
                 case "MetaViewPort":
@@ -71,6 +73,8 @@ namespace FalconEngineTest.Utils
                     return jsonModel.TitleDocument;
                 case "LinkHead":
                     return jsonModel.LinkHead;
+                case "Head":
+                    return jsonModel.Head;
                 default:
                     return jsonModel.ALink;
             }

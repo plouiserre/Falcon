@@ -30,7 +30,8 @@ namespace FalconEngineTest.Utils
         public static string? GetHtmlSimple()
         {
             JsonModel? json = GetData();
-            return json?.HtmlSimple;
+            string value = TemplatingHtmlData.GetHtmlData(json.HtmlSimple, json);
+            return value;
         }
 
         public static string? GetHead()
