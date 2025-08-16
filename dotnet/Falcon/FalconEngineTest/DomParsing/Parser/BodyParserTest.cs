@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FalconEngine.DomParsing.Parser;
 using FalconEngineTest.Utils;
+using FalconEngineTest.Utils.HtmlData;
 
 namespace FalconEngineTest.DomParsing.Parser
 {
@@ -12,7 +13,7 @@ namespace FalconEngineTest.DomParsing.Parser
         [Fact]
         public void ParseBodyDivContent()
         {
-            string body = HtmlData.GetBodySimple();
+            string body = HtmlPageSimpleData.GetHtml(TagHtmlSimple.body);
             var bodyParser = TestFactory.InitBodyParser();
 
             var html = bodyParser.Parse(body);

@@ -8,6 +8,7 @@ using FalconEngine.DomParsing.IdentifyTagParsing;
 using FalconEngine.DomParsing.Parser;
 using FalconEngine.Models;
 using FalconEngineTest.Utils;
+using FalconEngineTest.Utils.HtmlData;
 
 namespace FalconEngineTest.DomParsing.IdentifyTagParsing
 {
@@ -21,7 +22,7 @@ namespace FalconEngineTest.DomParsing.IdentifyTagParsing
         [Fact]
         public void IdentifyClairlyHtmlTagElement()
         {
-            string html = HtmlData.GetHtmlSimple();
+            string html = HtmlPageSimpleData.GetHtml(TagHtmlSimple.htmlPage);
             var identifyTag = TestFactory.InitIdentifyTag();
 
             var tag = identifyTag.Analyze(html);

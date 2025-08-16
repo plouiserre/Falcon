@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FalconEngine.Models;
 using FalconEngineTest.Utils;
+using FalconEngineTest.Utils.HtmlData;
 
 namespace FalconEngineTest.DomParsing.Parser
 {
@@ -34,7 +35,7 @@ namespace FalconEngineTest.DomParsing.Parser
         [Fact]
         public void ValidateParagraphWithOneChildOneGrandChild()
         {
-            var html = HtmlData.GetPSimple();
+            var html = HtmlPageSimpleData.GetHtml(TagHtmlSimple.pSimple);
 
             var parser = TestFactory.InitPParser();
 
@@ -71,7 +72,7 @@ namespace FalconEngineTest.DomParsing.Parser
         [Fact]
         public void ValidateParagraphWithTwoChildOneGrandChild()
         {
-            var html = HtmlData.GetPDeclarationText();
+            var html = HtmlPageSimpleData.GetHtml(TagHtmlSimple.pDeclarationText);
 
             var parser = TestFactory.InitPParser();
 

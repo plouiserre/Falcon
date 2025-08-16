@@ -9,6 +9,7 @@ using FalconEngine.DomParsing.IdentifyTagParsing;
 using FalconEngine.DomParsing.Parser;
 using FalconEngine.Models;
 using FalconEngineTest.Utils;
+using FalconEngineTest.Utils.HtmlData;
 
 namespace FalconEngineTest.DomParsing.Parser
 {
@@ -18,13 +19,13 @@ namespace FalconEngineTest.DomParsing.Parser
         [Fact]
         public void ParseSimpleHtmlOneLine()
         {
-            string html = HtmlData.GetHtmlSimple();
+            string html = HtmlPageSimpleData.GetHtml(TagHtmlSimple.htmlPage);
             var htmlTagParser = TestFactory.InitHtmlTagParser(true);
 
             var tagHtml = htmlTagParser.Parse(html);
             bool isValid = htmlTagParser.IsValid();
 
-            string contentHtmlSimpleWithSpace = HtmlData.GetHtmlSimple().Replace("<html lang=\"en\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\">", string.Empty)
+            string contentHtmlSimpleWithSpace = HtmlPageSimpleData.GetHtml(TagHtmlSimple.htmlPage).Replace("<html lang=\"en\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\">", string.Empty)
                                                 .Replace("</html>", string.Empty);
             Assert.Equal(NameTagEnum.html, tagHtml.NameTag);
             Assert.Equal(contentHtmlSimpleWithSpace, tagHtml.Content);
@@ -36,13 +37,13 @@ namespace FalconEngineTest.DomParsing.Parser
         [Fact]
         public void ParseSimpleHtmlWithSpaceAndEscapment()
         {
-            string html = HtmlData.GetHtmlSimple();
+            string html = HtmlPageSimpleData.GetHtml(TagHtmlSimple.htmlPage);
             var htmlTagParser = TestFactory.InitHtmlTagParser(true);
 
             var tagHtml = htmlTagParser.Parse(html);
             bool isValid = htmlTagParser.IsValid();
 
-            string contentHtmlSimpleWithSpace = HtmlData.GetHtmlSimple().Replace("<html lang=\"en\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\">", string.Empty)
+            string contentHtmlSimpleWithSpace = HtmlPageSimpleData.GetHtml(TagHtmlSimple.htmlPage).Replace("<html lang=\"en\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\">", string.Empty)
                                                 .Replace("</html>", string.Empty);
             Assert.Equal(contentHtmlSimpleWithSpace, tagHtml.Content);
             Assert.Equal(NameTagEnum.html, tagHtml.NameTag);
@@ -93,7 +94,7 @@ namespace FalconEngineTest.DomParsing.Parser
         [Fact]
         public void HtmlTagWithChildrenIsParsedAndOk()
         {
-            var html = string.Concat("<html>", HtmlData.GetDivIdContent(), "</html>");
+            var html = string.Concat("<html>", HtmlPageSimpleData.GetHtml(TagHtmlSimple.divIdContent), "</html>");
             var htmlTagParser = TestFactory.InitHtmlTagParser(true);
 
             var tag = htmlTagParser.Parse(html);
@@ -103,7 +104,7 @@ namespace FalconEngineTest.DomParsing.Parser
             Assert.Equal("<html>", tag.TagStart);
             Assert.Equal("</html>", tag.TagEnd);
             Assert.Equal(TagFamilyEnum.WithEnd, tag.TagFamily);
-            Assert.Equal(HtmlData.GetDivIdContent(), tag.Content);
+            Assert.Equal(HtmlPageSimpleData.GetHtml(TagHtmlSimple.divIdContent), tag.Content);
             Assert.Single(tag.Children);
             AssertHtml.AssertDivContent(tag.Children[0]);
         }

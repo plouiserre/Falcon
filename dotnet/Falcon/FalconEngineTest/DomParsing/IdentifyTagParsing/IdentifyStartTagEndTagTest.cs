@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FalconEngine.DomParsing.CustomException;
 using FalconEngine.DomParsing.IdentifyTagParsing;
-using FalconEngineTest.Utils;
+using FalconEngineTest.Utils.HtmlData;
 
 namespace FalconEngineTest.DomParsing.IdentifyTagParsing
 {
@@ -26,9 +26,9 @@ namespace FalconEngineTest.DomParsing.IdentifyTagParsing
         {
             var identifyTag = new IdentifyStartTagEndTag();
 
-            identifyTag.DetermineStartEndTags(HtmlData.GetMetaViewPort());
+            identifyTag.DetermineStartEndTags(HtmlPageSimpleData.GetHtml(TagHtmlSimple.metaviewPort));
 
-            Assert.Equal(HtmlData.GetMetaViewPort(), identifyTag.StartTag);
+            Assert.Equal(HtmlPageSimpleData.GetHtml(TagHtmlSimple.metaviewPort), identifyTag.StartTag);
             Assert.Null(identifyTag.EndTag);
         }
 
@@ -37,7 +37,7 @@ namespace FalconEngineTest.DomParsing.IdentifyTagParsing
         {
             var identifyTag = new IdentifyStartTagEndTag();
 
-            identifyTag.DetermineStartEndTags(HtmlData.GetHead());
+            identifyTag.DetermineStartEndTags(HtmlPageSimpleData.GetHtml(TagHtmlSimple.head));
 
             Assert.Equal("<head>", identifyTag.StartTag);
             Assert.Equal("</head>", identifyTag.EndTag);

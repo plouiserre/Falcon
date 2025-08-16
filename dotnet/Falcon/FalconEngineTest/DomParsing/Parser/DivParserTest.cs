@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FalconEngine.Models;
 using FalconEngineTest.Utils;
+using FalconEngineTest.Utils.HtmlData;
 
 namespace FalconEngineTest.DomParsing.Parser
 {
@@ -33,7 +34,7 @@ namespace FalconEngineTest.DomParsing.Parser
         [Fact]
         public void ParseComplexeDivAndValidateIt()
         {
-            string html = HtmlData.GetDivIdContent();
+            string html = HtmlPageSimpleData.GetHtml(TagHtmlSimple.divIdContent);
 
             var divParser = TestFactory.InitDivParser();
 

@@ -6,6 +6,7 @@ using FalconEngine.DomParsing.CustomException;
 using FalconEngine.DomParsing.IdentifyTagParsing;
 using FalconEngine.Models;
 using FalconEngineTest.Utils;
+using FalconEngineTest.Utils.HtmlData;
 
 namespace FalconEngineTest.DomParsing
 {
@@ -17,7 +18,7 @@ namespace FalconEngineTest.DomParsing
             var determinateChildren = TestFactory.InitDeterminateChildren();
             var parent = new TagModel();
 
-            string contentHeadSimple = HtmlData.GetHead().Replace("<head>", string.Empty).Replace("</head>", string.Empty);
+            string contentHeadSimple = HtmlPageSimpleData.GetHtml(TagHtmlSimple.head).Replace("<head>", string.Empty).Replace("</head>", string.Empty);
             var headerChildren = determinateChildren.Identify(parent, contentHeadSimple);
             bool areValid = determinateChildren.ValidateChildren(parent);
 

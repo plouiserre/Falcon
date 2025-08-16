@@ -7,6 +7,7 @@ using FalconEngine.DomParsing.CustomException;
 using FalconEngine.DomParsing.Parser;
 using FalconEngine.Models;
 using FalconEngineTest.Utils;
+using FalconEngineTest.Utils.HtmlData;
 
 namespace FalconEngineTest.DomParsing.Parser.Attribute
 {
@@ -15,7 +16,7 @@ namespace FalconEngineTest.DomParsing.Parser.Attribute
         [Fact]
         public void ParseOneAttribute()
         {
-            string html = HtmlData.GetMetaCharset();
+            string html = HtmlPageSimpleData.GetHtml(TagHtmlSimple.metaCharset);
             var attributeTagParser = TestFactory.InitAttributeTagParser();
 
             var attributs = attributeTagParser.Parse(html);
@@ -29,7 +30,7 @@ namespace FalconEngineTest.DomParsing.Parser.Attribute
         [Fact]
         public void ParseTwoAttributes()
         {
-            string html = HtmlData.GetMetaViewPort();
+            string html = HtmlPageSimpleData.GetHtml(TagHtmlSimple.metaviewPort);
             var attributeTagParser = TestFactory.InitAttributeTagParser();
 
             var attributs = attributeTagParser.Parse(html);

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FalconEngine.Models;
-using FalconEngineTest.Utils;
+using FalconEngineTest.Utils.HtmlData;
 
 namespace FalconEngineTest.Data
 {
@@ -27,7 +27,7 @@ namespace FalconEngineTest.Data
                 TagFamily = TagFamilyEnum.NoEnd,
                 Attributes = new List<AttributeModel>() { new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.charset.ToString(), Value = "UTF-8" } },
                 NameTag = NameTagEnum.meta,
-                TagStart = HtmlData.GetMetaCharset()
+                TagStart = HtmlPageSimpleData.GetHtml(TagHtmlSimple.metaCharset)
             };
             return metaCharsetTag;
         }

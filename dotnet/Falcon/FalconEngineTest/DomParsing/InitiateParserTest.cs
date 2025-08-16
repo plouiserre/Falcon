@@ -7,6 +7,7 @@ using FalconEngine.DomParsing;
 using FalconEngine.DomParsing.IdentifyTagParsing;
 using FalconEngine.DomParsing.Parser;
 using FalconEngineTest.Utils;
+using FalconEngineTest.Utils.HtmlData;
 
 namespace FalconEngineTest.DomParsing
 {
@@ -22,7 +23,7 @@ namespace FalconEngineTest.DomParsing
         [Fact]
         public void ShouldInitiateHtmlParser()
         {
-            string? html = HtmlData.GetHtmlSimpleWithDoctype();
+            string? html = HtmlPageSimpleData.GetHtml(TagHtmlSimple.htmlPageWithDoctype);
             var initiate = TestFactory.InitInitiateParser();
 
             var parsers = initiate.GetTagParsers(html);
@@ -35,7 +36,7 @@ namespace FalconEngineTest.DomParsing
         [Fact]
         public void ShoudInitiateDoctypeParser()
         {
-            string? html = HtmlData.GetSimpleDoctype();
+            string? html = HtmlPageSimpleData.GetHtml(TagHtmlSimple.doctype);
             var initiate = TestFactory.InitInitiateParser();
 
             var parsers = initiate.GetTagParsers(html);
@@ -47,7 +48,7 @@ namespace FalconEngineTest.DomParsing
         [Fact]
         public void ShoudInitiateHeadParser()
         {
-            string? html = HtmlData.GetHead();
+            string? html = HtmlPageSimpleData.GetHtml(TagHtmlSimple.head);
             var initiate = TestFactory.InitInitiateParser();
 
             var parsers = initiate.GetTagParsers(html);
@@ -72,7 +73,7 @@ namespace FalconEngineTest.DomParsing
         [Fact]
         public void ShoudInitiateLinkParser()
         {
-            string html = HtmlData.GetLinkHead();
+            string html = HtmlPageSimpleData.GetHtml(TagHtmlSimple.link);
             var initiate = TestFactory.InitInitiateParser();
 
             var parsers = initiate.GetTagParsers(html);
@@ -85,7 +86,7 @@ namespace FalconEngineTest.DomParsing
         [Fact]
         public void ShoudInitiateTitleParser()
         {
-            string html = HtmlData.GetTitleDocument();
+            string html = HtmlPageSimpleData.GetHtml(TagHtmlSimple.title);
             var initiate = TestFactory.InitInitiateParser();
 
             var parsers = initiate.GetTagParsers(html);
@@ -97,7 +98,7 @@ namespace FalconEngineTest.DomParsing
         [Fact]
         public void ShouldInitiateAllHeadContentParsers()
         {
-            string html = HtmlData.GetHead().Replace("<head>", string.Empty).Replace("</head>", string.Empty);
+            string html = HtmlPageSimpleData.GetHtml(TagHtmlSimple.head).Replace("<head>", string.Empty).Replace("</head>", string.Empty);
             var initiate = TestFactory.InitInitiateParser();
 
             var parsers = initiate.GetTagParsers(html);

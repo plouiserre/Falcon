@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using FalconEngine.DomParsing.Parser;
 using FalconEngine.Models;
 using FalconEngineTest.Utils;
+using FalconEngineTest.Utils.HtmlData;
 
 namespace FalconEngineTest.DomParsing.Parser
 {
@@ -13,7 +14,7 @@ namespace FalconEngineTest.DomParsing.Parser
         [Fact]
         public void ParseATagAndValidateIt()
         {
-            string html = HtmlData.GetALink();
+            string html = HtmlPageSimpleData.GetHtml(TagHtmlSimple.aLink);
 
             var aParser = TestFactory.InitAParser();
 

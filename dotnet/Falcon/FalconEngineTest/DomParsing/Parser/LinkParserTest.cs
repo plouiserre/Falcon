@@ -8,6 +8,7 @@ using FalconEngine.DomParsing.IdentifyTagParsing;
 using FalconEngine.DomParsing.Parser;
 using FalconEngine.Models;
 using FalconEngineTest.Utils;
+using FalconEngineTest.Utils.HtmlData;
 
 namespace FalconEngineTest.DomParsing.Parser
 {
@@ -16,7 +17,7 @@ namespace FalconEngineTest.DomParsing.Parser
         [Fact]
         public void ParseLinkTag()
         {
-            string html = HtmlData.GetLinkHead();
+            string html = HtmlPageSimpleData.GetHtml(TagHtmlSimple.link);
             var linkTagParser = TestFactory.InitLinkParser();
 
             var tag = linkTagParser.Parse(html);
