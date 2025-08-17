@@ -4,11 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using FalconEngineTest.Configuration;
 
-namespace FalconEngineTest.Utils
+namespace FalconEngineTest.Utils.Templating
 {
-    public class TemplatingHtmlData
+    public class TemplatingHtmlSimpleData
     {
-        public static string GetHtmlData(string html, JsonModel jsonModel)
+        public static string GetHtmlSimpleData(string html, JsonSimpleDataModel jsonModel)
         {
             string htmlResult = string.Empty;
             string htmlWorking = html;
@@ -21,7 +21,7 @@ namespace FalconEngineTest.Utils
             return htmlResult;
         }
 
-        private static string ManageHtmlTemplate(string html, JsonModel jsonModel)
+        private static string ManageHtmlTemplate(string html, JsonSimpleDataModel jsonModel)
         {
             if (!IsTemplatingPresent(html))
                 return html;
@@ -47,7 +47,7 @@ namespace FalconEngineTest.Utils
             return html.Substring(firstPartTemplate, secondPartTemplate - firstPartTemplate + 1);
         }
 
-        private static string? GetValue(string template, JsonModel jsonModel)
+        private static string? GetValue(string template, JsonSimpleDataModel jsonModel)
         {
             switch (template)
             {

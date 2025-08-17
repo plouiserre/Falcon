@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace FalconEngineTest.Configuration
 {
     //I'm in visual studio code I do not want manage jsonfile during test
-    public static class HtmlDataJson
+    public static class HtmlSimpleDataJson
     {
         public static string AllDataJson = """
                 {
@@ -36,7 +36,7 @@ namespace FalconEngineTest.Configuration
                 """;
     }
 
-    public class JsonModel
+    public class JsonSimpleDataModel
     {
         public string? ALink { get; set; }
         public string? SpanRed { get; set; }

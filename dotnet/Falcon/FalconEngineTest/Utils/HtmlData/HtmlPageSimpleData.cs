@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FalconEngineTest.Configuration;
+using FalconEngineTest.Utils.Templating;
 using Newtonsoft.Json;
 
 namespace FalconEngineTest.Utils.HtmlData
@@ -61,100 +62,100 @@ namespace FalconEngineTest.Utils.HtmlData
             }
         }
 
-        private static string? GetDoctype(JsonModel json)
+        private static string? GetDoctype(JsonSimpleDataModel json)
         {
             return json?.SimpleDoctype;
         }
 
-        private static string? GetHtmlSimpleWithDoctypeNotValid(JsonModel json)
+        private static string? GetHtmlSimpleWithDoctypeNotValid(JsonSimpleDataModel json)
         {
-            return TemplatingHtmlData.GetHtmlData(json.HtmlSimpleWithDoctypeNotValid, json);
+            return TemplatingHtmlSimpleData.GetHtmlSimpleData(json.HtmlSimpleWithDoctypeNotValid, json);
         }
 
-        private static string? GetHtmlSimpleWithDoctype(JsonModel json)
+        private static string? GetHtmlSimpleWithDoctype(JsonSimpleDataModel json)
         {
-            return TemplatingHtmlData.GetHtmlData(json.HtmlSimpleWithDoctype, json);
+            return TemplatingHtmlSimpleData.GetHtmlSimpleData(json.HtmlSimpleWithDoctype, json);
         }
 
-        private static string? GetHtmlSimple(JsonModel json)
+        private static string? GetHtmlSimple(JsonSimpleDataModel json)
         {
-            return TemplatingHtmlData.GetHtmlData(json.HtmlSimple, json);
+            return TemplatingHtmlSimpleData.GetHtmlSimpleData(json.HtmlSimple, json);
         }
 
-        private static string? GetHead(JsonModel json)
+        private static string? GetHead(JsonSimpleDataModel json)
         {
-            return TemplatingHtmlData.GetHtmlData(json.Head, json);
+            return TemplatingHtmlSimpleData.GetHtmlSimpleData(json.Head, json);
         }
 
-        private static string? GetMetaCharset(JsonModel json)
+        private static string? GetMetaCharset(JsonSimpleDataModel json)
         {
             return json?.MetaCharset;
         }
 
-        private static string? GetMetaViewPort(JsonModel json)
+        private static string? GetMetaViewPort(JsonSimpleDataModel json)
         {
             return json?.MetaViewPort;
         }
 
-        private static string? GetTitleDocument(JsonModel json)
+        private static string? GetTitleDocument(JsonSimpleDataModel json)
         {
             return json?.TitleDocument;
         }
 
-        private static string? GetLinkHead(JsonModel json)
+        private static string? GetLinkHead(JsonSimpleDataModel json)
         {
             return json?.LinkHead;
         }
 
-        private static string? GetBody(JsonModel json)
+        private static string? GetBody(JsonSimpleDataModel json)
         {
-            return TemplatingHtmlData.GetHtmlData(json.BodySimple, json);
+            return TemplatingHtmlSimpleData.GetHtmlSimpleData(json.BodySimple, json);
         }
 
-        private static string? GetDivIdContent(JsonModel json)
+        private static string? GetDivIdContent(JsonSimpleDataModel json)
         {
-            return TemplatingHtmlData.GetHtmlData(json.DivIdContent, json);
+            return TemplatingHtmlSimpleData.GetHtmlSimpleData(json.DivIdContent, json);
         }
 
-        private static string? GetPSimple(JsonModel json)
+        private static string? GetPSimple(JsonSimpleDataModel json)
         {
-            return TemplatingHtmlData.GetHtmlData(json.PSimple, json);
+            return TemplatingHtmlSimpleData.GetHtmlSimpleData(json.PSimple, json);
         }
 
-        private static string? GetQuestionPHtml(JsonModel json)
+        private static string? GetQuestionPHtml(JsonSimpleDataModel json)
         {
             return json?.QuestionPHtml;
         }
 
-        private static string? GetPDeclarationText(JsonModel json)
+        private static string? GetPDeclarationText(JsonSimpleDataModel json)
         {
-            return TemplatingHtmlData.GetHtmlData(json.PDeclarationText, json);
+            return TemplatingHtmlSimpleData.GetHtmlSimpleData(json.PDeclarationText, json);
         }
 
-        private static string? GetSpanA(JsonModel json)
+        private static string? GetSpanA(JsonSimpleDataModel json)
         {
-            return TemplatingHtmlData.GetHtmlData(json.SpanA, json);
+            return TemplatingHtmlSimpleData.GetHtmlSimpleData(json.SpanA, json);
         }
 
-        private static string? GetSpanInputRed(JsonModel json)
+        private static string? GetSpanInputRed(JsonSimpleDataModel json)
         {
             return json.SpanInputRed;
         }
 
-        private static string? GetSpanRed(JsonModel json)
+        private static string? GetSpanRed(JsonSimpleDataModel json)
         {
             return json.SpanRed;
         }
 
-        private static string? GetALink(JsonModel json)
+        private static string? GetALink(JsonSimpleDataModel json)
         {
             return json.ALink;
         }
 
-        private static JsonModel? GetData()
+        private static JsonSimpleDataModel? GetData()
         {
-            string dataJson = HtmlDataJson.AllDataJson;
-            JsonModel? data = JsonConvert.DeserializeObject<JsonModel>(dataJson);
+            string dataJson = HtmlSimpleDataJson.AllDataJson;
+            JsonSimpleDataModel? data = JsonConvert.DeserializeObject<JsonSimpleDataModel>(dataJson);
             return data;
         }
     }
