@@ -1,0 +1,43 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Candidature</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <form method="POST" action="/candidate">
+        <div class="Title">
+            <h1>Present your candidature</h1>
+        </div>
+        <div class="Identity">
+            <input type="text" placeholder="FirstName">
+            <input type="text" placeholder="LastName">            
+        </div>
+        <div class="Gender">
+            <label for="rgender">Gender</label>
+            <input type="radio" id="rgender" name="gender" value="male"/> <label for="male">Male</label>
+            <input type="radio" id="rgender" name="gender" value="female"/> <label for="female">Female</label>
+            <input type="radio" id="rgender" name="gender" value="undefined" checked/> <label for="undefined">Undefined</label>
+        </div>
+        <div class="Birthday">
+            <label for="dBirthday">Birthday</label>
+            <input
+                type="date"
+                id="dBirthday"
+                name="birthday"
+                value="1992-07-22"
+                min="1918-01-01"
+                max="2025-12-31" />
+        </div>
+        <div class="Resume">
+            <label for="dResume">Choose a resume</label>
+            <input type="file" id="avatar" name="avatar" accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+        </div>
+        <div class="Send">
+            <input type="Submit" value="Submit"/>
+        </div>
+    </form>
+</body>
+</html>
+
