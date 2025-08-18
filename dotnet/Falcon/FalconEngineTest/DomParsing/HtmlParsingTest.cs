@@ -31,7 +31,7 @@ namespace FalconEngineTest.DomParsing
         {
             HtmlPage htmlPage = SimulateParsingSimplePage.InitHtmlPage();
 
-            var parsing = _htmlParsing.Parse(HtmlPageSimpleData.GetHtml(TagHtmlSimple.htmlPageWithDoctype));
+            var parsing = _htmlParsing.Parse(HtmlPageSimpleData.GetHtml(TagHtmlSimple.htmlPageWithDoctype), false);
 
             Assert.True(AssertHtml.AssertTagsAreIdenticals(htmlPage.Tags, parsing.Tags));
             Assert.True(parsing.IsValid);
@@ -42,7 +42,7 @@ namespace FalconEngineTest.DomParsing
         {
             string html = string.Concat("<doctype>", HtmlPageSimpleData.GetHtml(TagHtmlSimple.htmlPage));
 
-            var parsing = _htmlParsing.Parse(html);
+            var parsing = _htmlParsing.Parse(html, false);
 
             Assert.False(parsing.IsValid);
         }
@@ -52,7 +52,7 @@ namespace FalconEngineTest.DomParsing
         {
             string html = string.Concat(HtmlPageSimpleData.GetHtml(TagHtmlSimple.doctype), "<html scheme=\"xml\">Hello World</html>");
 
-            var parsing = _htmlParsing.Parse(html);
+            var parsing = _htmlParsing.Parse(html, false);
 
             Assert.False(parsing.IsValid);
         }
@@ -62,9 +62,20 @@ namespace FalconEngineTest.DomParsing
         {
             string html = HtmlPageSimpleData.GetHtml(TagHtmlSimple.htmlNotValid);
 
-            var parsing = _htmlParsing.Parse(html);
+            var parsing = _htmlParsing.Parse(html, false);
 
             Assert.False(parsing.IsValid);
+        }
+
+        [Fact]
+        public void IsFormPageHasBeenParsingCorrectly()
+        {
+            HtmlPage htmlPage = SimulateParsingFormPage.InitHtmlPage();
+
+            var parsing = _htmlParsing.Parse(HtmlPageFormData.GetHtml(TagHtmlForm.htmlFormWithDoctype), true);
+
+            Assert.True(AssertHtml.AssertTagsAreIdenticals(htmlPage.Tags, parsing.Tags));
+            Assert.True(parsing.IsValid);
         }
     }
 }

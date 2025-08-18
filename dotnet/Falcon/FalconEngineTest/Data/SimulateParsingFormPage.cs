@@ -113,7 +113,7 @@ namespace FalconEngineTest.Data
                 TagFamily = TagFamilyEnum.WithEnd,
                 Content = HtmlPageFormData.GetHtml(TagHtmlForm.form),
                 Children = new List<TagModel>() { formPost },
-                TagStart = "<body class=\"main\">",
+                TagStart = "<body>",
                 TagEnd = "</body>"
             };
             return bodyTag;
@@ -440,7 +440,7 @@ namespace FalconEngineTest.Data
                 NameTag = NameTagEnum.div,
                 TagFamily = TagFamilyEnum.WithEnd,
                 Content = content,
-                TagStart = "<div class=\"Resume\">",
+                TagStart = "<div class=\"Send\">",
                 TagEnd = "</div>",
                 Children = new List<TagModel>() { inputSubmit }
             };

@@ -237,7 +237,7 @@ namespace FalconEngineTest.Utils.HtmlData
 
         private static JsonFormDataModel? GetData()
         {
-            string dataJson = HtmlSimpleDataJson.AllDataJson;
+            string dataJson = HtmlFormDataJson.AllDataJson;
             JsonFormDataModel? data = JsonConvert.DeserializeObject<JsonFormDataModel>(dataJson);
             return data;
         }

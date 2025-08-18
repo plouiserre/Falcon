@@ -79,6 +79,8 @@ namespace FalconEngineTest.Utils.Templating
                     return jsonModel.RadioUndefined;
                 case "LabelUndefined":
                     return jsonModel.LabelUndefined;
+                case "LabelGender":
+                    return jsonModel.LabelGender;
                 case "DivGender":
                     return jsonModel.DivGender;
                 case "InputFirstName":
@@ -95,7 +97,6 @@ namespace FalconEngineTest.Utils.Templating
                     return jsonModel.Form;
                 case "Body":
                     return jsonModel.Body;
-                    return jsonModel.DivIdentity;
                 case "MetaCharset":
                     return jsonModel.MetaCharset;
                 case "MetaViewPort":
