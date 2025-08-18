@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FalconEngine.DomParsing.Parser.Attribute;
+using FalconEngineTest.Utils.HtmlData;
 
 namespace FalconEngineTest.DomParsing.Parser.Attribute
 {
@@ -57,6 +58,25 @@ namespace FalconEngineTest.DomParsing.Parser.Attribute
             Assert.Equal("title=\"Thème alternatif\"", parts[3]);
             Assert.Equal("disabled", parts[4]);
             Assert.Equal("media=\"screen\"", parts[5]);
+        }
+
+
+
+        [Fact]
+        public void IdentifyAttributesInputRadioChecked()
+        {
+            string html = HtmlPageFormData.GetHtml(TagHtmlForm.radioUndefined);
+
+            var analyze = new AnalyzeAttributes();
+
+            var parts = analyze.Study(html);
+
+            Assert.Equal(5, parts.Count);
+            Assert.Equal("type=\"radio\"", parts[0]);
+            Assert.Equal("id=\"gender\"", parts[1]);
+            Assert.Equal("name=\"gender\"", parts[2]);
+            Assert.Equal("value=\"undefined\"", parts[3]);
+            Assert.Equal("checked", parts[4]);
         }
 
 

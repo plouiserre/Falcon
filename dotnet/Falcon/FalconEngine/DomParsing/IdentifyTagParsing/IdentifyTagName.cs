@@ -35,20 +35,22 @@ namespace FalconEngine.DomParsing.IdentifyTagParsing
                     return NameTagEnum.html;
                 case "head":
                     return NameTagEnum.head;
-                case "div":
-                    return NameTagEnum.div;
                 case "meta":
                     return NameTagEnum.meta;
-                case "span":
-                    return NameTagEnum.span;
-                case "body":
-                    return NameTagEnum.body;
-                case "p":
-                    return NameTagEnum.p;
                 case "link":
                     return NameTagEnum.link;
                 case "title":
                     return NameTagEnum.title;
+                case "body":
+                    return NameTagEnum.body;
+                case "div":
+                    return NameTagEnum.div;
+                case "p":
+                    return NameTagEnum.p;
+                case "input":
+                    return NameTagEnum.input;
+                case "span":
+                    return NameTagEnum.span;
                 default:
                     return NameTagEnum.a;
             }

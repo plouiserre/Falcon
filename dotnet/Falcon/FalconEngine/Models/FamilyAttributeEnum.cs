@@ -2,7 +2,7 @@ namespace FalconEngine.Models
 {
     public enum FamilyAttributeEnum
     {
-        accesskey, action, asAttr, blocking, charset, classCss, content, contenteditable, crossorigin, data_, disabled,
+        accept, accesskey, action, asAttr, blocking, charset, checkedAttr, classCss, content, contenteditable, crossorigin, data_, disabled,
         download, draggable, dir, enterkeyhint, hidden, httpequiv, href, hreflang, id, inert, inputmode, integrity, isAttr, lang, manifest,
         media, method, name,
         onclick, ondblclick, onmousedown, onmouseup, onmouseover, onmouseout, onmousemove, oncontextmenu, onmouseenter,
@@ -11,6 +11,6 @@ namespace FalconEngine.Models
         onpause, onended, onvolumechange, onwheel, onscroll, onresize, onerror, onoad, onunload, ontransitionend,
         onanimationstart, onanimationend, onanimationiteration,
         popover, rel, referrerpolicy, role, scheme, spellcheck, sizes, style, tabindex, target, title, translate, type,
-        xmlns
+        value, xmlns
     }
 }

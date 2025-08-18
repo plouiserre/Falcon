@@ -82,7 +82,17 @@ namespace FalconEngine.DomParsing.IdentifyTagParsing
 
         private void FindTagFamily()
         {
-            _tagFamily = !string.IsNullOrEmpty(_tagEnd) ? TagFamilyEnum.WithEnd : TagFamilyEnum.NoEnd;
+            if (string.IsNullOrEmpty(_tagEnd))
+            {
+                if (_tagStart.Contains("/>"))
+                    _tagFamily = TagFamilyEnum.NoEnd;
+                else
+                    _tagFamily = TagFamilyEnum.NoEnd;
+            }
+            else
+            {
+                _tagFamily = TagFamilyEnum.WithEnd;
+            }
         }
 
         private void FindContent()

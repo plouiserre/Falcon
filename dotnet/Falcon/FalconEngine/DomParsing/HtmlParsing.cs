@@ -248,7 +248,7 @@ namespace FalconEngine.DomParsing
             var inputFirstName = new TagModel()
             {
                 NameTag = NameTagEnum.input,
-                TagFamily = TagFamilyEnum.NoEndIncomplete,
+                TagFamily = TagFamilyEnum.NoEnd,
                 Content = string.Empty,
                 TagStart = "<input type=\"text\" placeholder=\"FirstName\">"
             };
@@ -260,7 +260,7 @@ namespace FalconEngine.DomParsing
             var inputLastName = new TagModel()
             {
                 NameTag = NameTagEnum.input,
-                TagFamily = TagFamilyEnum.NoEndIncomplete,
+                TagFamily = TagFamilyEnum.NoEnd,
                 Content = string.Empty,
                 TagStart = "<input type=\"text\" placeholder=\"LastName\"> "
             };
@@ -466,7 +466,7 @@ namespace FalconEngine.DomParsing
             var inputResume = new TagModel()
             {
                 NameTag = NameTagEnum.input,
-                TagFamily = TagFamilyEnum.NoEndIncomplete,
+                TagFamily = TagFamilyEnum.NoEnd,
                 Content = string.Empty,
                 TagStart = "<input type=\"file\" id=\"avatar\" name=\"avatar\" accept=\".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document\"> "
             };
