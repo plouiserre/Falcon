@@ -1,103 +1,55 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using FalconEngine.CleanData;
-using FalconEngine.DomParsing.Parser;
 using FalconEngine.Models;
+using FalconEngineTest.Utils.HtmlData;
 
-namespace FalconEngine.DomParsing
+namespace FalconEngineTest.Data
 {
-    public class HtmlParsing : IHtmlParsing
+    public class SimulateParsingFormPage
     {
-        private ITagParser _doctypeParse;
-        private ITagParser _htmlParse;
-        private IExtractHtmlRemaining _extractHtmlRemaining;
-        private IAttributeTagManager _attributeTagManager;
-        private string _html;
-        private bool _isValidDoctype;
-        private bool _isValidHtmlTag;
-        private bool _isValidPage;
+        private static TagModel? _doctypeTag;
+        private static TagModel? _htmlTag;
+        private static TagModel? _headTag;
+        private static HtmlPage? _htmlPage { get; set; }
 
-        public HtmlParsing(ITagParser doctypeParse, ITagParser htmlParse, IExtractHtmlRemaining extractHtmlRemaining, IAttributeTagManager attributeTagManager)
+        public static HtmlPage InitHtmlPage()
         {
-            _doctypeParse = doctypeParse;
-            _htmlParse = htmlParse;
-            _extractHtmlRemaining = extractHtmlRemaining;
-            _attributeTagManager = attributeTagManager;
+            _doctypeTag = GetDoctypeTag();
+            _htmlTag = GetTagHtml();
+            var tags = new List<TagModel>() { _doctypeTag, _htmlTag };
+            _htmlPage = new HtmlPage() { Tags = tags };
+            return _htmlPage;
         }
 
-        public HtmlPage Parse(string html, bool isSimulating)
+        private static TagModel GetDoctypeTag()
         {
-            _html = html;
-            _attributeTagManager.SetAttributes();
-            var doctypeTag = GetDoctypeTag();
-            RemoveUselessHtml(doctypeTag);
-            if (!isSimulating)
+            var doctypeTag = new TagModel()
             {
-                var htmlTag = GetTagHtml();
-                RemoveTagOpenCloed(htmlTag);
-                DeterminateIsValidPage();
-                var tags = new List<TagModel>() { doctypeTag, htmlTag };
-                var htmlPage = new HtmlPage() { Tags = tags, IsValid = _isValidPage };
-                return htmlPage;
-            }
-            else
-            {
-                var htmlTag = GetHtmlSimulate();
-                var tags = new List<TagModel>() { doctypeTag, htmlTag };
-                var htmlPage = new HtmlPage() { Tags = tags, IsValid = true };
-                return htmlPage;
-            }
-        }
-
-        private TagModel GetDoctypeTag()
-        {
-            var doctypeTag = _doctypeParse.Parse(_html);
-            _isValidDoctype = _doctypeParse.IsValid();
+                NameTag = NameTagEnum.doctype,
+                TagStart = "<!DOCTYPE html>",
+                TagFamily = TagFamilyEnum.NoEnd
+            };
             return doctypeTag;
         }
 
-        private TagModel GetTagHtml()
-        {
-            var htmlTag = _htmlParse.Parse(_html);
-            _isValidHtmlTag = _htmlParse.IsValid();
-            return htmlTag;
-        }
-
-        private void RemoveUselessHtml(TagModel tag)
-        {
-            _html = _extractHtmlRemaining.Extract(tag, _html, ExtractionMode.ASide);
-        }
-
-        private void RemoveTagOpenCloed(TagModel tag)
-        {
-            _html = _extractHtmlRemaining.Extract(tag, _html, ExtractionMode.Inside);
-        }
-
-        private void DeterminateIsValidPage()
-        {
-            _isValidPage = _isValidDoctype && _isValidHtmlTag;
-        }
-
-        //TODO when formpage is developed delete all this methods below
-        private TagModel GetHtmlSimulate()
+        private static TagModel GetTagHtml()
         {
             var attributLang = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.lang.ToString(), Value = "en" };
             var attributDir = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.dir.ToString(), Value = "auto" };
             var attributXmlns = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.xmlns.ToString(), Value = "http://www.w3.org/1999/xhtml" };
-            var headTag = GetHeadTag();
+            _headTag = GetHeadTag();
             var body = GetBodyTag();
             var htmlTag = new TagModel()
             {
                 Attributes = new List<AttributeModel>() { attributLang, attributDir, attributXmlns },
                 NameTag = NameTagEnum.html,
                 TagFamily = TagFamilyEnum.WithEnd,
-                Content = "<head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>Document</title><link rel=\"stylesheet\" href=\"main.css\" data-preload=\"true\"></head><body><form method=\"POST\" action=\"/candidate\"><div class=\"Title\"><h1>Present your candidature</h1></div><div class=\"Identity\"><input type=\"text\" placeholder=\"FirstName\"><input type=\"text\" placeholder=\"LastName\"></div><div class=\"Gender\"><label for=\"rgender\">Gender</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"male\"/> <label for=\"male\">Male</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"female\"/> <label for=\"female\">female</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"undefined\"/> <label for=\"undefined\">Undefined</label></div><div class=\"Birthday\"><label for=\"dBirthday\">Birthday</label><input type=\"date\" id=\"dBirthday\" name=\"birthday\" value=\"1992-07-22\" min=\"1918-01-01\" max=\"2025-12-31\" /></div><div class=\"Resume\"><input type=\"file\" id=\"avatar\" name=\"avatar\" accept=\".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document\"><label for=\"dResume\">Choose a resume</label></div><div class=\"Send\"><input type=\"Submit\" value=\"Submit\"/></div></form></body>",
+                Content = HtmlPageFormData.GetHtml(TagHtmlForm.htmlForm).Replace("<html lang=\"en\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\">", string.Empty).Replace("</html>", string.Empty),
                 TagStart = "<html lang=\"en\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\">",
                 TagEnd = "</html>",
-                Children = new List<TagModel>() { headTag, body }
+                Children = new List<TagModel>() { _headTag, body }
             };
             return htmlTag;
         }
@@ -109,7 +61,7 @@ namespace FalconEngine.DomParsing
                 TagFamily = TagFamilyEnum.NoEnd,
                 Attributes = new List<AttributeModel>() { new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.charset.ToString(), Value = "UTF-8" } },
                 NameTag = NameTagEnum.meta,
-                TagStart = "<meta charset=\"UTF-8\">"
+                TagStart = HtmlPageFormData.GetHtml(TagHtmlForm.metaCharset)
             };
             var metaViewPort = new TagModel()
             {
@@ -119,7 +71,7 @@ namespace FalconEngine.DomParsing
                         new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.content.ToString(), Value = "width=device-width, initial-scale=1.0" }
                 },
                 NameTag = NameTagEnum.meta,
-                TagStart = "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+                TagStart = HtmlPageFormData.GetHtml(TagHtmlForm.metaViewPort)
             };
             var title = new TagModel()
             {
@@ -144,7 +96,7 @@ namespace FalconEngine.DomParsing
             {
                 NameTag = NameTagEnum.head,
                 TagFamily = TagFamilyEnum.WithEnd,
-                Content = "<meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>Document</title><link rel=\"stylesheet\" href=\"main.css\" data-preload=\"true\">",
+                Content = HtmlPageFormData.GetHtml(TagHtmlForm.head).Replace("<head>", string.Empty).Replace("</head>", string.Empty),
                 Children = new List<TagModel>() { metaCharsetTag, metaViewPort, title, link },
                 TagStart = "<head>",
                 TagEnd = "</head>"
@@ -154,13 +106,12 @@ namespace FalconEngine.DomParsing
 
         private static TagModel GetBodyTag()
         {
-            string content = "<form method=\"POST\" action=\"/candidate\"><div class=\"Title\"><h1>Present your candidature</h1></div><div class=\"Identity\"><input type=\"text\" placeholder=\"FirstName\"><input type=\"text\" placeholder=\"LastName\"></div><div class=\"Gender\"><label for=\"rgender\">Gender</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"male\"/> <label for=\"male\">Male</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"female\"/> <label for=\"female\">female</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"undefined\"/> <label for=\"undefined\">Undefined</label></div><div class=\"Birthday\"><label for=\"dBirthday\">Birthday</label><input type=\"date\" id=\"dBirthday\" name=\"birthday\" value=\"1992-07-22\" min=\"1918-01-01\" max=\"2025-12-31\" /></div><div class=\"Resume\"><input type=\"file\" id=\"avatar\" name=\"avatar\" accept=\".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document\"><label for=\"dResume\">Choose a resume</label></div><div class=\"Send\"><input type=\"Submit\" value=\"Submit\"/></div></form>";
             var formPost = GetFormPost();
             var bodyTag = new TagModel()
             {
                 NameTag = NameTagEnum.body,
                 TagFamily = TagFamilyEnum.WithEnd,
-                Content = content,
+                Content = HtmlPageFormData.GetHtml(TagHtmlForm.form),
                 Children = new List<TagModel>() { formPost },
                 TagStart = "<body>",
                 TagEnd = "</body>"
@@ -172,7 +123,9 @@ namespace FalconEngine.DomParsing
         {
             var attributMethod = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.method.ToString(), Value = "POST" };
             var attributAction = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.action.ToString(), Value = "/candidate" };
-            string content = "<div class=\"Title\"><h1>Present your candidature</h1></div><div class=\"Identity\"><input type=\"text\" placeholder=\"FirstName\"><input type=\"text\" placeholder=\"LastName\"></div><div class=\"Gender\"><label for=\"rgender\">Gender</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"male\"/> <label for=\"male\">Male</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"female\"/> <label for=\"female\">female</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"undefined\"/> <label for=\"undefined\">Undefined</label></div><div class=\"Birthday\"><label for=\"dBirthday\">Birthday</label><input type=\"date\" id=\"dBirthday\" name=\"birthday\" value=\"1992-07-22\" min=\"1918-01-01\" max=\"2025-12-31\" /></div><div class=\"Resume\"><input type=\"file\" id=\"avatar\" name=\"avatar\" accept=\".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document\"><label for=\"dResume\">Choose a resume</label></div><div class=\"Send\"><input type=\"Submit\" value=\"Submit\"/></div>";
+            string content = string.Concat(HtmlPageFormData.GetHtml(TagHtmlForm.divH1), HtmlPageFormData.GetHtml(TagHtmlForm.divIdentity),
+                                HtmlPageFormData.GetHtml(TagHtmlForm.divGender), HtmlPageFormData.GetHtml(TagHtmlForm.divDate), HtmlPageFormData.GetHtml(TagHtmlForm.divResume),
+                                HtmlPageFormData.GetHtml(TagHtmlForm.divSubmit));
             var divTitle = GetDivTitle();
             var divIdentity = GetDivIdentity();
             var divGender = GetDivGender();
@@ -195,7 +148,7 @@ namespace FalconEngine.DomParsing
         private static TagModel GetDivTitle()
         {
             var attributId = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.classCss.ToString(), Value = "Title" };
-            string content = "<h1>Present your candidature</h1>";
+            string content = HtmlPageFormData.GetHtml(TagHtmlForm.h1Title);
             var h1Title = GetH1Title();
             var divTag = new TagModel()
             {
@@ -227,7 +180,7 @@ namespace FalconEngine.DomParsing
         private static TagModel GetDivIdentity()
         {
             var attributId = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.classCss.ToString(), Value = "Identity" };
-            string content = "<input type=\"text\" placeholder=\"FirstName\"><input type=\"text\" placeholder=\"LastName\">";
+            string content = string.Concat(HtmlPageFormData.GetHtml(TagHtmlForm.inputFirstName), HtmlPageFormData.GetHtml(TagHtmlForm.inputLastName));
             var inputFirstName = GetInputFirstName();
             var inputLastName = GetInputLastName();
             var divTag = new TagModel()
@@ -270,7 +223,10 @@ namespace FalconEngine.DomParsing
         private static TagModel GetDivGender()
         {
             var attributId = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.classCss.ToString(), Value = "Gender" };
-            string content = "<label for=\"rgender\">Gender</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"male\"/> <label for=\"male\">Male</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"female\"/> <label for=\"female\">female</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"undefined\"/> <label for=\"undefined\">Undefined</label>";
+            string content = string.Concat(HtmlPageFormData.GetHtml(TagHtmlForm.labelGender), HtmlPageFormData.GetHtml(TagHtmlForm.radioMale),
+                            HtmlPageFormData.GetHtml(TagHtmlForm.labelMale), HtmlPageFormData.GetHtml(TagHtmlForm.radioFemale),
+                            HtmlPageFormData.GetHtml(TagHtmlForm.labelFemale), HtmlPageFormData.GetHtml(TagHtmlForm.radioUndefined),
+                            HtmlPageFormData.GetHtml(TagHtmlForm.labelUndefined));
             var labelGender = GetLabelGender();
             var radioMale = GetRadioMale();
             var labelMale = GetLabelMale();
@@ -386,7 +342,7 @@ namespace FalconEngine.DomParsing
         private static TagModel GetDivBirthDay()
         {
             var attributId = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.classCss.ToString(), Value = "Birthday" };
-            string content = "<label for=\"dBirthday\">Birthday</label><input type=\"date\" id=\"dBirthday\" name=\"birthday\" value=\"1992-07-22\" min=\"1918-01-01\" max=\"2025-12-31\" />";
+            string content = string.Concat(HtmlPageFormData.GetHtml(TagHtmlForm.labelDate), HtmlPageFormData.GetHtml(TagHtmlForm.inputDate));
             var labelDate = GetLabelDate();
             var inputDate = GetInputBirthDay();
             var divTag = new TagModel()
@@ -431,7 +387,7 @@ namespace FalconEngine.DomParsing
         private static TagModel GetDivResume()
         {
             var attributId = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.classCss.ToString(), Value = "Resume" };
-            string content = "<label for=\"dResume\">Choose a resume</label><input type=\"file\" id=\"avatar\" name=\"avatar\" accept=\".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document\">";
+            string content = string.Concat(HtmlPageFormData.GetHtml(TagHtmlForm.labelResume), HtmlPageFormData.GetHtml(TagHtmlForm.inputFile));
             var labelResume = GetLabelResume();
             var inputResume = GetInputResume();
             var divTag = new TagModel()
@@ -476,7 +432,7 @@ namespace FalconEngine.DomParsing
         private static TagModel GetDivSend()
         {
             var attributId = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.classCss.ToString(), Value = "Send" };
-            string content = "<input type=\"Submit\" value=\"Submit\"/>";
+            string content = HtmlPageFormData.GetHtml(TagHtmlForm.inputSubmit);
             var inputSubmit = GetInputSubmit();
             var divTag = new TagModel()
             {

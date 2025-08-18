@@ -2,6 +2,6 @@ namespace FalconEngine.Models
 {
     public enum NameTagEnum
     {
-        doctype, html, title, head, div, span, meta, link, body, p, a
+        a, body, div, doctype, h1, head, html, input, label, link, meta, p, span, title
     }
 }

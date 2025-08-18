@@ -19,7 +19,7 @@ namespace FalconEngine.Engine
         //TODO update this method because the argument is useless or the method is calling inside!!!
         public HtmlPage Calculate(string html)
         {
-            return _htmlParsing.Parse(html);
+            return _htmlParsing.Parse(html, false);
         }
     }
 }
