@@ -15,7 +15,6 @@ namespace FalconEngineTest.Data
         private static TagModel? _htmlTag;
         private static TagModel? _headTag;
         private static HtmlPage? _htmlPage { get; set; }
-        private static TagModel? _metaCharsetTag { get; set; }
 
 
         public static HtmlPage InitHtmlPage()
@@ -60,7 +59,7 @@ namespace FalconEngineTest.Data
 
         private static TagModel GetHeadTag()
         {
-            _metaCharsetTag = new TagModel()
+            var metaCharsetTag = new TagModel()
             {
                 TagFamily = TagFamilyEnum.NoEnd,
                 Attributes = new List<AttributeModel>() { new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.charset.ToString(), Value = "UTF-8" } },
@@ -101,7 +100,7 @@ namespace FalconEngineTest.Data
                 NameTag = NameTagEnum.head,
                 TagFamily = TagFamilyEnum.WithEnd,
                 Content = HtmlPageSimpleData.GetHtml(TagHtmlSimple.head).Replace("<head>", string.Empty).Replace("</head>", string.Empty),
-                Children = new List<TagModel>() { _metaCharsetTag, metaViewPort, title, link },
+                Children = new List<TagModel>() { metaCharsetTag, metaViewPort, title, link },
                 TagStart = "<head>",
                 TagEnd = "</head>"
             };

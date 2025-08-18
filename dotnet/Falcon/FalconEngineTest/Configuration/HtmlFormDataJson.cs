@@ -56,6 +56,7 @@ namespace FalconEngineTest.Configuration
         public string? LabelMale { get; set; }
         public string? RadioFemale { get; set; }
         public string? LabelFemale { get; set; }
+        public string? LabelGender { get; set; }
         public string? RadioUndefined { get; set; }
         public string? LabelUndefined { get; set; }
         public string? DivGender { get; set; }

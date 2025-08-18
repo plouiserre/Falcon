@@ -10,9 +10,9 @@ namespace FalconEngineTest.Utils.HtmlData
 {
     public enum TagHtmlForm
     {
-        inputSubmit, divSubmit, inputFile, labelResume, divResume, inputDate, labelDate, divDate, radioMale, labelMale, radioFemale, labelFemale, radioUndefined,
-        labelUndefined, divGender, inputFirstName, inputLastName, divIdentity, h1Title, divH1, form, body, metaCharset, metaViewPort, titleDocument, linkHead,
-        head, htmlForm, htmlFormWithDoctype
+        body, divDate, divGender, divH1, divIdentity, divResume, divSubmit, form, h1Title, head, htmlForm, htmlFormWithDoctype, inputDate, inputFile, inputFirstName,
+        inputLastName, inputSubmit, labelDate, labelFemale, labelGender, labelMale, labelResume, labelUndefined, linkHead, radioFemale, radioMale,
+        metaCharset, metaViewPort, radioUndefined, titleDocument
     }
 
     public class HtmlPageFormData
@@ -60,6 +60,8 @@ namespace FalconEngineTest.Utils.HtmlData
                     return GetLabelDate(json);
                 case TagHtmlForm.labelFemale:
                     return GetLabelFemale(json);
+                case TagHtmlForm.labelGender:
+                    return GetLabelGender(json);
                 case TagHtmlForm.labelMale:
                     return GetLabelMale(json);
                 case TagHtmlForm.labelResume:
@@ -142,6 +144,11 @@ namespace FalconEngineTest.Utils.HtmlData
         private static string? GetLabelFemale(JsonFormDataModel json)
         {
             return json?.LabelFemale;
+        }
+
+        private static string? GetLabelGender(JsonFormDataModel json)
+        {
+            return json?.LabelGender;
         }
 
         private static string? GetRadioUndefined(JsonFormDataModel json)
