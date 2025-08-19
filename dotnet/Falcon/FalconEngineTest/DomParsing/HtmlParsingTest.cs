@@ -35,7 +35,7 @@ namespace FalconEngineTest.DomParsing
 
             var parsing = _htmlParsing.Parse(HtmlPageSimpleData.GetHtml(TagHtmlSimple.htmlPageWithDoctype), false);
 
-            Assert.True(AssertSimplePage.AssertTagsAreIdenticals(htmlPage.Tags, parsing.Tags));
+            Assert.True(AssertCommon.AssertTagsAreIdenticals(htmlPage.Tags, parsing.Tags));
             Assert.True(parsing.IsValid);
         }
 
@@ -76,7 +76,7 @@ namespace FalconEngineTest.DomParsing
 
             var parsing = _htmlParsing.Parse(HtmlPageFormData.GetHtml(TagHtmlForm.htmlFormWithDoctype), true);
 
-            Assert.True(AssertSimplePage.AssertTagsAreIdenticals(htmlPage.Tags, parsing.Tags));
+            Assert.True(AssertCommon.AssertTagsAreIdenticals(htmlPage.Tags, parsing.Tags));
             Assert.True(parsing.IsValid);
         }
     }
