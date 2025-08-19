@@ -23,7 +23,7 @@ namespace FalconEngineTest.DomParsing.Parser
 
             var tag = linkTagParser.Parse(html);
 
-            AssertSimplePage.AssertLinkCss(tag);
+            AssertCommon.AssertLinkCss(tag);
         }
 
         [Theory]

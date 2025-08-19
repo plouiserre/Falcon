@@ -32,7 +32,7 @@ namespace FalconEngineTest.DomParsing.Parser
 
             var tag = _metaParser.Parse(html);
 
-            AssertSimplePage.AssertMetaCharsetChild(tag);
+            AssertCommon.AssertMetaCharsetChild(tag);
         }
 
         [Fact]
@@ -42,7 +42,7 @@ namespace FalconEngineTest.DomParsing.Parser
 
             var tag = _metaParser.Parse(html);
 
-            AssertSimplePage.AssertMetaViewPortChild(tag);
+            AssertCommon.AssertMetaViewPortChild(tag);
         }
 
         [Fact]
@@ -51,7 +51,7 @@ namespace FalconEngineTest.DomParsing.Parser
             string contentHeadSimple = HtmlPageSimpleData.GetHtml(TagHtmlSimple.head).Replace("<head>", string.Empty).Replace("</head>", string.Empty);
             var tag = _metaParser.Parse(contentHeadSimple);
 
-            AssertSimplePage.AssertMetaCharsetChild(tag);
+            AssertCommon.AssertMetaCharsetChild(tag);
         }
 
         [Theory]

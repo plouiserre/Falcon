@@ -26,7 +26,7 @@ namespace FalconEngineTest.DomParsing.Parser
             bool isValid = headParser.IsValid();
 
             string contentHeadSimple = HtmlPageSimpleData.GetHtml(TagHtmlSimple.head).Replace("<head>", string.Empty).Replace("</head>", string.Empty);
-            AssertSimplePage.AssertHeader(tagHtml, contentHeadSimple);
+            AssertCommon.AssertHeader(tagHtml, contentHeadSimple);
 
             Assert.True(isValid);
         }
@@ -41,7 +41,7 @@ namespace FalconEngineTest.DomParsing.Parser
             var tagHtml = headParser.Parse(htmlNotClean);
             bool isValid = headParser.IsValid();
 
-            AssertSimplePage.AssertHeader(tagHtml, content);
+            AssertCommon.AssertHeader(tagHtml, content);
 
             Assert.True(isValid);
         }

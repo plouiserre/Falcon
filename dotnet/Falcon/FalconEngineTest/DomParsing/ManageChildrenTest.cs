@@ -25,7 +25,7 @@ namespace FalconEngineTest.DomParsing
 
             Assert.True(areValid);
 
-            AssertSimplePage.AssertHeaderChildren(headerChildren);
+            AssertCommon.AssertHeaderChildren(headerChildren);
         }
 
         [Fact]
