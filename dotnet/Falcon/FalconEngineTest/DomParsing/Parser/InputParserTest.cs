@@ -73,7 +73,7 @@ namespace FalconEngineTest.DomParsing.Parser
             Assert.Equal(FamilyAttributeEnum.value.ToString(), tag.Attributes[3].FamilyAttribute);
             Assert.Equal("undefined", tag.Attributes[3].Value);
             Assert.Equal(FamilyAttributeEnum.checkedAttr.ToString(), tag.Attributes[4].FamilyAttribute);
-            Assert.Equal(string.Empty, tag.Attributes[4].Value);
+            Assert.Null(tag.Attributes[4].Value);
             Assert.Equal(TagFamilyEnum.NoEnd, tag.TagFamily);
             Assert.Equal("<input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"undefined\" checked/>", tag.TagStart);
             Assert.Null(tag.TagEnd);

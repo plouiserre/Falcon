@@ -108,6 +108,8 @@ namespace FalconEngine.DomParsing.Parser.Attribute
                 return "httpequiv";
             else if (key == "is")
                 return "isAttr";
+            else if (key == "checked")
+                return "checkedAttr";
             else
                 return key;
         }

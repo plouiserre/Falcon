@@ -320,7 +320,7 @@ namespace FalconEngineTest.Data
                 NameTag = NameTagEnum.input,
                 TagFamily = TagFamilyEnum.NoEnd,
                 Content = string.Empty,
-                TagStart = "<input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"undefined\"/>"
+                TagStart = "<input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"undefined\" checked/>"
             };
             return radioUndefined;
         }

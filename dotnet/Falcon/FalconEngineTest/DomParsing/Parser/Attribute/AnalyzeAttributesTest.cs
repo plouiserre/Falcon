@@ -73,7 +73,7 @@ namespace FalconEngineTest.DomParsing.Parser.Attribute
 
             Assert.Equal(5, parts.Count);
             Assert.Equal("type=\"radio\"", parts[0]);
-            Assert.Equal("id=\"gender\"", parts[1]);
+            Assert.Equal("id=\"rgender\"", parts[1]);
             Assert.Equal("name=\"gender\"", parts[2]);
             Assert.Equal("value=\"undefined\"", parts[3]);
             Assert.Equal("checked", parts[4]);
