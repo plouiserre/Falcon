@@ -198,11 +198,13 @@ namespace FalconEngineTest.Data
 
         private static TagModel GetInputFirstName()
         {
+            var attributes = new List<AttributeModel>() { new AttributeModel() { FamilyAttribute = "type", Value = "text" },
+                                            new AttributeModel() { FamilyAttribute = "placeholder", Value = "FirstName" }}; ;
             var inputFirstName = new TagModel()
             {
                 NameTag = NameTagEnum.input,
                 TagFamily = TagFamilyEnum.NoEnd,
-                Content = string.Empty,
+                Attributes = attributes,
                 TagStart = "<input type=\"text\" placeholder=\"FirstName\">"
             };
             return inputFirstName;
@@ -210,12 +212,14 @@ namespace FalconEngineTest.Data
 
         private static TagModel GetInputLastName()
         {
+            var attributes = new List<AttributeModel>() { new AttributeModel() { FamilyAttribute = "type", Value = "text" },
+                                            new AttributeModel() { FamilyAttribute = "placeholder", Value = "LastName" }}; ;
             var inputLastName = new TagModel()
             {
                 NameTag = NameTagEnum.input,
                 TagFamily = TagFamilyEnum.NoEnd,
-                Content = string.Empty,
-                TagStart = "<input type=\"text\" placeholder=\"LastName\"> "
+                Attributes = attributes,
+                TagStart = "<input type=\"text\" placeholder=\"LastName\">"
             };
             return inputLastName;
         }
@@ -263,11 +267,15 @@ namespace FalconEngineTest.Data
 
         private static TagModel GetRadioMale()
         {
+            var attributes = new List<AttributeModel>() { new AttributeModel() { FamilyAttribute = "type", Value = "radio" },
+                                            new AttributeModel() { FamilyAttribute = "id", Value = "rgender" },
+                                            new AttributeModel() { FamilyAttribute = "name", Value ="gender"},
+                                            new AttributeModel(){ FamilyAttribute = "value", Value = "male"} }; ;
             var radioMale = new TagModel()
             {
+                Attributes = attributes,
                 NameTag = NameTagEnum.input,
                 TagFamily = TagFamilyEnum.NoEnd,
-                Content = string.Empty,
                 TagStart = "<input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"male\"/>"
             };
             return radioMale;
@@ -289,11 +297,15 @@ namespace FalconEngineTest.Data
 
         private static TagModel GetRadioFemale()
         {
+            var attributes = new List<AttributeModel>() { new AttributeModel() { FamilyAttribute = "type", Value = "radio" },
+                                            new AttributeModel() { FamilyAttribute = "id", Value = "rgender" },
+                                            new AttributeModel() { FamilyAttribute = "name", Value ="gender"},
+                                            new AttributeModel(){ FamilyAttribute = "value", Value = "female"} }; ;
             var radioFemale = new TagModel()
             {
+                Attributes = attributes,
                 NameTag = NameTagEnum.input,
                 TagFamily = TagFamilyEnum.NoEnd,
-                Content = string.Empty,
                 TagStart = "<input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"female\"/>"
             };
             return radioFemale;
@@ -315,11 +327,16 @@ namespace FalconEngineTest.Data
 
         private static TagModel GetRadioUndefined()
         {
+            var attributes = new List<AttributeModel>() { new AttributeModel() { FamilyAttribute = "type", Value = "radio" },
+                                            new AttributeModel() { FamilyAttribute = "id", Value = "rgender" },
+                                            new AttributeModel() { FamilyAttribute = "name", Value ="gender"},
+                                            new AttributeModel(){ FamilyAttribute = "value", Value = "undefined"},
+                                            new AttributeModel(){ FamilyAttribute = "checkedAttr"}};
             var radioUndefined = new TagModel()
             {
+                Attributes = attributes,
                 NameTag = NameTagEnum.input,
                 TagFamily = TagFamilyEnum.NoEnd,
-                Content = string.Empty,
                 TagStart = "<input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"undefined\" checked/>"
             };
             return radioUndefined;
@@ -374,12 +391,18 @@ namespace FalconEngineTest.Data
 
         private static TagModel GetInputBirthDay()
         {
+            var attributes = new List<AttributeModel>() { new AttributeModel() { FamilyAttribute = "type", Value = "date" },
+                                            new AttributeModel() { FamilyAttribute = "id", Value = "dBirthday" },
+                                            new AttributeModel() { FamilyAttribute = "name", Value ="birthday"},
+                                            new AttributeModel(){ FamilyAttribute = "value", Value = "1992-07-22"},
+                                            new AttributeModel(){ FamilyAttribute = "min", Value = "1918-01-01"},
+                                            new AttributeModel(){ FamilyAttribute = "max", Value="2025-12-31"}};
             var inputBirthDay = new TagModel()
             {
                 NameTag = NameTagEnum.input,
                 TagFamily = TagFamilyEnum.NoEnd,
-                Content = string.Empty,
-                TagStart = "<input type=\"date\" id=\"dBirthday\" name=\"birthday\" value=\"1992-07-22\" min=\"1918-01-01\" max=\"2025-12-31\" /> "
+                TagStart = "<input type=\"date\" id=\"dBirthday\" name=\"birthday\" value=\"1992-07-22\" min=\"1918-01-01\" max=\"2025-12-31\" />",
+                Attributes = attributes
             };
             return inputBirthDay;
         }
@@ -419,12 +442,16 @@ namespace FalconEngineTest.Data
 
         private static TagModel GetInputResume()
         {
+            var attributes = new List<AttributeModel>() { new AttributeModel() { FamilyAttribute = "type", Value = "file" },
+                                            new AttributeModel() { FamilyAttribute = "id", Value = "avatar" },
+                                            new AttributeModel() { FamilyAttribute = "name", Value ="avatar"},
+                                            new AttributeModel(){ FamilyAttribute = "accept", Value = ".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"} };
             var inputResume = new TagModel()
             {
+                Attributes = attributes,
                 NameTag = NameTagEnum.input,
                 TagFamily = TagFamilyEnum.NoEnd,
-                Content = string.Empty,
-                TagStart = "<input type=\"file\" id=\"avatar\" name=\"avatar\" accept=\".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document\"> "
+                TagStart = "<input type=\"file\" id=\"avatar\" name=\"avatar\" accept=\".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document\">"
             };
             return inputResume;
         }
@@ -449,12 +476,14 @@ namespace FalconEngineTest.Data
 
         private static TagModel GetInputSubmit()
         {
+            var attributes = new List<AttributeModel>() { new AttributeModel() { FamilyAttribute = "type", Value = "Submit" },
+                                            new AttributeModel() { FamilyAttribute = "value", Value = "Submit" } };
             var inputSubmit = new TagModel()
             {
                 NameTag = NameTagEnum.input,
                 TagFamily = TagFamilyEnum.NoEnd,
-                Content = string.Empty,
-                TagStart = "<input type=\"Submit\" value=\"Submit\"/> "
+                TagStart = "<input type=\"Submit\" value=\"Submit\"/>",
+                Attributes = attributes
             };
             return inputSubmit;
         }

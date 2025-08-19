@@ -13,6 +13,9 @@ namespace FalconEngine.DomParsing
     {
         private ITagParser _doctypeParse;
         private ITagParser _htmlParse;
+        //temporary start 
+        private ITagParser _inputParser;
+        //temporary end
         private IExtractHtmlRemaining _extractHtmlRemaining;
         private IAttributeTagManager _attributeTagManager;
         private string _html;
@@ -20,10 +23,11 @@ namespace FalconEngine.DomParsing
         private bool _isValidHtmlTag;
         private bool _isValidPage;
 
-        public HtmlParsing(ITagParser doctypeParse, ITagParser htmlParse, IExtractHtmlRemaining extractHtmlRemaining, IAttributeTagManager attributeTagManager)
+        public HtmlParsing(ITagParser doctypeParse, ITagParser htmlParse, ITagParser inputParser, IExtractHtmlRemaining extractHtmlRemaining, IAttributeTagManager attributeTagManager)
         {
             _doctypeParse = doctypeParse;
             _htmlParse = htmlParse;
+            _inputParser = inputParser;
             _extractHtmlRemaining = extractHtmlRemaining;
             _attributeTagManager = attributeTagManager;
         }
@@ -102,7 +106,7 @@ namespace FalconEngine.DomParsing
             return htmlTag;
         }
 
-        private static TagModel GetHeadTag()
+        private TagModel GetHeadTag()
         {
             var metaCharsetTag = new TagModel()
             {
@@ -152,7 +156,7 @@ namespace FalconEngine.DomParsing
             return headTag;
         }
 
-        private static TagModel GetBodyTag()
+        private TagModel GetBodyTag()
         {
             string content = "<form method=\"POST\" action=\"/candidate\"><div class=\"Title\"><h1>Present your candidature</h1></div><div class=\"Identity\"><input type=\"text\" placeholder=\"FirstName\"><input type=\"text\" placeholder=\"LastName\"></div><div class=\"Gender\"><label for=\"rgender\">Gender</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"male\"/> <label for=\"male\">Male</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"female\"/> <label for=\"female\">female</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"undefined\" checked/> <label for=\"undefined\">Undefined</label></div><div class=\"Birthday\"><label for=\"dBirthday\">Birthday</label><input type=\"date\" id=\"dBirthday\" name=\"birthday\" value=\"1992-07-22\" min=\"1918-01-01\" max=\"2025-12-31\" /></div><div class=\"Resume\"><input type=\"file\" id=\"avatar\" name=\"avatar\" accept=\".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document\"><label for=\"dResume\">Choose a resume</label></div><div class=\"Send\"><input type=\"Submit\" value=\"Submit\"/></div></form>";
             var formPost = GetFormPost();
@@ -168,7 +172,7 @@ namespace FalconEngine.DomParsing
             return bodyTag;
         }
 
-        private static TagModel GetFormPost()
+        private TagModel GetFormPost()
         {
             var attributMethod = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.method.ToString(), Value = "POST" };
             var attributAction = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.action.ToString(), Value = "/candidate" };
@@ -192,7 +196,7 @@ namespace FalconEngine.DomParsing
             return divTag;
         }
 
-        private static TagModel GetDivTitle()
+        private TagModel GetDivTitle()
         {
             var attributId = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.classCss.ToString(), Value = "Title" };
             string content = "<h1>Present your candidature</h1>";
@@ -210,7 +214,7 @@ namespace FalconEngine.DomParsing
             return divTag;
         }
 
-        private static TagModel GetH1Title()
+        private TagModel GetH1Title()
         {
             string content = "Present your candidature";
             var h1Tag = new TagModel()
@@ -224,7 +228,7 @@ namespace FalconEngine.DomParsing
             return h1Tag;
         }
 
-        private static TagModel GetDivIdentity()
+        private TagModel GetDivIdentity()
         {
             var attributId = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.classCss.ToString(), Value = "Identity" };
             string content = "<input type=\"text\" placeholder=\"FirstName\"><input type=\"text\" placeholder=\"LastName\">";
@@ -243,31 +247,21 @@ namespace FalconEngine.DomParsing
             return divTag;
         }
 
-        private static TagModel GetInputFirstName()
+        private TagModel GetInputFirstName()
         {
-            var inputFirstName = new TagModel()
-            {
-                NameTag = NameTagEnum.input,
-                TagFamily = TagFamilyEnum.NoEnd,
-                Content = string.Empty,
-                TagStart = "<input type=\"text\" placeholder=\"FirstName\">"
-            };
+            string html = "<input type=\"text\" placeholder=\"FirstName\">";
+            var inputFirstName = _inputParser.Parse(html);
             return inputFirstName;
         }
 
-        private static TagModel GetInputLastName()
+        private TagModel GetInputLastName()
         {
-            var inputLastName = new TagModel()
-            {
-                NameTag = NameTagEnum.input,
-                TagFamily = TagFamilyEnum.NoEnd,
-                Content = string.Empty,
-                TagStart = "<input type=\"text\" placeholder=\"LastName\"> "
-            };
+            string html = "<input type=\"text\" placeholder=\"LastName\">";
+            var inputLastName = _inputParser.Parse(html);
             return inputLastName;
         }
 
-        private static TagModel GetDivGender()
+        private TagModel GetDivGender()
         {
             var attributId = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.classCss.ToString(), Value = "Gender" };
             string content = "<label for=\"rgender\">Gender</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"male\"/> <label for=\"male\">Male</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"female\"/> <label for=\"female\">female</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"undefined\" checked/> <label for=\"undefined\">Undefined</label>";
@@ -291,7 +285,7 @@ namespace FalconEngine.DomParsing
             return divTag;
         }
 
-        private static TagModel GetLabelGender()
+        private TagModel GetLabelGender()
         {
             string content = "Gender";
             var labelGender = new TagModel()
@@ -305,19 +299,14 @@ namespace FalconEngine.DomParsing
             return labelGender;
         }
 
-        private static TagModel GetRadioMale()
+        private TagModel GetRadioMale()
         {
-            var radioMale = new TagModel()
-            {
-                NameTag = NameTagEnum.input,
-                TagFamily = TagFamilyEnum.NoEnd,
-                Content = string.Empty,
-                TagStart = "<input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"male\"/>"
-            };
+            string html = "<input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"male\"/>";
+            var radioMale = _inputParser.Parse(html);
             return radioMale;
         }
 
-        private static TagModel GetLabelMale()
+        private TagModel GetLabelMale()
         {
             string content = "Male";
             var labelGender = new TagModel()
@@ -331,19 +320,14 @@ namespace FalconEngine.DomParsing
             return labelGender;
         }
 
-        private static TagModel GetRadioFemale()
+        private TagModel GetRadioFemale()
         {
-            var radioFemale = new TagModel()
-            {
-                NameTag = NameTagEnum.input,
-                TagFamily = TagFamilyEnum.NoEnd,
-                Content = string.Empty,
-                TagStart = "<input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"female\"/>"
-            };
+            string html = "<input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"female\"/>";
+            var radioFemale = _inputParser.Parse(html);
             return radioFemale;
         }
 
-        private static TagModel GetLabelFemale()
+        private TagModel GetLabelFemale()
         {
             string content = "Female";
             var labelGender = new TagModel()
@@ -357,19 +341,14 @@ namespace FalconEngine.DomParsing
             return labelGender;
         }
 
-        private static TagModel GetRadioUndefined()
+        private TagModel GetRadioUndefined()
         {
-            var radioUndefined = new TagModel()
-            {
-                NameTag = NameTagEnum.input,
-                TagFamily = TagFamilyEnum.NoEnd,
-                Content = string.Empty,
-                TagStart = "<input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"undefined\" checked/>"
-            };
+            string html = "<input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"undefined\" checked/>";
+            var radioUndefined = _inputParser.Parse(html);
             return radioUndefined;
         }
 
-        private static TagModel GetLabelUndefined()
+        private TagModel GetLabelUndefined()
         {
             string content = "Undefined";
             var labelGender = new TagModel()
@@ -383,7 +362,7 @@ namespace FalconEngine.DomParsing
             return labelGender;
         }
 
-        private static TagModel GetDivBirthDay()
+        private TagModel GetDivBirthDay()
         {
             var attributId = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.classCss.ToString(), Value = "Birthday" };
             string content = "<label for=\"dBirthday\">Birthday</label><input type=\"date\" id=\"dBirthday\" name=\"birthday\" value=\"1992-07-22\" min=\"1918-01-01\" max=\"2025-12-31\" />";
@@ -402,7 +381,7 @@ namespace FalconEngine.DomParsing
             return divTag;
         }
 
-        private static TagModel GetLabelDate()
+        private TagModel GetLabelDate()
         {
             string content = "Birthday";
             var labelGender = new TagModel()
@@ -416,19 +395,14 @@ namespace FalconEngine.DomParsing
             return labelGender;
         }
 
-        private static TagModel GetInputBirthDay()
+        private TagModel GetInputBirthDay()
         {
-            var inputBirthDay = new TagModel()
-            {
-                NameTag = NameTagEnum.input,
-                TagFamily = TagFamilyEnum.NoEnd,
-                Content = string.Empty,
-                TagStart = "<input type=\"date\" id=\"dBirthday\" name=\"birthday\" value=\"1992-07-22\" min=\"1918-01-01\" max=\"2025-12-31\" /> "
-            };
+            string html = "<input type=\"date\" id=\"dBirthday\" name=\"birthday\" value=\"1992-07-22\" min=\"1918-01-01\" max=\"2025-12-31\" />";
+            var inputBirthDay = _inputParser.Parse(html);
             return inputBirthDay;
         }
 
-        private static TagModel GetDivResume()
+        private TagModel GetDivResume()
         {
             var attributId = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.classCss.ToString(), Value = "Resume" };
             string content = "<label for=\"dResume\">Choose a resume</label><input type=\"file\" id=\"avatar\" name=\"avatar\" accept=\".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document\">";
@@ -447,7 +421,7 @@ namespace FalconEngine.DomParsing
             return divTag;
         }
 
-        private static TagModel GetLabelResume()
+        private TagModel GetLabelResume()
         {
             string content = "Choose a resume";
             var labelResume = new TagModel()
@@ -461,19 +435,14 @@ namespace FalconEngine.DomParsing
             return labelResume;
         }
 
-        private static TagModel GetInputResume()
+        private TagModel GetInputResume()
         {
-            var inputResume = new TagModel()
-            {
-                NameTag = NameTagEnum.input,
-                TagFamily = TagFamilyEnum.NoEnd,
-                Content = string.Empty,
-                TagStart = "<input type=\"file\" id=\"avatar\" name=\"avatar\" accept=\".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document\"> "
-            };
+            string html = "<input type=\"file\" id=\"avatar\" name=\"avatar\" accept=\".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document\">";
+            var inputResume = _inputParser.Parse(html);
             return inputResume;
         }
 
-        private static TagModel GetDivSend()
+        private TagModel GetDivSend()
         {
             var attributId = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.classCss.ToString(), Value = "Send" };
             string content = "<input type=\"Submit\" value=\"Submit\"/>";
@@ -491,15 +460,10 @@ namespace FalconEngine.DomParsing
             return divTag;
         }
 
-        private static TagModel GetInputSubmit()
+        private TagModel GetInputSubmit()
         {
-            var inputSubmit = new TagModel()
-            {
-                NameTag = NameTagEnum.input,
-                TagFamily = TagFamilyEnum.NoEnd,
-                Content = string.Empty,
-                TagStart = "<input type=\"Submit\" value=\"Submit\"/> "
-            };
+            string html = "<input type=\"Submit\" value=\"Submit\"/> ";
+            var inputSubmit = _inputParser.Parse(html);
             return inputSubmit;
         }
 

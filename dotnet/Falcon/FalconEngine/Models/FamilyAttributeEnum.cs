@@ -4,7 +4,7 @@ namespace FalconEngine.Models
     {
         accept, accesskey, action, asAttr, blocking, charset, checkedAttr, classCss, content, contenteditable, crossorigin, data_, disabled,
         download, draggable, dir, enterkeyhint, hidden, httpequiv, href, hreflang, id, inert, inputmode, integrity, isAttr, lang, manifest,
-        media, method, name,
+        max, min, media, method, name,
         onclick, ondblclick, onmousedown, onmouseup, onmouseover, onmouseout, onmousemove, oncontextmenu, onmouseenter,
         onmouseleave, onkeydown, onkeypress, onkeyup, onfocus, onblur, onchange, oninput, onselect, onsubmit, onreset,
         ondrag, ondragstart, ondragend, ondragenter, ondragover, ondragleave, ondrop, oncopy, oncut, onpast, onplay,
