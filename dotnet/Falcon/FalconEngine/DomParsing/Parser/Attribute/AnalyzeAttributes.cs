@@ -33,6 +33,7 @@ namespace FalconEngine.DomParsing.Parser.Attribute
         private string GetOnlyAttributes()
         {
             string onlyAttributes = _startTag.Replace(_baseTag, string.Empty);
+            onlyAttributes = onlyAttributes.Replace("/>", string.Empty);
             onlyAttributes = onlyAttributes.Replace(">", string.Empty);
             onlyAttributes = onlyAttributes.TrimStart();
             return onlyAttributes;
@@ -51,6 +52,7 @@ namespace FalconEngine.DomParsing.Parser.Attribute
             List<string> parts = new List<string>();
             string recording = string.Empty;
             int countDoubleQuote = 0;
+            var attributesWorking = _onlyAttributes;
             for (int i = 0; i < _onlyAttributes.Length; i++)
             {
                 char caracter = _onlyAttributes[i];
@@ -62,11 +64,25 @@ namespace FalconEngine.DomParsing.Parser.Attribute
                 if (countDoubleQuote == 2)
                 {
                     parts.Add(recording);
+                    attributesWorking = attributesWorking.Replace(recording, string.Empty);
                     recording = string.Empty;
                     countDoubleQuote = 0;
                 }
             }
+            string attributesRemainingCleaned = ManageAttributesRemaining(attributesWorking);
+            if (!string.IsNullOrEmpty(attributesRemainingCleaned))
+                parts.Add(attributesRemainingCleaned);
             return parts;
+        }
+
+        private string ManageAttributesRemaining(string attributesNotClassed)
+        {
+            string attributesWorking = attributesNotClassed;
+            attributesWorking = attributesWorking.TrimStart().TrimEnd();
+            if (!string.IsNullOrEmpty(attributesWorking) && !attributesWorking.Contains(" "))
+                return attributesWorking;
+            else
+                return string.Empty;
         }
 
         private List<string> CleanAllParts(List<string> partsNotClean)

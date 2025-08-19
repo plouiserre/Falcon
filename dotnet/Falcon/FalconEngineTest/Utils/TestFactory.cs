@@ -13,12 +13,6 @@ namespace FalconEngineTest.Utils
 {
     public static class TestFactory
     {
-
-        private static IExtractHtmlRemaining InitExtractHtmlRemaining()
-        {
-            return new ExtractHtmlRemaining();
-        }
-
         private static IdentifyStartTagEndTag InitIdentifyStartTagEndTag()
         {
             return new IdentifyStartTagEndTag();
@@ -39,10 +33,14 @@ namespace FalconEngineTest.Utils
             return new AParser(InitIdentifyTag(), InitAttributeTagManager(true), InitDeleteUselessSpace());
         }
 
+        public static InputParser InitInputParser()
+        {
+            return new InputParser(InitIdentifyTag(), InitAttributeTagManager(true));
+        }
+
         public static SpanParser InitSpanParser()
         {
-            return new SpanParser(TestFactory.InitIdentifyTag(), TestFactory.InitAttributeTagManager(true),
-                            TestFactory.InitDeterminateChildren(), NameTagEnum.span);
+            return new SpanParser(InitIdentifyTag(), InitAttributeTagManager(true), InitDeterminateChildren(), NameTagEnum.span);
         }
 
         public static PParser InitPParser()
