@@ -79,5 +79,25 @@ namespace FalconEngineTest.DomParsing.Parser
             Assert.Null(tag.TagEnd);
             Assert.Null(tag.Children);
         }
+
+        [Fact]
+        public void ParseInputText()
+        {
+            string? html = HtmlPageFormData.GetHtml(TagHtmlForm.inputFirstName);
+            var inputTagParser = TestFactory.InitInputParser();
+
+            var tag = inputTagParser.Parse(html);
+
+            Assert.Equal(NameTagEnum.input, tag.NameTag);
+            Assert.Null(tag.Content);
+            Assert.Equal(FamilyAttributeEnum.type.ToString(), tag.Attributes[0].FamilyAttribute);
+            Assert.Equal("text", tag.Attributes[0].Value);
+            Assert.Equal(FamilyAttributeEnum.placeholder.ToString(), tag.Attributes[1].FamilyAttribute);
+            Assert.Equal("FirstName", tag.Attributes[1].Value);
+            Assert.Equal(TagFamilyEnum.NoEnd, tag.TagFamily);
+            Assert.Equal("<input type=\"text\" placeholder=\"FirstName\">", tag.TagStart);
+            Assert.Null(tag.TagEnd);
+            Assert.Null(tag.Children);
+        }
     }
 }

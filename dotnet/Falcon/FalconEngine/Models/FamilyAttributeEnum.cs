@@ -10,7 +10,7 @@ namespace FalconEngine.Models
         ondrag, ondragstart, ondragend, ondragenter, ondragover, ondragleave, ondrop, oncopy, oncut, onpast, onplay,
         onpause, onended, onvolumechange, onwheel, onscroll, onresize, onerror, onoad, onunload, ontransitionend,
         onanimationstart, onanimationend, onanimationiteration,
-        popover, rel, referrerpolicy, role, scheme, spellcheck, sizes, style, tabindex, target, title, translate, type,
+        placeholder, popover, rel, referrerpolicy, role, scheme, spellcheck, sizes, style, tabindex, target, title, translate, type,
         value, xmlns
     }
 }
