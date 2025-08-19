@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using FalconEngine.Models;
 using FalconEngineTest.Utils.HtmlData;
 
-namespace FalconEngineTest.Utils
+namespace FalconEngineTest.Utils.AssertHtml
 {
-    public static class AssertHtml
+    public static class AssertSimplePage
     {
         public static void AssertHeader(TagModel header, string contentHeader)
         {

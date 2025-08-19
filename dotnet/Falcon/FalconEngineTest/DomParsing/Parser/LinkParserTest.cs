@@ -8,6 +8,7 @@ using FalconEngine.DomParsing.IdentifyTagParsing;
 using FalconEngine.DomParsing.Parser;
 using FalconEngine.Models;
 using FalconEngineTest.Utils;
+using FalconEngineTest.Utils.AssertHtml;
 using FalconEngineTest.Utils.HtmlData;
 
 namespace FalconEngineTest.DomParsing.Parser
@@ -22,7 +23,7 @@ namespace FalconEngineTest.DomParsing.Parser
 
             var tag = linkTagParser.Parse(html);
 
-            AssertHtml.AssertLinkCss(tag);
+            AssertSimplePage.AssertLinkCss(tag);
         }
 
         [Theory]

@@ -6,6 +6,7 @@ using FalconEngine.DomParsing.CustomException;
 using FalconEngine.DomParsing.IdentifyTagParsing;
 using FalconEngine.Models;
 using FalconEngineTest.Utils;
+using FalconEngineTest.Utils.AssertHtml;
 using FalconEngineTest.Utils.HtmlData;
 
 namespace FalconEngineTest.DomParsing
@@ -24,7 +25,7 @@ namespace FalconEngineTest.DomParsing
 
             Assert.True(areValid);
 
-            AssertHtml.AssertHeaderChildren(headerChildren);
+            AssertSimplePage.AssertHeaderChildren(headerChildren);
         }
 
         [Fact]
