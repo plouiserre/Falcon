@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FalconEngine.DomParsing.Parser;
 using FalconEngineTest.Utils;
+using FalconEngineTest.Utils.AssertHtml;
 using FalconEngineTest.Utils.HtmlData;
 
 namespace FalconEngineTest.DomParsing.Parser
@@ -19,7 +20,7 @@ namespace FalconEngineTest.DomParsing.Parser
             var html = bodyParser.Parse(body);
             bool isValid = bodyParser.IsValid();
 
-            AssertHtml.AssertBodyClassMain(html);
+            AssertSimplePage.AssertBodyClassMain(html);
             Assert.True(isValid);
         }
 

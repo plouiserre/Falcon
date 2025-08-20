@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FalconEngine.Models;
 using FalconEngineTest.Utils;
+using FalconEngineTest.Utils.AssertHtml;
 using FalconEngineTest.Utils.HtmlData;
 
 namespace FalconEngineTest.DomParsing.Parser
@@ -80,7 +81,7 @@ namespace FalconEngineTest.DomParsing.Parser
             bool isValid = parser.IsValid();
 
             Assert.True(isValid);
-            AssertHtml.AssertPDeclarationText(tag);
+            AssertSimplePage.AssertPDeclarationText(tag);
         }
 
         [Fact]

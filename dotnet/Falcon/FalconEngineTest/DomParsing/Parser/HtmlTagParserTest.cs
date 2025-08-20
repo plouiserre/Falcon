@@ -9,6 +9,7 @@ using FalconEngine.DomParsing.IdentifyTagParsing;
 using FalconEngine.DomParsing.Parser;
 using FalconEngine.Models;
 using FalconEngineTest.Utils;
+using FalconEngineTest.Utils.AssertHtml;
 using FalconEngineTest.Utils.HtmlData;
 
 namespace FalconEngineTest.DomParsing.Parser
@@ -106,7 +107,7 @@ namespace FalconEngineTest.DomParsing.Parser
             Assert.Equal(TagFamilyEnum.WithEnd, tag.TagFamily);
             Assert.Equal(HtmlPageSimpleData.GetHtml(TagHtmlSimple.divIdContent), tag.Content);
             Assert.Single(tag.Children);
-            AssertHtml.AssertDivContent(tag.Children[0]);
+            AssertSimplePage.AssertDivContent(tag.Children[0]);
         }
     }
 }
