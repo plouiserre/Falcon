@@ -98,7 +98,7 @@ namespace FalconEngine.DomParsing
                 Attributes = new List<AttributeModel>() { attributLang, attributDir, attributXmlns },
                 NameTag = NameTagEnum.html,
                 TagFamily = TagFamilyEnum.WithEnd,
-                Content = "<head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>Document</title><link rel=\"stylesheet\" href=\"main.css\" data-preload=\"true\"></head><body><form method=\"POST\" action=\"/candidate\"><div class=\"Title\"><h1>Present your candidature</h1></div><div class=\"Identity\"><input type=\"text\" placeholder=\"FirstName\"><input type=\"text\" placeholder=\"LastName\"></div><div class=\"Gender\"><label for=\"rgender\">Gender</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"male\"/> <label for=\"male\">Male</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"female\"/> <label for=\"female\">female</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"undefined\" checked/> <label for=\"undefined\">Undefined</label></div><div class=\"Birthday\"><label for=\"dBirthday\">Birthday</label><input type=\"date\" id=\"dBirthday\" name=\"birthday\" value=\"1992-07-22\" min=\"1918-01-01\" max=\"2025-12-31\" /></div><div class=\"Resume\"><input type=\"file\" id=\"avatar\" name=\"avatar\" accept=\".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document\"><label for=\"dResume\">Choose a resume</label></div><div class=\"Send\"><input type=\"Submit\" value=\"Submit\"/></div></form></body>",
+                Content = "<head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>Document</title><link rel=\"stylesheet\" href=\"main.css\" data-preload=\"true\"></head><body><form method=\"POST\" action=\"/candidate\"><div class=\"Title\"><h1>Present your candidature</h1></div><div class=\"Identity\"><input type=\"text\" placeholder=\"FirstName\"><input type=\"text\" placeholder=\"LastName\"></div><div class=\"Gender\"><label for=\"rgender\">Gender</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"male\"/> <label for=\"male\">Male</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"female\"/> <label for=\"female\">female</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"undefined\" checked/> <label for=\"undefined\">Undefined</label></div><div class=\"Situation\"><label for=\"lSituation\">Situation</label><select name=\"sSituation\" id=\"sSituation\"><option>No Job</option><option>Job in a company</option><option>Entrepreneur</option></select></div><div class=\"Birthday\"><label for=\"dBirthday\">Birthday</label><input type=\"date\" id=\"dBirthday\" name=\"birthday\" value=\"1992-07-22\" min=\"1918-01-01\" max=\"2025-12-31\" /></div><div class=\"Resume\"><input type=\"file\" id=\"avatar\" name=\"avatar\" accept=\".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document\"><label for=\"dResume\">Choose a resume</label></div><div class=\"Send\"><input type=\"Submit\" value=\"Submit\"/></div></form></body>",
                 TagStart = "<html lang=\"en\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\">",
                 TagEnd = "</html>",
                 Children = new List<TagModel>() { headTag, body }
@@ -158,7 +158,7 @@ namespace FalconEngine.DomParsing
 
         private TagModel GetBodyTag()
         {
-            string content = "<form method=\"POST\" action=\"/candidate\"><div class=\"Title\"><h1>Present your candidature</h1></div><div class=\"Identity\"><input type=\"text\" placeholder=\"FirstName\"><input type=\"text\" placeholder=\"LastName\"></div><div class=\"Gender\"><label for=\"rgender\">Gender</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"male\"/> <label for=\"male\">Male</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"female\"/> <label for=\"female\">female</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"undefined\" checked/> <label for=\"undefined\">Undefined</label></div><div class=\"Birthday\"><label for=\"dBirthday\">Birthday</label><input type=\"date\" id=\"dBirthday\" name=\"birthday\" value=\"1992-07-22\" min=\"1918-01-01\" max=\"2025-12-31\" /></div><div class=\"Resume\"><input type=\"file\" id=\"avatar\" name=\"avatar\" accept=\".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document\"><label for=\"dResume\">Choose a resume</label></div><div class=\"Send\"><input type=\"Submit\" value=\"Submit\"/></div></form>";
+            string content = "<form method=\"POST\" action=\"/candidate\"><div class=\"Title\"><h1>Present your candidature</h1></div><div class=\"Identity\"><input type=\"text\" placeholder=\"FirstName\"><input type=\"text\" placeholder=\"LastName\"></div><div class=\"Gender\"><label for=\"rgender\">Gender</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"male\"/> <label for=\"male\">Male</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"female\"/> <label for=\"female\">female</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"undefined\" checked/> <label for=\"undefined\">Undefined</label></div><div class=\"Situation\"><label for=\"lSituation\">Situation</label><select name=\"sSituation\" id=\"sSituation\"><option>No Job</option><option>Job in a company</option><option>Entrepreneur</option></select></div><div class=\"Birthday\"><label for=\"dBirthday\">Birthday</label><input type=\"date\" id=\"dBirthday\" name=\"birthday\" value=\"1992-07-22\" min=\"1918-01-01\" max=\"2025-12-31\" /></div><div class=\"Resume\"><input type=\"file\" id=\"avatar\" name=\"avatar\" accept=\".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document\"><label for=\"dResume\">Choose a resume</label></div><div class=\"Send\"><input type=\"Submit\" value=\"Submit\"/></div></form>";
             var formPost = GetFormPost();
             var bodyTag = new TagModel()
             {
@@ -176,10 +176,11 @@ namespace FalconEngine.DomParsing
         {
             var attributMethod = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.method.ToString(), Value = "POST" };
             var attributAction = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.action.ToString(), Value = "/candidate" };
-            string content = "<div class=\"Title\"><h1>Present your candidature</h1></div><div class=\"Identity\"><input type=\"text\" placeholder=\"FirstName\"><input type=\"text\" placeholder=\"LastName\"></div><div class=\"Gender\"><label for=\"rgender\">Gender</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"male\"/> <label for=\"male\">Male</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"female\"/> <label for=\"female\">female</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"undefined\" checked/> <label for=\"undefined\">Undefined</label></div><div class=\"Birthday\"><label for=\"dBirthday\">Birthday</label><input type=\"date\" id=\"dBirthday\" name=\"birthday\" value=\"1992-07-22\" min=\"1918-01-01\" max=\"2025-12-31\" /></div><div class=\"Resume\"><input type=\"file\" id=\"avatar\" name=\"avatar\" accept=\".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document\"><label for=\"dResume\">Choose a resume</label></div><div class=\"Send\"><input type=\"Submit\" value=\"Submit\"/></div>";
+            string content = "<div class=\"Title\"><h1>Present your candidature</h1></div><div class=\"Identity\"><input type=\"text\" placeholder=\"FirstName\"><input type=\"text\" placeholder=\"LastName\"></div><div class=\"Gender\"><label for=\"rgender\">Gender</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"male\"/> <label for=\"male\">Male</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"female\"/> <label for=\"female\">female</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"undefined\" checked/> <label for=\"undefined\">Undefined</label></div><div class=\"Situation\"><label for=\"lSituation\">Situation</label><select name=\"sSituation\" id=\"sSituation\"><option>No Job</option><option>Job in a company</option><option>Entrepreneur</option></select></div><div class=\"Birthday\"><label for=\"dBirthday\">Birthday</label><input type=\"date\" id=\"dBirthday\" name=\"birthday\" value=\"1992-07-22\" min=\"1918-01-01\" max=\"2025-12-31\" /></div><div class=\"Resume\"><input type=\"file\" id=\"avatar\" name=\"avatar\" accept=\".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document\"><label for=\"dResume\">Choose a resume</label></div><div class=\"Send\"><input type=\"Submit\" value=\"Submit\"/></div>";
             var divTitle = GetDivTitle();
             var divIdentity = GetDivIdentity();
             var divGender = GetDivGender();
+            var divSituation = GetDivSituation();
             var divBirthday = GetDivBirthDay();
             var divResume = GetDivResume();
             var divSend = GetDivSend();
@@ -191,7 +192,7 @@ namespace FalconEngine.DomParsing
                 Content = content,
                 TagStart = "<div id=\"content\">",
                 TagEnd = "</div>",
-                Children = new List<TagModel>() { divTitle, divIdentity, divGender, divBirthday, divResume, divSend }
+                Children = new List<TagModel>() { divTitle, divIdentity, divGender, divSituation, divBirthday, divResume, divSend }
             };
             return divTag;
         }
@@ -360,6 +361,97 @@ namespace FalconEngine.DomParsing
                 TagEnd = "</label>"
             };
             return labelGender;
+        }
+
+        private static TagModel GetDivSituation()
+        {
+            var attributId = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.classCss.ToString(), Value = "Situation" };
+            string content = "<label for=\"lSituation\">Situation</label><select name=\"sSituation\" id=\"sSituation\"><option>No Job</option><option>Job in a company</option><option>Entrepreneur</option></select>";
+            var labelSituation = GetLabelSituation();
+            var selectSituation = GetSelectSituation();
+            var divTag = new TagModel()
+            {
+                Attributes = new List<AttributeModel>() { attributId },
+                NameTag = NameTagEnum.div,
+                TagFamily = TagFamilyEnum.WithEnd,
+                Content = content,
+                TagStart = "<div class=\"Situation\">",
+                TagEnd = "</div>",
+                Children = new List<TagModel>() { labelSituation, selectSituation }
+            };
+            return divTag;
+        }
+
+        private static TagModel GetLabelSituation()
+        {
+            string content = "Situation";
+            var labelGender = new TagModel()
+            {
+                NameTag = NameTagEnum.label,
+                TagFamily = TagFamilyEnum.WithEnd,
+                Content = content,
+                TagStart = "<label for=\"lSituation\">",
+                TagEnd = "</label>"
+            };
+            return labelGender;
+        }
+
+        private static TagModel GetSelectSituation()
+        {
+            var attributes = new List<AttributeModel>() { new AttributeModel() { FamilyAttribute = "name", Value = "sSituation" },
+                                            new AttributeModel() { FamilyAttribute = "id", Value = "sSituation" }};
+            var firstOption = GetFirstOption();
+            var secondOption = GetSecondOption();
+            var thirdOption = GetThirdOption();
+            var selectSelection = new TagModel()
+            {
+                NameTag = NameTagEnum.select,
+                TagFamily = TagFamilyEnum.WithEnd,
+                TagStart = "<select name=\"sSituation\" id=\"sSituation\">",
+                TagEnd = "</select>",
+                Attributes = attributes,
+                Children = new List<TagModel>() { firstOption, secondOption, thirdOption }
+            };
+            return selectSelection;
+        }
+
+        private static TagModel GetFirstOption()
+        {
+            var selectSelection = new TagModel()
+            {
+                NameTag = NameTagEnum.option,
+                TagFamily = TagFamilyEnum.WithEnd,
+                TagStart = "<option>",
+                TagEnd = "</option>",
+                Content = "No Job"
+            };
+            return selectSelection;
+        }
+
+        private static TagModel GetSecondOption()
+        {
+            var selectSelection = new TagModel()
+            {
+                NameTag = NameTagEnum.option,
+                TagFamily = TagFamilyEnum.WithEnd,
+                TagStart = "<option>",
+                TagEnd = "</option>",
+                Content = "Job in a company"
+            };
+            return selectSelection;
+        }
+
+        private static TagModel GetThirdOption()
+        {
+            var selectSelection = new TagModel()
+            {
+                NameTag = NameTagEnum.option,
+                TagFamily = TagFamilyEnum.WithEnd,
+                TagStart = "<option>",
+                TagEnd = "</option>",
+                Content = "Entrepreneur"
+            };
+            return selectSelection;
         }
 
         private TagModel GetDivBirthDay()

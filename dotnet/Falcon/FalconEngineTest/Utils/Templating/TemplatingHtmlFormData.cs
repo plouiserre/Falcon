@@ -67,6 +67,12 @@ namespace FalconEngineTest.Utils.Templating
                     return jsonModel.LabelDate;
                 case "DivDate":
                     return jsonModel.DivDate;
+                case "LabelSituation":
+                    return jsonModel.LabelSituation;
+                case "SelectSituation":
+                    return jsonModel.SelectSituation;
+                case "DivSituation":
+                    return jsonModel.DivSituation;
                 case "RadioMale":
                     return jsonModel.RadioMale;
                 case "LabelMale":
