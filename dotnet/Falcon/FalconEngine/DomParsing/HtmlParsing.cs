@@ -427,7 +427,7 @@ namespace FalconEngine.DomParsing
 
         private TagModel GetSecondOption()
         {
-            var html = "<option>Job in a company";
+            var html = "<option>Job in a company</option>";
             var option = _optionParser.Parse(html);
             return option;
         }
