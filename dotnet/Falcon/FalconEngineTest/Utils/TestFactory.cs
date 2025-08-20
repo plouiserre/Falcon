@@ -43,6 +43,11 @@ namespace FalconEngineTest.Utils
             return new OptionParser(TestFactory.InitIdentifyTag(), InitAttributeTagManager(true));
         }
 
+        public static SelectParser InitSelectParser()
+        {
+            return new SelectParser(TestFactory.InitIdentifyTag(), TestFactory.InitDeterminateChildren(), InitAttributeTagManager(true));
+        }
+
         public static SpanParser InitSpanParser()
         {
             return new SpanParser(InitIdentifyTag(), InitAttributeTagManager(true), InitDeterminateChildren(), NameTagEnum.span);

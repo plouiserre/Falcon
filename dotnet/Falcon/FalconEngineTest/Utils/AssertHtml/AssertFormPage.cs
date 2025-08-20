@@ -73,5 +73,55 @@ namespace FalconEngineTest.Utils.AssertHtml
             Assert.Null(tag.TagEnd);
             Assert.Null(tag.Children);
         }
+
+        public static void AssertSelectSituation(TagModel tag)
+        {
+            Assert.Equal(NameTagEnum.select, tag.NameTag);
+            Assert.Equal("<option>No Job</option><option>Job in a company</option><option>Entrepreneur</option>", tag.Content);
+            Assert.Equal(FamilyAttributeEnum.name.ToString(), tag.Attributes[0].FamilyAttribute);
+            Assert.Equal("sSituation", tag.Attributes[0].Value);
+            Assert.Equal(FamilyAttributeEnum.id.ToString(), tag.Attributes[1].FamilyAttribute);
+            Assert.Equal("sSituation", tag.Attributes[1].Value);
+            Assert.Equal(TagFamilyEnum.WithEnd, tag.TagFamily);
+            Assert.Equal("<select name=\"sSituation\" id=\"sSituation\">", tag.TagStart);
+            Assert.Equal("</select>", tag.TagEnd);
+            Assert.Equal(3, tag.Children.Count);
+            AssertFirstOption(tag.Children[0]);
+            AssertSecondOption(tag.Children[1]);
+            AssertThirdOption(tag.Children[2]);
+        }
+
+        private static void AssertFirstOption(TagModel tag)
+        {
+            Assert.Equal(NameTagEnum.option, tag.NameTag);
+            Assert.Equal("No Job", tag.Content);
+            Assert.Null(tag.Attributes);
+            Assert.Equal(TagFamilyEnum.WithEnd, tag.TagFamily);
+            Assert.Equal("<option>", tag.TagStart);
+            Assert.Equal("</option>", tag.TagEnd);
+            Assert.Null(tag.Children);
+        }
+
+        private static void AssertSecondOption(TagModel tag)
+        {
+            Assert.Equal(NameTagEnum.option, tag.NameTag);
+            Assert.Equal("Job in a company", tag.Content);
+            Assert.Null(tag.Attributes);
+            Assert.Equal(TagFamilyEnum.WithEnd, tag.TagFamily);
+            Assert.Equal("<option>", tag.TagStart);
+            Assert.Equal("</option>", tag.TagEnd);
+            Assert.Null(tag.Children);
+        }
+
+        private static void AssertThirdOption(TagModel tag)
+        {
+            Assert.Equal(NameTagEnum.option, tag.NameTag);
+            Assert.Equal("Entrepreneur", tag.Content);
+            Assert.Null(tag.Attributes);
+            Assert.Equal(TagFamilyEnum.WithEnd, tag.TagFamily);
+            Assert.Equal("<option>", tag.TagStart);
+            Assert.Equal("</option>", tag.TagEnd);
+            Assert.Null(tag.Children);
+        }
     }
 }

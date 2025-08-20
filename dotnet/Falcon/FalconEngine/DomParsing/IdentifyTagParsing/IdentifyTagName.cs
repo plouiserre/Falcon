@@ -25,6 +25,7 @@ namespace FalconEngine.DomParsing.IdentifyTagParsing
             return tag;
         }
 
+        //TODO try with parsing
         private NameTagEnum GetNameTagEnum(string simpleTag)
         {
             switch (simpleTag.ToLower())
@@ -53,6 +54,8 @@ namespace FalconEngine.DomParsing.IdentifyTagParsing
                     return NameTagEnum.input;
                 case "option":
                     return NameTagEnum.option;
+                case "select":
+                    return NameTagEnum.select;
                 default:
                     return NameTagEnum.a;
             }
