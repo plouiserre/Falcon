@@ -15,6 +15,7 @@ namespace FalconEngine.DomParsing
         private ITagParser _htmlParse;
         //temporary start 
         private ITagParser _inputParser;
+        private ITagParser _optionParser;
         //temporary end
         private IExtractHtmlRemaining _extractHtmlRemaining;
         private IAttributeTagManager _attributeTagManager;
@@ -23,11 +24,13 @@ namespace FalconEngine.DomParsing
         private bool _isValidHtmlTag;
         private bool _isValidPage;
 
-        public HtmlParsing(ITagParser doctypeParse, ITagParser htmlParse, ITagParser inputParser, IExtractHtmlRemaining extractHtmlRemaining, IAttributeTagManager attributeTagManager)
+        public HtmlParsing(ITagParser doctypeParse, ITagParser htmlParse, ITagParser inputParser, ITagParser optionParser,
+                             IExtractHtmlRemaining extractHtmlRemaining, IAttributeTagManager attributeTagManager)
         {
             _doctypeParse = doctypeParse;
             _htmlParse = htmlParse;
             _inputParser = inputParser;
+            _optionParser = optionParser;
             _extractHtmlRemaining = extractHtmlRemaining;
             _attributeTagManager = attributeTagManager;
         }
@@ -363,7 +366,7 @@ namespace FalconEngine.DomParsing
             return labelGender;
         }
 
-        private static TagModel GetDivSituation()
+        private TagModel GetDivSituation()
         {
             var attributId = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.classCss.ToString(), Value = "Situation" };
             string content = "<label for=\"lSituation\">Situation</label><select name=\"sSituation\" id=\"sSituation\"><option>No Job</option><option>Job in a company</option><option>Entrepreneur</option></select>";
@@ -396,7 +399,7 @@ namespace FalconEngine.DomParsing
             return labelGender;
         }
 
-        private static TagModel GetSelectSituation()
+        private TagModel GetSelectSituation()
         {
             var attributes = new List<AttributeModel>() { new AttributeModel() { FamilyAttribute = "name", Value = "sSituation" },
                                             new AttributeModel() { FamilyAttribute = "id", Value = "sSituation" }};
@@ -415,43 +418,25 @@ namespace FalconEngine.DomParsing
             return selectSelection;
         }
 
-        private static TagModel GetFirstOption()
+        private TagModel GetFirstOption()
         {
-            var selectSelection = new TagModel()
-            {
-                NameTag = NameTagEnum.option,
-                TagFamily = TagFamilyEnum.WithEnd,
-                TagStart = "<option>",
-                TagEnd = "</option>",
-                Content = "No Job"
-            };
-            return selectSelection;
+            string html = "<option>No Job</option>";
+            var option = _optionParser.Parse(html);
+            return option;
         }
 
-        private static TagModel GetSecondOption()
+        private TagModel GetSecondOption()
         {
-            var selectSelection = new TagModel()
-            {
-                NameTag = NameTagEnum.option,
-                TagFamily = TagFamilyEnum.WithEnd,
-                TagStart = "<option>",
-                TagEnd = "</option>",
-                Content = "Job in a company"
-            };
-            return selectSelection;
+            var html = "<option>Job in a company";
+            var option = _optionParser.Parse(html);
+            return option;
         }
 
-        private static TagModel GetThirdOption()
+        private TagModel GetThirdOption()
         {
-            var selectSelection = new TagModel()
-            {
-                NameTag = NameTagEnum.option,
-                TagFamily = TagFamilyEnum.WithEnd,
-                TagStart = "<option>",
-                TagEnd = "</option>",
-                Content = "Entrepreneur"
-            };
-            return selectSelection;
+            var html = "<option>Entrepreneur</option>";
+            var option = _optionParser.Parse(html);
+            return option;
         }
 
         private TagModel GetDivBirthDay()
