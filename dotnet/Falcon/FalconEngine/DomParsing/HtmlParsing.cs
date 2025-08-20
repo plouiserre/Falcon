@@ -15,7 +15,7 @@ namespace FalconEngine.DomParsing
         private ITagParser _htmlParse;
         //temporary start 
         private ITagParser _inputParser;
-        private ITagParser _optionParser;
+        private ITagParser _selectParser;
         //temporary end
         private IExtractHtmlRemaining _extractHtmlRemaining;
         private IAttributeTagManager _attributeTagManager;
@@ -24,13 +24,13 @@ namespace FalconEngine.DomParsing
         private bool _isValidHtmlTag;
         private bool _isValidPage;
 
-        public HtmlParsing(ITagParser doctypeParse, ITagParser htmlParse, ITagParser inputParser, ITagParser optionParser,
+        public HtmlParsing(ITagParser doctypeParse, ITagParser htmlParse, ITagParser inputParser, ITagParser selectParser,
                              IExtractHtmlRemaining extractHtmlRemaining, IAttributeTagManager attributeTagManager)
         {
             _doctypeParse = doctypeParse;
             _htmlParse = htmlParse;
             _inputParser = inputParser;
-            _optionParser = optionParser;
+            _selectParser = selectParser;
             _extractHtmlRemaining = extractHtmlRemaining;
             _attributeTagManager = attributeTagManager;
         }
@@ -401,42 +401,9 @@ namespace FalconEngine.DomParsing
 
         private TagModel GetSelectSituation()
         {
-            var attributes = new List<AttributeModel>() { new AttributeModel() { FamilyAttribute = "name", Value = "sSituation" },
-                                            new AttributeModel() { FamilyAttribute = "id", Value = "sSituation" }};
-            var firstOption = GetFirstOption();
-            var secondOption = GetSecondOption();
-            var thirdOption = GetThirdOption();
-            var selectSelection = new TagModel()
-            {
-                NameTag = NameTagEnum.select,
-                TagFamily = TagFamilyEnum.WithEnd,
-                TagStart = "<select name=\"sSituation\" id=\"sSituation\">",
-                TagEnd = "</select>",
-                Attributes = attributes,
-                Children = new List<TagModel>() { firstOption, secondOption, thirdOption }
-            };
+            string html = "<select name=\"sSituation\" id=\"sSituation\"><option>No Job</option><option>Job in a company</option><option>Entrepreneur</option></select>";
+            var selectSelection = _selectParser.Parse(html);
             return selectSelection;
-        }
-
-        private TagModel GetFirstOption()
-        {
-            string html = "<option>No Job</option>";
-            var option = _optionParser.Parse(html);
-            return option;
-        }
-
-        private TagModel GetSecondOption()
-        {
-            var html = "<option>Job in a company</option>";
-            var option = _optionParser.Parse(html);
-            return option;
-        }
-
-        private TagModel GetThirdOption()
-        {
-            var html = "<option>Entrepreneur</option>";
-            var option = _optionParser.Parse(html);
-            return option;
         }
 
         private TagModel GetDivBirthDay()

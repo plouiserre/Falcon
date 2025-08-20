@@ -395,6 +395,7 @@ namespace FalconEngineTest.Data
 
         private static TagModel GetSelectSituation()
         {
+            string content = "<option>No Job</option><option>Job in a company</option><option>Entrepreneur</option>";
             var attributes = new List<AttributeModel>() { new AttributeModel() { FamilyAttribute = "name", Value = "sSituation" },
                                             new AttributeModel() { FamilyAttribute = "id", Value = "sSituation" }};
             var firstOption = GetFirstOption();
@@ -402,6 +403,7 @@ namespace FalconEngineTest.Data
             var thirdOption = GetThirdOption();
             var selectSelection = new TagModel()
             {
+                Content = content,
                 NameTag = NameTagEnum.select,
                 TagFamily = TagFamilyEnum.WithEnd,
                 TagStart = "<select name=\"sSituation\" id=\"sSituation\">",

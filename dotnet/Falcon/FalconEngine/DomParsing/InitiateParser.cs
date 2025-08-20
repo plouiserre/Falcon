@@ -87,6 +87,8 @@ namespace FalconEngine.DomParsing
                     return new LinkParser(_identifyTag, _attributeTagManager);
                 case string tag when tag.ToLower().Contains("<title"):
                     return new TitleParser(_identifyTag, _determinateContent);
+                case string tag when tag.ToLower().Contains("<option"):
+                    return new OptionParser(_identifyTag, _attributeTagManager);
                 case string tag when tag.ToLower().Contains("<span"):
                     return new SpanParser(_identifyTag, _attributeTagManager, _manageChildrenTag, NameTagEnum.span);
                 case string tag when tag.ToLower().Contains("<p"):
