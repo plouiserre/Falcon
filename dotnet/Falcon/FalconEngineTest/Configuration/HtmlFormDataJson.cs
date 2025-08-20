@@ -25,12 +25,15 @@ namespace FalconEngineTest.Configuration
             "LabelUndefined":" <label for=\"undefined\">Undefined</label>",
             "LabelGender":"<label for=\"rgender\">Gender</label>",
             "DivGender":"<div class=\"Gender\">{LabelGender}{RadioMale}{LabelMale}{RadioFemale}{LabelFemale}{RadioUndefined}{LabelUndefined}</div>",
+            "LabelSituation":"<label for=\"lSituation\">Situation</label>",
+            "SelectSituation":"<select name=\"sSituation\" id=\"sSituation\"><option>No Job</option><option>Job in a company</option><option>Entrepreneur</option></select>",
+            "DivSituation":"<div class=\"Situation\">{LabelSituation}{SelectSituation}</div>",
             "InputFirstName":"<input type=\"text\" placeholder=\"FirstName\">",
             "InputLastName":"<input type=\"text\" placeholder=\"LastName\">",
             "DivIdentity":"<div class=\"Identity\">{InputFirstName}{InputLastName}</div>",
             "H1Title":"<h1>Present your candidature</h1>",
             "DivH1":"<div class=\"Title\">{H1Title}</div>",
-            "Form":"<form method=\"POST\" action=\"/candidate\">{DivH1}{DivIdentity}{DivGender}{DivDate}{DivResume}{DivSubmit}</form>",
+            "Form":"<form method=\"POST\" action=\"/candidate\">{DivH1}{DivIdentity}{DivGender}{DivSituation}{DivDate}{DivResume}{DivSubmit}</form>",
             "Body":"<body>{Form}</body>",
             "MetaCharset":"<meta charset=\"UTF-8\">",
             "MetaViewPort":"<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">",
@@ -60,6 +63,9 @@ namespace FalconEngineTest.Configuration
         public string? RadioUndefined { get; set; }
         public string? LabelUndefined { get; set; }
         public string? DivGender { get; set; }
+        public string? LabelSituation { get; set; }
+        public string? SelectSituation { get; set; }
+        public string? DivSituation { get; set; }
         public string? InputFirstName { get; set; }
         public string? InputLastName { get; set; }
         public string? DivIdentity { get; set; }
