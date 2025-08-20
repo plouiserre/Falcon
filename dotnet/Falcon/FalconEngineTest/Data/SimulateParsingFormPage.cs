@@ -260,6 +260,7 @@ namespace FalconEngineTest.Data
             string content = "Gender";
             var labelGender = new TagModel()
             {
+                Attributes = new List<AttributeModel>() { new AttributeModel() { FamilyAttribute = "forAttr", Value = "rgender" } },
                 NameTag = NameTagEnum.label,
                 TagFamily = TagFamilyEnum.WithEnd,
                 Content = content,
@@ -290,6 +291,7 @@ namespace FalconEngineTest.Data
             string content = "Male";
             var labelGender = new TagModel()
             {
+                Attributes = new List<AttributeModel>() { new AttributeModel() { FamilyAttribute = "forAttr", Value = "rgender" } },
                 NameTag = NameTagEnum.label,
                 TagFamily = TagFamilyEnum.WithEnd,
                 Content = content,
@@ -320,6 +322,7 @@ namespace FalconEngineTest.Data
             string content = "Female";
             var labelGender = new TagModel()
             {
+                Attributes = new List<AttributeModel>() { new AttributeModel() { FamilyAttribute = "forAttr", Value = "rgender" } },
                 NameTag = NameTagEnum.label,
                 TagFamily = TagFamilyEnum.WithEnd,
                 Content = content,
@@ -351,6 +354,7 @@ namespace FalconEngineTest.Data
             string content = "Undefined";
             var labelGender = new TagModel()
             {
+                Attributes = new List<AttributeModel>() { new AttributeModel() { FamilyAttribute = "forAttr", Value = "rgender" } },
                 NameTag = NameTagEnum.label,
                 TagFamily = TagFamilyEnum.WithEnd,
                 Content = content,
@@ -384,6 +388,7 @@ namespace FalconEngineTest.Data
             string content = "Situation";
             var labelGender = new TagModel()
             {
+                Attributes = new List<AttributeModel>() { new AttributeModel() { FamilyAttribute = "forAttr", Value = "lSituation" } },
                 NameTag = NameTagEnum.label,
                 TagFamily = TagFamilyEnum.WithEnd,
                 Content = content,
@@ -477,6 +482,7 @@ namespace FalconEngineTest.Data
             string content = "Birthday";
             var labelGender = new TagModel()
             {
+                Attributes = new List<AttributeModel>() { new AttributeModel() { FamilyAttribute = "forAttr", Value = "dBirthday" } },
                 NameTag = NameTagEnum.label,
                 TagFamily = TagFamilyEnum.WithEnd,
                 Content = content,
@@ -528,6 +534,7 @@ namespace FalconEngineTest.Data
             string content = "Choose a resume";
             var labelResume = new TagModel()
             {
+                Attributes = new List<AttributeModel>() { new AttributeModel() { FamilyAttribute = "forAttr", Value = "dResume" } },
                 NameTag = NameTagEnum.label,
                 TagFamily = TagFamilyEnum.WithEnd,
                 Content = content,

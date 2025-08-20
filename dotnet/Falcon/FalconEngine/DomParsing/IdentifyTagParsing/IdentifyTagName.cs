@@ -52,6 +52,8 @@ namespace FalconEngine.DomParsing.IdentifyTagParsing
                     return NameTagEnum.span;
                 case "input":
                     return NameTagEnum.input;
+                case "label":
+                    return NameTagEnum.label;
                 case "option":
                     return NameTagEnum.option;
                 case "select":

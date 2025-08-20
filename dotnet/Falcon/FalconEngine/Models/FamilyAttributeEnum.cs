@@ -3,8 +3,8 @@ namespace FalconEngine.Models
     public enum FamilyAttributeEnum
     {
         accept, accesskey, action, asAttr, blocking, charset, checkedAttr, classCss, content, contenteditable, crossorigin, data_, disabled,
-        download, draggable, dir, enterkeyhint, hidden, httpequiv, href, hreflang, id, inert, inputmode, integrity, isAttr, lang, manifest,
-        max, min, media, method, name,
+        download, draggable, dir, enterkeyhint, forAttr, hidden, httpequiv, href, hreflang, id, inert, inputmode, integrity, isAttr, lang,
+        manifest, max, min, media, method, name,
         onclick, ondblclick, onmousedown, onmouseup, onmouseover, onmouseout, onmousemove, oncontextmenu, onmouseenter,
         onmouseleave, onkeydown, onkeypress, onkeyup, onfocus, onblur, onchange, oninput, onselect, onsubmit, onreset,
         ondrag, ondragstart, ondragend, ondragenter, ondragover, ondragleave, ondrop, oncopy, oncut, onpast, onplay,

@@ -110,6 +110,8 @@ namespace FalconEngine.DomParsing.Parser.Attribute
                 return "isAttr";
             else if (key == "checked")
                 return "checkedAttr";
+            else if (key == "for")
+                return "forAttr";
             else
                 return key;
         }
