@@ -15,6 +15,7 @@ namespace FalconEngine.DomParsing
         private ITagParser _htmlParse;
         //temporary start 
         private ITagParser _inputParser;
+        private ITagParser _labelParser;
         private ITagParser _selectParser;
         //temporary end
         private IExtractHtmlRemaining _extractHtmlRemaining;
@@ -24,12 +25,13 @@ namespace FalconEngine.DomParsing
         private bool _isValidHtmlTag;
         private bool _isValidPage;
 
-        public HtmlParsing(ITagParser doctypeParse, ITagParser htmlParse, ITagParser inputParser, ITagParser selectParser,
-                             IExtractHtmlRemaining extractHtmlRemaining, IAttributeTagManager attributeTagManager)
+        public HtmlParsing(ITagParser doctypeParse, ITagParser htmlParse, ITagParser inputParser, ITagParser labelParser,
+                            ITagParser selectParser, IExtractHtmlRemaining extractHtmlRemaining, IAttributeTagManager attributeTagManager)
         {
             _doctypeParse = doctypeParse;
             _htmlParse = htmlParse;
             _inputParser = inputParser;
+            _labelParser = labelParser;
             _selectParser = selectParser;
             _extractHtmlRemaining = extractHtmlRemaining;
             _attributeTagManager = attributeTagManager;
@@ -291,16 +293,9 @@ namespace FalconEngine.DomParsing
 
         private TagModel GetLabelGender()
         {
-            string content = "Gender";
-            var labelGender = new TagModel()
-            {
-                NameTag = NameTagEnum.label,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = content,
-                TagStart = "<label for=\"rgender\">",
-                TagEnd = "</label>"
-            };
-            return labelGender;
+            string html = "<label for=\"rgender\">Gender</label>";
+            var tag = _labelParser.Parse(html);
+            return tag;
         }
 
         private TagModel GetRadioMale()
@@ -312,16 +307,9 @@ namespace FalconEngine.DomParsing
 
         private TagModel GetLabelMale()
         {
-            string content = "Male";
-            var labelGender = new TagModel()
-            {
-                NameTag = NameTagEnum.label,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = content,
-                TagStart = "<label for=\"rgender\">",
-                TagEnd = "</label>"
-            };
-            return labelGender;
+            string html = "<label for=\"rgender\">Male</label>";
+            var tag = _labelParser.Parse(html);
+            return tag;
         }
 
         private TagModel GetRadioFemale()
@@ -333,16 +321,9 @@ namespace FalconEngine.DomParsing
 
         private TagModel GetLabelFemale()
         {
-            string content = "Female";
-            var labelGender = new TagModel()
-            {
-                NameTag = NameTagEnum.label,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = content,
-                TagStart = "<label for=\"rgender\">",
-                TagEnd = "</label>"
-            };
-            return labelGender;
+            string html = "<label for=\"rgender\">Female</label>";
+            var tag = _labelParser.Parse(html);
+            return tag;
         }
 
         private TagModel GetRadioUndefined()
@@ -354,16 +335,9 @@ namespace FalconEngine.DomParsing
 
         private TagModel GetLabelUndefined()
         {
-            string content = "Undefined";
-            var labelGender = new TagModel()
-            {
-                NameTag = NameTagEnum.label,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = content,
-                TagStart = "<label for=\"rgender\">",
-                TagEnd = "</label>"
-            };
-            return labelGender;
+            string html = "<label for=\"rgender\">Undefined</label>";
+            var tag = _labelParser.Parse(html);
+            return tag;
         }
 
         private TagModel GetDivSituation()
@@ -385,18 +359,11 @@ namespace FalconEngine.DomParsing
             return divTag;
         }
 
-        private static TagModel GetLabelSituation()
+        private TagModel GetLabelSituation()
         {
-            string content = "Situation";
-            var labelGender = new TagModel()
-            {
-                NameTag = NameTagEnum.label,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = content,
-                TagStart = "<label for=\"lSituation\">",
-                TagEnd = "</label>"
-            };
-            return labelGender;
+            string html = "<label for=\"lSituation\">Situation</label>";
+            var tag = _labelParser.Parse(html);
+            return tag;
         }
 
         private TagModel GetSelectSituation()
@@ -427,16 +394,9 @@ namespace FalconEngine.DomParsing
 
         private TagModel GetLabelDate()
         {
-            string content = "Birthday";
-            var labelGender = new TagModel()
-            {
-                NameTag = NameTagEnum.label,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = content,
-                TagStart = "<label for=\"dBirthday\">",
-                TagEnd = "</label>"
-            };
-            return labelGender;
+            string html = "<label for=\"dBirthday\">Birthday</label>";
+            var tag = _labelParser.Parse(html);
+            return tag;
         }
 
         private TagModel GetInputBirthDay()
@@ -467,16 +427,9 @@ namespace FalconEngine.DomParsing
 
         private TagModel GetLabelResume()
         {
-            string content = "Choose a resume";
-            var labelResume = new TagModel()
-            {
-                NameTag = NameTagEnum.label,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = content,
-                TagStart = "<label for=\"dResume\">",
-                TagEnd = "</label>"
-            };
-            return labelResume;
+            string html = "<label for=\"dResume\">Choose a resume</label>";
+            var tag = _labelParser.Parse(html);
+            return tag;
         }
 
         private TagModel GetInputResume()

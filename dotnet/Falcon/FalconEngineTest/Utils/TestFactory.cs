@@ -38,6 +38,11 @@ namespace FalconEngineTest.Utils
             return new InputParser(InitIdentifyTag(), InitAttributeTagManager(true));
         }
 
+        public static LabelParser InitLabelParser()
+        {
+            return new LabelParser(TestFactory.InitIdentifyTag(), InitAttributeTagManager(true));
+        }
+
         public static OptionParser InitOptionParser()
         {
             return new OptionParser(TestFactory.InitIdentifyTag(), InitAttributeTagManager(true));
