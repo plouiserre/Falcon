@@ -51,38 +51,64 @@ namespace FalconEngine.DomParsing.Parser.Attribute
         {
             List<string> parts = new List<string>();
             string recording = string.Empty;
-            int countDoubleQuote = 0;
-            var attributesWorking = _onlyAttributes;
+            bool isFirstBracketFind = false;
             for (int i = 0; i < _onlyAttributes.Length; i++)
             {
                 char caracter = _onlyAttributes[i];
-                recording += caracter;
-                if (caracter == '"')
+                if (IsFirstBracketBeforeValue(caracter, isFirstBracketFind))
                 {
-                    countDoubleQuote += 1;
+                    isFirstBracketFind = true;
+                    recording += caracter;
                 }
-                if (countDoubleQuote == 2)
+                else if (IsSecondBracketAfterValue(caracter, isFirstBracketFind))
+                {
+                    isFirstBracketFind = false;
+                    recording += caracter;
+                    parts.Add(recording);
+                    recording = string.Empty;
+                }
+                else if (IsNotSpace(caracter))
+                {
+                    recording += caracter;
+                }
+                else if (IsOnlyAttributeFinishSaving(caracter, recording, isFirstBracketFind))
                 {
                     parts.Add(recording);
-                    attributesWorking = attributesWorking.Replace(recording, string.Empty);
                     recording = string.Empty;
-                    countDoubleQuote = 0;
+                }
+                else if (IsSpaceBetweenValue(caracter, isFirstBracketFind))
+                {
+                    recording += caracter;
                 }
             }
-            string attributesRemainingCleaned = ManageAttributesRemaining(attributesWorking);
-            if (!string.IsNullOrEmpty(attributesRemainingCleaned))
-                parts.Add(attributesRemainingCleaned);
+            if (!string.IsNullOrEmpty(recording))
+                parts.Add(recording);
             return parts;
         }
 
-        private string ManageAttributesRemaining(string attributesNotClassed)
+        private bool IsFirstBracketBeforeValue(char caracter, bool isFirstBracketFind)
         {
-            string attributesWorking = attributesNotClassed;
-            attributesWorking = attributesWorking.TrimStart().TrimEnd();
-            if (!string.IsNullOrEmpty(attributesWorking) && !attributesWorking.Contains(" "))
-                return attributesWorking;
-            else
-                return string.Empty;
+            return caracter == '\"' && !isFirstBracketFind;
+        }
+
+        private bool IsSecondBracketAfterValue(char caracter, bool isFirstBracketFind)
+        {
+            return caracter == '\"' && isFirstBracketFind;
+        }
+
+        private bool IsNotSpace(char caracter)
+        {
+            return caracter != ' ';
+        }
+
+        private bool IsOnlyAttributeFinishSaving(char caracter, string recording, bool isFirstBracketFind)
+        {
+            return caracter == ' ' && !string.IsNullOrEmpty(recording) && !isFirstBracketFind;
+        }
+
+        private bool IsSpaceBetweenValue(char caracter, bool isFirstBracketFind)
+        {
+            return caracter == ' ' && isFirstBracketFind;
         }
 
         private List<string> CleanAllParts(List<string> partsNotClean)

@@ -90,7 +90,7 @@ namespace FalconEngineTest.DomParsing.Parser.Attribute
             Assert.Equal(3, parts.Count);
             Assert.Equal("readonly", parts[0]);
             Assert.Equal("required", parts[1]);
-            Assert.Equal("size=\"3O\"", parts[2]);
+            Assert.Equal("size=\"30\"", parts[2]);
         }
 
 
