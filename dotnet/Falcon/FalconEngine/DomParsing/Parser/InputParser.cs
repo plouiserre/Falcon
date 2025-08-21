@@ -21,5 +21,10 @@ namespace FalconEngine.DomParsing.Parser
             _tag = _identifyTag.Analyze(html);
             return _tag;
         }
+
+        public override bool IsValid()
+        {
+            return base.IsValid();
+        }
     }
 }

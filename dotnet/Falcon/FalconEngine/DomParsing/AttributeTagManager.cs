@@ -22,6 +22,7 @@ namespace FalconEngine.DomParsing
             _allAttributesAutorizedByTag[NameTagEnum.p] = new List<FamilyAttributeEnum>();
             _allAttributesAutorizedByTag[NameTagEnum.div] = new List<FamilyAttributeEnum>();
             _allAttributesAutorizedByTag[NameTagEnum.body] = new List<FamilyAttributeEnum>();
+            _allAttributesAutorizedByTag[NameTagEnum.input] = new List<FamilyAttributeEnum>();
         }
 
         public List<string> GetAttributes(NameTagEnum tag)
@@ -36,6 +37,7 @@ namespace FalconEngine.DomParsing
             SetLinkAttributesAutorized();
             SetAAttributesAutorized();
             SetSpanAttributes();
+            SetInputAttributes();
             SetPAttributes();
             SetDivAttributes();
             SetBodyAttributes();
@@ -113,6 +115,52 @@ namespace FalconEngine.DomParsing
         {
             SetGlobalAttributes(NameTagEnum.span);
             SetOnEventAttribut(NameTagEnum.span);
+        }
+
+        //  _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.classCss);
+        //     _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.data_);
+        //     _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.id);
+        //     _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.lang);
+        //     _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.style);
+        //     _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.title);
+        private void SetInputAttributes()
+        {
+            SetGlobalAttributes(NameTagEnum.input);
+            SetOnEventAttribut(NameTagEnum.input);
+            _allAttributesAutorizedByTag[NameTagEnum.input].Add(FamilyAttributeEnum.accept);
+            _allAttributesAutorizedByTag[NameTagEnum.input].Add(FamilyAttributeEnum.alt);
+            _allAttributesAutorizedByTag[NameTagEnum.input].Add(FamilyAttributeEnum.autocapitalize);
+            _allAttributesAutorizedByTag[NameTagEnum.input].Add(FamilyAttributeEnum.autocomplete);
+            _allAttributesAutorizedByTag[NameTagEnum.input].Add(FamilyAttributeEnum.capture);
+            _allAttributesAutorizedByTag[NameTagEnum.input].Add(FamilyAttributeEnum.checkedAttr);
+            _allAttributesAutorizedByTag[NameTagEnum.input].Add(FamilyAttributeEnum.dirname);
+            _allAttributesAutorizedByTag[NameTagEnum.input].Add(FamilyAttributeEnum.disabled);
+            _allAttributesAutorizedByTag[NameTagEnum.input].Add(FamilyAttributeEnum.form);
+            _allAttributesAutorizedByTag[NameTagEnum.input].Add(FamilyAttributeEnum.formaction);
+            _allAttributesAutorizedByTag[NameTagEnum.input].Add(FamilyAttributeEnum.formenctype);
+            _allAttributesAutorizedByTag[NameTagEnum.input].Add(FamilyAttributeEnum.formmethod);
+            _allAttributesAutorizedByTag[NameTagEnum.input].Add(FamilyAttributeEnum.formnovalidate);
+            _allAttributesAutorizedByTag[NameTagEnum.input].Add(FamilyAttributeEnum.formtarget);
+            _allAttributesAutorizedByTag[NameTagEnum.input].Add(FamilyAttributeEnum.height);
+            _allAttributesAutorizedByTag[NameTagEnum.input].Add(FamilyAttributeEnum.list);
+            _allAttributesAutorizedByTag[NameTagEnum.input].Add(FamilyAttributeEnum.max);
+            _allAttributesAutorizedByTag[NameTagEnum.input].Add(FamilyAttributeEnum.maxlength);
+            _allAttributesAutorizedByTag[NameTagEnum.input].Add(FamilyAttributeEnum.min);
+            _allAttributesAutorizedByTag[NameTagEnum.input].Add(FamilyAttributeEnum.minlength);
+            _allAttributesAutorizedByTag[NameTagEnum.input].Add(FamilyAttributeEnum.multiple);
+            _allAttributesAutorizedByTag[NameTagEnum.input].Add(FamilyAttributeEnum.name);
+            _allAttributesAutorizedByTag[NameTagEnum.input].Add(FamilyAttributeEnum.pattern);
+            _allAttributesAutorizedByTag[NameTagEnum.input].Add(FamilyAttributeEnum.placeholder);
+            _allAttributesAutorizedByTag[NameTagEnum.input].Add(FamilyAttributeEnum.popovertarget);
+            _allAttributesAutorizedByTag[NameTagEnum.input].Add(FamilyAttributeEnum.popovertargetaction);
+            _allAttributesAutorizedByTag[NameTagEnum.input].Add(FamilyAttributeEnum.readonlyAttr);
+            _allAttributesAutorizedByTag[NameTagEnum.input].Add(FamilyAttributeEnum.required);
+            _allAttributesAutorizedByTag[NameTagEnum.input].Add(FamilyAttributeEnum.size);
+            _allAttributesAutorizedByTag[NameTagEnum.input].Add(FamilyAttributeEnum.src);
+            _allAttributesAutorizedByTag[NameTagEnum.input].Add(FamilyAttributeEnum.step);
+            _allAttributesAutorizedByTag[NameTagEnum.input].Add(FamilyAttributeEnum.type);
+            _allAttributesAutorizedByTag[NameTagEnum.input].Add(FamilyAttributeEnum.value);
+            _allAttributesAutorizedByTag[NameTagEnum.input].Add(FamilyAttributeEnum.width);
         }
 
         private void SetPAttributes()

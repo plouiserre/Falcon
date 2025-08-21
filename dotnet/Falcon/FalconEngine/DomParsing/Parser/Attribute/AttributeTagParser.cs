@@ -112,6 +112,8 @@ namespace FalconEngine.DomParsing.Parser.Attribute
                 return "checkedAttr";
             else if (key == "for")
                 return "forAttr";
+            else if (key == "readonly")
+                return "readonlyAttr";
             else
                 return key;
         }

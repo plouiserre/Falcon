@@ -79,6 +79,20 @@ namespace FalconEngineTest.DomParsing.Parser.Attribute
             Assert.Equal("checked", parts[4]);
         }
 
+        [Fact]
+        public void SeparateCorrectlyAttributsSoloWithoutValues()
+        {
+            string? html = "<input readonly required size=\"30\" >";
+            var analyze = new AnalyzeAttributes();
+
+            var parts = analyze.Study(html);
+
+            Assert.Equal(3, parts.Count);
+            Assert.Equal("readonly", parts[0]);
+            Assert.Equal("required", parts[1]);
+            Assert.Equal("size=\"3O\"", parts[2]);
+        }
+
 
     }
 }
