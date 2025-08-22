@@ -64,234 +64,74 @@ namespace FalconEngine.DomParsing.Parser
 
         private bool AcceptAttributeValidOnlyWithFileType()
         {
-            bool isAcceptAttributePresente = _tag.Attributes.Any(o => o.FamilyAttribute == FamilyAttributeEnum.accept.ToString());
-            bool isTypeAttributePresente = _tag.Attributes.Any(o => o.FamilyAttribute == FamilyAttributeEnum.type.ToString());
-            string typeValue = isTypeAttributePresente ? _tag.Attributes.First(o => o.FamilyAttribute ==
-                            FamilyAttributeEnum.type.ToString()).Value : string.Empty;
-            if (!isAcceptAttributePresente)
-                return true;
-            else
-            {
-                if (isTypeAttributePresente && typeValue == "file")
-                    return true;
-                else
-                    return false;
-            }
+            string[] acceptedTypeValues = new string[] { "file" };
+            return CheckIfAttributesWithThisTypes(FamilyAttributeEnum.accept.ToString(), acceptedTypeValues);
         }
 
         private bool AltAttributeValidOnlyWithImageType()
         {
-            bool isAltAttributePresente = _tag.Attributes.Any(o => o.FamilyAttribute == FamilyAttributeEnum.alt.ToString());
-            bool isTypeAttributePresente = _tag.Attributes.Any(o => o.FamilyAttribute == FamilyAttributeEnum.type.ToString());
-            string typeValue = isTypeAttributePresente ? _tag.Attributes.First(o => o.FamilyAttribute ==
-                            FamilyAttributeEnum.type.ToString()).Value : string.Empty;
-            if (!isAltAttributePresente)
-                return true;
-            else
-            {
-                if (isTypeAttributePresente && typeValue == "image")
-                    return true;
-                else
-                    return false;
-            }
+            string[] acceptedTypeValues = new string[] { "image" };
+            return CheckIfAttributesWithThisTypes(FamilyAttributeEnum.alt.ToString(), acceptedTypeValues);
         }
 
         private bool AutoCapitalizeAttributeValidAllTypeExceptEmailPasswordUrl()
         {
-            bool isAutocapitalizeAttributePresente = _tag.Attributes.Any(o => o.FamilyAttribute == FamilyAttributeEnum.autocapitalize.ToString());
-            bool isTypeAttributePresente = _tag.Attributes.Any(o => o.FamilyAttribute == FamilyAttributeEnum.type.ToString());
-            string typeValue = isTypeAttributePresente ? _tag.Attributes.First(o => o.FamilyAttribute ==
-                            FamilyAttributeEnum.type.ToString()).Value : string.Empty;
-            if (!isAutocapitalizeAttributePresente)
-                return true;
-            else
-            {
-                string[] notAcceptedTypeValue = new string[] { "email", "password", "url" };
-                if (isTypeAttributePresente && typeValue == "autocapitalize")
-                    return true;
-                else
-                {
-                    bool isTypeIsOk = !notAcceptedTypeValue.Contains(typeValue);
-                    return isTypeIsOk;
-                }
-            }
+            string[] notAcceptedTypeValue = new string[] { "email", "password", "url" };
+            return CheckIfAttributesWithNotThisTypes(FamilyAttributeEnum.autocapitalize.ToString(), notAcceptedTypeValue);
         }
 
         private bool AutocompleteAttributeValidAllTypeExceptButtonCheckboxRadio()
         {
-            bool isAutocompleteAttributePresente = _tag.Attributes.Any(o => o.FamilyAttribute == FamilyAttributeEnum.autocomplete.ToString());
-            bool isTypeAttributePresente = _tag.Attributes.Any(o => o.FamilyAttribute == FamilyAttributeEnum.type.ToString());
-            string typeValue = isTypeAttributePresente ? _tag.Attributes.First(o => o.FamilyAttribute ==
-                            FamilyAttributeEnum.type.ToString()).Value : string.Empty;
-            if (!isAutocompleteAttributePresente)
-                return true;
-            else
-            {
-                string[] notAcceptedTypeValue = new string[] { "button", "checkbox", "radio" };
-                if (isTypeAttributePresente && typeValue == "autocomplete")
-                    return true;
-                else
-                {
-                    bool isTypeIsOk = !notAcceptedTypeValue.Contains(typeValue);
-                    return isTypeIsOk;
-                }
-            }
+            string[] notAcceptedTypeValue = new string[] { "button", "checkbox", "radio" };
+            return CheckIfAttributesWithNotThisTypes(FamilyAttributeEnum.autocomplete.ToString(), notAcceptedTypeValue);
         }
 
         private bool CaptureAttributeValidWithFileType()
         {
-            bool isCaptureAttributePresente = _tag.Attributes.Any(o => o.FamilyAttribute == FamilyAttributeEnum.capture.ToString());
-            bool isTypeAttributePresente = _tag.Attributes.Any(o => o.FamilyAttribute == FamilyAttributeEnum.type.ToString());
-            string typeValue = isTypeAttributePresente ? _tag.Attributes.First(o => o.FamilyAttribute ==
-                            FamilyAttributeEnum.type.ToString()).Value : string.Empty; if (!isCaptureAttributePresente)
-                return true;
-            else
-            {
-                if (isTypeAttributePresente && typeValue == "file")
-                    return true;
-                else
-                    return false;
-            }
+            string[] acceptedTypeValues = new string[] { "file" };
+            return CheckIfAttributesWithThisTypes(FamilyAttributeEnum.capture.ToString(), acceptedTypeValues);
         }
 
         private bool CheckedAttributeValidWithCheckboxRadioType()
         {
-            bool isCheckedAttributePresente = _tag.Attributes.Any(o => o.FamilyAttribute == FamilyAttributeEnum.checkedAttr.ToString());
-            bool isTypeAttributePresente = _tag.Attributes.Any(o => o.FamilyAttribute == FamilyAttributeEnum.type.ToString());
-            string typeValue = isTypeAttributePresente ? _tag.Attributes.First(o => o.FamilyAttribute ==
-                            FamilyAttributeEnum.type.ToString()).Value : string.Empty;
-            if (!isCheckedAttributePresente)
-                return true;
-            else
-            {
-                string[] acceptedTypeValue = new string[] { "checkbox", "radio" };
-                if (acceptedTypeValue.Contains(typeValue))
-                    return true;
-                else
-                {
-                    return false;
-                }
-            }
+            string[] acceptedTypeValues = new string[] { "checkbox", "radio" };
+            return CheckIfAttributesWithThisTypes(FamilyAttributeEnum.checkedAttr.ToString(), acceptedTypeValues);
         }
 
         private bool DirnameAttributeValidWithItsAttribute()
         {
-            bool isCheckedAttributePresente = _tag.Attributes.Any(o => o.FamilyAttribute == FamilyAttributeEnum.dirname.ToString());
-            bool isTypeAttributePresente = _tag.Attributes.Any(o => o.FamilyAttribute == FamilyAttributeEnum.type.ToString());
-            string typeValue = isTypeAttributePresente ? _tag.Attributes.First(o => o.FamilyAttribute ==
-                            FamilyAttributeEnum.type.ToString()).Value : string.Empty;
-            if (!isCheckedAttributePresente)
-                return true;
-            else
-            {
-                string[] acceptedTypeValue = new string[] { "hidden", "text", "search", "url", "tel", "email" };
-                if (acceptedTypeValue.Contains(typeValue))
-                    return true;
-                else
-                {
-                    return false;
-                }
-            }
+            string[] acceptedTypeValues = new string[] { "hidden", "text", "search", "url", "tel", "email" };
+            return CheckIfAttributesWithThisTypes(FamilyAttributeEnum.dirname.ToString(), acceptedTypeValues);
         }
 
         private bool FormActionAttributeValidWithImageSubmit()
         {
-            bool isCheckedAttributePresente = _tag.Attributes.Any(o => o.FamilyAttribute == FamilyAttributeEnum.formaction.ToString());
-            bool isTypeAttributePresente = _tag.Attributes.Any(o => o.FamilyAttribute == FamilyAttributeEnum.type.ToString());
-            string typeValue = isTypeAttributePresente ? _tag.Attributes.First(o => o.FamilyAttribute ==
-                            FamilyAttributeEnum.type.ToString()).Value : string.Empty;
-            if (!isCheckedAttributePresente)
-                return true;
-            else
-            {
-                string[] acceptedTypeValue = new string[] { "image", "submit" };
-                if (acceptedTypeValue.Contains(typeValue))
-                    return true;
-                else
-                {
-                    return false;
-                }
-            }
+            string[] acceptedTypeValues = new string[] { "image", "submit" };
+            return CheckIfAttributesWithThisTypes(FamilyAttributeEnum.formaction.ToString(), acceptedTypeValues);
         }
 
         private bool FormenctypeAttributeValidWithImageSubmit()
         {
-            bool isCheckedAttributePresente = _tag.Attributes.Any(o => o.FamilyAttribute == FamilyAttributeEnum.formenctype.ToString());
-            bool isTypeAttributePresente = _tag.Attributes.Any(o => o.FamilyAttribute == FamilyAttributeEnum.type.ToString());
-            string typeValue = isTypeAttributePresente ? _tag.Attributes.First(o => o.FamilyAttribute ==
-                            FamilyAttributeEnum.type.ToString()).Value : string.Empty;
-            if (!isCheckedAttributePresente)
-                return true;
-            else
-            {
-                string[] acceptedTypeValue = new string[] { "image", "submit" };
-                if (acceptedTypeValue.Contains(typeValue))
-                    return true;
-                else
-                {
-                    return false;
-                }
-            }
+            string[] acceptedTypeValues = new string[] { "image", "submit" };
+            return CheckIfAttributesWithThisTypes(FamilyAttributeEnum.formenctype.ToString(), acceptedTypeValues);
         }
 
         private bool FormMethodAttributeValidWithImageSubmit()
         {
-            bool isCheckedAttributePresente = _tag.Attributes.Any(o => o.FamilyAttribute == FamilyAttributeEnum.formmethod.ToString());
-            bool isTypeAttributePresente = _tag.Attributes.Any(o => o.FamilyAttribute == FamilyAttributeEnum.type.ToString());
-            string typeValue = isTypeAttributePresente ? _tag.Attributes.First(o => o.FamilyAttribute ==
-                            FamilyAttributeEnum.type.ToString()).Value : string.Empty;
-            if (!isCheckedAttributePresente)
-                return true;
-            else
-            {
-                string[] acceptedTypeValue = new string[] { "image", "submit" };
-                if (acceptedTypeValue.Contains(typeValue))
-                    return true;
-                else
-                {
-                    return false;
-                }
-            }
+            string[] acceptedTypeValues = new string[] { "image", "submit" };
+            return CheckIfAttributesWithThisTypes(FamilyAttributeEnum.formmethod.ToString(), acceptedTypeValues);
         }
 
         private bool FormNoValidateAttributeValidWithImageSubmit()
         {
-            bool isCheckedAttributePresente = _tag.Attributes.Any(o => o.FamilyAttribute == FamilyAttributeEnum.formnovalidate.ToString());
-            bool isTypeAttributePresente = _tag.Attributes.Any(o => o.FamilyAttribute == FamilyAttributeEnum.type.ToString());
-            string typeValue = isTypeAttributePresente ? _tag.Attributes.First(o => o.FamilyAttribute ==
-                            FamilyAttributeEnum.type.ToString()).Value : string.Empty;
-            if (!isCheckedAttributePresente)
-                return true;
-            else
-            {
-                string[] acceptedTypeValue = new string[] { "image", "submit" };
-                if (acceptedTypeValue.Contains(typeValue))
-                    return true;
-                else
-                {
-                    return false;
-                }
-            }
+            string[] acceptedTypeValues = new string[] { "image", "submit" };
+            return CheckIfAttributesWithThisTypes(FamilyAttributeEnum.formnovalidate.ToString(), acceptedTypeValues);
         }
 
         private bool FormTargetAttributeValidWithImageSubmit()
         {
-            bool isCheckedAttributePresente = _tag.Attributes.Any(o => o.FamilyAttribute == FamilyAttributeEnum.formtarget.ToString());
-            bool isTypeAttributePresente = _tag.Attributes.Any(o => o.FamilyAttribute == FamilyAttributeEnum.type.ToString());
-            string typeValue = isTypeAttributePresente ? _tag.Attributes.First(o => o.FamilyAttribute ==
-                            FamilyAttributeEnum.type.ToString()).Value : string.Empty;
-            if (!isCheckedAttributePresente)
-                return true;
-            else
-            {
-                string[] acceptedTypeValue = new string[] { "image", "submit" };
-                if (acceptedTypeValue.Contains(typeValue))
-                    return true;
-                else
-                {
-                    return false;
-                }
-            }
+            string[] acceptedTypeValues = new string[] { "image", "submit" };
+            return CheckIfAttributesWithThisTypes(FamilyAttributeEnum.formtarget.ToString(), acceptedTypeValues);
         }
 
         private bool HeigthAttributeValidWithImage()
