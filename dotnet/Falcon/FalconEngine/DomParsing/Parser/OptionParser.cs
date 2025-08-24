@@ -18,8 +18,15 @@ namespace FalconEngine.DomParsing.Parser
 
         public override TagModel Parse(string html)
         {
-            var tag = _identifyTag.Analyze(html);
-            return tag;
+            _tag = _identifyTag.Analyze(html);
+            return _tag;
+        }
+
+        public override bool IsValid()
+        {
+            bool tagsEnd = !string.IsNullOrEmpty(_tag.TagEnd);
+            bool attributesAreOk = AreAttributesAreAutorized();
+            return tagsEnd && attributesAreOk;
         }
     }
 }

@@ -20,9 +20,10 @@ namespace FalconEngine.DomParsing
             _allAttributesAutorizedByTag[NameTagEnum.a] = new List<FamilyAttributeEnum>();
             _allAttributesAutorizedByTag[NameTagEnum.span] = new List<FamilyAttributeEnum>();
             _allAttributesAutorizedByTag[NameTagEnum.p] = new List<FamilyAttributeEnum>();
+            _allAttributesAutorizedByTag[NameTagEnum.input] = new List<FamilyAttributeEnum>();
+            _allAttributesAutorizedByTag[NameTagEnum.option] = new List<FamilyAttributeEnum>();
             _allAttributesAutorizedByTag[NameTagEnum.div] = new List<FamilyAttributeEnum>();
             _allAttributesAutorizedByTag[NameTagEnum.body] = new List<FamilyAttributeEnum>();
-            _allAttributesAutorizedByTag[NameTagEnum.input] = new List<FamilyAttributeEnum>();
         }
 
         public List<string> GetAttributes(NameTagEnum tag)
@@ -38,6 +39,7 @@ namespace FalconEngine.DomParsing
             SetAAttributesAutorized();
             SetSpanAttributes();
             SetInputAttributes();
+            SetOptionAttributes();
             SetPAttributes();
             SetDivAttributes();
             SetBodyAttributes();
@@ -117,12 +119,6 @@ namespace FalconEngine.DomParsing
             SetOnEventAttribut(NameTagEnum.span);
         }
 
-        //  _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.classCss);
-        //     _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.data_);
-        //     _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.id);
-        //     _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.lang);
-        //     _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.style);
-        //     _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.title);
         private void SetInputAttributes()
         {
             SetGlobalAttributes(NameTagEnum.input);
@@ -161,6 +157,14 @@ namespace FalconEngine.DomParsing
             _allAttributesAutorizedByTag[NameTagEnum.input].Add(FamilyAttributeEnum.type);
             _allAttributesAutorizedByTag[NameTagEnum.input].Add(FamilyAttributeEnum.value);
             _allAttributesAutorizedByTag[NameTagEnum.input].Add(FamilyAttributeEnum.width);
+        }
+
+        private void SetOptionAttributes()
+        {
+            _allAttributesAutorizedByTag[NameTagEnum.option].Add(FamilyAttributeEnum.disabled);
+            _allAttributesAutorizedByTag[NameTagEnum.option].Add(FamilyAttributeEnum.label);
+            _allAttributesAutorizedByTag[NameTagEnum.option].Add(FamilyAttributeEnum.selected);
+            _allAttributesAutorizedByTag[NameTagEnum.option].Add(FamilyAttributeEnum.value);
         }
 
         private void SetPAttributes()
