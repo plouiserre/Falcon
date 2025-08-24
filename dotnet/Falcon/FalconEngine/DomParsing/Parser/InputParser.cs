@@ -41,11 +41,19 @@ namespace FalconEngine.DomParsing.Parser
             bool formtargetValidation = FormTargetAttributeValidWithImageSubmit();
             bool heightValidation = HeigthAttributeValidWithImage();
             bool listValidation = ListAttributeValidWithImage();
+            bool maxValidation = MaxAttributeValidation();
+            bool maxLengthValidation = MaxLengthAttributeValidation();
+            bool minValidation = MinAttributeValidation();
+            bool minLengthValidation = MinLengthAttributeValidation();
+            bool multipleValidation = MultipleAttributeValidation();
+            bool patternValidation = MultiplePatternValidation();
+            bool placeholderValidation = MultiplePlaceholderValidation();
             return basiqueValidation && typeValueValidation && acceptRuleValidation && altRuleValidation
                 && autocapitalizeValidation && autocompleteValidation && captureValidation &&
                 checkedValidation && dirnameValidation && formactionValidation && formenctypeValidation &&
                 formMethodValidation && formNoValidateValidation && formtargetValidation && heightValidation
-                && listValidation;
+                && listValidation && maxValidation && maxLengthValidation && minValidation && minLengthValidation
+                && multipleValidation && patternValidation && placeholderValidation;
         }
 
         private bool ValidateValueType()
@@ -146,6 +154,49 @@ namespace FalconEngine.DomParsing.Parser
             return CheckIfAttributesWithNotThisTypes(FamilyAttributeEnum.list.ToString(), notAcceptedTypeValue);
         }
 
+        private bool MaxAttributeValidation()
+        {
+            string[] acceptedTypeValues = new string[] { "date", "datetime-local", "month", "number", "range", "time", "week" };
+            return CheckIfAttributesWithThisTypes(FamilyAttributeEnum.max.ToString(), acceptedTypeValues);
+        }
+
+        private bool MaxLengthAttributeValidation()
+        {
+            string[] acceptedTypeValues = new string[] { "email", "password", "search", "url", "tel", "text" };
+            return CheckIfAttributesWithThisTypes(FamilyAttributeEnum.maxlength.ToString(), acceptedTypeValues);
+        }
+
+        private bool MinAttributeValidation()
+        {
+            string[] acceptedTypeValues = new string[] { "date", "datetime-local", "month", "number", "range", "time", "week" };
+            return CheckIfAttributesWithThisTypes(FamilyAttributeEnum.min.ToString(), acceptedTypeValues);
+        }
+
+        private bool MinLengthAttributeValidation()
+        {
+            string[] acceptedTypeValues = new string[] { "email", "password", "search", "url", "tel", "text" };
+            return CheckIfAttributesWithThisTypes(FamilyAttributeEnum.minlength.ToString(), acceptedTypeValues);
+        }
+
+        private bool MultipleAttributeValidation()
+        {
+            string[] acceptedTypeValues = new string[] { "email", "file" };
+            return CheckIfAttributesWithThisTypes(FamilyAttributeEnum.multiple.ToString(), acceptedTypeValues);
+        }
+
+        private bool MultiplePatternValidation()
+        {
+            string[] acceptedTypeValues = new string[] { "email", "password", "search", "tel", "text", "url" };
+            return CheckIfAttributesWithThisTypes(FamilyAttributeEnum.pattern.ToString(), acceptedTypeValues);
+        }
+
+        private bool MultiplePlaceholderValidation()
+        {
+            string[] acceptedTypeValues = new string[] { "email", "number", "password", "search", "tel", "text", "url" };
+            return CheckIfAttributesWithThisTypes(FamilyAttributeEnum.placeholder.ToString(), acceptedTypeValues);
+        }
+
+
         private bool CheckIfAttributesWithThisTypes(string type, string[] typesOK)
         {
             bool isCheckedAttributePresente = _tag.Attributes.Any(o => o.FamilyAttribute == type.ToString());
@@ -159,9 +210,7 @@ namespace FalconEngine.DomParsing.Parser
                 if (typesOK.Contains(typeValue))
                     return true;
                 else
-                {
                     return false;
-                }
             }
         }
 

@@ -66,7 +66,7 @@ namespace FalconEngineTest.DomParsing.Parser
         [Fact]
         public void ValidateInputTagWithAllAcceptedAttributes()
         {
-            string? html = "<input disabled form=\"monFormulaire\" max=\"100\" maxlength=\"50\" min=\"1\" minlength=\"2\" multiple name=\"monInput\" pattern=\"[A-Za-z0-9]+\" placeholder=\"Entrez une valeur\" popovertarget=\"menu\" popovertargetaction=\"toggle\" readonly required size=\"30\" src=\"image.png\" step=\"1\" type=\"text\" value=\"Valeur par défaut\" width=\"200\" >";
+            string? html = "<input disabled form=\"monFormulaire\"  minlength=\"2\" name=\"monInput\" pattern=\"[A-Za-z0-9]+\" placeholder=\"Entrez une valeur\" popovertarget=\"menu\" popovertargetaction=\"toggle\" readonly required size=\"30\" src=\"image.png\" step=\"1\" type=\"text\" value=\"Valeur par défaut\" width=\"200\" >";
             var inputTagParser = TestFactory.InitInputParser();
 
             inputTagParser.Parse(html);
@@ -287,7 +287,7 @@ namespace FalconEngineTest.DomParsing.Parser
         [Fact]
         public void ValidateBecauseCheckedAttributeIsWithTypeCheckboxRadio()
         {
-            var goodTypes = new List<string> { "checked", "radio" };
+            var goodTypes = new List<string> { "checkbox", "radio" };
             foreach (var type in goodTypes)
             {
                 string? html = string.Format($"<input checked type=\"{type}\" >");
@@ -568,28 +568,237 @@ namespace FalconEngineTest.DomParsing.Parser
             }
         }
 
-        // [Theory]
-        // [InlineData("button")]
-        // [InlineData("checkbox")]
-        // [InlineData("color")]
-        // [InlineData("date")]
-        // [InlineData("datetime-local")]
-        // [InlineData("email")]
-        // [InlineData("file")]
-        // [InlineData("hidden")]
-        // [InlineData("image")]
-        // [InlineData("month")]
-        // [InlineData("number")]
-        // [InlineData("password")]
-        // [InlineData("radio")]
-        // [InlineData("range")]
-        // [InlineData("reset")]
-        // [InlineData("search")]
-        // [InlineData("submit")]
-        // [InlineData("tel")]
-        // [InlineData("text")]
-        // [InlineData("time")]
-        // [InlineData("url")]
-        // [InlineData("week")]
+        [Fact]
+        public void NotValidateBecauseMaxAttributeIsWithBadTypes()
+        {
+            var badTypes = new List<string> { "button", "checkbox", "color", "email", "file", "hidden", "image", "password", "radio", "reset", "search", "submit", "tel",
+                "text", "url"};
+            foreach (var type in badTypes)
+            {
+                string? html = string.Format($"<input max=\"100\" type=\"{type}\" >");
+                var inputTagParser = TestFactory.InitInputParser();
+
+                inputTagParser.Parse(html);
+                bool isValid = inputTagParser.IsValid();
+
+                Assert.False(isValid);
+            }
+        }
+
+        [Fact]
+        public void ValidateBecauseMaxAttributeIsNotWithBadTypes()
+        {
+            var goodTypes = new List<string> { "date", "datetime-local", "month", "number", "range", "time", "week" };
+            foreach (var type in goodTypes)
+            {
+                string? html = string.Format($"<input max=\"100\" type=\"{type}\" >");
+                var inputTagParser = TestFactory.InitInputParser();
+
+                inputTagParser.Parse(html);
+                bool isValid = inputTagParser.IsValid();
+
+                Assert.True(isValid);
+            }
+        }
+
+        [Fact]
+        public void NotValidateBecauseMaxLengthAttributeIsWithBadTypes()
+        {
+            var badTypes = new List<string> { "button", "checkbox", "color", "date", "datetime-local", "file", "hidden", "image", "month", "number",
+                "radio", "range", "reset", "submit","time", "week"};
+            foreach (var type in badTypes)
+            {
+                string? html = string.Format($"<input maxlength=\"50\" type=\"{type}\" >");
+                var inputTagParser = TestFactory.InitInputParser();
+
+                inputTagParser.Parse(html);
+                bool isValid = inputTagParser.IsValid();
+
+                Assert.False(isValid);
+            }
+        }
+
+        [Fact]
+        public void ValidateBecauseMaxLengthAttributeIsNotWithBadTypes()
+        {
+            var goodTypes = new List<string> { "email", "password", "search", "url", "tel", "text" };
+            foreach (var type in goodTypes)
+            {
+                string? html = string.Format($"<input maxlength=\"50\" type=\"{type}\" >");
+                var inputTagParser = TestFactory.InitInputParser();
+
+                inputTagParser.Parse(html);
+                bool isValid = inputTagParser.IsValid();
+
+                Assert.True(isValid);
+            }
+        }
+
+        [Fact]
+        public void NotValidateBecauseMinAttributeIsWithBadTypes()
+        {
+            var badTypes = new List<string> { "button", "checkbox", "color", "email", "file", "hidden", "image", "password", "radio", "reset", "search", "submit", "tel",
+                "text", "url"};
+            foreach (var type in badTypes)
+            {
+                string? html = string.Format($"<input min=\"1\" type=\"{type}\" >");
+                var inputTagParser = TestFactory.InitInputParser();
+
+                inputTagParser.Parse(html);
+                bool isValid = inputTagParser.IsValid();
+
+                Assert.False(isValid);
+            }
+        }
+
+        [Fact]
+        public void ValidateBecauseMinAttributeIsNotWithBadTypes()
+        {
+            var goodTypes = new List<string> { "date", "datetime-local", "month", "number", "range", "time", "week" };
+            foreach (var type in goodTypes)
+            {
+                string? html = string.Format($"<input min=\"1\" type=\"{type}\" >");
+                var inputTagParser = TestFactory.InitInputParser();
+
+                inputTagParser.Parse(html);
+                bool isValid = inputTagParser.IsValid();
+
+                Assert.True(isValid);
+            }
+        }
+
+        [Fact]
+        public void NotValidateBecauseMinLengthAttributeIsWithBadTypes()
+        {
+            var badTypes = new List<string> { "button", "checkbox", "color", "date", "datetime-local", "file", "hidden", "image", "month", "number",
+                "radio", "range", "reset", "submit","time", "week"};
+            foreach (var type in badTypes)
+            {
+                string? html = string.Format($"<input minlength=\"2\" type=\"{type}\" >");
+                var inputTagParser = TestFactory.InitInputParser();
+
+                inputTagParser.Parse(html);
+                bool isValid = inputTagParser.IsValid();
+
+                Assert.False(isValid);
+            }
+        }
+
+        [Fact]
+        public void ValidateBecauseMinLengthAttributeIsNotWithBadTypes()
+        {
+            var goodTypes = new List<string> { "email", "password", "search", "url", "tel", "text" };
+            foreach (var type in goodTypes)
+            {
+                string? html = string.Format($"<input minlength=\"2\" type=\"{type}\" >");
+                var inputTagParser = TestFactory.InitInputParser();
+
+                inputTagParser.Parse(html);
+                bool isValid = inputTagParser.IsValid();
+
+                Assert.True(isValid);
+            }
+        }
+
+        [Fact]
+        public void NotValidateBecauseMultipleAttributeIsWithBadTypes()
+        {
+            var badTypes = new List<string> { "button", "checkbox", "color", "date", "datetime-local", "hidden", "image", "month", "number",
+                    "password", "radio", "range", "reset", "search", "submit", "tel", "text", "time", "url", "week"};
+            foreach (var type in badTypes)
+            {
+                string? html = string.Format($"<input multiple type=\"{type}\" >");
+                var inputTagParser = TestFactory.InitInputParser();
+
+                inputTagParser.Parse(html);
+                bool isValid = inputTagParser.IsValid();
+
+                Assert.False(isValid);
+            }
+        }
+
+        [Fact]
+        public void ValidateBecauseMultipleAttributeIsNotWithBadTypes()
+        {
+            var goodTypes = new List<string> { "email", "file" };
+            foreach (var type in goodTypes)
+            {
+                string? html = string.Format($"<input multiple type=\"{type}\" >");
+                var inputTagParser = TestFactory.InitInputParser();
+
+                inputTagParser.Parse(html);
+                bool isValid = inputTagParser.IsValid();
+
+                Assert.True(isValid);
+            }
+        }
+
+        [Fact]
+        public void NotValidateBecausePatternAttributeIsWithBadTypes()
+        {
+            var badTypes = new List<string> { "button", "checkbox", "color", "date", "datetime-local", "file", "hidden", "image", "month", "number",
+                                        "radio", "range", "reset", "submit", "time", "week" };
+            foreach (var type in badTypes)
+            {
+                string? html = string.Format($"<input pattern=\"[A-Za-z0-9]+\"  type=\"{type}\" >");
+                var inputTagParser = TestFactory.InitInputParser();
+
+                inputTagParser.Parse(html);
+                bool isValid = inputTagParser.IsValid();
+
+                Assert.False(isValid);
+            }
+        }
+
+        [Fact]
+        public void ValidateBecausePatternAttributeIsNotWithBadTypes()
+        {
+            var goodTypes = new List<string> { "email", "password", "search", "tel", "text", "url" };
+            foreach (var type in goodTypes)
+            {
+                string? html = string.Format($"<input pattern=\"[A-Za-z0-9]+\"   type=\"{type}\" >");
+                var inputTagParser = TestFactory.InitInputParser();
+
+                inputTagParser.Parse(html);
+                bool isValid = inputTagParser.IsValid();
+
+                Assert.True(isValid);
+            }
+        }
+
+        [Fact]
+        public void NotValidateBecausePlaceholderAttributeIsWithBadTypes()
+        {
+            var badTypes = new List<string> { "button", "checkbox", "color", "date", "datetime-local", "file", "hidden", "image", "month", "radio", "range", "reset", "submit", "time", "week" };
+            foreach (var type in badTypes)
+            {
+                string? html = string.Format($"<input placeholder=\"Entrez une valeur\" type=\"{type}\" >");
+                var inputTagParser = TestFactory.InitInputParser();
+
+                inputTagParser.Parse(html);
+                bool isValid = inputTagParser.IsValid();
+
+                Assert.False(isValid);
+            }
+        }
+
+        [Fact]
+        public void ValidateBecausePlaceholderAttributeIsNotWithBadTypes()
+        {
+            var goodTypes = new List<string> { "email", "number", "password", "search", "tel", "text", "url" };
+            foreach (var type in goodTypes)
+            {
+                string? html = string.Format($"<input placeholder=\"Entrez une valeur\" type=\"{type}\" >");
+                var inputTagParser = TestFactory.InitInputParser();
+
+                inputTagParser.Parse(html);
+                bool isValid = inputTagParser.IsValid();
+
+                Assert.True(isValid);
+            }
+        }
+
+
+        // new List<string> { "button", "checkbox", "color", "date", "datetime-local", "email", "file", "hidden", "image", "month", "number", "password", "radio", "range", "reset", "search", "submit", "tel", "text", "time", "url", "week"};       
     }
 }
