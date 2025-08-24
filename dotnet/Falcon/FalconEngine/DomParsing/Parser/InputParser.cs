@@ -252,9 +252,8 @@ namespace FalconEngine.DomParsing.Parser
 
         private bool ValueValidation()
         {
-            string[] acceptedTypeValues = new string[] { "button", "checkbox", "color", "date", "datetime-local", "email", "file", "hidden", "month", "number",
-                                            "password", "radio", "range", "reset", "search", "submit", "tel", "text", "time", "url", "week" };
-            return CheckIfAttributesWithThisTypes(FamilyAttributeEnum.value.ToString(), acceptedTypeValues);
+            string[] acceptedTypeValues = new string[] { "image" };
+            return CheckIfAttributesWithNotThisTypes(FamilyAttributeEnum.value.ToString(), acceptedTypeValues);
         }
 
         private bool WidthValidation()
