@@ -46,14 +46,26 @@ namespace FalconEngine.DomParsing.Parser
             bool minValidation = MinAttributeValidation();
             bool minLengthValidation = MinLengthAttributeValidation();
             bool multipleValidation = MultipleAttributeValidation();
-            bool patternValidation = MultiplePatternValidation();
-            bool placeholderValidation = MultiplePlaceholderValidation();
+            bool patternValidation = PatternValidation();
+            bool placeholderValidation = PlaceholderValidation();
+            bool popovertargetValidation = PopovertargetValidation();
+            bool popovertargetactionValidation = PopovertargetactionValidation();
+            bool readonlyValidation = ReadonlyValidation();
+            bool requiredValidation = RequiredValidation();
+            bool sizeValidation = SizeValidation();
+            bool srcValidation = SrcValidation();
+            bool stepValidation = StepValidation();
+            bool valueValidation = ValueValidation();
+            bool widthValidation = WidthValidation();
+
             return basiqueValidation && typeValueValidation && acceptRuleValidation && altRuleValidation
-                && autocapitalizeValidation && autocompleteValidation && captureValidation &&
-                checkedValidation && dirnameValidation && formactionValidation && formenctypeValidation &&
-                formMethodValidation && formNoValidateValidation && formtargetValidation && heightValidation
+                && autocapitalizeValidation && autocompleteValidation && captureValidation
+                && checkedValidation && dirnameValidation && formactionValidation && formenctypeValidation
+                && formMethodValidation && formNoValidateValidation && formtargetValidation && heightValidation
                 && listValidation && maxValidation && maxLengthValidation && minValidation && minLengthValidation
-                && multipleValidation && patternValidation && placeholderValidation;
+                && multipleValidation && patternValidation && placeholderValidation && popovertargetValidation
+                && popovertargetactionValidation && readonlyValidation && requiredValidation && sizeValidation
+                && srcValidation && stepValidation && valueValidation && widthValidation;
         }
 
         private bool ValidateValueType()
@@ -184,18 +196,72 @@ namespace FalconEngine.DomParsing.Parser
             return CheckIfAttributesWithThisTypes(FamilyAttributeEnum.multiple.ToString(), acceptedTypeValues);
         }
 
-        private bool MultiplePatternValidation()
+        private bool PatternValidation()
         {
             string[] acceptedTypeValues = new string[] { "email", "password", "search", "tel", "text", "url" };
             return CheckIfAttributesWithThisTypes(FamilyAttributeEnum.pattern.ToString(), acceptedTypeValues);
         }
 
-        private bool MultiplePlaceholderValidation()
+        private bool PlaceholderValidation()
         {
             string[] acceptedTypeValues = new string[] { "email", "number", "password", "search", "tel", "text", "url" };
             return CheckIfAttributesWithThisTypes(FamilyAttributeEnum.placeholder.ToString(), acceptedTypeValues);
         }
 
+        private bool PopovertargetValidation()
+        {
+            string[] acceptedTypeValues = new string[] { "button" };
+            return CheckIfAttributesWithThisTypes(FamilyAttributeEnum.popovertarget.ToString(), acceptedTypeValues);
+        }
+
+        private bool PopovertargetactionValidation()
+        {
+            string[] acceptedTypeValues = new string[] { "button" };
+            return CheckIfAttributesWithThisTypes(FamilyAttributeEnum.popovertargetaction.ToString(), acceptedTypeValues);
+        }
+
+        private bool ReadonlyValidation()
+        {
+            string[] acceptedTypeValues = new string[] { "button", "checkbox", "color", "hidden", "radio", "range" };
+            return CheckIfAttributesWithThisTypes(FamilyAttributeEnum.readonlyAttr.ToString(), acceptedTypeValues);
+        }
+
+        private bool RequiredValidation()
+        {
+            string[] acceptedTypeValues = new string[] { "button", "color", "hidden", "range" };
+            return CheckIfAttributesWithThisTypes(FamilyAttributeEnum.required.ToString(), acceptedTypeValues);
+        }
+
+        private bool SizeValidation()
+        {
+            string[] acceptedTypeValues = new string[] { "email", "password", "search", "tel", "text", "url" };
+            return CheckIfAttributesWithThisTypes(FamilyAttributeEnum.size.ToString(), acceptedTypeValues);
+        }
+
+        private bool SrcValidation()
+        {
+            string[] acceptedTypeValues = new string[] { "image" };
+            return CheckIfAttributesWithThisTypes(FamilyAttributeEnum.src.ToString(), acceptedTypeValues);
+        }
+
+        private bool StepValidation()
+        {
+            string[] acceptedTypeValues = new string[] { "date", "datetime-local", "month", "number", "range", "time", "week" };
+            return CheckIfAttributesWithThisTypes(FamilyAttributeEnum.step.ToString(), acceptedTypeValues);
+        }
+
+        private bool ValueValidation()
+        {
+            string[] acceptedTypeValues = new string[] { "button", "checkbox", "color", "date", "datetime-local", "email", "file", "hidden", "month", "number",
+                                            "password", "radio", "range", "reset", "search", "submit", "tel", "text", "time", "url", "week" };
+            return CheckIfAttributesWithThisTypes(FamilyAttributeEnum.value.ToString(), acceptedTypeValues);
+        }
+
+        private bool WidthValidation()
+        {
+            string[] acceptedTypeValues = new string[] { "image" };
+            return CheckIfAttributesWithThisTypes(FamilyAttributeEnum.width.ToString(), acceptedTypeValues);
+        }
 
         private bool CheckIfAttributesWithThisTypes(string type, string[] typesOK)
         {
