@@ -8,6 +8,16 @@ namespace FalconEngineTest.Utils.AssertHtml
 {
     public static class AssertFormPage
     {
+        public static void AssertH1Title(TagModel tag)
+        {
+            Assert.Equal(NameTagEnum.h1, tag.NameTag);
+            Assert.Equal("Present your candidature", tag.Content);
+            Assert.Equal(TagFamilyEnum.WithEnd, tag.TagFamily);
+            Assert.Equal("<h1>", tag.TagStart);
+            Assert.Equal("</h1>", tag.TagEnd);
+            Assert.Null(tag.Attributes);
+            Assert.Null(tag.Children);
+        }
         public static void AssertInputSubmit(TagModel tag)
         {
             Assert.Equal(NameTagEnum.input, tag.NameTag);
