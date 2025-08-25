@@ -17,6 +17,7 @@ namespace FalconEngine.DomParsing
         private ITagParser _inputParser;
         private ITagParser _labelParser;
         private ITagParser _selectParser;
+        private ITagParser _h1Parser;
         //temporary end
         private IExtractHtmlRemaining _extractHtmlRemaining;
         private IAttributeTagManager _attributeTagManager;
@@ -26,13 +27,14 @@ namespace FalconEngine.DomParsing
         private bool _isValidPage;
 
         public HtmlParsing(ITagParser doctypeParse, ITagParser htmlParse, ITagParser inputParser, ITagParser labelParser,
-                            ITagParser selectParser, IExtractHtmlRemaining extractHtmlRemaining, IAttributeTagManager attributeTagManager)
+                            ITagParser selectParser, ITagParser h1Parser, IExtractHtmlRemaining extractHtmlRemaining, IAttributeTagManager attributeTagManager)
         {
             _doctypeParse = doctypeParse;
             _htmlParse = htmlParse;
             _inputParser = inputParser;
             _labelParser = labelParser;
             _selectParser = selectParser;
+            _h1Parser = h1Parser;
             _extractHtmlRemaining = extractHtmlRemaining;
             _attributeTagManager = attributeTagManager;
         }
@@ -222,16 +224,9 @@ namespace FalconEngine.DomParsing
 
         private TagModel GetH1Title()
         {
-            string content = "Present your candidature";
-            var h1Tag = new TagModel()
-            {
-                NameTag = NameTagEnum.h1,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = content,
-                TagStart = "<h1>",
-                TagEnd = "</h1>"
-            };
-            return h1Tag;
+            string html = "<h1>Present your candidature</h1>";
+            var tag = _h1Parser.Parse(html);
+            return tag;
         }
 
         private TagModel GetDivIdentity()

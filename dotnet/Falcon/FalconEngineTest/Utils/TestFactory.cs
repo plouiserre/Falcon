@@ -58,6 +58,11 @@ namespace FalconEngineTest.Utils
             return new SpanParser(InitIdentifyTag(), InitAttributeTagManager(true), InitDeterminateChildren(), NameTagEnum.span);
         }
 
+        public static H1Parser InitH1Parser()
+        {
+            return new H1Parser(InitIdentifyTag(), InitDeterminateChildren(), InitAttributeTagManager(true));
+        }
+
         public static PParser InitPParser()
         {
             return new PParser(TestFactory.InitIdentifyTag(), TestFactory.InitDeterminateChildren(),
