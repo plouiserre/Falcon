@@ -2,7 +2,7 @@ namespace FalconEngine.Models
 {
     public enum FamilyAttributeEnum
     {
-        accept, accesskey, action, alt, asAttr, autocapitalize, autocomplete, blocking, capture, charset,
+        accept, accesskey, action, alt, asAttr, autocapitalize, autocomplete, autofocus, blocking, capture, charset,
         checkedAttr, classCss, content, contenteditable, crossorigin, data_, dirname, disabled,
         download, draggable, dir, enterkeyhint, forAttr, form, formaction, formenctype, formmethod, formnovalidate,
         formtarget, height, hidden, httpequiv, href, hreflang, id, inert, inputmode, integrity, isAttr, label, lang,

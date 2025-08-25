@@ -22,6 +22,7 @@ namespace FalconEngine.DomParsing
             _allAttributesAutorizedByTag[NameTagEnum.p] = new List<FamilyAttributeEnum>();
             _allAttributesAutorizedByTag[NameTagEnum.input] = new List<FamilyAttributeEnum>();
             _allAttributesAutorizedByTag[NameTagEnum.option] = new List<FamilyAttributeEnum>();
+            _allAttributesAutorizedByTag[NameTagEnum.select] = new List<FamilyAttributeEnum>();
             _allAttributesAutorizedByTag[NameTagEnum.div] = new List<FamilyAttributeEnum>();
             _allAttributesAutorizedByTag[NameTagEnum.body] = new List<FamilyAttributeEnum>();
         }
@@ -40,6 +41,7 @@ namespace FalconEngine.DomParsing
             SetSpanAttributes();
             SetInputAttributes();
             SetOptionAttributes();
+            SetSelectAttributes();
             SetPAttributes();
             SetDivAttributes();
             SetBodyAttributes();
@@ -165,6 +167,18 @@ namespace FalconEngine.DomParsing
             _allAttributesAutorizedByTag[NameTagEnum.option].Add(FamilyAttributeEnum.label);
             _allAttributesAutorizedByTag[NameTagEnum.option].Add(FamilyAttributeEnum.selected);
             _allAttributesAutorizedByTag[NameTagEnum.option].Add(FamilyAttributeEnum.value);
+        }
+
+        private void SetSelectAttributes()
+        {
+            SetGlobalAttributes(NameTagEnum.select);
+            _allAttributesAutorizedByTag[NameTagEnum.select].Add(FamilyAttributeEnum.autocomplete);
+            _allAttributesAutorizedByTag[NameTagEnum.select].Add(FamilyAttributeEnum.autofocus);
+            _allAttributesAutorizedByTag[NameTagEnum.select].Add(FamilyAttributeEnum.form);
+            _allAttributesAutorizedByTag[NameTagEnum.select].Add(FamilyAttributeEnum.multiple);
+            _allAttributesAutorizedByTag[NameTagEnum.select].Add(FamilyAttributeEnum.name);
+            _allAttributesAutorizedByTag[NameTagEnum.select].Add(FamilyAttributeEnum.required);
+            _allAttributesAutorizedByTag[NameTagEnum.select].Add(FamilyAttributeEnum.size);
         }
 
         private void SetPAttributes()
