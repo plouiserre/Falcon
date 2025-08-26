@@ -8,6 +8,33 @@ namespace FalconEngineTest.Utils.AssertHtml
 {
     public static class AssertFormPage
     {
+        public static void AssertForm(TagModel tag, string content)
+        {
+            Assert.Equal(NameTagEnum.form, tag.NameTag);
+            Assert.Equal(TagFamilyEnum.WithEnd, tag.TagFamily);
+            Assert.Equal("<form method=\"POST\" action=\"/candidate\">", tag.TagStart);
+            Assert.Equal("</form>", tag.TagEnd);
+            Assert.Equal(content, tag.Content);
+            Assert.Equal("method", tag.Attributes[0].FamilyAttribute);
+            Assert.Equal("POST", tag.Attributes[0].Value);
+            Assert.Equal("action", tag.Attributes[1].FamilyAttribute);
+            Assert.Equal("/candidate", tag.Attributes[1].Value);
+            AssertDivH1(tag.Children[0]);
+            AssertDivIdentity(tag.Children[1]);
+            AssertDivGender(tag.Children[2]);
+            AssertDivSituation(tag.Children[3]);
+            AssertDivDate(tag.Children[4]);
+            AssertDivResume(tag.Children[5]);
+            AssertDivSubmit(tag.Children[6]);
+        }
+
+        // {DivH1}
+        private static void AssertDivH1(TagModel tag)
+        {
+
+        }
+
+
         public static void AssertH1Title(TagModel tag)
         {
             Assert.Equal(NameTagEnum.h1, tag.NameTag);
@@ -18,6 +45,39 @@ namespace FalconEngineTest.Utils.AssertHtml
             Assert.Null(tag.Attributes);
             Assert.Null(tag.Children);
         }
+
+        // {DivIdentity}
+        private static void AssertDivIdentity(TagModel tag)
+        {
+
+        }
+        // {DivGender}
+        private static void AssertDivGender(TagModel tag)
+        {
+
+        }
+        // {DivSituation}
+        private static void AssertDivSituation(TagModel tag)
+        {
+
+        }
+        // {DivDate}
+        private static void AssertDivDate(TagModel tag)
+        {
+
+        }
+        // {DivResume}
+        private static void AssertDivResume(TagModel tag)
+        {
+
+        }
+
+        // {DivSubmit}
+        private static void AssertDivSubmit(TagModel tag)
+        {
+
+        }
+
         public static void AssertInputSubmit(TagModel tag)
         {
             Assert.Equal(NameTagEnum.input, tag.NameTag);

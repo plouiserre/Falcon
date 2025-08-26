@@ -74,6 +74,11 @@ namespace FalconEngineTest.Utils
             return new DivParser(InitIdentifyTag(), InitDeterminateChildren(), InitAttributeTagManager(true));
         }
 
+        public static FormParser InitFormParser()
+        {
+            return new FormParser(InitIdentifyTag(), InitDeterminateChildren(), InitAttributeTagManager(true));
+        }
+
         public static BodyParser InitBodyParser()
         {
             return new BodyParser(InitIdentifyTag(), InitDeterminateChildren(), InitAttributeTagManager(true));

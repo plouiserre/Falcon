@@ -25,6 +25,7 @@ namespace FalconEngine.DomParsing
             _allAttributesAutorizedByTag[NameTagEnum.option] = new List<FamilyAttributeEnum>();
             _allAttributesAutorizedByTag[NameTagEnum.select] = new List<FamilyAttributeEnum>();
             _allAttributesAutorizedByTag[NameTagEnum.div] = new List<FamilyAttributeEnum>();
+            _allAttributesAutorizedByTag[NameTagEnum.form] = new List<FamilyAttributeEnum>();
             _allAttributesAutorizedByTag[NameTagEnum.body] = new List<FamilyAttributeEnum>();
         }
 
@@ -46,6 +47,7 @@ namespace FalconEngine.DomParsing
             SetSelectAttributes();
             SetPAttributes();
             SetDivAttributes();
+            SetFormAttributes();
             SetBodyAttributes();
         }
 
@@ -205,6 +207,12 @@ namespace FalconEngine.DomParsing
             _allAttributesAutorizedByTag[NameTagEnum.div].Add(FamilyAttributeEnum.draggable);
             _allAttributesAutorizedByTag[NameTagEnum.div].Add(FamilyAttributeEnum.contenteditable);
             _allAttributesAutorizedByTag[NameTagEnum.div].Add(FamilyAttributeEnum.spellcheck);
+        }
+
+        private void SetFormAttributes()
+        {
+            _allAttributesAutorizedByTag[NameTagEnum.form].Add(FamilyAttributeEnum.action);
+            _allAttributesAutorizedByTag[NameTagEnum.form].Add(FamilyAttributeEnum.method);
         }
 
         private void SetBodyAttributes()
