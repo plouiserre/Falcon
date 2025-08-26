@@ -150,5 +150,17 @@ namespace FalconEngineTest.DomParsing
             Assert.IsType<PParser>(parsers[0]);
             Assert.IsType<PParser>(parsers[1]);
         }
+
+        [Fact]
+        public void ShouldInitiateH1()
+        {
+            string html = "<h1>Present your candidature</h1>";
+            var initiate = TestFactory.InitInitiateParser();
+
+            var parsers = initiate.GetTagParsers(html);
+
+            Assert.Single(parsers);
+            Assert.IsType<H1Parser>(parsers[0]);
+        }
     }
 }

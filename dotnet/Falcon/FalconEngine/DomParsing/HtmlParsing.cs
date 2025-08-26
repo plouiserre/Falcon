@@ -18,6 +18,7 @@ namespace FalconEngine.DomParsing
         private ITagParser _labelParser;
         private ITagParser _selectParser;
         private ITagParser _h1Parser;
+        private ITagParser _formParser;
         //temporary end
         private IExtractHtmlRemaining _extractHtmlRemaining;
         private IAttributeTagManager _attributeTagManager;
@@ -27,7 +28,7 @@ namespace FalconEngine.DomParsing
         private bool _isValidPage;
 
         public HtmlParsing(ITagParser doctypeParse, ITagParser htmlParse, ITagParser inputParser, ITagParser labelParser,
-                            ITagParser selectParser, ITagParser h1Parser, IExtractHtmlRemaining extractHtmlRemaining, IAttributeTagManager attributeTagManager)
+                            ITagParser selectParser, ITagParser h1Parser, ITagParser formParser, IExtractHtmlRemaining extractHtmlRemaining, IAttributeTagManager attributeTagManager)
         {
             _doctypeParse = doctypeParse;
             _htmlParse = htmlParse;
@@ -35,6 +36,7 @@ namespace FalconEngine.DomParsing
             _labelParser = labelParser;
             _selectParser = selectParser;
             _h1Parser = h1Parser;
+            _formParser = formParser;
             _extractHtmlRemaining = extractHtmlRemaining;
             _attributeTagManager = attributeTagManager;
         }
@@ -105,7 +107,7 @@ namespace FalconEngine.DomParsing
                 Attributes = new List<AttributeModel>() { attributLang, attributDir, attributXmlns },
                 NameTag = NameTagEnum.html,
                 TagFamily = TagFamilyEnum.WithEnd,
-                Content = "<head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>Document</title><link rel=\"stylesheet\" href=\"main.css\" data-preload=\"true\"></head><body><form method=\"POST\" action=\"/candidate\"><div class=\"Title\"><h1>Present your candidature</h1></div><div class=\"Identity\"><input type=\"text\" placeholder=\"FirstName\"><input type=\"text\" placeholder=\"LastName\"></div><div class=\"Gender\"><label for=\"rgender\">Gender</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"male\"/> <label for=\"male\">Male</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"female\"/> <label for=\"female\">female</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"undefined\" checked/> <label for=\"undefined\">Undefined</label></div><div class=\"Situation\"><label for=\"lSituation\">Situation</label><select name=\"sSituation\" id=\"sSituation\"><option>No Job</option><option>Job in a company</option><option>Entrepreneur</option></select></div><div class=\"Birthday\"><label for=\"dBirthday\">Birthday</label><input type=\"date\" id=\"dBirthday\" name=\"birthday\" value=\"1992-07-22\" min=\"1918-01-01\" max=\"2025-12-31\" /></div><div class=\"Resume\"><input type=\"file\" id=\"avatar\" name=\"avatar\" accept=\".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document\"><label for=\"dResume\">Choose a resume</label></div><div class=\"Send\"><input type=\"Submit\" value=\"Submit\"/></div></form></body>",
+                Content = "<head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>Document</title><link rel=\"stylesheet\" href=\"main.css\" data-preload=\"true\"></head><body><form method=\"POST\" action=\"/candidate\"><div class=\"Title\"><h1>Present your candidature</h1></div><div class=\"Identity\"><input type=\"text\" placeholder=\"FirstName\"><input type=\"text\" placeholder=\"LastName\"></div><div class=\"Gender\"><label for=\"rgender\">Gender</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"male\"/> <label for=\"male\">Male</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"female\"/> <label for=\"female\">Female</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"undefined\" checked/> <label for=\"undefined\">Undefined</label></div><div class=\"Situation\"><label for=\"lSituation\">Situation</label><select name=\"sSituation\" id=\"sSituation\"><option>No Job</option><option>Job in a company</option><option>Entrepreneur</option></select></div><div class=\"Birthday\"><label for=\"dBirthday\">Birthday</label><input type=\"date\" id=\"dBirthday\" name=\"birthday\" value=\"1992-07-22\" min=\"1918-01-01\" max=\"2025-12-31\" /></div><div class=\"Resume\"><input type=\"file\" id=\"avatar\" name=\"avatar\" accept=\".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document\"><label for=\"dResume\">Choose a resume</label></div><div class=\"Send\"><input type=\"Submit\" value=\"Submit\"/></div></form></body>",
                 TagStart = "<html lang=\"en\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\">",
                 TagEnd = "</html>",
                 Children = new List<TagModel>() { headTag, body }
@@ -165,7 +167,7 @@ namespace FalconEngine.DomParsing
 
         private TagModel GetBodyTag()
         {
-            string content = "<form method=\"POST\" action=\"/candidate\"><div class=\"Title\"><h1>Present your candidature</h1></div><div class=\"Identity\"><input type=\"text\" placeholder=\"FirstName\"><input type=\"text\" placeholder=\"LastName\"></div><div class=\"Gender\"><label for=\"rgender\">Gender</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"male\"/> <label for=\"male\">Male</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"female\"/> <label for=\"female\">female</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"undefined\" checked/> <label for=\"undefined\">Undefined</label></div><div class=\"Situation\"><label for=\"lSituation\">Situation</label><select name=\"sSituation\" id=\"sSituation\"><option>No Job</option><option>Job in a company</option><option>Entrepreneur</option></select></div><div class=\"Birthday\"><label for=\"dBirthday\">Birthday</label><input type=\"date\" id=\"dBirthday\" name=\"birthday\" value=\"1992-07-22\" min=\"1918-01-01\" max=\"2025-12-31\" /></div><div class=\"Resume\"><input type=\"file\" id=\"avatar\" name=\"avatar\" accept=\".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document\"><label for=\"dResume\">Choose a resume</label></div><div class=\"Send\"><input type=\"Submit\" value=\"Submit\"/></div></form>";
+            string content = "<form method=\"POST\" action=\"/candidate\"><div class=\"Title\"><h1>Present your candidature</h1></div><div class=\"Identity\"><input type=\"text\" placeholder=\"FirstName\"><input type=\"text\" placeholder=\"LastName\"></div><div class=\"Gender\"><label for=\"rgender\">Gender</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"male\"/> <label for=\"male\">Male</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"female\"/> <label for=\"female\">Female</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"undefined\" checked/> <label for=\"undefined\">Undefined</label></div><div class=\"Situation\"><label for=\"lSituation\">Situation</label><select name=\"sSituation\" id=\"sSituation\"><option>No Job</option><option>Job in a company</option><option>Entrepreneur</option></select></div><div class=\"Birthday\"><label for=\"dBirthday\">Birthday</label><input type=\"date\" id=\"dBirthday\" name=\"birthday\" value=\"1992-07-22\" min=\"1918-01-01\" max=\"2025-12-31\" /></div><div class=\"Resume\"><input type=\"file\" id=\"avatar\" name=\"avatar\" accept=\".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document\"><label for=\"dResume\">Choose a resume</label></div><div class=\"Send\"><input type=\"Submit\" value=\"Submit\"/></div></form>";
             var formPost = GetFormPost();
             var bodyTag = new TagModel()
             {
@@ -181,283 +183,9 @@ namespace FalconEngine.DomParsing
 
         private TagModel GetFormPost()
         {
-            var attributMethod = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.method.ToString(), Value = "POST" };
-            var attributAction = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.action.ToString(), Value = "/candidate" };
-            string content = "<div class=\"Title\"><h1>Present your candidature</h1></div><div class=\"Identity\"><input type=\"text\" placeholder=\"FirstName\"><input type=\"text\" placeholder=\"LastName\"></div><div class=\"Gender\"><label for=\"rgender\">Gender</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"male\"/> <label for=\"male\">Male</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"female\"/> <label for=\"female\">female</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"undefined\" checked/> <label for=\"undefined\">Undefined</label></div><div class=\"Situation\"><label for=\"lSituation\">Situation</label><select name=\"sSituation\" id=\"sSituation\"><option>No Job</option><option>Job in a company</option><option>Entrepreneur</option></select></div><div class=\"Birthday\"><label for=\"dBirthday\">Birthday</label><input type=\"date\" id=\"dBirthday\" name=\"birthday\" value=\"1992-07-22\" min=\"1918-01-01\" max=\"2025-12-31\" /></div><div class=\"Resume\"><input type=\"file\" id=\"avatar\" name=\"avatar\" accept=\".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document\"><label for=\"dResume\">Choose a resume</label></div><div class=\"Send\"><input type=\"Submit\" value=\"Submit\"/></div>";
-            var divTitle = GetDivTitle();
-            var divIdentity = GetDivIdentity();
-            var divGender = GetDivGender();
-            var divSituation = GetDivSituation();
-            var divBirthday = GetDivBirthDay();
-            var divResume = GetDivResume();
-            var divSend = GetDivSend();
-            var divTag = new TagModel()
-            {
-                Attributes = new List<AttributeModel>() { attributMethod, attributAction },
-                NameTag = NameTagEnum.div,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = content,
-                TagStart = "<div id=\"content\">",
-                TagEnd = "</div>",
-                Children = new List<TagModel>() { divTitle, divIdentity, divGender, divSituation, divBirthday, divResume, divSend }
-            };
-            return divTag;
-        }
-
-        private TagModel GetDivTitle()
-        {
-            var attributId = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.classCss.ToString(), Value = "Title" };
-            string content = "<h1>Present your candidature</h1>";
-            var h1Title = GetH1Title();
-            var divTag = new TagModel()
-            {
-                Attributes = new List<AttributeModel>() { attributId },
-                NameTag = NameTagEnum.div,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = content,
-                TagStart = "<div class=\"Title\">",
-                TagEnd = "</div>",
-                Children = new List<TagModel>() { h1Title }
-            };
-            return divTag;
-        }
-
-        private TagModel GetH1Title()
-        {
-            string html = "<h1>Present your candidature</h1>";
-            var tag = _h1Parser.Parse(html);
+            string html = "<form method=\"POST\" action=\"/candidate\"><div class=\"Title\"><h1>Present your candidature</h1></div><div class=\"Identity\"><input type=\"text\" placeholder=\"FirstName\"><input type=\"text\" placeholder=\"LastName\"></div><div class=\"Gender\"><label for=\"rgender\">Gender</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"male\"/> <label for=\"male\">Male</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"female\"/> <label for=\"female\">Female</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"undefined\" checked/> <label for=\"undefined\">Undefined</label></div><div class=\"Situation\"><label for=\"lSituation\">Situation</label><select name=\"sSituation\" id=\"sSituation\"><option>No Job</option><option>Job in a company</option><option>Entrepreneur</option></select></div><div class=\"Birthday\"><label for=\"dBirthday\">Birthday</label><input type=\"date\" id=\"dBirthday\" name=\"birthday\" value=\"1992-07-22\" min=\"1918-01-01\" max=\"2025-12-31\" /></div><div class=\"Resume\"><input type=\"file\" id=\"avatar\" name=\"avatar\" accept=\".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document\"><label for=\"dResume\">Choose a resume</label></div><div class=\"Send\"><input type=\"Submit\" value=\"Submit\"/></div></form>";
+            var tag = _formParser.Parse(html);
             return tag;
         }
-
-        private TagModel GetDivIdentity()
-        {
-            var attributId = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.classCss.ToString(), Value = "Identity" };
-            string content = "<input type=\"text\" placeholder=\"FirstName\"><input type=\"text\" placeholder=\"LastName\">";
-            var inputFirstName = GetInputFirstName();
-            var inputLastName = GetInputLastName();
-            var divTag = new TagModel()
-            {
-                Attributes = new List<AttributeModel>() { attributId },
-                NameTag = NameTagEnum.div,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = content,
-                TagStart = "<div class=\"Identity\">",
-                TagEnd = "</div>",
-                Children = new List<TagModel>() { inputFirstName, inputLastName }
-            };
-            return divTag;
-        }
-
-        private TagModel GetInputFirstName()
-        {
-            string html = "<input type=\"text\" placeholder=\"FirstName\">";
-            var inputFirstName = _inputParser.Parse(html);
-            return inputFirstName;
-        }
-
-        private TagModel GetInputLastName()
-        {
-            string html = "<input type=\"text\" placeholder=\"LastName\">";
-            var inputLastName = _inputParser.Parse(html);
-            return inputLastName;
-        }
-
-        private TagModel GetDivGender()
-        {
-            var attributId = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.classCss.ToString(), Value = "Gender" };
-            string content = "<label for=\"rgender\">Gender</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"male\"/> <label for=\"male\">Male</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"female\"/> <label for=\"female\">female</label><input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"undefined\" checked/> <label for=\"undefined\">Undefined</label>";
-            var labelGender = GetLabelGender();
-            var radioMale = GetRadioMale();
-            var labelMale = GetLabelMale();
-            var radioFemale = GetRadioFemale();
-            var labelFemale = GetLabelFemale();
-            var radioUndefined = GetRadioUndefined();
-            var labelUndefined = GetLabelUndefined();
-            var divTag = new TagModel()
-            {
-                Attributes = new List<AttributeModel>() { attributId },
-                NameTag = NameTagEnum.div,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = content,
-                TagStart = "<div class=\"Identity\">",
-                TagEnd = "</div>",
-                Children = new List<TagModel>() { labelGender, radioMale, labelMale, radioFemale, labelFemale, radioUndefined, labelUndefined }
-            };
-            return divTag;
-        }
-
-        private TagModel GetLabelGender()
-        {
-            string html = "<label for=\"rgender\">Gender</label>";
-            var tag = _labelParser.Parse(html);
-            return tag;
-        }
-
-        private TagModel GetRadioMale()
-        {
-            string html = "<input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"male\"/>";
-            var radioMale = _inputParser.Parse(html);
-            return radioMale;
-        }
-
-        private TagModel GetLabelMale()
-        {
-            string html = "<label for=\"rgender\">Male</label>";
-            var tag = _labelParser.Parse(html);
-            return tag;
-        }
-
-        private TagModel GetRadioFemale()
-        {
-            string html = "<input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"female\"/>";
-            var radioFemale = _inputParser.Parse(html);
-            return radioFemale;
-        }
-
-        private TagModel GetLabelFemale()
-        {
-            string html = "<label for=\"rgender\">Female</label>";
-            var tag = _labelParser.Parse(html);
-            return tag;
-        }
-
-        private TagModel GetRadioUndefined()
-        {
-            string html = "<input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"undefined\" checked/>";
-            var radioUndefined = _inputParser.Parse(html);
-            return radioUndefined;
-        }
-
-        private TagModel GetLabelUndefined()
-        {
-            string html = "<label for=\"rgender\">Undefined</label>";
-            var tag = _labelParser.Parse(html);
-            return tag;
-        }
-
-        private TagModel GetDivSituation()
-        {
-            var attributId = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.classCss.ToString(), Value = "Situation" };
-            string content = "<label for=\"lSituation\">Situation</label><select name=\"sSituation\" id=\"sSituation\"><option>No Job</option><option>Job in a company</option><option>Entrepreneur</option></select>";
-            var labelSituation = GetLabelSituation();
-            var selectSituation = GetSelectSituation();
-            var divTag = new TagModel()
-            {
-                Attributes = new List<AttributeModel>() { attributId },
-                NameTag = NameTagEnum.div,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = content,
-                TagStart = "<div class=\"Situation\">",
-                TagEnd = "</div>",
-                Children = new List<TagModel>() { labelSituation, selectSituation }
-            };
-            return divTag;
-        }
-
-        private TagModel GetLabelSituation()
-        {
-            string html = "<label for=\"lSituation\">Situation</label>";
-            var tag = _labelParser.Parse(html);
-            return tag;
-        }
-
-        private TagModel GetSelectSituation()
-        {
-            string html = "<select name=\"sSituation\" id=\"sSituation\"><option>No Job</option><option>Job in a company</option><option>Entrepreneur</option></select>";
-            var selectSelection = _selectParser.Parse(html);
-            return selectSelection;
-        }
-
-        private TagModel GetDivBirthDay()
-        {
-            var attributId = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.classCss.ToString(), Value = "Birthday" };
-            string content = "<label for=\"dBirthday\">Birthday</label><input type=\"date\" id=\"dBirthday\" name=\"birthday\" value=\"1992-07-22\" min=\"1918-01-01\" max=\"2025-12-31\" />";
-            var labelDate = GetLabelDate();
-            var inputDate = GetInputBirthDay();
-            var divTag = new TagModel()
-            {
-                Attributes = new List<AttributeModel>() { attributId },
-                NameTag = NameTagEnum.div,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = content,
-                TagStart = "<div class=\"Birthday\">",
-                TagEnd = "</div>",
-                Children = new List<TagModel>() { labelDate, inputDate }
-            };
-            return divTag;
-        }
-
-        private TagModel GetLabelDate()
-        {
-            string html = "<label for=\"dBirthday\">Birthday</label>";
-            var tag = _labelParser.Parse(html);
-            return tag;
-        }
-
-        private TagModel GetInputBirthDay()
-        {
-            string html = "<input type=\"date\" id=\"dBirthday\" name=\"birthday\" value=\"1992-07-22\" min=\"1918-01-01\" max=\"2025-12-31\" />";
-            var inputBirthDay = _inputParser.Parse(html);
-            return inputBirthDay;
-        }
-
-        private TagModel GetDivResume()
-        {
-            var attributId = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.classCss.ToString(), Value = "Resume" };
-            string content = "<label for=\"dResume\">Choose a resume</label><input type=\"file\" id=\"avatar\" name=\"avatar\" accept=\".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document\">";
-            var labelResume = GetLabelResume();
-            var inputResume = GetInputResume();
-            var divTag = new TagModel()
-            {
-                Attributes = new List<AttributeModel>() { attributId },
-                NameTag = NameTagEnum.div,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = content,
-                TagStart = "<div class=\"Resume\">",
-                TagEnd = "</div>",
-                Children = new List<TagModel>() { labelResume, inputResume }
-            };
-            return divTag;
-        }
-
-        private TagModel GetLabelResume()
-        {
-            string html = "<label for=\"dResume\">Choose a resume</label>";
-            var tag = _labelParser.Parse(html);
-            return tag;
-        }
-
-        private TagModel GetInputResume()
-        {
-            string html = "<input type=\"file\" id=\"avatar\" name=\"avatar\" accept=\".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document\">";
-            var inputResume = _inputParser.Parse(html);
-            return inputResume;
-        }
-
-        private TagModel GetDivSend()
-        {
-            var attributId = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.classCss.ToString(), Value = "Send" };
-            string content = "<input type=\"Submit\" value=\"Submit\"/>";
-            var inputSubmit = GetInputSubmit();
-            var divTag = new TagModel()
-            {
-                Attributes = new List<AttributeModel>() { attributId },
-                NameTag = NameTagEnum.div,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = content,
-                TagStart = "<div class=\"Send\">",
-                TagEnd = "</div>",
-                Children = new List<TagModel>() { inputSubmit }
-            };
-            return divTag;
-        }
-
-        private TagModel GetInputSubmit()
-        {
-            string html = "<input type=\"Submit\" value=\"Submit\"/> ";
-            var inputSubmit = _inputParser.Parse(html);
-            return inputSubmit;
-        }
-
     }
 }

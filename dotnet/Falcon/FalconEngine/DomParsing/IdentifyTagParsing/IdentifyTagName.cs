@@ -44,6 +44,8 @@ namespace FalconEngine.DomParsing.IdentifyTagParsing
                     return NameTagEnum.title;
                 case "body":
                     return NameTagEnum.body;
+                case "form":
+                    return NameTagEnum.form;
                 case "div":
                     return NameTagEnum.div;
                 case "p":
