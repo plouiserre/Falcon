@@ -20,7 +20,7 @@ namespace FalconEngineTest.Configuration
             "RadioMale":"<input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"male\"/>",
             "LabelMale":" <label for=\"male\">Male</label>",
             "RadioFemale":"<input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"female\"/>",
-            "LabelFemale":" <label for=\"female\">female</label>",
+            "LabelFemale":" <label for=\"female\">Female</label>",
             "RadioUndefined":"<input type=\"radio\" id=\"rgender\" name=\"gender\" value=\"undefined\" checked/>",
             "LabelUndefined":" <label for=\"undefined\">Undefined</label>",
             "LabelGender":"<label for=\"rgender\">Gender</label>",

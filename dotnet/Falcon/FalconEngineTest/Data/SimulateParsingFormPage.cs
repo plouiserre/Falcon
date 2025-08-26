@@ -138,11 +138,11 @@ namespace FalconEngineTest.Data
             var divTag = new TagModel()
             {
                 Attributes = new List<AttributeModel>() { attributMethod, attributAction },
-                NameTag = NameTagEnum.div,
+                NameTag = NameTagEnum.form,
                 TagFamily = TagFamilyEnum.WithEnd,
                 Content = content,
-                TagStart = "<div id=\"content\">",
-                TagEnd = "</div>",
+                TagStart = "<form method=\"POST\" action=\"/candidate\">",
+                TagEnd = "</form>",
                 Children = new List<TagModel>() { divTitle, divIdentity, divGender, divSituation, divBirthday,
                             divResume, divSend }
             };
@@ -248,7 +248,7 @@ namespace FalconEngineTest.Data
                 NameTag = NameTagEnum.div,
                 TagFamily = TagFamilyEnum.WithEnd,
                 Content = content,
-                TagStart = "<div class=\"Identity\">",
+                TagStart = "<div class=\"Gender\">",
                 TagEnd = "</div>",
                 Children = new List<TagModel>() { labelGender, radioMale, labelMale, radioFemale, labelFemale, radioUndefined, labelUndefined }
             };
@@ -291,11 +291,11 @@ namespace FalconEngineTest.Data
             string content = "Male";
             var labelGender = new TagModel()
             {
-                Attributes = new List<AttributeModel>() { new AttributeModel() { FamilyAttribute = "forAttr", Value = "rgender" } },
+                Attributes = new List<AttributeModel>() { new AttributeModel() { FamilyAttribute = "forAttr", Value = "male" } },
                 NameTag = NameTagEnum.label,
                 TagFamily = TagFamilyEnum.WithEnd,
                 Content = content,
-                TagStart = "<label for=\"rgender\">",
+                TagStart = "<label for=\"male\">",
                 TagEnd = "</label>"
             };
             return labelGender;
@@ -322,11 +322,11 @@ namespace FalconEngineTest.Data
             string content = "Female";
             var labelGender = new TagModel()
             {
-                Attributes = new List<AttributeModel>() { new AttributeModel() { FamilyAttribute = "forAttr", Value = "rgender" } },
+                Attributes = new List<AttributeModel>() { new AttributeModel() { FamilyAttribute = "forAttr", Value = "female" } },
                 NameTag = NameTagEnum.label,
                 TagFamily = TagFamilyEnum.WithEnd,
                 Content = content,
-                TagStart = "<label for=\"rgender\">",
+                TagStart = "<label for=\"female\">",
                 TagEnd = "</label>"
             };
             return labelGender;
@@ -354,11 +354,11 @@ namespace FalconEngineTest.Data
             string content = "Undefined";
             var labelGender = new TagModel()
             {
-                Attributes = new List<AttributeModel>() { new AttributeModel() { FamilyAttribute = "forAttr", Value = "rgender" } },
+                Attributes = new List<AttributeModel>() { new AttributeModel() { FamilyAttribute = "forAttr", Value = "undefined" } },
                 NameTag = NameTagEnum.label,
                 TagFamily = TagFamilyEnum.WithEnd,
                 Content = content,
-                TagStart = "<label for=\"rgender\">",
+                TagStart = "<label for=\"undefined\">",
                 TagEnd = "</label>"
             };
             return labelGender;
@@ -513,7 +513,7 @@ namespace FalconEngineTest.Data
         private static TagModel GetDivResume()
         {
             var attributId = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.classCss.ToString(), Value = "Resume" };
-            string content = string.Concat(HtmlPageFormData.GetHtml(TagHtmlForm.labelResume), HtmlPageFormData.GetHtml(TagHtmlForm.inputFile));
+            string content = string.Concat(HtmlPageFormData.GetHtml(TagHtmlForm.inputFile), HtmlPageFormData.GetHtml(TagHtmlForm.labelResume));
             var labelResume = GetLabelResume();
             var inputResume = GetInputResume();
             var divTag = new TagModel()
@@ -524,7 +524,7 @@ namespace FalconEngineTest.Data
                 Content = content,
                 TagStart = "<div class=\"Resume\">",
                 TagEnd = "</div>",
-                Children = new List<TagModel>() { labelResume, inputResume }
+                Children = new List<TagModel>() { inputResume, labelResume }
             };
             return divTag;
         }
