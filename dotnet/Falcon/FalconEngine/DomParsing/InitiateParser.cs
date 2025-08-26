@@ -103,6 +103,8 @@ namespace FalconEngine.DomParsing
                     return new PParser(_identifyTag, _manageChildrenTag, _attributeTagManager);
                 case string tag when tag.ToLower().Contains("<div"):
                     return new DivParser(_identifyTag, _manageChildrenTag, _attributeTagManager);
+                case string tag when tag.ToLower().Contains("<form"):
+                    return new FormParser(_identifyTag, _manageChildrenTag, _attributeTagManager);
                 case string tag when tag.ToLower().Contains("<body"):
                     return new BodyParser(_identifyTag, _manageChildrenTag, _attributeTagManager);
                 case string tag when tag.ToLower().Contains("<a"):
