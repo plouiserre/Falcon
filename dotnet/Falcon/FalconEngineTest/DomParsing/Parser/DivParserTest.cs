@@ -50,7 +50,7 @@ namespace FalconEngineTest.DomParsing.Parser
         [Fact]
         public void ParseComplexeDivAndNotValidateIt()
         {
-            string html = "<div><p inputmode=\"false\">Hello World!!!</p></div>";
+            string html = "<div><p alt=\"basic message\">Hello World!!!</p></div>";
 
             var divParser = TestFactory.InitDivParser();
 
