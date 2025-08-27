@@ -71,7 +71,7 @@ namespace FalconEngineTest.DomParsing.Parser
         [Theory]
         [InlineData("<meta charset=\"UTF-8\"></meta>")]
         [InlineData("<meta ondragleave=\"leave()\">")]
-        [InlineData("<meta name=\"description\" spellcheck=\"Ceci est une description de la page.\">")]
+        [InlineData("<meta name=\"description\" alt=\"Ceci est une description de la page.\">")]
         public void ParseMetaAndNoValidateHtml(string html)
         {
             _metaParser.Parse(html);

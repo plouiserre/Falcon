@@ -71,7 +71,7 @@ namespace FalconEngineTest.DomParsing.Parser
         [Fact]
         public void ParseATagAndNoValidateIt()
         {
-            string html = "<a href=\"index.html\" spellcheck=\"true\">Mon site</a>";
+            string html = "<a href=\"index.html\" alt=\"link to my website\">Mon site</a>";
 
             var aParser = TestFactory.InitAParser();
 
