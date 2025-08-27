@@ -14,9 +14,12 @@ namespace FalconEngine.DomParsing
         public AttributeTagManager()
         {
             _allAttributesAutorizedByTag = new Dictionary<NameTagEnum, List<FamilyAttributeEnum>>();
+            _allAttributesAutorizedByTag[NameTagEnum.doctype] = new List<FamilyAttributeEnum>();
             _allAttributesAutorizedByTag[NameTagEnum.html] = new List<FamilyAttributeEnum>();
+            _allAttributesAutorizedByTag[NameTagEnum.head] = new List<FamilyAttributeEnum>();
             _allAttributesAutorizedByTag[NameTagEnum.meta] = new List<FamilyAttributeEnum>();
             _allAttributesAutorizedByTag[NameTagEnum.link] = new List<FamilyAttributeEnum>();
+            _allAttributesAutorizedByTag[NameTagEnum.title] = new List<FamilyAttributeEnum>();
             _allAttributesAutorizedByTag[NameTagEnum.a] = new List<FamilyAttributeEnum>();
             _allAttributesAutorizedByTag[NameTagEnum.span] = new List<FamilyAttributeEnum>();
             _allAttributesAutorizedByTag[NameTagEnum.h1] = new List<FamilyAttributeEnum>();
@@ -37,41 +40,47 @@ namespace FalconEngine.DomParsing
 
         public void SetAttributes()
         {
+            SetDoctypeAttributesAutorized();
             SetHtmlAttributesAutorized();
+            SetHeadAttributesAutorized();
             SetMetaAttributesAutorized();
             SetLinkAttributesAutorized();
+            SetTitleAttributesAutorized();
             SetAAttributesAutorized();
-            SetSpanAttributes();
-            SetH1Attributes();
-            SetLabelAttributes();
-            SetInputAttributes();
-            SetOptionAttributes();
-            SetSelectAttributes();
-            SetPAttributes();
-            SetDivAttributes();
-            SetFormAttributes();
-            SetBodyAttributes();
+            SetSpanAttributesAutorized();
+            SetH1AttributesAutorized();
+            SetLabelAttributesAutorized();
+            SetInputAttributesAutorized();
+            SetOptionAttributesAutorized();
+            SetSelectAttributesAutorized();
+            SetPAttributesAutorized();
+            SetDivAttributesAutorized();
+            SetFormAttributesAutorized();
+            SetBodyAttributesAutorized();
+        }
+
+        private void SetDoctypeAttributesAutorized()
+        {
+            SetUniversalAttributes(NameTagEnum.doctype);
         }
 
         private void SetHtmlAttributesAutorized()
         {
-            SetGlobalAttributes(NameTagEnum.html);
-            _allAttributesAutorizedByTag[NameTagEnum.html].Add(FamilyAttributeEnum.accesskey);
-            _allAttributesAutorizedByTag[NameTagEnum.html].Add(FamilyAttributeEnum.contenteditable);
-            _allAttributesAutorizedByTag[NameTagEnum.html].Add(FamilyAttributeEnum.dir);
-            _allAttributesAutorizedByTag[NameTagEnum.html].Add(FamilyAttributeEnum.draggable);
+            SetUniversalAttributes(NameTagEnum.html);
             _allAttributesAutorizedByTag[NameTagEnum.html].Add(FamilyAttributeEnum.manifest);
-            _allAttributesAutorizedByTag[NameTagEnum.html].Add(FamilyAttributeEnum.spellcheck);
-            _allAttributesAutorizedByTag[NameTagEnum.html].Add(FamilyAttributeEnum.tabindex);
             _allAttributesAutorizedByTag[NameTagEnum.html].Add(FamilyAttributeEnum.xmlns);
+        }
+
+        private void SetHeadAttributesAutorized()
+        {
+            SetUniversalAttributes(NameTagEnum.head);
         }
 
         private void SetMetaAttributesAutorized()
         {
-            SetGlobalAttributes(NameTagEnum.meta);
+            SetUniversalAttributes(NameTagEnum.meta);
             _allAttributesAutorizedByTag[NameTagEnum.meta].Add(FamilyAttributeEnum.charset);
             _allAttributesAutorizedByTag[NameTagEnum.meta].Add(FamilyAttributeEnum.content);
-            _allAttributesAutorizedByTag[NameTagEnum.meta].Add(FamilyAttributeEnum.dir);
             _allAttributesAutorizedByTag[NameTagEnum.meta].Add(FamilyAttributeEnum.httpequiv);
             _allAttributesAutorizedByTag[NameTagEnum.meta].Add(FamilyAttributeEnum.name);
             _allAttributesAutorizedByTag[NameTagEnum.meta].Add(FamilyAttributeEnum.scheme);
@@ -79,14 +88,12 @@ namespace FalconEngine.DomParsing
 
         private void SetLinkAttributesAutorized()
         {
-            SetGlobalAttributes(NameTagEnum.link);
+            SetUniversalAttributes(NameTagEnum.link);
             _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.accesskey);
             _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.asAttr);
             _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.blocking);
             _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.crossorigin);
             _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.disabled);
-            _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.draggable);
-            _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.dir);
             _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.integrity);
             _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.href);
             _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.hreflang);
@@ -95,58 +102,54 @@ namespace FalconEngine.DomParsing
             _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.rel);
             _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.role);
             _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.sizes);
-            _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.spellcheck);
-            _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.tabindex);
-            _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.translate);
             _allAttributesAutorizedByTag[NameTagEnum.link].Add(FamilyAttributeEnum.type);
         }
 
-        //TODO m'occuper des attributs aria-* et hidden
+        private void SetTitleAttributesAutorized()
+        {
+            SetUniversalAttributes(NameTagEnum.title);
+        }
+
         private void SetAAttributesAutorized()
         {
-            SetGlobalAttributes(NameTagEnum.a);
+            SetUniversalAttributes(NameTagEnum.a);
             SetOnEventAttribut(NameTagEnum.a);
             _allAttributesAutorizedByTag[NameTagEnum.a].Add(FamilyAttributeEnum.accesskey);
-            _allAttributesAutorizedByTag[NameTagEnum.a].Add(FamilyAttributeEnum.dir);
             _allAttributesAutorizedByTag[NameTagEnum.a].Add(FamilyAttributeEnum.download);
-            _allAttributesAutorizedByTag[NameTagEnum.a].Add(FamilyAttributeEnum.draggable);
-            _allAttributesAutorizedByTag[NameTagEnum.a].Add(FamilyAttributeEnum.hidden);
             _allAttributesAutorizedByTag[NameTagEnum.a].Add(FamilyAttributeEnum.href);
             _allAttributesAutorizedByTag[NameTagEnum.a].Add(FamilyAttributeEnum.hreflang);
             _allAttributesAutorizedByTag[NameTagEnum.a].Add(FamilyAttributeEnum.referrerpolicy);
             _allAttributesAutorizedByTag[NameTagEnum.a].Add(FamilyAttributeEnum.rel);
             _allAttributesAutorizedByTag[NameTagEnum.a].Add(FamilyAttributeEnum.role);
-            _allAttributesAutorizedByTag[NameTagEnum.a].Add(FamilyAttributeEnum.tabindex);
             _allAttributesAutorizedByTag[NameTagEnum.a].Add(FamilyAttributeEnum.target);
             _allAttributesAutorizedByTag[NameTagEnum.a].Add(FamilyAttributeEnum.type);
         }
 
-        private void SetSpanAttributes()
+        private void SetSpanAttributesAutorized()
         {
-            SetGlobalAttributes(NameTagEnum.span);
+            SetUniversalAttributes(NameTagEnum.span);
             SetOnEventAttribut(NameTagEnum.span);
         }
 
-        private void SetH1Attributes()
+        private void SetH1AttributesAutorized()
         {
-            SetGlobalAttributes(NameTagEnum.h1);
+            SetUniversalAttributes(NameTagEnum.h1);
             SetOnEventAttribut(NameTagEnum.h1);
         }
 
-        private void SetLabelAttributes()
+        private void SetLabelAttributesAutorized()
         {
-            SetGlobalAttributes(NameTagEnum.label);
+            SetUniversalAttributes(NameTagEnum.label);
             _allAttributesAutorizedByTag[NameTagEnum.label].Add(FamilyAttributeEnum.forAttr);
             _allAttributesAutorizedByTag[NameTagEnum.label].Add(FamilyAttributeEnum.form);
         }
 
-        private void SetInputAttributes()
+        private void SetInputAttributesAutorized()
         {
-            SetGlobalAttributes(NameTagEnum.input);
+            SetUniversalAttributes(NameTagEnum.input);
             SetOnEventAttribut(NameTagEnum.input);
             _allAttributesAutorizedByTag[NameTagEnum.input].Add(FamilyAttributeEnum.accept);
             _allAttributesAutorizedByTag[NameTagEnum.input].Add(FamilyAttributeEnum.alt);
-            _allAttributesAutorizedByTag[NameTagEnum.input].Add(FamilyAttributeEnum.autocapitalize);
             _allAttributesAutorizedByTag[NameTagEnum.input].Add(FamilyAttributeEnum.autocomplete);
             _allAttributesAutorizedByTag[NameTagEnum.input].Add(FamilyAttributeEnum.capture);
             _allAttributesAutorizedByTag[NameTagEnum.input].Add(FamilyAttributeEnum.checkedAttr);
@@ -180,17 +183,18 @@ namespace FalconEngine.DomParsing
             _allAttributesAutorizedByTag[NameTagEnum.input].Add(FamilyAttributeEnum.width);
         }
 
-        private void SetOptionAttributes()
+        private void SetOptionAttributesAutorized()
         {
+            SetUniversalAttributes(NameTagEnum.option);
             _allAttributesAutorizedByTag[NameTagEnum.option].Add(FamilyAttributeEnum.disabled);
             _allAttributesAutorizedByTag[NameTagEnum.option].Add(FamilyAttributeEnum.label);
             _allAttributesAutorizedByTag[NameTagEnum.option].Add(FamilyAttributeEnum.selected);
             _allAttributesAutorizedByTag[NameTagEnum.option].Add(FamilyAttributeEnum.value);
         }
 
-        private void SetSelectAttributes()
+        private void SetSelectAttributesAutorized()
         {
-            SetGlobalAttributes(NameTagEnum.select);
+            SetUniversalAttributes(NameTagEnum.select);
             _allAttributesAutorizedByTag[NameTagEnum.select].Add(FamilyAttributeEnum.autocomplete);
             _allAttributesAutorizedByTag[NameTagEnum.select].Add(FamilyAttributeEnum.autofocus);
             _allAttributesAutorizedByTag[NameTagEnum.select].Add(FamilyAttributeEnum.form);
@@ -200,55 +204,63 @@ namespace FalconEngine.DomParsing
             _allAttributesAutorizedByTag[NameTagEnum.select].Add(FamilyAttributeEnum.size);
         }
 
-        private void SetPAttributes()
+        private void SetPAttributesAutorized()
         {
-            SetGlobalAttributes(NameTagEnum.p);
+            SetUniversalAttributes(NameTagEnum.p);
         }
 
-        private void SetDivAttributes()
+        private void SetDivAttributesAutorized()
         {
-            SetGlobalAttributes(NameTagEnum.div);
+            SetUniversalAttributes(NameTagEnum.div);
             SetOnEventAttribut(NameTagEnum.div);
-            _allAttributesAutorizedByTag[NameTagEnum.div].Add(FamilyAttributeEnum.dir);
-            _allAttributesAutorizedByTag[NameTagEnum.div].Add(FamilyAttributeEnum.hidden);
-            _allAttributesAutorizedByTag[NameTagEnum.div].Add(FamilyAttributeEnum.tabindex);
-            _allAttributesAutorizedByTag[NameTagEnum.div].Add(FamilyAttributeEnum.accesskey);
-            _allAttributesAutorizedByTag[NameTagEnum.div].Add(FamilyAttributeEnum.draggable);
-            _allAttributesAutorizedByTag[NameTagEnum.div].Add(FamilyAttributeEnum.contenteditable);
-            _allAttributesAutorizedByTag[NameTagEnum.div].Add(FamilyAttributeEnum.spellcheck);
         }
 
-        private void SetFormAttributes()
+        private void SetFormAttributesAutorized()
         {
+
+            SetUniversalAttributes(NameTagEnum.form);
             _allAttributesAutorizedByTag[NameTagEnum.form].Add(FamilyAttributeEnum.action);
             _allAttributesAutorizedByTag[NameTagEnum.form].Add(FamilyAttributeEnum.method);
         }
 
-        private void SetBodyAttributes()
+        private void SetBodyAttributesAutorized()
         {
-            SetGlobalAttributes(NameTagEnum.body);
+            SetUniversalAttributes(NameTagEnum.body);
             SetOnEventAttribut(NameTagEnum.body);
-            _allAttributesAutorizedByTag[NameTagEnum.body].Add(FamilyAttributeEnum.translate);
-            _allAttributesAutorizedByTag[NameTagEnum.body].Add(FamilyAttributeEnum.tabindex);
-            _allAttributesAutorizedByTag[NameTagEnum.body].Add(FamilyAttributeEnum.accesskey);
-            _allAttributesAutorizedByTag[NameTagEnum.body].Add(FamilyAttributeEnum.draggable);
-            _allAttributesAutorizedByTag[NameTagEnum.body].Add(FamilyAttributeEnum.hidden);
             _allAttributesAutorizedByTag[NameTagEnum.body].Add(FamilyAttributeEnum.inert);
             _allAttributesAutorizedByTag[NameTagEnum.body].Add(FamilyAttributeEnum.enterkeyhint);
-            _allAttributesAutorizedByTag[NameTagEnum.body].Add(FamilyAttributeEnum.inputmode);
-            _allAttributesAutorizedByTag[NameTagEnum.body].Add(FamilyAttributeEnum.isAttr);
             _allAttributesAutorizedByTag[NameTagEnum.body].Add(FamilyAttributeEnum.popover);
-            _allAttributesAutorizedByTag[NameTagEnum.body].Add(FamilyAttributeEnum.data_);
         }
 
-        private void SetGlobalAttributes(NameTagEnum nameTag)
+        private void SetUniversalAttributes(NameTagEnum nameTag)
         {
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.accesskey);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.autocapitalize);
             _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.classCss);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.contenteditable);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.contextmenu);
             _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.data_);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.dir);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.draggable);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.dropzone);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.exportparts);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.hidden);
             _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.id);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.inputmode);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.isAttr);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.itemid);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.itemprop);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.itemref);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.itemscope);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.itemtype);
             _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.lang);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.part);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.slot);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.spellcheck);
             _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.style);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.tabindex);
             _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.title);
+            _allAttributesAutorizedByTag[nameTag].Add(FamilyAttributeEnum.translate);
         }
 
         private void SetOnEventAttribut(NameTagEnum nameTag)

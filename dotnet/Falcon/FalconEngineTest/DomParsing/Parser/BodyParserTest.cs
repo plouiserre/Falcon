@@ -44,7 +44,7 @@ namespace FalconEngineTest.DomParsing.Parser
         [Fact]
         public void ParseBodyParseAndFailValidation()
         {
-            string body = "<body contenteditable=\"false\">Hello World!!!</body>";
+            string body = "<body alt=\"basic message\">Hello World!!!</body>";
             var bodyParser = TestFactory.InitBodyParser();
 
             bodyParser.Parse(body);
@@ -56,7 +56,7 @@ namespace FalconEngineTest.DomParsing.Parser
         [Fact]
         public void ParseBodyParseAndFailValidationBecauseChildrenNotValid()
         {
-            string body = "<body><div inputmode=\"false\">Hello World!!!</div></body>";
+            string body = "<body><div alt=\"basic message\">Hello World!!!</div></body>";
             var bodyParser = TestFactory.InitBodyParser();
 
             bodyParser.Parse(body);
