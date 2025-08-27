@@ -30,18 +30,10 @@ namespace FalconEngine.DomParsing.Parser
 
         public TagModel Parse(string html)
         {
-            try
-            {
-                _tag = _identifyTag.Analyze(html);
-                _tag.Children = _manageChildrenTag.Identify(_tag, _tag.Content);
-                if (string.IsNullOrEmpty(_tag.TagEnd))
-                    throw new HtmlParsingException(ErrorTypeParsing.html, $"Une erreur a eu lieu lors du parsing de {html}");
-            }
-            catch (Exception ex)
-            {
-                string message = string.Format($"Une erreur a eu lieu lors du parsing de {html}");
-                throw new HtmlParsingException(ErrorTypeParsing.html, message);
-            }
+            _tag = _identifyTag.Analyze(html);
+            _tag.Children = _manageChildrenTag.Identify(_tag, _tag.Content);
+            if (string.IsNullOrEmpty(_tag.TagEnd))
+                throw new HtmlParsingException(ErrorTypeParsing.html, $"Une erreur a eu lieu lors du parsing de {html}");
             return _tag;
         }
 

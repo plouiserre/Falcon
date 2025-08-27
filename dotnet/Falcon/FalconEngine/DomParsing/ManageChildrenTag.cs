@@ -51,10 +51,6 @@ namespace FalconEngine.DomParsing
             {
                 return GetChildren();
             }
-            catch (Exception ex)
-            {
-                throw new DeterminateChildrenException(ErrorTypeParsing.children, $"Error parsing for the children of  {html}");
-            }
             return GetChildren();
         }
 

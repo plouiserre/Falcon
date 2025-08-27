@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FalconEngine.CleanData;
 using FalconEngine.DomParsing;
+using FalconEngine.DomParsing.CustomException;
 using FalconEngine.DomParsing.Parser;
 using FalconEngine.Engine;
 using FalconEngine.Models;
@@ -32,7 +33,7 @@ namespace FalconEngineTest.DomParsing
         {
             HtmlPage htmlPage = SimulateParsingSimplePage.InitHtmlPage();
 
-            var parsing = _htmlParsing.Parse(HtmlPageSimpleData.GetHtml(TagHtmlSimple.htmlPageWithDoctype), false);
+            var parsing = _htmlParsing.Parse(HtmlPageSimpleData.GetHtml(TagHtmlSimple.htmlPageWithDoctype));
 
             Assert.True(AssertCommon.AssertTagsAreIdenticals(htmlPage.Tags, parsing.Tags));
             Assert.True(parsing.IsValid);
@@ -43,7 +44,7 @@ namespace FalconEngineTest.DomParsing
         {
             string html = string.Concat("<doctype>", HtmlPageSimpleData.GetHtml(TagHtmlSimple.htmlPage));
 
-            var parsing = _htmlParsing.Parse(html, false);
+            var parsing = _htmlParsing.Parse(html);
 
             Assert.False(parsing.IsValid);
         }
@@ -53,7 +54,7 @@ namespace FalconEngineTest.DomParsing
         {
             string html = string.Concat(HtmlPageSimpleData.GetHtml(TagHtmlSimple.doctype), "<html scheme=\"xml\">Hello World</html>");
 
-            var parsing = _htmlParsing.Parse(html, false);
+            var parsing = _htmlParsing.Parse(html);
 
             Assert.False(parsing.IsValid);
         }
@@ -63,7 +64,7 @@ namespace FalconEngineTest.DomParsing
         {
             string html = HtmlPageSimpleData.GetHtml(TagHtmlSimple.htmlNotValid);
 
-            var parsing = _htmlParsing.Parse(html, false);
+            var parsing = _htmlParsing.Parse(html);
 
             Assert.False(parsing.IsValid);
         }
@@ -73,10 +74,21 @@ namespace FalconEngineTest.DomParsing
         {
             HtmlPage htmlPage = SimulateParsingFormPage.InitHtmlPage();
 
-            var parsing = _htmlParsing.Parse(HtmlPageFormData.GetHtml(TagHtmlForm.htmlFormWithDoctype), true);
+            var parsing = _htmlParsing.Parse(HtmlPageFormData.GetHtml(TagHtmlForm.htmlFormWithDoctype));
 
             Assert.True(AssertCommon.AssertTagsAreIdenticals(htmlPage.Tags, parsing.Tags));
             Assert.True(parsing.IsValid);
+        }
+
+        [Fact]
+        public void HtmlParsingFailBecauseUnknowsTagIsDiscovered()
+        {
+            var html = "<!DOCTYPE html><html><body><div id=\"main\"><declaration>Hello world</declaration></div></body></html>";
+
+            var exception = Assert.Throws<UnknownTagException>(() => _htmlParsing.Parse(html));
+
+            Assert.Equal(ErrorTypeParsing.unknownTag, exception.ErrorType);
+            Assert.Equal("<declaration> tag is unknown", exception.Message);
         }
     }
 }
