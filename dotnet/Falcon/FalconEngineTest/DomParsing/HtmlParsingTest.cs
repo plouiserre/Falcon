@@ -102,8 +102,6 @@ namespace FalconEngineTest.DomParsing
             Assert.Equal("mode attribute in <p mode=\"declaration\"> tag is unknown", exception.Message);
         }
 
-
-
         [Fact]
         public void HtmlParsingFailBecauseHtmlIsBad()
         {

@@ -8,6 +8,7 @@ namespace FalconEngine.DomParsing.CustomException
     public class StartTagBadFormattedException : ParsingException
     {
         public string TagBadFormatting { get; set; }
+
         public StartTagBadFormattedException(string tag, string message) : base(ErrorTypeParsing.starttagbadformatting, message)
         {
             TagBadFormatting = tag;

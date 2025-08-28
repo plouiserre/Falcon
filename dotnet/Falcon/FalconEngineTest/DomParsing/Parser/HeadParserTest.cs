@@ -46,20 +46,6 @@ namespace FalconEngineTest.DomParsing.Parser
             Assert.True(isValid);
         }
 
-
-        [Fact]
-        public void IsHeadParseIsFailingBecauseNoTagEnd()
-        {
-            var headParser = TestFactory.InitHeadParser();
-
-            string htmlContent = HtmlPageSimpleData.GetHtml(TagHtmlSimple.htmlPage).Replace("<html lang=\"en\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\">", string.Empty).Replace("</html>", string.Empty);
-            string badHtml = htmlContent.Replace("</head>", string.Empty);
-            var exception = Assert.Throws<HeadParsingException>(() => headParser.Parse(badHtml));
-
-            Assert.Equal($"Une erreur a eu lieu lors du parsing de {badHtml}", exception.Message);
-            Assert.Equal(ErrorTypeParsing.head, exception.ErrorType);
-        }
-
         [Fact]
         public void HeadIsNotValidAfterParsing()
         {

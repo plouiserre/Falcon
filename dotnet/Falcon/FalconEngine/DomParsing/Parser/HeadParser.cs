@@ -44,19 +44,11 @@ namespace FalconEngine.DomParsing.Parser
 
         public TagModel Parse(string html)
         {
-            try
-            {
-                _html = html;
-                _html = CleanHtml();
-                _tag = _identifyTag.Analyze(_html);
-                _tag.Children = _manageChildrenTag.Identify(_tag, _tag.Content);
-                return _tag;
-            }
-            catch (Exception ex)
-            {
-                string message = $"Une erreur a eu lieu lors du parsing de {html}";
-                throw new HeadParsingException(ErrorTypeParsing.head, message);
-            }
+            _html = html;
+            _html = CleanHtml();
+            _tag = _identifyTag.Analyze(_html);
+            _tag.Children = _manageChildrenTag.Identify(_tag, _tag.Content);
+            return _tag;
         }
 
 

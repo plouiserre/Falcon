@@ -32,8 +32,6 @@ namespace FalconEngine.DomParsing.Parser
         {
             _tag = _identifyTag.Analyze(html);
             _tag.Children = _manageChildrenTag.Identify(_tag, _tag.Content);
-            if (string.IsNullOrEmpty(_tag.TagEnd))
-                throw new HtmlParsingException(ErrorTypeParsing.html, $"Une erreur a eu lieu lors du parsing de {html}");
             return _tag;
         }
 
