@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FalconEngine.CleanData;
 using FalconEngine.DomParsing;
+using FalconEngine.DomParsing.CustomException;
 using FalconEngine.DomParsing.IdentifyTagParsing;
 using FalconEngine.DomParsing.Parser;
 using FalconEngineTest.Utils;
@@ -161,6 +162,19 @@ namespace FalconEngineTest.DomParsing
 
             Assert.Single(parsers);
             Assert.IsType<H1Parser>(parsers[0]);
+        }
+
+        [Fact]
+        public void ThrowsExceptionBecauseOfUnknownTag()
+        {
+            string html = "<declaration>Hello world</declaration>";
+            var initiate = TestFactory.InitInitiateParser();
+
+            var exception = Assert.Throws<ParserNotFoundException>(() => initiate.GetTagParsers(html));
+
+            Assert.Equal(ErrorTypeParsing.parserNotFoundException, exception.ErrorType);
+            Assert.Equal("We cannot find a parser for <declaration> Tag", exception.Message);
+            Assert.Equal("<declaration>", exception.NameTag);
         }
     }
 }

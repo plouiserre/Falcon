@@ -29,18 +29,6 @@ namespace FalconEngineTest.DomParsing
         }
 
         [Fact]
-        public void ThrowsChildrenExceptionWhenParseChildrenGoesWrong()
-        {
-            string html = "<head><test<title>Document</title></head>";
-
-            var determinateChildren = TestFactory.InitDeterminateChildren();
-            var error = Assert.Throws<DeterminateChildrenException>(() => determinateChildren.Identify(new TagModel(), html));
-
-            Assert.Equal(error.Message, $"Error parsing for the children of  {html}");
-            Assert.Equal(ErrorTypeParsing.children, error.ErrorType);
-        }
-
-        [Fact]
         public void HeaderValidationFailedBecauseTitleIsNotValid()
         {
 

@@ -5,11 +5,10 @@ using System.Threading.Tasks;
 
 namespace FalconEngine.DomParsing.CustomException
 {
-    public class HeadParsingException : ParsingException
+    public class TagBadFormattingException : ParsingException
     {
-        public HeadParsingException(ErrorTypeParsing errorType, string message) : base(errorType, message)
+        public TagBadFormattingException(string message) : base(ErrorTypeParsing.badFormatting, message)
         {
-
         }
     }
 }

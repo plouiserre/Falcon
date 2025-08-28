@@ -5,11 +5,10 @@ using System.Threading.Tasks;
 
 namespace FalconEngine.DomParsing.CustomException
 {
-    public class HtmlParsingException : ParsingException
+    public class UnknownTagException : ParsingException
     {
-        public HtmlParsingException(ErrorTypeParsing errorType, string message) : base(errorType, message)
+        public UnknownTagException(string message) : base(ErrorTypeParsing.unknownTag, message)
         {
-
         }
     }
 }

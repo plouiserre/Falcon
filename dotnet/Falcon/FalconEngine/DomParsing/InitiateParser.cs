@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using FalconEngine.CleanData;
+using FalconEngine.DomParsing.CustomException;
 using FalconEngine.DomParsing.IdentifyTagParsing;
 using FalconEngine.DomParsing.Parser;
 using FalconEngine.DomParsing.Parser.Attribute;
@@ -110,7 +112,8 @@ namespace FalconEngine.DomParsing
                 case string tag when tag.ToLower().Contains("<a"):
                     return new AParser(_identifyTag, _attributeTagManager, _deleteUselessSpace);
                 default:
-                    return null;
+                    string message = string.Format($"We cannot find a parser for {_startTag} Tag");
+                    throw new ParserNotFoundException(_startTag, ErrorTypeParsing.parserNotFoundException, message);
             }
         }
 

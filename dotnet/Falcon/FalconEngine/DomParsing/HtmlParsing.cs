@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using FalconEngine.CleanData;
+using FalconEngine.DomParsing.CustomException;
 using FalconEngine.DomParsing.Parser;
 using FalconEngine.Models;
 
@@ -28,19 +29,37 @@ namespace FalconEngine.DomParsing
             _attributeTagManager = attributeTagManager;
         }
 
-        public HtmlPage Parse(string html, bool isSimulating)
+        public HtmlPage Parse(string html)
         {
-            _html = html;
-            _attributeTagManager.SetAttributes();
-            var doctypeTag = GetDoctypeTag();
-            RemoveUselessHtml(doctypeTag);
+            try
+            {
+                _html = html;
+                _attributeTagManager.SetAttributes();
+                var doctypeTag = GetDoctypeTag();
+                RemoveUselessHtml(doctypeTag);
 
-            var htmlTag = GetTagHtml();
-            RemoveTagOpenCloed(htmlTag);
-            DeterminateIsValidPage();
-            var tags = new List<TagModel>() { doctypeTag, htmlTag };
-            var htmlPage = new HtmlPage() { Tags = tags, IsValid = _isValidPage };
-            return htmlPage;
+                var htmlTag = GetTagHtml();
+                RemoveTagOpenCloed(htmlTag);
+                DeterminateIsValidPage();
+                var tags = new List<TagModel>() { doctypeTag, htmlTag };
+                var htmlPage = new HtmlPage() { Tags = tags, IsValid = _isValidPage };
+                return htmlPage;
+            }
+            catch (ParserNotFoundException ex)
+            {
+                string message = string.Format($"{ex.NameTag} tag is unknown");
+                throw new UnknownTagException(message);
+            }
+            catch (AttributeTagParserException ex)
+            {
+                string message = string.Format($"{ex.AttributeTagUnknown} attribute in {ex.StartTag} tag is unknown");
+                throw new UnknownAttributeException(message);
+            }
+            catch (StartTagBadFormattedException ex)
+            {
+                string message = string.Format($"{ex.TagBadFormatting} is bad formatting");
+                throw new TagBadFormattingException(message);
+            }
         }
 
         private TagModel GetDoctypeTag()

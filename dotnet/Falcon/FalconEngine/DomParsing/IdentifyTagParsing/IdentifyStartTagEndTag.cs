@@ -17,6 +17,7 @@ namespace FalconEngine.DomParsing.IdentifyTagParsing
             _html = html;
             StartTag = CalculateStartTag();
             EndTag = CalculateEndTag();
+            CheckGoodFormat();
         }
 
 
@@ -36,6 +37,16 @@ namespace FalconEngine.DomParsing.IdentifyTagParsing
             string cleanTag = tag.Split(' ')[0];
             string potentialEndTag = string.Concat("</", cleanTag, ">");
             return _html.Contains(potentialEndTag) ? potentialEndTag : null;
+        }
+
+        private void CheckGoodFormat()
+        {
+            if (!string.IsNullOrEmpty(EndTag))
+            {
+                bool contains = StartTag.Contains(EndTag);
+                if (contains)
+                    throw new StartTagBadFormattedException(_html, $"{_html} doesn't have tags well formatted");
+            }
         }
     }
 }

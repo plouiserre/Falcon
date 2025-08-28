@@ -5,11 +5,10 @@ using System.Threading.Tasks;
 
 namespace FalconEngine.DomParsing.CustomException
 {
-    public class DeterminateChildrenException : ParsingException
+    public class UnknownAttributeException : ParsingException
     {
-        public DeterminateChildrenException(ErrorTypeParsing errorType, string message) : base(errorType, message)
+        public UnknownAttributeException(string message) : base(ErrorTypeParsing.unknownAttribute, message)
         {
-
         }
     }
 }
