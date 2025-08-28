@@ -7,9 +7,13 @@ namespace FalconEngine.DomParsing.CustomException
 {
     public class AttributeTagParserException : ParsingException
     {
-        public AttributeTagParserException(ErrorTypeParsing errorType, string message) : base(errorType, message)
-        {
+        public string AttributeTagUnknown { get; set; }
+        public string StartTag { get; set; }
 
+        public AttributeTagParserException(string attributeTagUnknown, string startTag, string message) : base(ErrorTypeParsing.attributes, message)
+        {
+            AttributeTagUnknown = attributeTagUnknown;
+            StartTag = startTag;
         }
     }
 }

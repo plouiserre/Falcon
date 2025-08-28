@@ -7,7 +7,7 @@ namespace FalconEngine.DomParsing.CustomException
 {
     public enum ErrorTypeParsing
     {
-        attributes, children, doctype, head, html, parserNotFoundException, starttagmissing, unknownTag, validation
+        attributes, children, doctype, head, html, parserNotFoundException, starttagmissing, unknownAttribute, unknownTag, validation
     }
 
     public abstract class ParsingException : Exception

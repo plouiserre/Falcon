@@ -91,7 +91,7 @@ namespace FalconEngine.DomParsing.Parser.Attribute
                 if (key.Contains("data"))
                     familyAttributeValue = key;
                 else
-                    throw new AttributeTagParserException(ErrorTypeParsing.attributes, $"We fail to parse the attributes of {_html}");
+                    throw new AttributeTagParserException(key, _startTag, $"We fail to parse the attributes of {_html}");
             }
 
             familyAttributeValue = familyAttributeValue == string.Empty ? familyAttribute.ToString() : familyAttributeValue;

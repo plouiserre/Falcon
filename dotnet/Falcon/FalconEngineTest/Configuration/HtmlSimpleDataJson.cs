@@ -12,7 +12,7 @@ namespace FalconEngineTest.Configuration
                 {
                   "ALink": "<a href=\"declaration.html\">paragraphe</a>",
                   "SpanRed": "<span class=\"red\">Et il raconte des supers trucs!!!</span>",
-                  "SpanInputRed" :"<span inputmode=\"false\" class=\"red\">Et il raconte des supers trucs!!!</span>",
+                  "SpanInputRed" :"<span alt=\"declaration badass\" class=\"red\">Et il raconte des supers trucs!!!</span>",
                   "SpanA": "<span>{ALink}</span>",                  
                   "PDeclarationText":"<p class=\"declarationText\"> Ceci est un {SpanA}{SpanRed}</p>",
                   "PDeclarationTextNotValid":"<p class=\"declarationText\"> Ceci est un {SpanA}{SpanInputRed}</p>",

@@ -90,5 +90,17 @@ namespace FalconEngineTest.DomParsing
             Assert.Equal(ErrorTypeParsing.unknownTag, exception.ErrorType);
             Assert.Equal("<declaration> tag is unknown", exception.Message);
         }
+
+
+        [Fact]
+        public void HtmlParsingFailBecauseUnknowsAttributeIsDiscovered()
+        {
+            var html = "<!DOCTYPE html><html><body><div id=\"main\"><p mode=\"declaration\">Hello world</p></div></body></html>";
+
+            var exception = Assert.Throws<UnknownAttributeException>(() => _htmlParsing.Parse(html));
+
+            Assert.Equal(ErrorTypeParsing.unknownAttribute, exception.ErrorType);
+            Assert.Equal("mode attribute in <p mode=\"declaration\"> tag is unknown", exception.Message);
+        }
     }
 }

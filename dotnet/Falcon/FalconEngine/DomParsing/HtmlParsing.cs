@@ -48,7 +48,12 @@ namespace FalconEngine.DomParsing
             catch (ParserNotFoundException ex)
             {
                 string message = string.Format($"{ex.NameTag} tag is unknown");
-                throw new UnknownTagException(ErrorTypeParsing.unknownTag, message);
+                throw new UnknownTagException(message);
+            }
+            catch (AttributeTagParserException ex)
+            {
+                string message = string.Format($"{ex.AttributeTagUnknown} attribute in {ex.StartTag} tag is unknown");
+                throw new UnknownAttributeException(message);
             }
         }
 

@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace FalconEngine.DomParsing.CustomException
 {
-    public class UnknownTagException : ParsingException
+    public class UnknownAttributeException : ParsingException
     {
-        public UnknownTagException(string message) : base(ErrorTypeParsing.unknownTag, message)
+        public UnknownAttributeException(string message) : base(ErrorTypeParsing.unknownAttribute, message)
         {
         }
     }
