@@ -55,6 +55,11 @@ namespace FalconEngine.DomParsing
                 string message = string.Format($"{ex.AttributeTagUnknown} attribute in {ex.StartTag} tag is unknown");
                 throw new UnknownAttributeException(message);
             }
+            catch (StartTagBadFormattedException ex)
+            {
+                string message = string.Format($"{ex.TagBadFormatting} is bad formatting");
+                throw new TagBadFormattingException(message);
+            }
         }
 
         private TagModel GetDoctypeTag()

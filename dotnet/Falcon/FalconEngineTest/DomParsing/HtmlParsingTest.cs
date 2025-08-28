@@ -91,7 +91,6 @@ namespace FalconEngineTest.DomParsing
             Assert.Equal("<declaration> tag is unknown", exception.Message);
         }
 
-
         [Fact]
         public void HtmlParsingFailBecauseUnknowsAttributeIsDiscovered()
         {
@@ -101,6 +100,19 @@ namespace FalconEngineTest.DomParsing
 
             Assert.Equal(ErrorTypeParsing.unknownAttribute, exception.ErrorType);
             Assert.Equal("mode attribute in <p mode=\"declaration\"> tag is unknown", exception.Message);
+        }
+
+
+
+        [Fact]
+        public void HtmlParsingFailBecauseHtmlIsBad()
+        {
+            var html = "<!DOCTYPE html><html><body><div id=\"main\"><p Hello world</p></div></body></html>";
+
+            var exception = Assert.Throws<TagBadFormattingException>(() => _htmlParsing.Parse(html));
+
+            Assert.Equal(ErrorTypeParsing.badFormatting, exception.ErrorType);
+            Assert.Equal("<p Hello world</p> is bad formatting", exception.Message);
         }
     }
 }

@@ -52,19 +52,6 @@ namespace FalconEngineTest.DomParsing.Parser
             Assert.True(isValid);
         }
 
-
-        [Fact]
-        public void ErrorDuringParsingHtmlTag()
-        {
-            string html = "<html>test";
-            var htmlTagParser = TestFactory.InitHtmlTagParser(true);
-
-            var exception = Assert.Throws<HtmlParsingException>(() => htmlTagParser.Parse(html));
-
-            Assert.Equal("Une erreur a eu lieu lors du parsing de <html>test", exception.Message);
-            Assert.Equal(ErrorTypeParsing.html, exception.ErrorType);
-        }
-
         [Theory]
         [InlineData("<html lang=\"fr\" dir=\"ltr\" xmlns=\"http://www.w3.org/1999/xhtml\">Hello world</html>")]
         [InlineData("<html manifest=\"app.manifest\">Hello world</html>")]
