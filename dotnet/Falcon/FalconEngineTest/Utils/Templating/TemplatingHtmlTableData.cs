@@ -125,14 +125,18 @@ namespace FalconEngineTest.Utils.Templating
                     return jsonModel.LevelTable;
                 case "Thead":
                     return jsonModel.Thead;
-                case "PosteTable":
-                    return jsonModel.PosteTable;
+                case "Trthead":
+                    return jsonModel.Trthead;
+                case "PostTable":
+                    return jsonModel.PostTable;
                 case "MainTag":
                     return jsonModel.MainTag;
                 case "H1News":
                     return jsonModel.H1News;
                 case "PNews":
                     return jsonModel.PNews;
+                case "ArticleTag":
+                    return jsonModel.ArticleTag;
                 case "SectionTag":
                     return jsonModel.SectionTag;
                 case "LiHome":

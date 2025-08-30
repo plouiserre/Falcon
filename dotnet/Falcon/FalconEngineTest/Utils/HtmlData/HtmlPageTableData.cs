@@ -10,13 +10,12 @@ namespace FalconEngineTest.Utils.HtmlData
     public enum TagHtmlTable
     {
         htmlFormWithDoctype, htmlForm, head, linkHead, titleDocument, metaViewPort, metaCharset, body, navTag, ulMenu, liOrganisation,
-        liNews, liHome, sectionTag, pNews, h1News, mainTag, posteTable, thead, levelTable, typeTable, descriptionTable, titleTable,
-        tbody, developerTable, developerLabel, developerDescription, developerType, developerLevel, productOwnerTable,
-        productOwnerLabel, productOwnerDescription, productOwnerType, productOwnerLevel, technicalLeaderTable, technicalLeaderLabel,
-        technicalLeaderDescription, technicalLeaderType, technicalLeaderLevel, managerTable, managerLabel, managerDescription,
-        managerType, managerLevel, architectTable, architectLabel, architectDescription, architectType, architectLevel,
+        liNews, liHome, articleTag, sectionTag, pNews, h1News, mainTag, postTable, thead, trhead, firstTrHead, secondTrHead, thirdTrHead,
+        fourthTrHead, levelTable, typeTable, descriptionTable, titleTable, tbody, developerTable, developerLabel, developerDescription,
+        developerType, developerLevel, productOwnerTable, productOwnerLabel, productOwnerDescription, productOwnerType, productOwnerLevel,
+        technicalLeaderTable, technicalLeaderLabel, technicalLeaderDescription, technicalLeaderType, technicalLeaderLevel, managerTable,
+        managerLabel, managerDescription, managerType, managerLevel, architectTable, architectLabel, architectDescription, architectType, architectLevel,
         directorTable, directorLabel, directorDescription, directorType, directorLevel, scriptTable
-
     }
 
     public class HtmlPageTableData
@@ -52,6 +51,8 @@ namespace FalconEngineTest.Utils.HtmlData
                     return GetLiNews(json);
                 case TagHtmlTable.liHome:
                     return GetLiHome(json);
+                case TagHtmlTable.articleTag:
+                    return GetArticleTag(json);
                 case TagHtmlTable.sectionTag:
                     return GetSectionTag(json);
                 case TagHtmlTable.pNews:
@@ -60,10 +61,12 @@ namespace FalconEngineTest.Utils.HtmlData
                     return GetH1News(json);
                 case TagHtmlTable.mainTag:
                     return GetMainTag(json);
-                case TagHtmlTable.posteTable:
-                    return GetPosteTable(json);
+                case TagHtmlTable.postTable:
+                    return GetPostTable(json);
                 case TagHtmlTable.thead:
                     return GetThead(json);
+                case TagHtmlTable.trhead:
+                    return GetTrhead(json);
                 case TagHtmlTable.levelTable:
                     return GetLevelTable(json);
                 case TagHtmlTable.typeTable:
@@ -326,9 +329,14 @@ namespace FalconEngineTest.Utils.HtmlData
             return json?.Thead;
         }
 
-        private static string? GetPosteTable(JsonTableDataModel? json)
+        private static string? GetTrhead(JsonTableDataModel? json)
         {
-            return json?.PosteTable;
+            return json?.Trthead;
+        }
+
+        private static string? GetPostTable(JsonTableDataModel? json)
+        {
+            return json?.PostTable;
         }
 
         private static string? GetMainTag(JsonTableDataModel? json)
@@ -344,6 +352,11 @@ namespace FalconEngineTest.Utils.HtmlData
         private static string? GetPNews(JsonTableDataModel? json)
         {
             return json?.PNews;
+        }
+
+        private static string? GetArticleTag(JsonTableDataModel? json)
+        {
+            return json?.ArticleTag;
         }
 
         private static string? GetSectionTag(JsonTableDataModel? json)
