@@ -31,13 +31,13 @@ namespace FalconEngine.DomParsing
 
         public HtmlPage Parse(string html, bool isThirdTest)
         {
+            _html = html;
+            _attributeTagManager.SetAttributes();
             var doctypeTag = GetDoctypeTag();
             if (!isThirdTest)
             {
                 try
                 {
-                    _html = html;
-                    _attributeTagManager.SetAttributes();
                     RemoveUselessHtml(doctypeTag);
 
                     var htmlTag = GetTagHtml();

@@ -161,10 +161,10 @@ namespace FalconEngineTest.Utils.Templating
                     return jsonModel.LinkHead;
                 case "Head":
                     return jsonModel.Head;
-                case "HtmlForm":
-                    return jsonModel.HtmlForm;
-                case "HtmlFormWithDoctype":
-                    return jsonModel.HtmlFormWithDoctype;
+                case "HtmlTable":
+                    return jsonModel.HtmlTable;
+                case "HtmlTableWithDoctype":
+                    return jsonModel.HtmlTableWithDoctype;
                 default:
                     throw new Exception("Unknown template");
             }

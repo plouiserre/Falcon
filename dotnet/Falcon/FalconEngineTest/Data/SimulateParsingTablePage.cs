@@ -46,7 +46,7 @@ namespace FalconEngineTest.Data
                 Attributes = new List<AttributeModel>() { attributLang, attributDir, attributXmlns },
                 NameTag = NameTagEnum.html,
                 TagFamily = TagFamilyEnum.WithEnd,
-                Content = HtmlPageTableData.GetHtml(TagHtmlTable.htmlForm).Replace("<html lang=\"en\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\">", string.Empty).Replace("</html>", string.Empty),
+                Content = HtmlPageTableData.GetHtml(TagHtmlTable.htmlTable).Replace("<html lang=\"en\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\">", string.Empty).Replace("</html>", string.Empty),
                 TagStart = "<html lang=\"en\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\">",
                 TagEnd = "</html>",
                 Children = new List<TagModel>() { _headTag, body, scriptJs }

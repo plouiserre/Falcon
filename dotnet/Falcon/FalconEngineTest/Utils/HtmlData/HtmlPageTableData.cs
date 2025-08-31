@@ -9,7 +9,7 @@ namespace FalconEngineTest.Utils.HtmlData
 {
     public enum TagHtmlTable
     {
-        htmlFormWithDoctype, htmlForm, head, linkHead, titleDocument, metaViewPort, metaCharset, body, navTag, ulMenu, liOrganisation,
+        htmlTableWithDoctype, htmlTable, head, linkHead, titleDocument, metaViewPort, metaCharset, body, navTag, ulMenu, liOrganisation,
         liNews, liHome, articleTag, sectionTag, pNews, h1News, mainTag, postTable, thead, trhead, firstTrHead, secondTrHead, thirdTrHead,
         fourthTrHead, levelTable, typeTable, descriptionTable, titleTable, tbody, developerTable, developerLabel, developerDescription,
         developerType, developerLevel, productOwnerTable, productOwnerLabel, productOwnerDescription, productOwnerType, productOwnerLevel,
@@ -25,10 +25,10 @@ namespace FalconEngineTest.Utils.HtmlData
             var json = GetData();
             switch (tag)
             {
-                case TagHtmlTable.htmlFormWithDoctype:
-                    return GetHtmlFormWithDoctype(json);
-                case TagHtmlTable.htmlForm:
-                    return GetHtmlForm(json);
+                case TagHtmlTable.htmlTableWithDoctype:
+                    return GetHtmlTableWithDoctype(json);
+                case TagHtmlTable.htmlTable:
+                    return GetHtmlTable(json);
                 case TagHtmlTable.head:
                     return GetHead(json);
                 case TagHtmlTable.linkHead:
@@ -419,14 +419,14 @@ namespace FalconEngineTest.Utils.HtmlData
             return json?.Head;
         }
 
-        private static string? GetHtmlForm(JsonTableDataModel? json)
+        private static string? GetHtmlTable(JsonTableDataModel? json)
         {
-            return json?.HtmlForm;
+            return json?.HtmlTable;
         }
 
-        private static string? GetHtmlFormWithDoctype(JsonTableDataModel? json)
+        private static string? GetHtmlTableWithDoctype(JsonTableDataModel? json)
         {
-            return json?.HtmlFormWithDoctype;
+            return json?.HtmlTableWithDoctype;
         }
 
         private static JsonTableDataModel? GetData()

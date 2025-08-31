@@ -112,5 +112,18 @@ namespace FalconEngineTest.DomParsing
             Assert.Equal(ErrorTypeParsing.badFormatting, exception.ErrorType);
             Assert.Equal("<p Hello world</p> is bad formatting", exception.Message);
         }
+
+
+
+        [Fact]
+        public void IsTablePageHasBeenParsingCorrectly()
+        {
+            HtmlPage htmlPage = SimulateParsingTablePage.InitHtmlPage();
+
+            var parsing = _htmlParsing.Parse(HtmlPageTableData.GetHtml(TagHtmlTable.htmlTableWithDoctype), true);
+
+            Assert.True(AssertCommon.AssertTagsAreIdenticals(htmlPage.Tags, parsing.Tags));
+            Assert.True(parsing.IsValid);
+        }
     }
 }
