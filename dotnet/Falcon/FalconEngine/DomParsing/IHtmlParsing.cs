@@ -9,6 +9,6 @@ namespace FalconEngine.DomParsing
     public interface IHtmlParsing
     {
         //TODO delete when second page is developed
-        HtmlPage Parse(string html);
+        HtmlPage Parse(string html, bool isThirdTest);
     }
 }
