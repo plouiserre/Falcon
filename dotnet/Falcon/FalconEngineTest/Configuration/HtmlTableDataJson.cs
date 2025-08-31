@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -45,18 +46,20 @@ namespace FalconEngineTest.Configuration
             "DescriptionTable":"<th scope=\"col\">Description</th>",
             "TypeTable":"<th scope=\"col\">Type</th>",
             "LevelTable":"<th scope=\"col\">Level</th>",
-            "Thead":"<thead><tr>{TitleTable}{DescriptionTable}{TypeTable}{LevelTable}</tr></thead>",
-            "PosteTable":"<table>{Thead}{Tbody}</table>",
-            "MainTag":"{PosteTable}",
+            "Thead":"<thead>{Trthead}</thead>",
+            "Trthead":"<tr>{TitleTable}{DescriptionTable}{TypeTable}{LevelTable}</tr>",
+            "PostTable":"<table>{Thead}{Tbody}</table>",
+            "MainTag":"<main>{PostTable}</main>",
             "H1News":"<h1>News!!!</h1>",
             "PNews":"<p>The direction decide to present you the news roles in the organisation.</p>",
-            "SectionTag":"{H1News}{PNews}",
+            "ArticleTag":"<article>{SectionTag}</article>",
+            "SectionTag":"<section>{H1News}{PNews}</section>",
             "LiHome":"<li>Home</li>",
             "LiNews":"<li>News</li>",
             "LiOrganisation":"<li>New organisation</li>",
             "UlMenu":"<ul>{LiHome}{LiNews}{LiOrganisation}</ul>",
             "NavTag":"<nav>{UlMenu}</nav>",
-            "Body":"<body>{NavTag}{SectionTag}{MainTag}</body>",
+            "Body":"<body>{NavTag}{ArticleTag}{MainTag}</body>",
             "MetaCharset":"<meta charset=\"UTF-8\">",
             "MetaViewPort":"<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">",
             "TitleDocument":"<title>Document</title>",
@@ -107,10 +110,12 @@ namespace FalconEngineTest.Configuration
         public string? TypeTable { get; set; }
         public string? LevelTable { get; set; }
         public string? Thead { get; set; }
-        public string? PosteTable { get; set; }
+        public string? Trthead { get; set; }
+        public string? PostTable { get; set; }
         public string? MainTag { get; set; }
         public string? H1News { get; set; }
         public string? PNews { get; set; }
+        public string? ArticleTag { get; set; }
         public string? SectionTag { get; set; }
         public string? LiHome { get; set; }
         public string? LiNews { get; set; }

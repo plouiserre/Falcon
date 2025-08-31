@@ -14,7 +14,7 @@ namespace FalconEngine.Models
         onpause, onended, onvolumechange, onwheel, onscroll, onresize, onerror, onoad, onunload, ontransitionend,
         onanimationstart, onanimationend, onanimationiteration,
         part, placeholder, pattern, popover, popovertarget, popovertargetaction, readonlyAttr, required, rel,
-        referrerpolicy, role, scheme, selected, spellcheck, size, sizes, slot, src, step, style, tabindex, target,
-        title, translate, type, value, width, xmlns
+        referrerpolicy, role, scheme, scope, selected, spellcheck, size, sizes, slot, src, step, style, tabindex,
+        target, title, translate, type, value, width, xmlns
     }
 }
