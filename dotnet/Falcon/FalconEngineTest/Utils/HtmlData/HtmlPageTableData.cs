@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FalconEngineTest.Configuration;
+using FalconEngineTest.Utils.Templating;
 using Newtonsoft.Json;
 
 namespace FalconEngineTest.Utils.HtmlData
@@ -171,7 +172,7 @@ namespace FalconEngineTest.Utils.HtmlData
 
         private static string? GetDirectorTable(JsonTableDataModel? json)
         {
-            return json?.DirectorTable;
+            return TemplatingHtmlTableData.GetHtmlTableata(json?.DirectorTable, json);
         }
 
         private static string? GetArchitectLevel(JsonTableDataModel? json)
@@ -196,7 +197,7 @@ namespace FalconEngineTest.Utils.HtmlData
 
         private static string? GetArchitectTable(JsonTableDataModel? json)
         {
-            return json?.ArchitectTable;
+            return TemplatingHtmlTableData.GetHtmlTableata(json?.ArchitectTable, json);
         }
 
         private static string? GetManagerLevel(JsonTableDataModel? json)
@@ -221,7 +222,7 @@ namespace FalconEngineTest.Utils.HtmlData
 
         private static string? GetManagerTable(JsonTableDataModel? json)
         {
-            return json?.ManagerTable;
+            return TemplatingHtmlTableData.GetHtmlTableata(json?.ManagerTable, json);
         }
 
         private static string? GetTechnicalLeaderLevel(JsonTableDataModel? json)
@@ -246,7 +247,7 @@ namespace FalconEngineTest.Utils.HtmlData
 
         private static string? GetTechnicalLeaderTable(JsonTableDataModel? json)
         {
-            return json?.TechnicalLeaderTable;
+            return TemplatingHtmlTableData.GetHtmlTableata(json?.TechnicalLeaderTable, json);
         }
 
         private static string? GetProductOwnerLevel(JsonTableDataModel? json)
@@ -271,7 +272,7 @@ namespace FalconEngineTest.Utils.HtmlData
 
         private static string? GetProductOwnerTable(JsonTableDataModel? json)
         {
-            return json?.ProductOwnerTable;
+            return TemplatingHtmlTableData.GetHtmlTableata(json?.ProductOwnerTable, json);
         }
 
         private static string? GetDeveloperLevel(JsonTableDataModel? json)
@@ -296,72 +297,72 @@ namespace FalconEngineTest.Utils.HtmlData
 
         private static string? GetDeveloperTable(JsonTableDataModel? json)
         {
-            return json?.DeveloperTable;
+            return TemplatingHtmlTableData.GetHtmlTableata(json?.DeveloperTable, json);
         }
 
         private static string? GetTbody(JsonTableDataModel? json)
         {
-            return json?.Tbody;
+            return TemplatingHtmlTableData.GetHtmlTableata(json?.Tbody, json);
         }
 
         private static string? GetTitleTable(JsonTableDataModel? json)
         {
-            return json?.TitleTable;
+            return TemplatingHtmlTableData.GetHtmlTableata(json?.TitleTable, json);
         }
 
         private static string? GetDescriptionTable(JsonTableDataModel? json)
         {
-            return json?.DescriptionTable;
+            return TemplatingHtmlTableData.GetHtmlTableata(json?.DescriptionTable, json);
         }
 
         private static string? GetTypeTable(JsonTableDataModel? json)
         {
-            return json?.TypeTable;
+            return TemplatingHtmlTableData.GetHtmlTableata(json?.TypeTable, json);
         }
 
         private static string? GetLevelTable(JsonTableDataModel? json)
         {
-            return json?.LevelTable;
+            return TemplatingHtmlTableData.GetHtmlTableata(json?.LevelTable, json);
         }
 
         private static string? GetThead(JsonTableDataModel? json)
         {
-            return json?.Thead;
+            return TemplatingHtmlTableData.GetHtmlTableata(json?.Thead, json);
         }
 
         private static string? GetTrhead(JsonTableDataModel? json)
         {
-            return json?.Trthead;
+            return TemplatingHtmlTableData.GetHtmlTableata(json?.Trthead, json);
         }
 
         private static string? GetPostTable(JsonTableDataModel? json)
         {
-            return json?.PostTable;
+            return TemplatingHtmlTableData.GetHtmlTableata(json?.PostTable, json);
         }
 
         private static string? GetMainTag(JsonTableDataModel? json)
         {
-            return json?.MainTag;
+            return TemplatingHtmlTableData.GetHtmlTableata(json?.MainTag, json);
         }
 
         private static string? GetH1News(JsonTableDataModel? json)
         {
-            return json?.H1News;
+            return TemplatingHtmlTableData.GetHtmlTableata(json?.H1News, json);
         }
 
         private static string? GetPNews(JsonTableDataModel? json)
         {
-            return json?.PNews;
+            return TemplatingHtmlTableData.GetHtmlTableata(json?.PNews, json);
         }
 
         private static string? GetArticleTag(JsonTableDataModel? json)
         {
-            return json?.ArticleTag;
+            return TemplatingHtmlTableData.GetHtmlTableata(json?.ArticleTag, json);
         }
 
         private static string? GetSectionTag(JsonTableDataModel? json)
         {
-            return json?.SectionTag;
+            return TemplatingHtmlTableData.GetHtmlTableata(json?.SectionTag, json);
         }
 
         private static string? GetLiHome(JsonTableDataModel? json)
@@ -381,17 +382,17 @@ namespace FalconEngineTest.Utils.HtmlData
 
         private static string? GetUlMenu(JsonTableDataModel? json)
         {
-            return json?.UlMenu;
+            return TemplatingHtmlTableData.GetHtmlTableata(json?.UlMenu, json);
         }
 
         private static string? GetNavTag(JsonTableDataModel? json)
         {
-            return json?.NavTag;
+            return TemplatingHtmlTableData.GetHtmlTableata(json?.NavTag, json);
         }
 
         private static string? GetBody(JsonTableDataModel? json)
         {
-            return json?.Body;
+            return TemplatingHtmlTableData.GetHtmlTableata(json?.Body, json);
         }
 
         private static string? GetMetaCharset(JsonTableDataModel? json)
@@ -416,23 +417,23 @@ namespace FalconEngineTest.Utils.HtmlData
 
         private static string? GetHead(JsonTableDataModel? json)
         {
-            return json?.Head;
+            return TemplatingHtmlTableData.GetHtmlTableata(json?.Head, json);
         }
 
         private static string? GetHtmlTable(JsonTableDataModel? json)
         {
-            return json?.HtmlTable;
+            return TemplatingHtmlTableData.GetHtmlTableata(json?.HtmlTable, json);
         }
 
         private static string? GetHtmlTableWithDoctype(JsonTableDataModel? json)
         {
-            return json?.HtmlTableWithDoctype;
+            return TemplatingHtmlTableData.GetHtmlTableata(json?.HtmlTableWithDoctype, json);
         }
 
         private static JsonTableDataModel? GetData()
         {
-            string dataJson = HtmlFormDataJson.AllDataJson;
-            var data = JsonConvert.DeserializeObject<JsonTableDataModel>(dataJson);
+            string? dataJson = HtmlTableDataJson.AllDataJson;
+            var data = dataJson != null ? JsonConvert.DeserializeObject<JsonTableDataModel>(dataJson) : null;
             return data;
         }
     }

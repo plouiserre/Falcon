@@ -8,7 +8,7 @@ namespace FalconEngineTest.Utils.Templating
 {
     public class TemplatingHtmlTableData
     {
-        public static string GetHtmlFormData(string html, JsonTableDataModel jsonModel)
+        public static string GetHtmlTableata(string? html, JsonTableDataModel? jsonModel)
         {
             string htmlResult = string.Empty;
             string htmlWorking = html;

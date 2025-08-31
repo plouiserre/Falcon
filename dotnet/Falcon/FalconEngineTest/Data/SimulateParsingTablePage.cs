@@ -41,6 +41,7 @@ namespace FalconEngineTest.Data
             _headTag = GetHeadTag();
             var body = GetBodyTag();
             var scriptJs = GetScriptJs();
+            var test = HtmlPageTableData.GetHtml(TagHtmlTable.htmlTable);
             var htmlTag = new TagModel()
             {
                 Attributes = new List<AttributeModel>() { attributLang, attributDir, attributXmlns },
@@ -288,11 +289,13 @@ namespace FalconEngineTest.Data
         private static TagModel GetThead()
         {
             var trThead = GetTrThead();
+            string content = string.Concat("<tr>", HtmlPageTableData.GetHtml(TagHtmlTable.titleTable), HtmlPageTableData.GetHtml(TagHtmlTable.descriptionTable),
+            HtmlPageTableData.GetHtml(TagHtmlTable.typeTable), HtmlPageTableData.GetHtml(TagHtmlTable.levelTable), "</tr>");
             var thead = new TagModel()
             {
                 NameTag = NameTagEnum.thead,
                 TagFamily = TagFamilyEnum.WithEnd,
-                Content = HtmlPageTableData.GetHtml(TagHtmlTable.thead),
+                Content = content,
                 Children = new List<TagModel>() { trThead },
                 TagStart = "<thead>",
                 TagEnd = "</thead>"
@@ -511,7 +514,7 @@ namespace FalconEngineTest.Data
             {
                 NameTag = NameTagEnum.td,
                 TagFamily = TagFamilyEnum.WithEnd,
-                Content = "Create and ordered features from the wishes of the business ",
+                Content = "Create and ordered features from the wishes of the business",
                 TagStart = "<td>",
                 TagEnd = "</td>"
             };
