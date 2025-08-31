@@ -65,8 +65,8 @@ namespace FalconEngineTest.Configuration
             "TitleDocument":"<title>Document</title>",
             "LinkHead":"<link rel=\"stylesheet\" href=\"main.css\" data-preload=\"true\">",
             "Head":"<head>{MetaCharset}{MetaViewPort}{TitleDocument}{LinkHead}</head>",
-            "HtmlForm":"<html lang=\"en\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\">{Head}{Body}{ScriptTable}</html>",                  
-            "HtmlFormWithDoctype":"<!DOCTYPE html>{HtmlForm}"
+            "HtmlTable":"<html lang=\"en\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\">{Head}{Body}{ScriptTable}</html>",                  
+            "HtmlTableWithDoctype":"<!DOCTYPE html>{HtmlTable}"
         }
         """;
     }
@@ -128,7 +128,7 @@ namespace FalconEngineTest.Configuration
         public string? TitleDocument { get; set; }
         public string? LinkHead { get; set; }
         public string? Head { get; set; }
-        public string? HtmlForm { get; set; }
-        public string? HtmlFormWithDoctype { get; set; }
+        public string? HtmlTable { get; set; }
+        public string? HtmlTableWithDoctype { get; set; }
     }
 }

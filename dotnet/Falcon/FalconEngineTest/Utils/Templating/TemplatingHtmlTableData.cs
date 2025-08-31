@@ -8,7 +8,7 @@ namespace FalconEngineTest.Utils.Templating
 {
     public class TemplatingHtmlTableData
     {
-        public static string GetHtmlFormData(string html, JsonTableDataModel jsonModel)
+        public static string GetHtmlTableata(string? html, JsonTableDataModel? jsonModel)
         {
             string htmlResult = string.Empty;
             string htmlWorking = html;
@@ -161,10 +161,10 @@ namespace FalconEngineTest.Utils.Templating
                     return jsonModel.LinkHead;
                 case "Head":
                     return jsonModel.Head;
-                case "HtmlForm":
-                    return jsonModel.HtmlForm;
-                case "HtmlFormWithDoctype":
-                    return jsonModel.HtmlFormWithDoctype;
+                case "HtmlTable":
+                    return jsonModel.HtmlTable;
+                case "HtmlTableWithDoctype":
+                    return jsonModel.HtmlTableWithDoctype;
                 default:
                     throw new Exception("Unknown template");
             }
