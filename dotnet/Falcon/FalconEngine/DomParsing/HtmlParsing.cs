@@ -14,6 +14,7 @@ namespace FalconEngine.DomParsing
     {
         private ITagParser _doctypeParse;
         private ITagParser _htmlParse;
+        private ITagParser _tdParser;
         private IExtractHtmlRemaining _extractHtmlRemaining;
         private IAttributeTagManager _attributeTagManager;
         private string _html;
@@ -21,10 +22,11 @@ namespace FalconEngine.DomParsing
         private bool _isValidHtmlTag;
         private bool _isValidPage;
 
-        public HtmlParsing(ITagParser doctypeParse, ITagParser htmlParse, IExtractHtmlRemaining extractHtmlRemaining, IAttributeTagManager attributeTagManager)
+        public HtmlParsing(ITagParser doctypeParse, ITagParser htmlParse, ITagParser tdParser, IExtractHtmlRemaining extractHtmlRemaining, IAttributeTagManager attributeTagManager)
         {
             _doctypeParse = doctypeParse;
             _htmlParse = htmlParse;
+            _tdParser = tdParser;
             _extractHtmlRemaining = extractHtmlRemaining;
             _attributeTagManager = attributeTagManager;
         }
@@ -173,7 +175,7 @@ namespace FalconEngine.DomParsing
             return headTag;
         }
 
-        private static TagModel GetBodyTag()
+        private TagModel GetBodyTag()
         {
             var nav = GetNav();
             var article = GetArticle();
@@ -321,7 +323,7 @@ namespace FalconEngine.DomParsing
             return p;
         }
 
-        private static TagModel GetMain()
+        private TagModel GetMain()
         {
             var table = GetTable();
             var main = new TagModel()
@@ -336,7 +338,7 @@ namespace FalconEngine.DomParsing
             return main;
         }
 
-        private static TagModel GetTable()
+        private TagModel GetTable()
         {
             var thead = GetThead();
             var tbody = GetTbody();
@@ -443,8 +445,7 @@ namespace FalconEngine.DomParsing
             return th;
         }
 
-        //"Tbody":"<tbody>{DeveloperTable}{ProductOwnerTable}{TechnicalLeaderTable}{ManagerTable}{ArchitectTable}{DirectorTable}</tbody>",
-        private static TagModel GetTbody()
+        private TagModel GetTbody()
         {
             var developerTable = GetDeveloperTable();
             var productOwnerTable = GetProductOwnerTable();
@@ -466,7 +467,7 @@ namespace FalconEngine.DomParsing
             return tbody;
         }
 
-        private static TagModel GetDeveloperTable()
+        private TagModel GetDeveloperTable()
         {
             var developerLabel = GetDeveloperLabel();
             var developerDescription = GetDeveloperDescription();
@@ -485,58 +486,31 @@ namespace FalconEngine.DomParsing
             };
             return developerTable;
         }
-        private static TagModel GetDeveloperLabel()
+        private TagModel GetDeveloperLabel()
         {
-            var td = new TagModel()
-            {
-                NameTag = NameTagEnum.td,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = "Software Engineer",
-                TagStart = "<td>",
-                TagEnd = "</td>"
-            };
-            return td;
-        }
-        private static TagModel GetDeveloperDescription()
-        {
-            var td = new TagModel()
-            {
-                NameTag = NameTagEnum.td,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = "Make software from specifications",
-                TagStart = "<td>",
-                TagEnd = "</td>"
-            };
+            var td = _tdParser.Parse("<td>Software Engineer</td>");
             return td;
         }
 
-        private static TagModel GetDeveloperType()
+        private TagModel GetDeveloperDescription()
         {
-            var td = new TagModel()
-            {
-                NameTag = NameTagEnum.td,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = "Technical",
-                TagStart = "<td>",
-                TagEnd = "</td>"
-            };
+            var td = _tdParser.Parse("<td>Make software from specifications</td>");
             return td;
         }
 
-        private static TagModel GetDeveloperLevel()
+        private TagModel GetDeveloperType()
         {
-            var td = new TagModel()
-            {
-                NameTag = NameTagEnum.td,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = "1",
-                TagStart = "<td>",
-                TagEnd = "</td>"
-            };
+            var td = _tdParser.Parse("<td>Technical</td>");
             return td;
         }
 
-        private static TagModel GetProductOwnerTable()
+        private TagModel GetDeveloperLevel()
+        {
+            var td = _tdParser.Parse("<td>1</td>");
+            return td;
+        }
+
+        private TagModel GetProductOwnerTable()
         {
             var productownerLabel = GetProductOwnerLabel();
             var productownerDescription = GetProductOwnerDescription();
@@ -555,59 +529,31 @@ namespace FalconEngine.DomParsing
             return productownerTable;
         }
 
-        private static TagModel GetProductOwnerLabel()
+        private TagModel GetProductOwnerLabel()
         {
-            var td = new TagModel()
-            {
-                NameTag = NameTagEnum.td,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = "Product Owner",
-                TagStart = "<td>",
-                TagEnd = "</td>"
-            };
+            var td = _tdParser.Parse("<td>Product Owner</td>");
             return td;
         }
 
-        private static TagModel GetProductOwnerDescription()
+        private TagModel GetProductOwnerDescription()
         {
-            var td = new TagModel()
-            {
-                NameTag = NameTagEnum.td,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = "Create and ordered features from the wishes of the business",
-                TagStart = "<td>",
-                TagEnd = "</td>"
-            };
+            var td = _tdParser.Parse("<td>Create and ordered features from the wishes of the business</td>");
             return td;
         }
 
-        private static TagModel GetProductOwnerType()
+        private TagModel GetProductOwnerType()
         {
-            var td = new TagModel()
-            {
-                NameTag = NameTagEnum.td,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = "Product",
-                TagStart = "<td>",
-                TagEnd = "</td>"
-            };
+            var td = _tdParser.Parse("<td>Product</td>");
             return td;
         }
 
-        private static TagModel GetProductOwnerLevel()
+        private TagModel GetProductOwnerLevel()
         {
-            var td = new TagModel()
-            {
-                NameTag = NameTagEnum.td,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = "1",
-                TagStart = "<td>",
-                TagEnd = "</td>"
-            };
+            var td = _tdParser.Parse("<td>1</td>");
             return td;
         }
 
-        private static TagModel GetTechnicalLeaderTable()
+        private TagModel GetTechnicalLeaderTable()
         {
             var technicalLeaderLabel = GetTechnicalLeaderLabel();
             var technicalLeaderDescription = GetTechnicalLeaderDescription();
@@ -626,59 +572,31 @@ namespace FalconEngine.DomParsing
             return technicalLeaderTable;
         }
 
-        private static TagModel GetTechnicalLeaderLabel()
+        private TagModel GetTechnicalLeaderLabel()
         {
-            var td = new TagModel()
-            {
-                NameTag = NameTagEnum.td,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = "Technical Leader",
-                TagStart = "<td>",
-                TagEnd = "</td>"
-            };
+            var td = _tdParser.Parse("<td>Technical Leader</td>");
             return td;
         }
 
-        private static TagModel GetTechnicalLeaderDescription()
+        private TagModel GetTechnicalLeaderDescription()
         {
-            var td = new TagModel()
-            {
-                NameTag = NameTagEnum.td,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = "Help developer to build software for the business in the a good way",
-                TagStart = "<td>",
-                TagEnd = "</td>"
-            };
+            var td = _tdParser.Parse("<td>Help developer to build software for the business in the a good way</td>");
             return td;
         }
 
-        private static TagModel GetTechnicalLeaderType()
+        private TagModel GetTechnicalLeaderType()
         {
-            var td = new TagModel()
-            {
-                NameTag = NameTagEnum.td,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = "Technical",
-                TagStart = "<td>",
-                TagEnd = "</td>"
-            };
+            var td = _tdParser.Parse("<td>Technical</td>");
             return td;
         }
 
-        private static TagModel GetTechnicalLeaderLevel()
+        private TagModel GetTechnicalLeaderLevel()
         {
-            var td = new TagModel()
-            {
-                NameTag = NameTagEnum.td,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = "2",
-                TagStart = "<td>",
-                TagEnd = "</td>"
-            };
+            var td = _tdParser.Parse("<td>2</td>");
             return td;
         }
 
-        private static TagModel GetManagerTable()
+        private TagModel GetManagerTable()
         {
             var engineerManagerLabel = GetEngineerManagerLabel();
             var engineerManagerDescription = GetEngineerManagerrDescription();
@@ -697,59 +615,31 @@ namespace FalconEngine.DomParsing
             return engineerManagerTable;
         }
 
-        private static TagModel GetEngineerManagerLabel()
+        private TagModel GetEngineerManagerLabel()
         {
-            var td = new TagModel()
-            {
-                NameTag = NameTagEnum.td,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = "Engineer Manager",
-                TagStart = "<td>",
-                TagEnd = "</td>"
-            };
+            var td = _tdParser.Parse("<td>Engineer Manager</td>");
             return td;
         }
 
-        private static TagModel GetEngineerManagerrDescription()
+        private TagModel GetEngineerManagerrDescription()
         {
-            var td = new TagModel()
-            {
-                NameTag = NameTagEnum.td,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = "Manager of a team",
-                TagStart = "<td>",
-                TagEnd = "</td>"
-            };
+            var td = _tdParser.Parse("<td>Manager of a team</td>");
             return td;
         }
 
-        private static TagModel GetEngineerManagerType()
+        private TagModel GetEngineerManagerType()
         {
-            var td = new TagModel()
-            {
-                NameTag = NameTagEnum.td,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = "Management",
-                TagStart = "<td>",
-                TagEnd = "</td>"
-            };
+            var td = _tdParser.Parse("<td>Management</td>");
             return td;
         }
 
-        private static TagModel GetEngineerManagerLevel()
+        private TagModel GetEngineerManagerLevel()
         {
-            var td = new TagModel()
-            {
-                NameTag = NameTagEnum.td,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = "2",
-                TagStart = "<td>",
-                TagEnd = "</td>"
-            };
+            var td = _tdParser.Parse("<td>2</td>");
             return td;
         }
 
-        private static TagModel GetArchitectTable()
+        private TagModel GetArchitectTable()
         {
             var architecteLabel = GetArchitectLabel();
             var architecteDescription = GetArchitectDescription();
@@ -768,59 +658,31 @@ namespace FalconEngine.DomParsing
             return architecteTable;
         }
 
-        private static TagModel GetArchitectLabel()
+        private TagModel GetArchitectLabel()
         {
-            var td = new TagModel()
-            {
-                NameTag = NameTagEnum.td,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = "Architect",
-                TagStart = "<td>",
-                TagEnd = "</td>"
-            };
+            var td = _tdParser.Parse("<td>Architect</td>");
             return td;
         }
 
-        private static TagModel GetArchitectDescription()
+        private TagModel GetArchitectDescription()
         {
-            var td = new TagModel()
-            {
-                NameTag = NameTagEnum.td,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = "Responsible of the quality and the durability of the tech",
-                TagStart = "<td>",
-                TagEnd = "</td>"
-            };
+            var td = _tdParser.Parse("<td>Responsible of the quality and the durability of the tech</td>");
             return td;
         }
 
-        private static TagModel GetArchitectType()
+        private TagModel GetArchitectType()
         {
-            var td = new TagModel()
-            {
-                NameTag = NameTagEnum.td,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = "Technical",
-                TagStart = "<td>",
-                TagEnd = "</td>"
-            };
+            var td = _tdParser.Parse("<td>Technical</td>");
             return td;
         }
 
-        private static TagModel GetArchitectLevel()
+        private TagModel GetArchitectLevel()
         {
-            var td = new TagModel()
-            {
-                NameTag = NameTagEnum.td,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = "3",
-                TagStart = "<td>",
-                TagEnd = "</td>"
-            };
+            var td = _tdParser.Parse("<td>3</td>");
             return td;
         }
 
-        private static TagModel GetDirectorTable()
+        private TagModel GetDirectorTable()
         {
             var directorLabel = GetDirectorLabel();
             var directorDescription = GetDirectorDescription();
@@ -839,57 +701,27 @@ namespace FalconEngine.DomParsing
             return directorTable;
         }
 
-
-
-        private static TagModel GetDirectorLabel()
+        private TagModel GetDirectorLabel()
         {
-            var td = new TagModel()
-            {
-                NameTag = NameTagEnum.td,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = "Director",
-                TagStart = "<td>",
-                TagEnd = "</td>"
-            };
+            var td = _tdParser.Parse("<td>Director</td>");
             return td;
         }
 
-        private static TagModel GetDirectorDescription()
+        private TagModel GetDirectorDescription()
         {
-            var td = new TagModel()
-            {
-                NameTag = NameTagEnum.td,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = "Manager of a departement",
-                TagStart = "<td>",
-                TagEnd = "</td>"
-            };
+            var td = _tdParser.Parse("<td>Manager of a departement</td>");
             return td;
         }
 
-        private static TagModel GetDirectorType()
+        private TagModel GetDirectorType()
         {
-            var td = new TagModel()
-            {
-                NameTag = NameTagEnum.td,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = "Management",
-                TagStart = "<td>",
-                TagEnd = "</td>"
-            };
+            var td = _tdParser.Parse("<td>Management</td>");
             return td;
         }
 
-        private static TagModel GetDirectorLevel()
+        private TagModel GetDirectorLevel()
         {
-            var td = new TagModel()
-            {
-                NameTag = NameTagEnum.td,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = "3",
-                TagStart = "<td>",
-                TagEnd = "</td>"
-            };
+            var td = _tdParser.Parse("<td>3</td>");
             return td;
         }
 
