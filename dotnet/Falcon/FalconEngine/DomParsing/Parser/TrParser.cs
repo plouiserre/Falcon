@@ -26,7 +26,8 @@ namespace FalconEngine.DomParsing.Parser
         {
             bool tagsEnd = !string.IsNullOrEmpty(_tag.TagEnd);
             bool attributesAreOk = AreAttributesAreAutorized();
-            return tagsEnd && attributesAreOk;
+            bool childrenAreValid = _manageChildrenTag.ValidateChildren(_tag);
+            return tagsEnd && attributesAreOk && childrenAreValid;
         }
     }
 }
