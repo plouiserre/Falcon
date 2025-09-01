@@ -48,6 +48,8 @@ namespace FalconEngine.DomParsing.IdentifyTagParsing
                     return NameTagEnum.form;
                 case "div":
                     return NameTagEnum.div;
+                case "td":
+                    return NameTagEnum.td;
                 case "p":
                     return NameTagEnum.p;
                 case "h1":
@@ -63,7 +65,7 @@ namespace FalconEngine.DomParsing.IdentifyTagParsing
                 case "select":
                     return NameTagEnum.select;
                 default:
-                    return NameTagEnum.a;
+                    throw new Exception($"unknown tag {simpleTag.ToLower()}");
             }
         }
     }

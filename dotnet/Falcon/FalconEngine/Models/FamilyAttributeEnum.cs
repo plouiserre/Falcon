@@ -3,9 +3,9 @@ namespace FalconEngine.Models
     public enum FamilyAttributeEnum
     {
         accept, accesskey, action, alt, asAttr, autocapitalize, autocomplete, autofocus, blocking, capture, charset,
-        checkedAttr, classCss, content, contenteditable, contextmenu, crossorigin, data_, dirname, disabled,
+        checkedAttr, classCss, colspan, content, contenteditable, contextmenu, crossorigin, data_, dirname, disabled,
         download, draggable, dir, dropzone, enterkeyhint, exportparts, forAttr, form, formaction, formenctype,
-        formmethod, formnovalidate, formtarget, height, hidden, httpequiv, href, hreflang, id, inert, inputmode,
+        formmethod, formnovalidate, formtarget, headers, height, hidden, httpequiv, href, hreflang, id, inert, inputmode,
         integrity, isAttr, itemid, itemprop, itemref, itemscope, itemtype, label, lang, list, manifest, max, maxlength,
         min, minlength, media, method, multiple, name,
         onclick, ondblclick, onmousedown, onmouseup, onmouseover, onmouseout, onmousemove, oncontextmenu, onmouseenter,
@@ -14,7 +14,7 @@ namespace FalconEngine.Models
         onpause, onended, onvolumechange, onwheel, onscroll, onresize, onerror, onoad, onunload, ontransitionend,
         onanimationstart, onanimationend, onanimationiteration,
         part, placeholder, pattern, popover, popovertarget, popovertargetaction, readonlyAttr, required, rel,
-        referrerpolicy, role, scheme, scope, selected, spellcheck, size, sizes, slot, src, step, style, tabindex,
+        referrerpolicy, role, rowspan, scheme, scope, selected, spellcheck, size, sizes, slot, src, step, style, tabindex,
         target, title, translate, type, value, width, xmlns
     }
 }
