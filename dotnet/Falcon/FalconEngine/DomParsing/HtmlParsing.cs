@@ -14,7 +14,7 @@ namespace FalconEngine.DomParsing
     {
         private ITagParser _doctypeParse;
         private ITagParser _htmlParse;
-        private ITagParser _tdParser;
+        private ITagParser _trParser;
         private IExtractHtmlRemaining _extractHtmlRemaining;
         private IAttributeTagManager _attributeTagManager;
         private string _html;
@@ -22,11 +22,11 @@ namespace FalconEngine.DomParsing
         private bool _isValidHtmlTag;
         private bool _isValidPage;
 
-        public HtmlParsing(ITagParser doctypeParse, ITagParser htmlParse, ITagParser tdParser, IExtractHtmlRemaining extractHtmlRemaining, IAttributeTagManager attributeTagManager)
+        public HtmlParsing(ITagParser doctypeParse, ITagParser htmlParse, ITagParser trParser, IExtractHtmlRemaining extractHtmlRemaining, IAttributeTagManager attributeTagManager)
         {
             _doctypeParse = doctypeParse;
             _htmlParse = htmlParse;
-            _tdParser = tdParser;
+            _trParser = trParser;
             _extractHtmlRemaining = extractHtmlRemaining;
             _attributeTagManager = attributeTagManager;
         }
@@ -469,260 +469,44 @@ namespace FalconEngine.DomParsing
 
         private TagModel GetDeveloperTable()
         {
-            var developerLabel = GetDeveloperLabel();
-            var developerDescription = GetDeveloperDescription();
-            var developerType = GetDeveloperType();
-            var developerLevel = GetDeveloperLevel();
-            string content = "<td>Software Engineer</td><td>Make software from specifications</td><td>Technical</td><td>1</td>";
-            var developerTable = new TagModel()
-            {
-                NameTag = NameTagEnum.tr,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = content,
-                Children = new List<TagModel>() { developerLabel, developerDescription, developerType,
-                                developerLevel},
-                TagStart = "<tr>",
-                TagEnd = "</tr>"
-            };
+            string html = "<tr><td>Software Engineer</td><td>Make software from specifications</td><td>Technical</td><td>1</td></tr>";
+            var developerTable = _trParser.Parse(html);
             return developerTable;
-        }
-        private TagModel GetDeveloperLabel()
-        {
-            var td = _tdParser.Parse("<td>Software Engineer</td>");
-            return td;
-        }
-
-        private TagModel GetDeveloperDescription()
-        {
-            var td = _tdParser.Parse("<td>Make software from specifications</td>");
-            return td;
-        }
-
-        private TagModel GetDeveloperType()
-        {
-            var td = _tdParser.Parse("<td>Technical</td>");
-            return td;
-        }
-
-        private TagModel GetDeveloperLevel()
-        {
-            var td = _tdParser.Parse("<td>1</td>");
-            return td;
         }
 
         private TagModel GetProductOwnerTable()
         {
-            var productownerLabel = GetProductOwnerLabel();
-            var productownerDescription = GetProductOwnerDescription();
-            var productownerType = GetProductOwnerType();
-            var productownerLevel = GetProductOwnerLevel();
-            string content = "<td>Product Owner</td><td>Create and ordered features from the wishes of the business</td><td>Product</td><td>1</td>";
-            var productownerTable = new TagModel()
-            {
-                NameTag = NameTagEnum.tr,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = content,
-                Children = new List<TagModel>() { productownerLabel, productownerDescription, productownerType, productownerLevel },
-                TagStart = "<tr>",
-                TagEnd = "</tr>"
-            };
+            string html = "<tr><td>Product Owner</td><td>Create and ordered features from the wishes of the business</td><td>Product</td><td>1</td></tr>";
+            var productownerTable = _trParser.Parse(html);
             return productownerTable;
-        }
-
-        private TagModel GetProductOwnerLabel()
-        {
-            var td = _tdParser.Parse("<td>Product Owner</td>");
-            return td;
-        }
-
-        private TagModel GetProductOwnerDescription()
-        {
-            var td = _tdParser.Parse("<td>Create and ordered features from the wishes of the business</td>");
-            return td;
-        }
-
-        private TagModel GetProductOwnerType()
-        {
-            var td = _tdParser.Parse("<td>Product</td>");
-            return td;
-        }
-
-        private TagModel GetProductOwnerLevel()
-        {
-            var td = _tdParser.Parse("<td>1</td>");
-            return td;
         }
 
         private TagModel GetTechnicalLeaderTable()
         {
-            var technicalLeaderLabel = GetTechnicalLeaderLabel();
-            var technicalLeaderDescription = GetTechnicalLeaderDescription();
-            var technicalLeaderType = GetTechnicalLeaderType();
-            var technicalLeaderLevel = GetTechnicalLeaderLevel();
-            string content = "<td>Technical Leader</td><td>Help developer to build software for the business in the a good way</td><td>Technical</td><td>2</td>";
-            var technicalLeaderTable = new TagModel()
-            {
-                NameTag = NameTagEnum.tr,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = content,
-                Children = new List<TagModel>() { technicalLeaderLabel, technicalLeaderDescription, technicalLeaderType, technicalLeaderLevel },
-                TagStart = "<tr>",
-                TagEnd = "</tr>"
-            };
+            string html = "<tr><td>Technical Leader</td><td>Help developer to build software for the business in the a good way</td><td>Technical</td><td>2</td></tr>";
+            var technicalLeaderTable = _trParser.Parse(html);
             return technicalLeaderTable;
-        }
-
-        private TagModel GetTechnicalLeaderLabel()
-        {
-            var td = _tdParser.Parse("<td>Technical Leader</td>");
-            return td;
-        }
-
-        private TagModel GetTechnicalLeaderDescription()
-        {
-            var td = _tdParser.Parse("<td>Help developer to build software for the business in the a good way</td>");
-            return td;
-        }
-
-        private TagModel GetTechnicalLeaderType()
-        {
-            var td = _tdParser.Parse("<td>Technical</td>");
-            return td;
-        }
-
-        private TagModel GetTechnicalLeaderLevel()
-        {
-            var td = _tdParser.Parse("<td>2</td>");
-            return td;
         }
 
         private TagModel GetManagerTable()
         {
-            var engineerManagerLabel = GetEngineerManagerLabel();
-            var engineerManagerDescription = GetEngineerManagerrDescription();
-            var engineerManagerType = GetEngineerManagerType();
-            var engineerManagerLevel = GetEngineerManagerLevel();
-            string content = "<td>Engineer Manager</td><td>Manager of a team</td><td>Management</td><td>2</td>";
-            var engineerManagerTable = new TagModel()
-            {
-                NameTag = NameTagEnum.tr,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = content,
-                Children = new List<TagModel>() { engineerManagerLabel, engineerManagerDescription, engineerManagerType, engineerManagerLevel },
-                TagStart = "<tr>",
-                TagEnd = "</tr>"
-            };
+            string html = "<tr><td>Engineer Manager</td><td>Manager of a team</td><td>Management</td><td>2</td></tr>";
+            var engineerManagerTable = _trParser.Parse(html);
             return engineerManagerTable;
-        }
-
-        private TagModel GetEngineerManagerLabel()
-        {
-            var td = _tdParser.Parse("<td>Engineer Manager</td>");
-            return td;
-        }
-
-        private TagModel GetEngineerManagerrDescription()
-        {
-            var td = _tdParser.Parse("<td>Manager of a team</td>");
-            return td;
-        }
-
-        private TagModel GetEngineerManagerType()
-        {
-            var td = _tdParser.Parse("<td>Management</td>");
-            return td;
-        }
-
-        private TagModel GetEngineerManagerLevel()
-        {
-            var td = _tdParser.Parse("<td>2</td>");
-            return td;
         }
 
         private TagModel GetArchitectTable()
         {
-            var architecteLabel = GetArchitectLabel();
-            var architecteDescription = GetArchitectDescription();
-            var architecterType = GetArchitectType();
-            var architecteLevel = GetArchitectLevel();
-            string content = "<td>Architect</td><td>Responsible of the quality and the durability of the tech</td><td>Technical</td><td>3</td>";
-            var architecteTable = new TagModel()
-            {
-                NameTag = NameTagEnum.tr,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = content,
-                Children = new List<TagModel>() { architecteLabel, architecteDescription, architecterType, architecteLevel },
-                TagStart = "<tr>",
-                TagEnd = "</tr>"
-            };
+            string html = "<tr><td>Architect</td><td>Responsible of the quality and the durability of the tech</td><td>Technical</td><td>3</td></tr>";
+            var architecteTable = _trParser.Parse(html);
             return architecteTable;
-        }
-
-        private TagModel GetArchitectLabel()
-        {
-            var td = _tdParser.Parse("<td>Architect</td>");
-            return td;
-        }
-
-        private TagModel GetArchitectDescription()
-        {
-            var td = _tdParser.Parse("<td>Responsible of the quality and the durability of the tech</td>");
-            return td;
-        }
-
-        private TagModel GetArchitectType()
-        {
-            var td = _tdParser.Parse("<td>Technical</td>");
-            return td;
-        }
-
-        private TagModel GetArchitectLevel()
-        {
-            var td = _tdParser.Parse("<td>3</td>");
-            return td;
         }
 
         private TagModel GetDirectorTable()
         {
-            var directorLabel = GetDirectorLabel();
-            var directorDescription = GetDirectorDescription();
-            var directorType = GetDirectorType();
-            var directorLevel = GetDirectorLevel();
-            string content = "<td>Director</td><td>Manager of a departement</td><td>Management</td><td>3</td>";
-            var directorTable = new TagModel()
-            {
-                NameTag = NameTagEnum.tr,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = content,
-                Children = new List<TagModel>() { directorLabel, directorDescription, directorType, directorLevel },
-                TagStart = "<tr>",
-                TagEnd = "</tr>"
-            };
+            string html = "<tr><td>Director</td><td>Manager of a departement</td><td>Management</td><td>3</td></tr>";
+            var directorTable = _trParser.Parse(html);
             return directorTable;
-        }
-
-        private TagModel GetDirectorLabel()
-        {
-            var td = _tdParser.Parse("<td>Director</td>");
-            return td;
-        }
-
-        private TagModel GetDirectorDescription()
-        {
-            var td = _tdParser.Parse("<td>Manager of a departement</td>");
-            return td;
-        }
-
-        private TagModel GetDirectorType()
-        {
-            var td = _tdParser.Parse("<td>Management</td>");
-            return td;
-        }
-
-        private TagModel GetDirectorLevel()
-        {
-            var td = _tdParser.Parse("<td>3</td>");
-            return td;
         }
 
         private static TagModel GetScriptJs()
