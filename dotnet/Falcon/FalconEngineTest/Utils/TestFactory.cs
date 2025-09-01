@@ -8,6 +8,7 @@ using FalconEngine.DomParsing.IdentifyTagParsing;
 using FalconEngine.DomParsing.Parser;
 using FalconEngine.DomParsing.Parser.Attribute;
 using FalconEngine.Models;
+using FalconEngineTest.DomParsing.Parser;
 
 namespace FalconEngineTest.Utils
 {
@@ -72,6 +73,12 @@ namespace FalconEngineTest.Utils
         public static TdParser InitTdParser()
         {
             return new TdParser(TestFactory.InitIdentifyTag(), TestFactory.InitAttributeTagManager(true));
+        }
+
+        public static TrParser InitTrParser()
+        {
+            return new TrParser(TestFactory.InitIdentifyTag(), TestFactory.InitDeterminateChildren(),
+                TestFactory.InitAttributeTagManager(true));
         }
 
         public static DivParser InitDivParser()
