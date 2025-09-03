@@ -5,10 +5,10 @@ namespace FalconEngine.DomParsing.Parser
 {
     public class TrParser : TagParser, ITagParser
     {
-        private IdentifyTag _identifyTag;
+        private IIdentifyTag _identifyTag;
         private IManageChildrenTag _manageChildrenTag;
 
-        public TrParser(IdentifyTag identifyTag, IManageChildrenTag manageChildrenTag, IAttributeTagManager attributeTagManager) :
+        public TrParser(IIdentifyTag identifyTag, IManageChildrenTag manageChildrenTag, IAttributeTagManager attributeTagManager) :
                          base(attributeTagManager, NameTagEnum.tr)
         {
             _identifyTag = identifyTag;
