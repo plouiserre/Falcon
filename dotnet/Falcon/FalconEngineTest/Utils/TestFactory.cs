@@ -86,6 +86,12 @@ namespace FalconEngineTest.Utils
                 TestFactory.InitAttributeTagManager(true));
         }
 
+        public static TBodyParser InitTbodyParser()
+        {
+            return new TBodyParser(TestFactory.InitIdentifyTag(), TestFactory.InitDeterminateChildren(),
+            TestFactory.InitAttributeTagManager(true));
+        }
+
         public static DivParser InitDivParser()
         {
             return new DivParser(InitIdentifyTag(), InitDeterminateChildren(), InitAttributeTagManager(true));
