@@ -22,5 +22,30 @@ namespace FalconEngineTest.DomParsing.Parser
             AssertTablePage.AssertTBody(tag);
             Assert.True(isValid);
         }
+
+        [Fact]
+        public void ParseAndNoValidateTbody()
+        {
+            string? html = "<tbody alt=\"all body\"><tr><td>Hello</td></tr><tr><td>World</td></tr></tbody>";
+            var parser = TestFactory.InitTbodyParser();
+
+            parser.Parse(html);
+            bool isValid = parser.IsValid();
+
+            Assert.False(isValid);
+        }
+
+        //Not ok children
+        [Fact]
+        public void ParseAndNoValidateChildrenTbody()
+        {
+            string? html = "<tbody><tr><td alt=\"all body\">Hello</td></tr><tr><td>World</td></tr></tbody>";
+            var parser = TestFactory.InitTbodyParser();
+
+            parser.Parse(html);
+            bool isValid = parser.IsValid();
+
+            Assert.False(isValid);
+        }
     }
 }
