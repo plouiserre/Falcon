@@ -355,7 +355,7 @@ namespace FalconEngine.DomParsing
             return table;
         }
 
-        private static TagModel GetThead()
+        private TagModel GetThead()
         {
             var trThead = GetTrThead();
             var thead = new TagModel()
@@ -370,79 +370,11 @@ namespace FalconEngine.DomParsing
             return thead;
         }
 
-        private static TagModel GetTrThead()
+        private TagModel GetTrThead()
         {
-            var firstTh = GetFirstTh();
-            var secondTh = GetSecondTh();
-            var thirdTh = GetThirdTh();
-            var fourthTh = GetFourth();
-            string content = "<th scope=\"col\">Title</th><th scope=\"col\">Description</th><th scope=\"col\">Type</th><th scope=\"col\">Level</th>";
-            var trThead = new TagModel()
-            {
-                NameTag = NameTagEnum.tr,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = content,
-                Children = new List<TagModel>() { firstTh, secondTh, thirdTh, fourthTh },
-                TagStart = "<tr>",
-                TagEnd = "</tr>"
-            };
+            string html = "<tr><th scope=\"col\">Title</th><th scope=\"col\">Description</th><th scope=\"col\">Type</th><th scope=\"col\">Level</th></tr>";
+            var trThead = _trParser.Parse(html);
             return trThead;
-        }
-
-        private static TagModel GetFirstTh()
-        {
-            var th = new TagModel()
-            {
-                NameTag = NameTagEnum.th,
-                Attributes = new List<AttributeModel>() { new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.scope.ToString(), Value = "col" } },
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = "Title",
-                TagStart = "<th scope=\"col\">",
-                TagEnd = "</th>"
-            };
-            return th;
-        }
-
-        private static TagModel GetSecondTh()
-        {
-            var th = new TagModel()
-            {
-                NameTag = NameTagEnum.th,
-                Attributes = new List<AttributeModel>() { new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.scope.ToString(), Value = "col" } },
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = "Description",
-                TagStart = "<th scope=\"col\">",
-                TagEnd = "</th>"
-            };
-            return th;
-        }
-
-        private static TagModel GetThirdTh()
-        {
-            var th = new TagModel()
-            {
-                NameTag = NameTagEnum.th,
-                Attributes = new List<AttributeModel>() { new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.scope.ToString(), Value = "col" } },
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = "Type",
-                TagStart = "<th scope=\"col\">",
-                TagEnd = "</th>"
-            };
-            return th;
-        }
-
-        private static TagModel GetFourth()
-        {
-            var th = new TagModel()
-            {
-                NameTag = NameTagEnum.th,
-                Attributes = new List<AttributeModel>() { new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.scope.ToString(), Value = "col" } },
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = "Level",
-                TagStart = "<th scope=\"col\">",
-                TagEnd = "</th>"
-            };
-            return th;
         }
 
         private TagModel GetTbody()
