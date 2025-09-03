@@ -35,7 +35,6 @@ namespace FalconEngineTest.DomParsing.Parser
             Assert.False(isValid);
         }
 
-        //Not ok children
         [Fact]
         public void ParseAndNoValidateChildrenTbody()
         {
