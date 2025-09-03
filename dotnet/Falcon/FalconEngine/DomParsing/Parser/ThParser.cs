@@ -27,7 +27,23 @@ namespace FalconEngine.DomParsing.Parser
         {
             bool tagsEnd = !string.IsNullOrEmpty(_tag.TagEnd);
             bool attributesAreOk = AreAttributesAreAutorized();
-            return tagsEnd && attributesAreOk;
+            bool isValidScopeValue = ValidScopeValue();
+            return tagsEnd && attributesAreOk && isValidScopeValue;
+        }
+
+        private bool ValidScopeValue()
+        {
+            var attribute = _tag.Attributes.FirstOrDefault(o => o.FamilyAttribute == FamilyAttributeEnum.scope.ToString());
+            var validValue = new string[] { "row", "col", "rowgroup", "colgroup" };
+            if (attribute == null)
+                return true;
+            else
+            {
+                if (validValue.Contains(attribute.Value))
+                    return true;
+                else
+                    return false;
+            }
         }
     }
 }

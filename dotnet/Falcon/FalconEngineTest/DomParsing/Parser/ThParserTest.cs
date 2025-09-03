@@ -54,10 +54,66 @@ namespace FalconEngineTest.DomParsing.Parser
             Assert.True(isValid);
         }
 
-        //TODO faire un test KO à cause des valeurs bidons de scope
+        [Fact]
+        public void ParseAndNoValidateThBecauseScopeHaveWrongValue()
+        {
+            string html = "<th scope=\"table\">Title</th>";
+            var thParser = TestFactory.InitThParser();
 
-        //TODO faire un test où je valide les valeurs de scope et je ne les valide pas
+            var tag = thParser.Parse(html);
+            var isValid = thParser.IsValid();
 
-        //TODO faire un test KO à cause d'un attribut bidon
+            Assert.Equal(NameTagEnum.th, tag.NameTag);
+            Assert.Equal("<th scope=\"table\">", tag.TagStart);
+            Assert.Equal("</th>", tag.TagEnd);
+            Assert.Equal("Title", tag.Content);
+            Assert.Equal("scope", tag.Attributes[0].FamilyAttribute);
+            Assert.Equal("table", tag.Attributes[0].Value);
+            Assert.Null(tag.Children);
+            Assert.False(isValid);
+        }
+
+        [Fact]
+        public void ValidateOrNotThTagWithDifferentsScopeValue()
+        {
+            string[] goodTags = new string[]{"<th scope=\"row\">Title</th>", "<th scope=\"col\">Title</th>", "<th scope=\"rowgroup\">Title</th>",
+                    "<th scope=\"colgroup\">Title</th>"};
+            foreach (var html in goodTags)
+            {
+                var thParser = TestFactory.InitThParser();
+                var tag = thParser.Parse(html);
+                var isValid = thParser.IsValid();
+                Assert.True(isValid);
+            }
+            string[] badTags = new string[] { "<th scope=\"test\">Title</th>", "<th scope=\"azef\">Title</th>", "<th scope=\"2332d\">Title</th>" };
+            foreach (var html in badTags)
+            {
+                var thParser = TestFactory.InitThParser();
+                var tag = thParser.Parse(html);
+                var isValid = thParser.IsValid();
+                Assert.False(isValid);
+            }
+        }
+
+        [Fact]
+        public void ParseAndNoValidateThBecauseWrongAttributs()
+        {
+            string html = "<th scope=\"col\" alt=\"head column\">Title</th>";
+            var thParser = TestFactory.InitThParser();
+
+            var tag = thParser.Parse(html);
+            var isValid = thParser.IsValid();
+
+            Assert.Equal(NameTagEnum.th, tag.NameTag);
+            Assert.Equal("<th scope=\"col\" alt=\"head column\">", tag.TagStart);
+            Assert.Equal("</th>", tag.TagEnd);
+            Assert.Equal("Title", tag.Content);
+            Assert.Equal("scope", tag.Attributes[0].FamilyAttribute);
+            Assert.Equal("col", tag.Attributes[0].Value);
+            Assert.Equal("alt", tag.Attributes[1].FamilyAttribute);
+            Assert.Equal("head column", tag.Attributes[1].Value);
+            Assert.Null(tag.Children);
+            Assert.False(isValid);
+        }
     }
 }
