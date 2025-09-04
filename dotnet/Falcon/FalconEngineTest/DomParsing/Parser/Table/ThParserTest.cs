@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using FalconEngine.Models;
 using FalconEngineTest.Utils;
 
-namespace FalconEngineTest.DomParsing.Parser
+namespace FalconEngineTest.DomParsing.Parser.Table
 {
     public class ThParserTest
     {

@@ -14,8 +14,8 @@ namespace FalconEngine.DomParsing
     {
         private ITagParser _doctypeParse;
         private ITagParser _htmlParse;
-        private ITagParser _trParser;
         private ITagParser _tbodyParser;
+        private ITagParser _theadParser;
         private IExtractHtmlRemaining _extractHtmlRemaining;
         private IAttributeTagManager _attributeTagManager;
         private string _html;
@@ -23,12 +23,12 @@ namespace FalconEngine.DomParsing
         private bool _isValidHtmlTag;
         private bool _isValidPage;
 
-        public HtmlParsing(ITagParser doctypeParse, ITagParser htmlParse, ITagParser tbodyParser, ITagParser trParser, IExtractHtmlRemaining extractHtmlRemaining, IAttributeTagManager attributeTagManager)
+        public HtmlParsing(ITagParser doctypeParse, ITagParser htmlParse, ITagParser theadParser, ITagParser tbodyParser, IExtractHtmlRemaining extractHtmlRemaining, IAttributeTagManager attributeTagManager)
         {
             _doctypeParse = doctypeParse;
             _htmlParse = htmlParse;
             _tbodyParser = tbodyParser;
-            _trParser = trParser;
+            _theadParser = theadParser;
             _extractHtmlRemaining = extractHtmlRemaining;
             _attributeTagManager = attributeTagManager;
         }
@@ -359,24 +359,9 @@ namespace FalconEngine.DomParsing
 
         private TagModel GetThead()
         {
-            var trThead = GetTrThead();
-            var thead = new TagModel()
-            {
-                NameTag = NameTagEnum.thead,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = "<tr><th scope=\"col\">Title</th><th scope=\"col\">Description</th><th scope=\"col\">Type</th><th scope=\"col\">Level</th></tr>",
-                Children = new List<TagModel>() { trThead },
-                TagStart = "<thead>",
-                TagEnd = "</thead>"
-            };
+            string html = "<thead><tr><th scope=\"col\">Title</th><th scope=\"col\">Description</th><th scope=\"col\">Type</th><th scope=\"col\">Level</th></tr></thead>";
+            var thead = _theadParser.Parse(html);
             return thead;
-        }
-
-        private TagModel GetTrThead()
-        {
-            string html = "<tr><th scope=\"col\">Title</th><th scope=\"col\">Description</th><th scope=\"col\">Type</th><th scope=\"col\">Level</th></tr>";
-            var trThead = _trParser.Parse(html);
-            return trThead;
         }
 
         private TagModel GetTbody()

@@ -9,6 +9,44 @@ namespace FalconEngineTest.Utils.AssertHtml
 {
     public static class AssertTablePage
     {
+        public static void AssertThead(TagModel thead)
+        {
+            string content = "<tr><th scope=\"col\">Title</th><th scope=\"col\">Description</th><th scope=\"col\">Type</th><th scope=\"col\">Level</th></tr>";
+            Assert.Equal(NameTagEnum.thead, thead.NameTag);
+            Assert.Equal(TagFamilyEnum.WithEnd, thead.TagFamily);
+            Assert.Equal("<thead>", thead.TagStart);
+            Assert.Equal("</thead>", thead.TagEnd);
+            Assert.Equal(content, thead.Content);
+            Assert.Null(thead.Attributes);
+            AssertTrHead(thead.Children[0]);
+        }
+
+        private static void AssertTrHead(TagModel tr)
+        {
+            string content = "<th scope=\"col\">Title</th><th scope=\"col\">Description</th><th scope=\"col\">Type</th><th scope=\"col\">Level</th>";
+            Assert.Equal(NameTagEnum.tr, tr.NameTag);
+            Assert.Equal(TagFamilyEnum.WithEnd, tr.TagFamily);
+            Assert.Equal("<tr>", tr.TagStart);
+            Assert.Equal("</tr>", tr.TagEnd);
+            Assert.Equal(content, tr.Content);
+            Assert.Null(tr.Attributes);
+            AssertThHead(tr.Children[0], "Title");
+            AssertThHead(tr.Children[1], "Description");
+            AssertThHead(tr.Children[2], "Type");
+            AssertThHead(tr.Children[3], "Level");
+        }
+
+        private static void AssertThHead(TagModel th, string label)
+        {
+            Assert.Equal(NameTagEnum.th, th.NameTag);
+            Assert.Equal(TagFamilyEnum.WithEnd, th.TagFamily);
+            Assert.Equal("<th scope=\"col\">", th.TagStart);
+            Assert.Equal("</th>", th.TagEnd);
+            Assert.Equal(label, th.Content);
+            Assert.Equal("scope", th.Attributes[0].FamilyAttribute);
+            Assert.Equal("col", th.Attributes[0].Value);
+        }
+
         public static void AssertTBody(TagModel tbody)
         {
             string content = "<tr><td>Software Engineer</td><td>Make software from specifications</td><td>Technical</td><td>1</td></tr><tr><td>Product Owner</td><td>Create and ordered features from the wishes of the business</td><td>Product</td><td>1</td></tr><tr><td>Technical Leader</td><td>Help developer to build software for the business in the a good way</td><td>Technical</td><td>2</td></tr><tr><td>Engineer Manager</td><td>Manager of a team</td><td>Management</td><td>2</td></tr><tr><td>Architect</td><td>Responsible of the quality and the durability of the tech</td><td>Technical</td><td>3</td></tr><tr><td>Director</td><td>Manager of a departement</td><td>Management</td><td>3</td></tr>";
