@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using FalconEngine.DomParsing.IdentifyTagParsing;
 using FalconEngine.Models;
 
-namespace FalconEngine.DomParsing.Parser
+namespace FalconEngine.DomParsing.Parser.Table
 {
     public class ThParser : TagParser, ITagParser
     {

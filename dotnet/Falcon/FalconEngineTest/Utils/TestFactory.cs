@@ -7,6 +7,7 @@ using FalconEngine.DomParsing;
 using FalconEngine.DomParsing.IdentifyTagParsing;
 using FalconEngine.DomParsing.Parser;
 using FalconEngine.DomParsing.Parser.Attribute;
+using FalconEngine.DomParsing.Parser.Table;
 using FalconEngine.Models;
 using FalconEngineTest.DomParsing.Parser;
 

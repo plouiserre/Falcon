@@ -1,18 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using FalconEngine.DomParsing.IdentifyTagParsing;
 using FalconEngine.Models;
 
-namespace FalconEngine.DomParsing.Parser
+namespace FalconEngine.DomParsing.Parser.Table
 {
-    public class TBodyParser : TagParser, ITagParser
+    public class TrParser : TagParser, ITagParser
     {
         private IIdentifyTag _identifyTag;
         private IManageChildrenTag _manageChildrenTag;
 
-        public TBodyParser(IIdentifyTag identifyTag, IManageChildrenTag manageChildrenTag, IAttributeTagManager attributeTagManager) : base(attributeTagManager, NameTagEnum.tbody)
+        public TrParser(IIdentifyTag identifyTag, IManageChildrenTag manageChildrenTag, IAttributeTagManager attributeTagManager) :
+                         base(attributeTagManager, NameTagEnum.tr)
         {
             _identifyTag = identifyTag;
             _manageChildrenTag = manageChildrenTag;

@@ -6,7 +6,7 @@ using FalconEngineTest.Utils;
 using FalconEngineTest.Utils.AssertHtml;
 using FalconEngineTest.Utils.HtmlData;
 
-namespace FalconEngineTest.DomParsing.Parser
+namespace FalconEngineTest.DomParsing.Parser.Table
 {
     public class TBodyParserTest
     {
