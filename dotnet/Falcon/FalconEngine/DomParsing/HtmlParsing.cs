@@ -15,6 +15,7 @@ namespace FalconEngine.DomParsing
         private ITagParser _doctypeParse;
         private ITagParser _htmlParse;
         private ITagParser _trParser;
+        private ITagParser _tbodyParser;
         private IExtractHtmlRemaining _extractHtmlRemaining;
         private IAttributeTagManager _attributeTagManager;
         private string _html;
@@ -22,10 +23,11 @@ namespace FalconEngine.DomParsing
         private bool _isValidHtmlTag;
         private bool _isValidPage;
 
-        public HtmlParsing(ITagParser doctypeParse, ITagParser htmlParse, ITagParser trParser, IExtractHtmlRemaining extractHtmlRemaining, IAttributeTagManager attributeTagManager)
+        public HtmlParsing(ITagParser doctypeParse, ITagParser htmlParse, ITagParser tbodyParser, ITagParser trParser, IExtractHtmlRemaining extractHtmlRemaining, IAttributeTagManager attributeTagManager)
         {
             _doctypeParse = doctypeParse;
             _htmlParse = htmlParse;
+            _tbodyParser = tbodyParser;
             _trParser = trParser;
             _extractHtmlRemaining = extractHtmlRemaining;
             _attributeTagManager = attributeTagManager;
@@ -379,66 +381,9 @@ namespace FalconEngine.DomParsing
 
         private TagModel GetTbody()
         {
-            var developerTable = GetDeveloperTable();
-            var productOwnerTable = GetProductOwnerTable();
-            var technicalLeaderTable = GetTechnicalLeaderTable();
-            var managerTable = GetManagerTable();
-            var architectTable = GetArchitectTable();
-            var directorTable = GetDirectorTable();
-            string content = "<tr><td>Software Engineer</td><td>Make software from specifications</td><td>Technical</td><td>1</td></tr><tr><td>Product Owner</td><td>Create and ordered features from the wishes of the business</td><td>Product</td><td>1</td></tr><tr><td>Technical Leader</td><td>Help developer to build software for the business in the a good way</td><td>Technical</td><td>2</td></tr><tr><td>Engineer Manager</td><td>Manager of a team</td><td>Management</td><td>2</td></tr><tr><td>Architect</td><td>Responsible of the quality and the durability of the tech</td><td>Technical</td><td>3</td></tr><tr><td>Director</td><td>Manager of a departement</td><td>Management</td><td>3</td></tr>";
-            var tbody = new TagModel()
-            {
-                NameTag = NameTagEnum.tbody,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = content,
-                Children = new List<TagModel>() { developerTable, productOwnerTable, technicalLeaderTable,
-                                managerTable, architectTable, directorTable },
-                TagStart = "<tbody>",
-                TagEnd = "</tbody>"
-            };
+            string html = "<tbody><tr><td>Software Engineer</td><td>Make software from specifications</td><td>Technical</td><td>1</td></tr><tr><td>Product Owner</td><td>Create and ordered features from the wishes of the business</td><td>Product</td><td>1</td></tr><tr><td>Technical Leader</td><td>Help developer to build software for the business in the a good way</td><td>Technical</td><td>2</td></tr><tr><td>Engineer Manager</td><td>Manager of a team</td><td>Management</td><td>2</td></tr><tr><td>Architect</td><td>Responsible of the quality and the durability of the tech</td><td>Technical</td><td>3</td></tr><tr><td>Director</td><td>Manager of a departement</td><td>Management</td><td>3</td></tr></tbody>";
+            var tbody = _tbodyParser.Parse(html);
             return tbody;
-        }
-
-        private TagModel GetDeveloperTable()
-        {
-            string html = "<tr><td>Software Engineer</td><td>Make software from specifications</td><td>Technical</td><td>1</td></tr>";
-            var developerTable = _trParser.Parse(html);
-            return developerTable;
-        }
-
-        private TagModel GetProductOwnerTable()
-        {
-            string html = "<tr><td>Product Owner</td><td>Create and ordered features from the wishes of the business</td><td>Product</td><td>1</td></tr>";
-            var productownerTable = _trParser.Parse(html);
-            return productownerTable;
-        }
-
-        private TagModel GetTechnicalLeaderTable()
-        {
-            string html = "<tr><td>Technical Leader</td><td>Help developer to build software for the business in the a good way</td><td>Technical</td><td>2</td></tr>";
-            var technicalLeaderTable = _trParser.Parse(html);
-            return technicalLeaderTable;
-        }
-
-        private TagModel GetManagerTable()
-        {
-            string html = "<tr><td>Engineer Manager</td><td>Manager of a team</td><td>Management</td><td>2</td></tr>";
-            var engineerManagerTable = _trParser.Parse(html);
-            return engineerManagerTable;
-        }
-
-        private TagModel GetArchitectTable()
-        {
-            string html = "<tr><td>Architect</td><td>Responsible of the quality and the durability of the tech</td><td>Technical</td><td>3</td></tr>";
-            var architecteTable = _trParser.Parse(html);
-            return architecteTable;
-        }
-
-        private TagModel GetDirectorTable()
-        {
-            string html = "<tr><td>Director</td><td>Manager of a departement</td><td>Management</td><td>3</td></tr>";
-            var directorTable = _trParser.Parse(html);
-            return directorTable;
         }
 
         private static TagModel GetScriptJs()

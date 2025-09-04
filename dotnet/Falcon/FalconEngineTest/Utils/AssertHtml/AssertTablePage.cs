@@ -9,6 +9,83 @@ namespace FalconEngineTest.Utils.AssertHtml
 {
     public static class AssertTablePage
     {
+        public static void AssertTBody(TagModel tbody)
+        {
+            string content = "<tr><td>Software Engineer</td><td>Make software from specifications</td><td>Technical</td><td>1</td></tr><tr><td>Product Owner</td><td>Create and ordered features from the wishes of the business</td><td>Product</td><td>1</td></tr><tr><td>Technical Leader</td><td>Help developer to build software for the business in the a good way</td><td>Technical</td><td>2</td></tr><tr><td>Engineer Manager</td><td>Manager of a team</td><td>Management</td><td>2</td></tr><tr><td>Architect</td><td>Responsible of the quality and the durability of the tech</td><td>Technical</td><td>3</td></tr><tr><td>Director</td><td>Manager of a departement</td><td>Management</td><td>3</td></tr>";
+            Assert.Equal(NameTagEnum.tbody, tbody.NameTag);
+            Assert.Equal(TagFamilyEnum.WithEnd, tbody.TagFamily);
+            Assert.Equal("<tbody>", tbody.TagStart);
+            Assert.Equal("</tbody>", tbody.TagEnd);
+            Assert.Equal(content, tbody.Content);
+            Assert.Null(tbody.Attributes);
+            AssertSoftwareEngineerTr(tbody.Children[0]);
+            AssertProductOwnerTr(tbody.Children[1]);
+            AssertTechnicalLeaderTr(tbody.Children[2]);
+            AssertEngineerManagerTr(tbody.Children[3]);
+            AssertArchitecteTr(tbody.Children[4]);
+            AssertDirectorTr(tbody.Children[5]);
+        }
+
+        private static void AssertSoftwareEngineerTr(TagModel tr)
+        {
+            string content = "<td>Software Engineer</td><td>Make software from specifications</td><td>Technical</td><td>1</td>";
+            Assert.Equal(NameTagEnum.tr, tr.NameTag);
+            Assert.Equal(TagFamilyEnum.WithEnd, tr.TagFamily);
+            Assert.Equal("<tr>", tr.TagStart);
+            Assert.Equal("</tr>", tr.TagEnd);
+            Assert.Null(tr.Attributes);
+            Assert.Equal(content, tr.Content);
+            AssertTd(tr.Children[0], "Software Engineer");
+            AssertTd(tr.Children[1], "Make software from specifications");
+            AssertTd(tr.Children[2], "Technical");
+            AssertTd(tr.Children[3], "1");
+        }
+
+        private static void AssertProductOwnerTr(TagModel tr)
+        {
+            string content = "<td>Product Owner</td><td>Create and ordered features from the wishes of the business</td><td>Product</td><td>1</td>";
+            Assert.Equal(NameTagEnum.tr, tr.NameTag);
+            Assert.Equal(TagFamilyEnum.WithEnd, tr.TagFamily);
+            Assert.Equal("<tr>", tr.TagStart);
+            Assert.Equal("</tr>", tr.TagEnd);
+            Assert.Null(tr.Attributes);
+            Assert.Equal(content, tr.Content);
+            AssertTd(tr.Children[0], "Product Owner");
+            AssertTd(tr.Children[1], "Create and ordered features from the wishes of the business");
+            AssertTd(tr.Children[2], "Product");
+            AssertTd(tr.Children[3], "1");
+        }
+
+        private static void AssertTechnicalLeaderTr(TagModel tr)
+        {
+            string content = "<td>Technical Leader</td><td>Help developer to build software for the business in the a good way</td><td>Technical</td><td>2</td>";
+            Assert.Equal(NameTagEnum.tr, tr.NameTag);
+            Assert.Equal(TagFamilyEnum.WithEnd, tr.TagFamily);
+            Assert.Equal("<tr>", tr.TagStart);
+            Assert.Equal("</tr>", tr.TagEnd);
+            Assert.Null(tr.Attributes);
+            Assert.Equal(content, tr.Content);
+            AssertTd(tr.Children[0], "Technical Leader");
+            AssertTd(tr.Children[1], "Help developer to build software for the business in the a good way");
+            AssertTd(tr.Children[2], "Technical");
+            AssertTd(tr.Children[3], "2");
+        }
+
+        private static void AssertEngineerManagerTr(TagModel tr)
+        {
+            string content = "<td>Engineer Manager</td><td>Manager of a team</td><td>Management</td><td>2</td>";
+            Assert.Equal(NameTagEnum.tr, tr.NameTag);
+            Assert.Equal(TagFamilyEnum.WithEnd, tr.TagFamily);
+            Assert.Equal("<tr>", tr.TagStart);
+            Assert.Equal("</tr>", tr.TagEnd);
+            Assert.Null(tr.Attributes);
+            Assert.Equal(content, tr.Content);
+            AssertTd(tr.Children[0], "Engineer Manager");
+            AssertTd(tr.Children[1], "Manager of a team");
+            AssertTd(tr.Children[2], "Management");
+            AssertTd(tr.Children[3], "2");
+        }
+
         public static void AssertArchitecteTr(TagModel tr)
         {
             string content = "<td>Architect</td><td>Responsible of the quality and the durability of the tech</td><td>Technical</td><td>3</td>";
@@ -18,53 +95,35 @@ namespace FalconEngineTest.Utils.AssertHtml
             Assert.Equal("</tr>", tr.TagEnd);
             Assert.Null(tr.Attributes);
             Assert.Equal(content, tr.Content);
-            AssertLabelArchitecte(tr.Children[0]);
-            AssertDescriptionArchitecte(tr.Children[1]);
-            AssertTypeArchitecte(tr.Children[2]);
-            AssertLevelArchitecte(tr.Children[3]);
+            AssertTd(tr.Children[0], "Architect");
+            AssertTd(tr.Children[1], "Responsible of the quality and the durability of the tech");
+            AssertTd(tr.Children[2], "Technical");
+            AssertTd(tr.Children[3], "3");
         }
 
-        private static void AssertLabelArchitecte(TagModel td)
+        public static void AssertDirectorTr(TagModel tr)
+        {
+            string content = "<td>Director</td><td>Manager of a departement</td><td>Management</td><td>3</td>";
+            Assert.Equal(NameTagEnum.tr, tr.NameTag);
+            Assert.Equal(TagFamilyEnum.WithEnd, tr.TagFamily);
+            Assert.Equal("<tr>", tr.TagStart);
+            Assert.Equal("</tr>", tr.TagEnd);
+            Assert.Null(tr.Attributes);
+            Assert.Equal(content, tr.Content);
+            AssertTd(tr.Children[0], "Director");
+            AssertTd(tr.Children[1], "Manager of a departement");
+            AssertTd(tr.Children[2], "Management");
+            AssertTd(tr.Children[3], "3");
+        }
+
+        private static void AssertTd(TagModel td, string label)
         {
             Assert.Equal(NameTagEnum.td, td.NameTag);
             Assert.Equal(TagFamilyEnum.WithEnd, td.TagFamily);
             Assert.Equal("<td>", td.TagStart);
             Assert.Equal("</td>", td.TagEnd);
             Assert.Null(td.Attributes);
-            Assert.Equal("Architect", td.Content);
-            Assert.Null(td.Children);
-        }
-
-        private static void AssertDescriptionArchitecte(TagModel td)
-        {
-            Assert.Equal(NameTagEnum.td, td.NameTag);
-            Assert.Equal(TagFamilyEnum.WithEnd, td.TagFamily);
-            Assert.Equal("<td>", td.TagStart);
-            Assert.Equal("</td>", td.TagEnd);
-            Assert.Null(td.Attributes);
-            Assert.Equal("Responsible of the quality and the durability of the tech", td.Content);
-            Assert.Null(td.Children);
-        }
-
-        private static void AssertTypeArchitecte(TagModel td)
-        {
-            Assert.Equal(NameTagEnum.td, td.NameTag);
-            Assert.Equal(TagFamilyEnum.WithEnd, td.TagFamily);
-            Assert.Equal("<td>", td.TagStart);
-            Assert.Equal("</td>", td.TagEnd);
-            Assert.Null(td.Attributes);
-            Assert.Equal("Technical", td.Content);
-            Assert.Null(td.Children);
-        }
-
-        private static void AssertLevelArchitecte(TagModel td)
-        {
-            Assert.Equal(NameTagEnum.td, td.NameTag);
-            Assert.Equal(TagFamilyEnum.WithEnd, td.TagFamily);
-            Assert.Equal("<td>", td.TagStart);
-            Assert.Equal("</td>", td.TagEnd);
-            Assert.Null(td.Attributes);
-            Assert.Equal("3", td.Content);
+            Assert.Equal(label, td.Content);
             Assert.Null(td.Children);
         }
     }
