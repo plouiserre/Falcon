@@ -106,10 +106,14 @@ namespace FalconEngine.DomParsing
                     return new PParser(_identifyTag, _manageChildrenTag, _attributeTagManager);
                 case string tag when tag.ToLower().Contains("<td"):
                     return new TdParser(_identifyTag, _attributeTagManager);
-                case string tag when tag.ToLower().Contains("<th"):
+                case string tag when tag.ToLower().Contains("<th "):
                     return new ThParser(_identifyTag, _attributeTagManager);
                 case string tag when tag.ToLower().Contains("<tr"):
                     return new TrParser(_identifyTag, _manageChildrenTag, _attributeTagManager);
+                case string tag when tag.ToLower().Contains("<thead"):
+                    return new TheadParser(_identifyTag, _manageChildrenTag, _attributeTagManager);
+                case string tag when tag.ToLower().Contains("<tbody"):
+                    return new TBodyParser(_identifyTag, _manageChildrenTag, _attributeTagManager);
                 case string tag when tag.ToLower().Contains("<div"):
                     return new DivParser(_identifyTag, _manageChildrenTag, _attributeTagManager);
                 case string tag when tag.ToLower().Contains("<form"):
