@@ -11,14 +11,12 @@ namespace FalconEngine.DomParsing.Parser.Structure
     {
         private IIdentifyTag _identifyTag;
         private IManageChildrenTag _manageChildrenTag;
-        private IAttributeTagManager _attributeTagManager;
 
         public SectionParser(IIdentifyTag identifyTag, IManageChildrenTag manageChildrenTag, IAttributeTagManager attributeTagManager) :
                                 base(attributeTagManager, NameTagEnum.section)
         {
             _identifyTag = identifyTag;
             _manageChildrenTag = manageChildrenTag;
-            _attributeTagManager = attributeTagManager;
         }
 
         public override TagModel Parse(string html)
@@ -32,8 +30,8 @@ namespace FalconEngine.DomParsing.Parser.Structure
         {
             bool tagEnd = !string.IsNullOrEmpty(_tag.TagEnd);
             bool tagsAreOk = AreAttributesAreAutorized();
-            //bool areChildrenValid = _manageChildrenTag.ValidateChildren(_tag);
-            return tagEnd && tagsAreOk;// && areChildrenValid;
+            bool areChildrenValid = _manageChildrenTag.ValidateChildren(_tag);
+            return tagEnd && tagsAreOk && areChildrenValid;
         }
     }
 }
