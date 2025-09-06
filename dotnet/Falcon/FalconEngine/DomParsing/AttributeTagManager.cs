@@ -35,6 +35,7 @@ namespace FalconEngine.DomParsing
             _allAttributesAutorizedByTag[NameTagEnum.thead] = new List<FamilyAttributeEnum>();
             _allAttributesAutorizedByTag[NameTagEnum.table] = new List<FamilyAttributeEnum>();
             _allAttributesAutorizedByTag[NameTagEnum.div] = new List<FamilyAttributeEnum>();
+            _allAttributesAutorizedByTag[NameTagEnum.section] = new List<FamilyAttributeEnum>();
             _allAttributesAutorizedByTag[NameTagEnum.form] = new List<FamilyAttributeEnum>();
             _allAttributesAutorizedByTag[NameTagEnum.body] = new List<FamilyAttributeEnum>();
         }
@@ -67,6 +68,7 @@ namespace FalconEngine.DomParsing
             SetTheadAttributesAutorized();
             SetTableAttributesAutorized();
             SetDivAttributesAutorized();
+            SetSectionAttributesAutorized();
             SetFormAttributesAutorized();
             SetBodyAttributesAutorized();
         }
@@ -263,6 +265,11 @@ namespace FalconEngine.DomParsing
         {
             SetUniversalAttributes(NameTagEnum.div);
             SetOnEventAttribut(NameTagEnum.div);
+        }
+
+        private void SetSectionAttributesAutorized()
+        {
+            SetUniversalAttributes(NameTagEnum.section);
         }
 
         private void SetFormAttributesAutorized()

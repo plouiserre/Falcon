@@ -9,6 +9,41 @@ namespace FalconEngineTest.Utils.AssertHtml
 {
     public static class AssertTablePage
     {
+        public static void AssertSection(TagModel section)
+        {
+            string content = "<h1>News!!!</h1><p>The direction decide to present you the news roles in the organisation.</p>";
+            Assert.Equal(NameTagEnum.section, section.NameTag);
+            Assert.Equal(TagFamilyEnum.WithEnd, section.TagFamily);
+            Assert.Equal("<section>", section.TagStart);
+            Assert.Equal("</section>", section.TagEnd);
+            Assert.Equal(content, section.Content);
+            Assert.Null(section.Attributes);
+            AssertH1(section.Children[0]);
+            AssertP(section.Children[1]);
+        }
+
+        private static void AssertH1(TagModel h1)
+        {
+            Assert.Equal(NameTagEnum.h1, h1.NameTag);
+            Assert.Equal(TagFamilyEnum.WithEnd, h1.TagFamily);
+            Assert.Equal("<h1>", h1.TagStart);
+            Assert.Equal("</h1>", h1.TagEnd);
+            Assert.Equal("News!!!", h1.Content);
+            Assert.Null(h1.Attributes);
+            Assert.Null(h1.Children);
+        }
+
+        private static void AssertP(TagModel p)
+        {
+            Assert.Equal(NameTagEnum.p, p.NameTag);
+            Assert.Equal(TagFamilyEnum.WithEnd, p.TagFamily);
+            Assert.Equal("<p>", p.TagStart);
+            Assert.Equal("</p>", p.TagEnd);
+            Assert.Equal("The direction decide to present you the news roles in the organisation.", p.Content);
+            Assert.Null(p.Attributes);
+            Assert.Null(p.Children);
+        }
+
         public static void AssertTable(TagModel table)
         {
             string content = HtmlPageTableData.GetHtml(TagHtmlTable.postTable).Replace("<table>", string.Empty).Replace("</table>", string.Empty);
