@@ -290,32 +290,6 @@ namespace FalconEngine.DomParsing
             return section;
         }
 
-        private static TagModel GetH1()
-        {
-            var h1 = new TagModel()
-            {
-                NameTag = NameTagEnum.h1,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = "News!!!",
-                TagStart = "<h1>",
-                TagEnd = "</h1>"
-            };
-            return h1;
-        }
-
-        private static TagModel GetP()
-        {
-            var p = new TagModel()
-            {
-                NameTag = NameTagEnum.p,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = "The direction decide to present you the news roles in the organisation.",
-                TagStart = "<p>",
-                TagEnd = "</p>"
-            };
-            return p;
-        }
-
         private TagModel GetMain()
         {
             var table = GetTable();
