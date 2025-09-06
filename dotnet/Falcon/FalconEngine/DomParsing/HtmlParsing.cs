@@ -15,6 +15,7 @@ namespace FalconEngine.DomParsing
         private ITagParser _doctypeParse;
         private ITagParser _htmlParse;
         private ITagParser _tableParser;
+        private ITagParser _sectionParser;
         private IExtractHtmlRemaining _extractHtmlRemaining;
         private IAttributeTagManager _attributeTagManager;
         private string _html;
@@ -22,12 +23,13 @@ namespace FalconEngine.DomParsing
         private bool _isValidHtmlTag;
         private bool _isValidPage;
 
-        public HtmlParsing(ITagParser doctypeParse, ITagParser htmlParse, ITagParser tableParser, IExtractHtmlRemaining extractHtmlRemaining,
-                                IAttributeTagManager attributeTagManager)
+        public HtmlParsing(ITagParser doctypeParse, ITagParser htmlParse, ITagParser tableParser, ITagParser sectionParser,
+                            IExtractHtmlRemaining extractHtmlRemaining, IAttributeTagManager attributeTagManager)
         {
             _doctypeParse = doctypeParse;
             _htmlParse = htmlParse;
             _tableParser = tableParser;
+            _sectionParser = sectionParser;
             _extractHtmlRemaining = extractHtmlRemaining;
             _attributeTagManager = attributeTagManager;
         }
@@ -266,7 +268,7 @@ namespace FalconEngine.DomParsing
             return liOrganisation;
         }
 
-        private static TagModel GetArticle()
+        private TagModel GetArticle()
         {
             var section = GetSection();
             var article = new TagModel()
@@ -281,21 +283,11 @@ namespace FalconEngine.DomParsing
             return article;
         }
 
-        private static TagModel GetSection()
+        private TagModel GetSection()
         {
-            var h1 = GetH1();
-            var p = GetP();
-            string content = "<h1>News!!!</h1><p>The direction decide to present you the news roles in the organisation.</p>";
-            var article = new TagModel()
-            {
-                NameTag = NameTagEnum.section,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = content,
-                Children = new List<TagModel>() { h1, p },
-                TagStart = "<section>",
-                TagEnd = "</section>"
-            };
-            return article;
+            string html = "<section><h1>News!!!</h1><p>The direction decide to present you the news roles in the organisation.</p></section>";
+            var section = _sectionParser.Parse(html);
+            return section;
         }
 
         private static TagModel GetH1()

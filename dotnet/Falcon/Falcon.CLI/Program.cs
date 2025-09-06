@@ -4,6 +4,7 @@ using FalconEngine.DomParsing;
 using FalconEngine.DomParsing.IdentifyTagParsing;
 using FalconEngine.DomParsing.Parser;
 using FalconEngine.DomParsing.Parser.Attribute;
+using FalconEngine.DomParsing.Parser.Structure;
 using FalconEngine.DomParsing.Parser.Table;
 using FalconEngine.Engine;
 using FalconEngine.Models;
@@ -38,7 +39,8 @@ var manageChildrenTag = new ManageChildrenTag(deleteUselessSpace, identifyTag, i
 var doctypeParser = new DoctypeParser(identifyTag);
 var htmlParser = new HtmlTagParser(identifyTag, manageChildrenTag, attributeTagManager);
 var tableParser = new TableParser(identifyTag, manageChildrenTag, attributeTagManager);
-var htmlParsing = new HtmlParsing(doctypeParser, htmlParser, tableParser, extractHtmlRemaining, attributeTagManager);
+var sectionParser = new SectionParser(identifyTag, manageChildrenTag, attributeTagManager);
+var htmlParsing = new HtmlParsing(doctypeParser, htmlParser, tableParser, sectionParser, extractHtmlRemaining, attributeTagManager);
 var engine = new HtmlEngine(htmlParsing);
 var result = engine.Calculate(html);
 Console.WriteLine(JsonConvert.SerializeObject(result));
