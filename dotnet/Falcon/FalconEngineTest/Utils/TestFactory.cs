@@ -116,6 +116,11 @@ namespace FalconEngineTest.Utils
             return new SectionParser(InitIdentifyTag(), InitDeterminateChildren(), InitAttributeTagManager(true));
         }
 
+        public static ArticleParser InitArticleParser()
+        {
+            return new ArticleParser(InitIdentifyTag(), InitDeterminateChildren(), InitAttributeTagManager(true));
+        }
+
         public static FormParser InitFormParser()
         {
             return new FormParser(InitIdentifyTag(), InitDeterminateChildren(), InitAttributeTagManager(true));
