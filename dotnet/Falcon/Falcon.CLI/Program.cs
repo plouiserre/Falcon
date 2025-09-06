@@ -39,8 +39,8 @@ var manageChildrenTag = new ManageChildrenTag(deleteUselessSpace, identifyTag, i
 var doctypeParser = new DoctypeParser(identifyTag);
 var htmlParser = new HtmlTagParser(identifyTag, manageChildrenTag, attributeTagManager);
 var tableParser = new TableParser(identifyTag, manageChildrenTag, attributeTagManager);
-var sectionParser = new SectionParser(identifyTag, manageChildrenTag, attributeTagManager);
-var htmlParsing = new HtmlParsing(doctypeParser, htmlParser, tableParser, sectionParser, extractHtmlRemaining, attributeTagManager);
+var articleParser = new ArticleParser(identifyTag, manageChildrenTag, attributeTagManager);
+var htmlParsing = new HtmlParsing(doctypeParser, htmlParser, tableParser, articleParser, extractHtmlRemaining, attributeTagManager);
 var engine = new HtmlEngine(htmlParsing);
 var result = engine.Calculate(html);
 Console.WriteLine(JsonConvert.SerializeObject(result));
