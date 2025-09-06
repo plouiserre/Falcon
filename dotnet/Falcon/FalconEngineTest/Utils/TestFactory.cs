@@ -7,6 +7,7 @@ using FalconEngine.DomParsing;
 using FalconEngine.DomParsing.IdentifyTagParsing;
 using FalconEngine.DomParsing.Parser;
 using FalconEngine.DomParsing.Parser.Attribute;
+using FalconEngine.DomParsing.Parser.Structure;
 using FalconEngine.DomParsing.Parser.Table;
 using FalconEngine.Models;
 using FalconEngineTest.DomParsing.Parser;
@@ -108,6 +109,11 @@ namespace FalconEngineTest.Utils
         public static DivParser InitDivParser()
         {
             return new DivParser(InitIdentifyTag(), InitDeterminateChildren(), InitAttributeTagManager(true));
+        }
+
+        public static SectionParser InitSectionParser()
+        {
+            return new SectionParser(InitIdentifyTag(), InitDeterminateChildren(), InitAttributeTagManager(true));
         }
 
         public static FormParser InitFormParser()
