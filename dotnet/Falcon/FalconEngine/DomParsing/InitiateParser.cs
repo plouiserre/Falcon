@@ -8,6 +8,7 @@ using FalconEngine.DomParsing.CustomException;
 using FalconEngine.DomParsing.IdentifyTagParsing;
 using FalconEngine.DomParsing.Parser;
 using FalconEngine.DomParsing.Parser.Attribute;
+using FalconEngine.DomParsing.Parser.Structure;
 using FalconEngine.DomParsing.Parser.Table;
 using FalconEngine.Models;
 
@@ -116,6 +117,8 @@ namespace FalconEngine.DomParsing
                     return new TBodyParser(_identifyTag, _manageChildrenTag, _attributeTagManager);
                 case string tag when tag.ToLower().Contains("<div"):
                     return new DivParser(_identifyTag, _manageChildrenTag, _attributeTagManager);
+                case string tag when tag.ToLower().Contains("<section"):
+                    return new SectionParser(_identifyTag, _manageChildrenTag, _attributeTagManager);
                 case string tag when tag.ToLower().Contains("<form"):
                     return new FormParser(_identifyTag, _manageChildrenTag, _attributeTagManager);
                 case string tag when tag.ToLower().Contains("<body"):

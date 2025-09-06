@@ -15,7 +15,7 @@ namespace FalconEngine.DomParsing
         private ITagParser _doctypeParse;
         private ITagParser _htmlParse;
         private ITagParser _tableParser;
-        private ITagParser _sectionParser;
+        private ITagParser _articleParser;
         private IExtractHtmlRemaining _extractHtmlRemaining;
         private IAttributeTagManager _attributeTagManager;
         private string _html;
@@ -23,13 +23,13 @@ namespace FalconEngine.DomParsing
         private bool _isValidHtmlTag;
         private bool _isValidPage;
 
-        public HtmlParsing(ITagParser doctypeParse, ITagParser htmlParse, ITagParser tableParser, ITagParser sectionParser,
+        public HtmlParsing(ITagParser doctypeParse, ITagParser htmlParse, ITagParser tableParser, ITagParser articleParser,
                             IExtractHtmlRemaining extractHtmlRemaining, IAttributeTagManager attributeTagManager)
         {
             _doctypeParse = doctypeParse;
             _htmlParse = htmlParse;
             _tableParser = tableParser;
-            _sectionParser = sectionParser;
+            _articleParser = articleParser;
             _extractHtmlRemaining = extractHtmlRemaining;
             _attributeTagManager = attributeTagManager;
         }
@@ -270,24 +270,9 @@ namespace FalconEngine.DomParsing
 
         private TagModel GetArticle()
         {
-            var section = GetSection();
-            var article = new TagModel()
-            {
-                NameTag = NameTagEnum.article,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = "<section><h1>News!!!</h1><p>The direction decide to present you the news roles in the organisation.</p></section>",
-                Children = new List<TagModel>() { section },
-                TagStart = "<article>",
-                TagEnd = "</article>"
-            };
+            string html = "<article><section><h1>News!!!</h1><p>The direction decide to present you the news roles in the organisation.</p></section></article>";
+            var article = _articleParser.Parse(html);
             return article;
-        }
-
-        private TagModel GetSection()
-        {
-            string html = "<section><h1>News!!!</h1><p>The direction decide to present you the news roles in the organisation.</p></section>";
-            var section = _sectionParser.Parse(html);
-            return section;
         }
 
         private TagModel GetMain()
