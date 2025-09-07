@@ -7,6 +7,7 @@ using FalconEngine.DomParsing;
 using FalconEngine.DomParsing.IdentifyTagParsing;
 using FalconEngine.DomParsing.Parser;
 using FalconEngine.DomParsing.Parser.Attribute;
+using FalconEngine.DomParsing.Parser.List;
 using FalconEngine.DomParsing.Parser.Structure;
 using FalconEngine.DomParsing.Parser.Table;
 using FalconEngine.Models;
@@ -64,6 +65,11 @@ namespace FalconEngineTest.Utils
         public static H1Parser InitH1Parser()
         {
             return new H1Parser(InitIdentifyTag(), InitDeterminateChildren(), InitAttributeTagManager(true));
+        }
+
+        public static LiParser InitLiParser()
+        {
+            return new LiParser(InitIdentifyTag(), InitDeterminateChildren(), InitAttributeTagManager(true));
         }
 
         public static PParser InitPParser()
