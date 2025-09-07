@@ -66,6 +66,8 @@ namespace FalconEngine.DomParsing.IdentifyTagParsing
                     return NameTagEnum.td;
                 case "p":
                     return NameTagEnum.p;
+                case "li":
+                    return NameTagEnum.li;
                 case "h1":
                     return NameTagEnum.h1;
                 case "span":

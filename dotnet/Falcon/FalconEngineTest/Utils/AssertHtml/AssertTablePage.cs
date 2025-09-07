@@ -9,6 +9,17 @@ namespace FalconEngineTest.Utils.AssertHtml
 {
     public static class AssertTablePage
     {
+        public static void AssertLiHome(TagModel li)
+        {
+            Assert.Equal(NameTagEnum.li, li.NameTag);
+            Assert.Equal(TagFamilyEnum.WithEnd, li.TagFamily);
+            Assert.Equal("<li>", li.TagStart);
+            Assert.Equal("</li>", li.TagEnd);
+            Assert.Equal("Home", li.Content);
+            Assert.Null(li.Attributes);
+            Assert.Null(li.Children);
+        }
+
         public static void AssertArticle(TagModel article)
         {
             string content = "<section><h1>News!!!</h1><p>The direction decide to present you the news roles in the organisation.</p></section>";

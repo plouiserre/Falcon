@@ -16,6 +16,7 @@ namespace FalconEngine.DomParsing
         private ITagParser _htmlParse;
         private ITagParser _tableParser;
         private ITagParser _articleParser;
+        private ITagParser _liParser;
         private IExtractHtmlRemaining _extractHtmlRemaining;
         private IAttributeTagManager _attributeTagManager;
         private string _html;
@@ -24,12 +25,13 @@ namespace FalconEngine.DomParsing
         private bool _isValidPage;
 
         public HtmlParsing(ITagParser doctypeParse, ITagParser htmlParse, ITagParser tableParser, ITagParser articleParser,
-                            IExtractHtmlRemaining extractHtmlRemaining, IAttributeTagManager attributeTagManager)
+                            ITagParser liParser, IExtractHtmlRemaining extractHtmlRemaining, IAttributeTagManager attributeTagManager)
         {
             _doctypeParse = doctypeParse;
             _htmlParse = htmlParse;
             _tableParser = tableParser;
             _articleParser = articleParser;
+            _liParser = liParser;
             _extractHtmlRemaining = extractHtmlRemaining;
             _attributeTagManager = attributeTagManager;
         }
@@ -196,7 +198,7 @@ namespace FalconEngine.DomParsing
             return bodyTag;
         }
 
-        private static TagModel GetNav()
+        private TagModel GetNav()
         {
             var ul = GetUlMenu();
             var nav = new TagModel()
@@ -211,7 +213,7 @@ namespace FalconEngine.DomParsing
             return nav;
         }
 
-        private static TagModel GetUlMenu()
+        private TagModel GetUlMenu()
         {
             string content = "<li>Home</li><li>News</li><li>New organisation</li>";
             var liHome = GetLiHome();
@@ -229,42 +231,24 @@ namespace FalconEngine.DomParsing
             return ulMenu;
         }
 
-        private static TagModel GetLiHome()
+        private TagModel GetLiHome()
         {
-            var liHome = new TagModel()
-            {
-                NameTag = NameTagEnum.li,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = "Home",
-                TagStart = "<li>",
-                TagEnd = "</li>"
-            };
+            string html = "<li>Home</li>";
+            var liHome = _liParser.Parse(html);
             return liHome;
         }
 
-        private static TagModel GetLiNews()
+        private TagModel GetLiNews()
         {
-            var liNews = new TagModel()
-            {
-                NameTag = NameTagEnum.li,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = "News",
-                TagStart = "<li>",
-                TagEnd = "</li>"
-            };
+            string html = "<li>News</li>";
+            var liNews = _liParser.Parse(html);
             return liNews;
         }
 
-        private static TagModel GetLiOrganisation()
+        private TagModel GetLiOrganisation()
         {
-            var liOrganisation = new TagModel()
-            {
-                NameTag = NameTagEnum.li,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = "New organisation",
-                TagStart = "<li>",
-                TagEnd = "</li>"
-            };
+            string html = "<li>New organisation</li>";
+            var liOrganisation = _liParser.Parse(html);
             return liOrganisation;
         }
 
