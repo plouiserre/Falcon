@@ -23,17 +23,6 @@ namespace FalconEngineTest.Utils.AssertHtml
             AssertLi(ul.Children[2], "New organisation");
         }
 
-        // public static void AssertLiHome(TagModel li)
-        // {
-        //     Assert.Equal(NameTagEnum.li, li.NameTag);
-        //     Assert.Equal(TagFamilyEnum.WithEnd, li.TagFamily);
-        //     Assert.Equal("<li>", li.TagStart);
-        //     Assert.Equal("</li>", li.TagEnd);
-        //     Assert.Equal("Home", li.Content);
-        //     Assert.Null(li.Attributes);
-        //     Assert.Null(li.Children);
-        // }
-
         public static void AssertLi(TagModel li, string content)
         {
             Assert.Equal(NameTagEnum.li, li.NameTag);

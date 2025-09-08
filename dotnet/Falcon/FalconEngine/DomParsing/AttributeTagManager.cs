@@ -25,6 +25,7 @@ namespace FalconEngine.DomParsing
             _allAttributesAutorizedByTag[NameTagEnum.h1] = new List<FamilyAttributeEnum>();
             _allAttributesAutorizedByTag[NameTagEnum.p] = new List<FamilyAttributeEnum>();
             _allAttributesAutorizedByTag[NameTagEnum.li] = new List<FamilyAttributeEnum>();
+            _allAttributesAutorizedByTag[NameTagEnum.ul] = new List<FamilyAttributeEnum>();
             _allAttributesAutorizedByTag[NameTagEnum.label] = new List<FamilyAttributeEnum>();
             _allAttributesAutorizedByTag[NameTagEnum.input] = new List<FamilyAttributeEnum>();
             _allAttributesAutorizedByTag[NameTagEnum.option] = new List<FamilyAttributeEnum>();
@@ -63,6 +64,7 @@ namespace FalconEngine.DomParsing
             SetOptionAttributesAutorized();
             SetSelectAttributesAutorized();
             SetLiAttributesAutorized();
+            SetUlAttributesAutorized();
             SetPAttributesAutorized();
             SetTdAttributesAutorized();
             SetThAttributesAutorized();
@@ -219,6 +221,11 @@ namespace FalconEngine.DomParsing
             _allAttributesAutorizedByTag[NameTagEnum.select].Add(FamilyAttributeEnum.name);
             _allAttributesAutorizedByTag[NameTagEnum.select].Add(FamilyAttributeEnum.required);
             _allAttributesAutorizedByTag[NameTagEnum.select].Add(FamilyAttributeEnum.size);
+        }
+
+        private void SetUlAttributesAutorized()
+        {
+            SetUniversalAttributes(NameTagEnum.ul);
         }
 
         private void SetLiAttributesAutorized()
