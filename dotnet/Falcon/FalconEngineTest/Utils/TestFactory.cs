@@ -54,27 +54,32 @@ namespace FalconEngineTest.Utils
 
         public static SelectParser InitSelectParser()
         {
-            return new SelectParser(TestFactory.InitIdentifyTag(), TestFactory.InitDeterminateChildren(), InitAttributeTagManager(true));
+            return new SelectParser(TestFactory.InitIdentifyTag(), TestFactory.InitManageChildren(), InitAttributeTagManager(true));
         }
 
         public static SpanParser InitSpanParser()
         {
-            return new SpanParser(InitIdentifyTag(), InitAttributeTagManager(true), InitDeterminateChildren(), NameTagEnum.span);
+            return new SpanParser(InitIdentifyTag(), InitAttributeTagManager(true), InitManageChildren());
         }
 
         public static H1Parser InitH1Parser()
         {
-            return new H1Parser(InitIdentifyTag(), InitDeterminateChildren(), InitAttributeTagManager(true));
+            return new H1Parser(InitIdentifyTag(), InitManageChildren(), InitAttributeTagManager(true));
         }
 
         public static LiParser InitLiParser()
         {
-            return new LiParser(InitIdentifyTag(), InitDeterminateChildren(), InitAttributeTagManager(true));
+            return new LiParser(InitIdentifyTag(), InitManageChildren(), InitAttributeTagManager(true));
+        }
+
+        public static UlParser InitUlParser()
+        {
+            return new UlParser(InitIdentifyTag(), InitManageChildren(), InitAttributeTagManager(true));
         }
 
         public static PParser InitPParser()
         {
-            return new PParser(TestFactory.InitIdentifyTag(), TestFactory.InitDeterminateChildren(),
+            return new PParser(TestFactory.InitIdentifyTag(), TestFactory.InitManageChildren(),
                                 TestFactory.InitAttributeTagManager(true));
         }
 
@@ -90,51 +95,49 @@ namespace FalconEngineTest.Utils
 
         public static TrParser InitTrParser()
         {
-            return new TrParser(TestFactory.InitIdentifyTag(), TestFactory.InitDeterminateChildren(),
+            return new TrParser(TestFactory.InitIdentifyTag(), TestFactory.InitManageChildren(),
                 TestFactory.InitAttributeTagManager(true));
         }
 
         public static TBodyParser InitTbodyParser()
         {
-            return new TBodyParser(TestFactory.InitIdentifyTag(), TestFactory.InitDeterminateChildren(),
+            return new TBodyParser(TestFactory.InitIdentifyTag(), TestFactory.InitManageChildren(),
                 TestFactory.InitAttributeTagManager(true));
         }
 
         public static TheadParser InitTheadParser()
         {
-            return new TheadParser(TestFactory.InitIdentifyTag(), TestFactory.InitDeterminateChildren(),
-                TestFactory.InitAttributeTagManager(true));
+            return new TheadParser(InitIdentifyTag(), InitManageChildren(), InitAttributeTagManager(true));
         }
 
         public static TableParser InitTableParser()
         {
-            return new TableParser(TestFactory.InitIdentifyTag(), TestFactory.InitDeterminateChildren(),
-                TestFactory.InitAttributeTagManager(true));
+            return new TableParser(InitIdentifyTag(), InitManageChildren(), InitAttributeTagManager(true));
         }
 
         public static DivParser InitDivParser()
         {
-            return new DivParser(InitIdentifyTag(), InitDeterminateChildren(), InitAttributeTagManager(true));
+            return new DivParser(InitIdentifyTag(), InitManageChildren(), InitAttributeTagManager(true));
         }
 
         public static SectionParser InitSectionParser()
         {
-            return new SectionParser(InitIdentifyTag(), InitDeterminateChildren(), InitAttributeTagManager(true));
+            return new SectionParser(InitIdentifyTag(), InitManageChildren(), InitAttributeTagManager(true));
         }
 
         public static ArticleParser InitArticleParser()
         {
-            return new ArticleParser(InitIdentifyTag(), InitDeterminateChildren(), InitAttributeTagManager(true));
+            return new ArticleParser(InitIdentifyTag(), InitManageChildren(), InitAttributeTagManager(true));
         }
 
         public static FormParser InitFormParser()
         {
-            return new FormParser(InitIdentifyTag(), InitDeterminateChildren(), InitAttributeTagManager(true));
+            return new FormParser(InitIdentifyTag(), InitManageChildren(), InitAttributeTagManager(true));
         }
 
         public static BodyParser InitBodyParser()
         {
-            return new BodyParser(InitIdentifyTag(), InitDeterminateChildren(), InitAttributeTagManager(true));
+            return new BodyParser(InitIdentifyTag(), InitManageChildren(), InitAttributeTagManager(true));
         }
 
         public static AttributeTagManager InitAttributeTagManager(bool isSettingAttributes)
@@ -147,7 +150,7 @@ namespace FalconEngineTest.Utils
 
         public static HtmlTagParser InitHtmlTagParser(bool isSettingAttributes)
         {
-            return new HtmlTagParser(TestFactory.InitIdentifyTag(), TestFactory.InitDeterminateChildren(),
+            return new HtmlTagParser(TestFactory.InitIdentifyTag(), TestFactory.InitManageChildren(),
                 TestFactory.InitAttributeTagManager(isSettingAttributes));
         }
 
@@ -182,17 +185,17 @@ namespace FalconEngineTest.Utils
         {
             var identifyTag = InitIdentifyTag();
             var initiate = new InitiateParser(InitDeleteUselessSpace(), identifyTag, InitIdentifyStartTagEndTag(),
-                InitDeterminateContent(), InitDeterminateChildren(), InitAttributeTagManager(false));
+                InitDeterminateContent(), InitManageChildren(), InitAttributeTagManager(false));
             return initiate;
         }
 
         public static HeadParser InitHeadParser()
         {
-            var headParser = new HeadParser(InitDeleteUselessSpace(), InitIdentifyTag(), InitDeterminateChildren());
+            var headParser = new HeadParser(InitDeleteUselessSpace(), InitIdentifyTag(), InitManageChildren());
             return headParser;
         }
 
-        public static ManageChildrenTag InitDeterminateChildren()
+        public static ManageChildrenTag InitManageChildren()
         {
             var manageChildrenTag = new ManageChildrenTag(InitDeleteUselessSpace(), InitIdentifyTag(),
             InitIdentifyStartTagEndTag(), InitDeterminateContent(), InitAttributeTagManager(false));

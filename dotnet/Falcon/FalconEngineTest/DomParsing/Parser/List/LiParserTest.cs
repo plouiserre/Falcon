@@ -20,7 +20,7 @@ namespace FalconEngineTest.DomParsing.Parser.List
             var tag = liParser.Parse(html);
             var isValid = liParser.IsValid();
 
-            AssertTablePage.AssertLiHome(tag);
+            AssertTablePage.AssertLi(tag, "Home");
             Assert.True(isValid);
         }
 

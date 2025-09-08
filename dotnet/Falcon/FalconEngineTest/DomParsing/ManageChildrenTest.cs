@@ -16,7 +16,7 @@ namespace FalconEngineTest.DomParsing
         [Fact]
         public void FindHeaderChildren()
         {
-            var determinateChildren = TestFactory.InitDeterminateChildren();
+            var determinateChildren = TestFactory.InitManageChildren();
             var parent = new TagModel();
 
             string contentHeadSimple = HtmlPageSimpleData.GetHtml(TagHtmlSimple.head).Replace("<head>", string.Empty).Replace("</head>", string.Empty);
@@ -33,7 +33,7 @@ namespace FalconEngineTest.DomParsing
         {
 
             var html = "<head><meta charset=\"UTF-8\"><title class=\"thetitle\">My Website</title></head>";
-            var determinateChildren = TestFactory.InitDeterminateChildren();
+            var determinateChildren = TestFactory.InitManageChildren();
             var parent = new TagModel();
 
             determinateChildren.Identify(parent, html);
@@ -46,7 +46,7 @@ namespace FalconEngineTest.DomParsing
         public void NoChildrenPresents()
         {
             var html = "A simple text";
-            var determinateChildren = TestFactory.InitDeterminateChildren();
+            var determinateChildren = TestFactory.InitManageChildren();
 
             var children = determinateChildren.Identify(new TagModel(), html);
 

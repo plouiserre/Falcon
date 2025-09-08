@@ -5,26 +5,18 @@ using System.Threading.Tasks;
 using FalconEngine.DomParsing.IdentifyTagParsing;
 using FalconEngine.Models;
 
-namespace FalconEngine.DomParsing.Parser
+namespace FalconEngine.DomParsing.Parser.List
 {
-    public class SpanParser : TagParser, ITagParser
+    public class UlParser : TagParser, ITagParser
     {
         private IIdentifyTag _identifyTag;
         private IManageChildrenTag _manageChildrenTag;
 
-        public SpanParser(IIdentifyTag identifyTag, IAttributeTagManager attributeTagManager,
-                IManageChildrenTag manageChildrenTag) : base(attributeTagManager, NameTagEnum.span)
+        public UlParser(IIdentifyTag identifyTag, IManageChildrenTag manageChildrenTag, IAttributeTagManager attributeTagManager) :
+                        base(attributeTagManager, NameTagEnum.ul)
         {
             _identifyTag = identifyTag;
             _manageChildrenTag = manageChildrenTag;
-        }
-
-        public override bool IsValid()
-        {
-            bool noTagEnd = !string.IsNullOrEmpty(_tag.TagEnd);
-            bool tagsAreOk = AreAttributesAreAutorized();
-            bool areChildrenValids = _manageChildrenTag.ValidateChildren(_tag);
-            return noTagEnd && tagsAreOk && areChildrenValids;
         }
 
         public override TagModel Parse(string html)
@@ -32,6 +24,13 @@ namespace FalconEngine.DomParsing.Parser
             _tag = _identifyTag.Analyze(html);
             _tag.Children = _manageChildrenTag.Identify(_tag, _tag.Content);
             return _tag;
+        }
+        public override bool IsValid()
+        {
+            bool tagEnd = !string.IsNullOrEmpty(_tag.TagEnd);
+            bool tagsAreOk = AreAttributesAreAutorized();
+            //bool areChildrenValid = _manageChildrenTag.ValidateChildren(_tag);
+            return tagEnd && tagsAreOk; // && areChildrenValid;
         }
     }
 }

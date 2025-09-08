@@ -8,6 +8,7 @@ using FalconEngine.DomParsing.CustomException;
 using FalconEngine.DomParsing.IdentifyTagParsing;
 using FalconEngine.DomParsing.Parser;
 using FalconEngine.DomParsing.Parser.Attribute;
+using FalconEngine.DomParsing.Parser.List;
 using FalconEngine.DomParsing.Parser.Structure;
 using FalconEngine.DomParsing.Parser.Table;
 using FalconEngine.Models;
@@ -102,7 +103,9 @@ namespace FalconEngine.DomParsing
                 case string tag when tag.ToLower().Contains("<input"):
                     return new InputParser(_identifyTag, _attributeTagManager);
                 case string tag when tag.ToLower().Contains("<span"):
-                    return new SpanParser(_identifyTag, _attributeTagManager, _manageChildrenTag, NameTagEnum.span);
+                    return new SpanParser(_identifyTag, _attributeTagManager, _manageChildrenTag);
+                case string tag when tag.ToLower().Contains("<li"):
+                    return new LiParser(_identifyTag, _manageChildrenTag, _attributeTagManager);
                 case string tag when tag.ToLower().Contains("<p"):
                     return new PParser(_identifyTag, _manageChildrenTag, _attributeTagManager);
                 case string tag when tag.ToLower().Contains("<td"):

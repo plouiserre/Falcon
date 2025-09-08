@@ -9,13 +9,38 @@ namespace FalconEngineTest.Utils.AssertHtml
 {
     public static class AssertTablePage
     {
-        public static void AssertLiHome(TagModel li)
+        public static void AssertUl(TagModel ul)
+        {
+            string content = HtmlPageTableData.GetHtml(TagHtmlTable.ulMenu).Replace("<ul>", string.Empty).Replace("</ul>", string.Empty);
+            Assert.Equal(NameTagEnum.ul, ul.NameTag);
+            Assert.Equal(TagFamilyEnum.WithEnd, ul.TagFamily);
+            Assert.Equal("<ul>", ul.TagStart);
+            Assert.Equal("</ul>", ul.TagEnd);
+            Assert.Equal(content, ul.Content);
+            Assert.Null(ul.Attributes);
+            AssertLi(ul.Children[0], "Home");
+            AssertLi(ul.Children[1], "News");
+            AssertLi(ul.Children[2], "New organisation");
+        }
+
+        // public static void AssertLiHome(TagModel li)
+        // {
+        //     Assert.Equal(NameTagEnum.li, li.NameTag);
+        //     Assert.Equal(TagFamilyEnum.WithEnd, li.TagFamily);
+        //     Assert.Equal("<li>", li.TagStart);
+        //     Assert.Equal("</li>", li.TagEnd);
+        //     Assert.Equal("Home", li.Content);
+        //     Assert.Null(li.Attributes);
+        //     Assert.Null(li.Children);
+        // }
+
+        public static void AssertLi(TagModel li, string content)
         {
             Assert.Equal(NameTagEnum.li, li.NameTag);
             Assert.Equal(TagFamilyEnum.WithEnd, li.TagFamily);
             Assert.Equal("<li>", li.TagStart);
             Assert.Equal("</li>", li.TagEnd);
-            Assert.Equal("Home", li.Content);
+            Assert.Equal(content, li.Content);
             Assert.Null(li.Attributes);
             Assert.Null(li.Children);
         }
