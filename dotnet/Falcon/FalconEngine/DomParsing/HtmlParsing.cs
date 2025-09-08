@@ -16,7 +16,7 @@ namespace FalconEngine.DomParsing
         private ITagParser _htmlParse;
         private ITagParser _tableParser;
         private ITagParser _articleParser;
-        private ITagParser _liParser;
+        private ITagParser _ulParser;
         private IExtractHtmlRemaining _extractHtmlRemaining;
         private IAttributeTagManager _attributeTagManager;
         private string _html;
@@ -25,13 +25,13 @@ namespace FalconEngine.DomParsing
         private bool _isValidPage;
 
         public HtmlParsing(ITagParser doctypeParse, ITagParser htmlParse, ITagParser tableParser, ITagParser articleParser,
-                            ITagParser liParser, IExtractHtmlRemaining extractHtmlRemaining, IAttributeTagManager attributeTagManager)
+                            ITagParser ulParser, IExtractHtmlRemaining extractHtmlRemaining, IAttributeTagManager attributeTagManager)
         {
             _doctypeParse = doctypeParse;
             _htmlParse = htmlParse;
             _tableParser = tableParser;
             _articleParser = articleParser;
-            _liParser = liParser;
+            _ulParser = ulParser;
             _extractHtmlRemaining = extractHtmlRemaining;
             _attributeTagManager = attributeTagManager;
         }
@@ -215,41 +215,9 @@ namespace FalconEngine.DomParsing
 
         private TagModel GetUlMenu()
         {
-            string content = "<li>Home</li><li>News</li><li>New organisation</li>";
-            var liHome = GetLiHome();
-            var liNews = GetLiNews();
-            var liOrganisation = GetLiOrganisation();
-            var ulMenu = new TagModel()
-            {
-                NameTag = NameTagEnum.ul,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = content,
-                Children = new List<TagModel>() { liHome, liNews, liOrganisation },
-                TagStart = "<ul>",
-                TagEnd = "</ul>"
-            };
+            string html = "<ul><li>Home</li><li>News</li><li>New organisation</li></ul>";
+            var ulMenu = _ulParser.Parse(html);
             return ulMenu;
-        }
-
-        private TagModel GetLiHome()
-        {
-            string html = "<li>Home</li>";
-            var liHome = _liParser.Parse(html);
-            return liHome;
-        }
-
-        private TagModel GetLiNews()
-        {
-            string html = "<li>News</li>";
-            var liNews = _liParser.Parse(html);
-            return liNews;
-        }
-
-        private TagModel GetLiOrganisation()
-        {
-            string html = "<li>New organisation</li>";
-            var liOrganisation = _liParser.Parse(html);
-            return liOrganisation;
         }
 
         private TagModel GetArticle()
