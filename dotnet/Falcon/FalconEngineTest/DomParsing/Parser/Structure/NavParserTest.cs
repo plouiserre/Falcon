@@ -22,5 +22,29 @@ namespace FalconEngineTest.DomParsing.Parser.Structure
             AssertTablePage.AssertNav(tag);
             Assert.True(isValid);
         }
+
+        [Fact]
+        public void UlParseAndNoValidateItWrongAttributs()
+        {
+            string html = "<nav alt=\"list\"><ul><li><a href=\"article.htm\">My article</a></li></ul></nav>";
+            var navParser = TestFactory.InitNavParser();
+
+            navParser.Parse(html);
+            bool isValid = navParser.IsValid();
+
+            Assert.False(isValid);
+        }
+
+        [Fact]
+        public void UlParseAndNoValidateItChildrenWrongAttributs()
+        {
+            string html = "<nav><ul><li alt=\"list\"><a href=\"article.htm\">My article</a></li></ul></nav>";
+            var navParser = TestFactory.InitNavParser();
+
+            navParser.Parse(html);
+            bool isValid = navParser.IsValid();
+
+            Assert.False(isValid);
+        }
     }
 }
