@@ -106,6 +106,8 @@ namespace FalconEngine.DomParsing
                     return new SpanParser(_identifyTag, _attributeTagManager, _manageChildrenTag);
                 case string tag when tag.ToLower().Contains("<li"):
                     return new LiParser(_identifyTag, _manageChildrenTag, _attributeTagManager);
+                case string tag when tag.ToLower().Contains("<ul"):
+                    return new UlParser(_identifyTag, _manageChildrenTag, _attributeTagManager);
                 case string tag when tag.ToLower().Contains("<p"):
                     return new PParser(_identifyTag, _manageChildrenTag, _attributeTagManager);
                 case string tag when tag.ToLower().Contains("<td"):

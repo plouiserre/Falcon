@@ -16,7 +16,7 @@ namespace FalconEngine.DomParsing
         private ITagParser _htmlParse;
         private ITagParser _tableParser;
         private ITagParser _articleParser;
-        private ITagParser _ulParser;
+        private ITagParser _navParser;
         private IExtractHtmlRemaining _extractHtmlRemaining;
         private IAttributeTagManager _attributeTagManager;
         private string _html;
@@ -25,13 +25,13 @@ namespace FalconEngine.DomParsing
         private bool _isValidPage;
 
         public HtmlParsing(ITagParser doctypeParse, ITagParser htmlParse, ITagParser tableParser, ITagParser articleParser,
-                            ITagParser ulParser, IExtractHtmlRemaining extractHtmlRemaining, IAttributeTagManager attributeTagManager)
+                            ITagParser navParser, IExtractHtmlRemaining extractHtmlRemaining, IAttributeTagManager attributeTagManager)
         {
             _doctypeParse = doctypeParse;
             _htmlParse = htmlParse;
             _tableParser = tableParser;
             _articleParser = articleParser;
-            _ulParser = ulParser;
+            _navParser = navParser;
             _extractHtmlRemaining = extractHtmlRemaining;
             _attributeTagManager = attributeTagManager;
         }
@@ -200,24 +200,9 @@ namespace FalconEngine.DomParsing
 
         private TagModel GetNav()
         {
-            var ul = GetUlMenu();
-            var nav = new TagModel()
-            {
-                NameTag = NameTagEnum.nav,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = "<ul><li>Home</li><li>News</li><li>New organisation</li></ul>",
-                Children = new List<TagModel>() { ul },
-                TagStart = "<nav>",
-                TagEnd = "</nav>"
-            };
+            string html = "<nav><ul><li>Home</li><li>News</li><li>New organisation</li></ul></nav>";
+            var nav = _navParser.Parse(html);
             return nav;
-        }
-
-        private TagModel GetUlMenu()
-        {
-            string html = "<ul><li>Home</li><li>News</li><li>New organisation</li></ul>";
-            var ulMenu = _ulParser.Parse(html);
-            return ulMenu;
         }
 
         private TagModel GetArticle()

@@ -26,9 +26,9 @@ namespace FalconEngineTest.DomParsing
             var htmlTagParser = TestFactory.InitHtmlTagParser(true);
             var tableParser = TestFactory.InitTableParser();
             var articleParser = TestFactory.InitArticleParser();
-            var ulParser = TestFactory.InitUlParser();
+            var navParser = TestFactory.InitNavParser();
             var extractHtmlRemaining = new ExtractHtmlRemaining();
-            _htmlParsing = new HtmlParsing(doctypeParser, htmlTagParser, tableParser, articleParser, ulParser,
+            _htmlParsing = new HtmlParsing(doctypeParser, htmlTagParser, tableParser, articleParser, navParser,
                                 extractHtmlRemaining, TestFactory.InitAttributeTagManager(true));
         }
 
