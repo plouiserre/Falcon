@@ -130,6 +130,11 @@ namespace FalconEngineTest.Utils
             return new ArticleParser(InitIdentifyTag(), InitManageChildren(), InitAttributeTagManager(true));
         }
 
+        public static MainParser InitMainParser()
+        {
+            return new MainParser(InitIdentifyTag(), InitManageChildren(), InitAttributeTagManager(true));
+        }
+
         public static NavParser InitNavParser()
         {
             return new NavParser(InitIdentifyTag(), InitManageChildren(), InitAttributeTagManager(true));

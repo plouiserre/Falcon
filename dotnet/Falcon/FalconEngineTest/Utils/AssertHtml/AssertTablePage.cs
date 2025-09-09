@@ -93,6 +93,18 @@ namespace FalconEngineTest.Utils.AssertHtml
             Assert.Null(p.Children);
         }
 
+        public static void AssertMain(TagModel main)
+        {
+            string content = HtmlPageTableData.GetHtml(TagHtmlTable.mainTag).Replace("<main>", string.Empty).Replace("</main>", string.Empty);
+            Assert.Equal(NameTagEnum.main, main.NameTag);
+            Assert.Equal(TagFamilyEnum.WithEnd, main.TagFamily);
+            Assert.Equal("<main>", main.TagStart);
+            Assert.Equal("</main>", main.TagEnd);
+            Assert.Equal(content, main.Content);
+            Assert.Null(main.Attributes);
+            AssertTable(main.Children[0]);
+        }
+
         public static void AssertTable(TagModel table)
         {
             string content = HtmlPageTableData.GetHtml(TagHtmlTable.postTable).Replace("<table>", string.Empty).Replace("</table>", string.Empty);
