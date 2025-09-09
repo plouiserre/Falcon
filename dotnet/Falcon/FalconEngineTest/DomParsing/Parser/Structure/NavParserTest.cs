@@ -24,7 +24,7 @@ namespace FalconEngineTest.DomParsing.Parser.Structure
         }
 
         [Fact]
-        public void UlParseAndNoValidateItWrongAttributs()
+        public void NavParseAndNoValidateItWrongAttributs()
         {
             string html = "<nav alt=\"list\"><ul><li><a href=\"article.htm\">My article</a></li></ul></nav>";
             var navParser = TestFactory.InitNavParser();
@@ -36,7 +36,7 @@ namespace FalconEngineTest.DomParsing.Parser.Structure
         }
 
         [Fact]
-        public void UlParseAndNoValidateItChildrenWrongAttributs()
+        public void NavParseAndNoValidateItChildrenWrongAttributs()
         {
             string html = "<nav><ul><li alt=\"list\"><a href=\"article.htm\">My article</a></li></ul></nav>";
             var navParser = TestFactory.InitNavParser();

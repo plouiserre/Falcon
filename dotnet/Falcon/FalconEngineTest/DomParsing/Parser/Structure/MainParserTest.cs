@@ -22,5 +22,29 @@ namespace FalconEngineTest.DomParsing.Parser.Structure
             AssertTablePage.AssertMain(tag);
             Assert.True(isValid);
         }
+
+        [Fact]
+        public void MainParseAndNoValidate()
+        {
+            string? html = "<main alt=\"all body\"><table><tbody><tr><td>Hello</td></tr><tr><td>World</td></tr></tbody></table></main>";
+            var parser = TestFactory.InitMainParser();
+
+            parser.Parse(html);
+            bool isValid = parser.IsValid();
+
+            Assert.False(isValid);
+        }
+
+        [Fact]
+        public void MainParseAndNoValidateTable()
+        {
+            string? html = "<main><table alt=\"all body\"><tbody><tr><td>Hello</td></tr><tr><td>World</td></tr></tbody></table></main>";
+            var parser = TestFactory.InitMainParser();
+
+            parser.Parse(html);
+            bool isValid = parser.IsValid();
+
+            Assert.False(isValid);
+        }
     }
 }
