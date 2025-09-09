@@ -126,6 +126,12 @@ namespace FalconEngine.DomParsing
                     return new DivParser(_identifyTag, _manageChildrenTag, _attributeTagManager);
                 case string tag when tag.ToLower().Contains("<section"):
                     return new SectionParser(_identifyTag, _manageChildrenTag, _attributeTagManager);
+                case string tag when tag.ToLower().Contains("<article"):
+                    return new ArticleParser(_identifyTag, _manageChildrenTag, _attributeTagManager);
+                case string tag when tag.ToLower().Contains("<nav"):
+                    return new NavParser(_identifyTag, _manageChildrenTag, _attributeTagManager);
+                case string tag when tag.ToLower().Contains("<main"):
+                    return new MainParser(_identifyTag, _manageChildrenTag, _attributeTagManager);
                 case string tag when tag.ToLower().Contains("<form"):
                     return new FormParser(_identifyTag, _manageChildrenTag, _attributeTagManager);
                 case string tag when tag.ToLower().Contains("<body"):
