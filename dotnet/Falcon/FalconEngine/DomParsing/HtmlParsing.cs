@@ -14,9 +14,7 @@ namespace FalconEngine.DomParsing
     {
         private ITagParser _doctypeParse;
         private ITagParser _htmlParse;
-        private ITagParser _tableParser;
-        private ITagParser _articleParser;
-        private ITagParser _navParser;
+        private ITagParser _bodyParser;
         private IExtractHtmlRemaining _extractHtmlRemaining;
         private IAttributeTagManager _attributeTagManager;
         private string _html;
@@ -24,14 +22,12 @@ namespace FalconEngine.DomParsing
         private bool _isValidHtmlTag;
         private bool _isValidPage;
 
-        public HtmlParsing(ITagParser doctypeParse, ITagParser htmlParse, ITagParser tableParser, ITagParser articleParser,
-                            ITagParser navParser, IExtractHtmlRemaining extractHtmlRemaining, IAttributeTagManager attributeTagManager)
+        public HtmlParsing(ITagParser doctypeParse, ITagParser htmlParse, ITagParser bodyParser, IExtractHtmlRemaining extractHtmlRemaining,
+                            IAttributeTagManager attributeTagManager)
         {
             _doctypeParse = doctypeParse;
             _htmlParse = htmlParse;
-            _tableParser = tableParser;
-            _articleParser = articleParser;
-            _navParser = navParser;
+            _bodyParser = bodyParser;
             _extractHtmlRemaining = extractHtmlRemaining;
             _attributeTagManager = attributeTagManager;
         }
@@ -182,56 +178,9 @@ namespace FalconEngine.DomParsing
 
         private TagModel GetBodyTag()
         {
-            var nav = GetNav();
-            var article = GetArticle();
-            var main = GetMain();
-            string content = "<nav><ul><li>Home</li><li>News</li><li>New organisation</li></ul></nav><article><section><h1>News!!!</h1><p>The direction decide to present you the news roles in the organisation.</p></section></article><main><table><thead><tr><th scope=\"col\">Title</th><th scope=\"col\">Description</th><th scope=\"col\">Type</th><th scope=\"col\">Level</th></tr></thead><tbody><tr><td>Software Engineer</td><td>Make software from specifications</td><td>Technical</td><td>1</td></tr><tr><td>Product Owner</td><td>Create and ordered features from the wishes of the business</td><td>Product</td><td>1</td></tr><tr><td>Technical Leader</td><td>Help developer to build software for the business in the a good way</td><td>Technical</td><td>2</td></tr><tr><td>Engineer Manager</td><td>Manager of a team</td><td>Management</td><td>2</td></tr><tr><td>Architect</td><td>Responsible of the quality and the durability of the tech</td><td>Technical</td><td>3</td></tr><tr><td>Director</td><td>Manager of a departement</td><td>Management</td><td>3</td></tr></tbody></table></main>";
-            var bodyTag = new TagModel()
-            {
-                NameTag = NameTagEnum.body,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = content,
-                Children = new List<TagModel>() { nav, article, main },
-                TagStart = "<body>",
-                TagEnd = "</body>"
-            };
+            string html = "<body><nav><ul><li>Home</li><li>News</li><li>New organisation</li></ul></nav><article><section><h1>News!!!</h1><p>The direction decide to present you the news roles in the organisation.</p></section></article><main><table><thead><tr><th scope=\"col\">Title</th><th scope=\"col\">Description</th><th scope=\"col\">Type</th><th scope=\"col\">Level</th></tr></thead><tbody><tr><td>Software Engineer</td><td>Make software from specifications</td><td>Technical</td><td>1</td></tr><tr><td>Product Owner</td><td>Create and ordered features from the wishes of the business</td><td>Product</td><td>1</td></tr><tr><td>Technical Leader</td><td>Help developer to build software for the business in the a good way</td><td>Technical</td><td>2</td></tr><tr><td>Engineer Manager</td><td>Manager of a team</td><td>Management</td><td>2</td></tr><tr><td>Architect</td><td>Responsible of the quality and the durability of the tech</td><td>Technical</td><td>3</td></tr><tr><td>Director</td><td>Manager of a departement</td><td>Management</td><td>3</td></tr></tbody></table></main></body>";
+            var bodyTag = _bodyParser.Parse(html);
             return bodyTag;
-        }
-
-        private TagModel GetNav()
-        {
-            string html = "<nav><ul><li>Home</li><li>News</li><li>New organisation</li></ul></nav>";
-            var nav = _navParser.Parse(html);
-            return nav;
-        }
-
-        private TagModel GetArticle()
-        {
-            string html = "<article><section><h1>News!!!</h1><p>The direction decide to present you the news roles in the organisation.</p></section></article>";
-            var article = _articleParser.Parse(html);
-            return article;
-        }
-
-        private TagModel GetMain()
-        {
-            var table = GetTable();
-            var main = new TagModel()
-            {
-                NameTag = NameTagEnum.main,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = "<table><thead><tr><th scope=\"col\">Title</th><th scope=\"col\">Description</th><th scope=\"col\">Type</th><th scope=\"col\">Level</th></tr></thead><tbody><tr><td>Software Engineer</td><td>Make software from specifications</td><td>Technical</td><td>1</td></tr><tr><td>Product Owner</td><td>Create and ordered features from the wishes of the business</td><td>Product</td><td>1</td></tr><tr><td>Technical Leader</td><td>Help developer to build software for the business in the a good way</td><td>Technical</td><td>2</td></tr><tr><td>Engineer Manager</td><td>Manager of a team</td><td>Management</td><td>2</td></tr><tr><td>Architect</td><td>Responsible of the quality and the durability of the tech</td><td>Technical</td><td>3</td></tr><tr><td>Director</td><td>Manager of a departement</td><td>Management</td><td>3</td></tr></tbody></table>",
-                Children = new List<TagModel>() { table },
-                TagStart = "<main>",
-                TagEnd = "</main>"
-            };
-            return main;
-        }
-
-        private TagModel GetTable()
-        {
-            var html = "<table><thead><tr><th scope=\"col\">Title</th><th scope=\"col\">Description</th><th scope=\"col\">Type</th><th scope=\"col\">Level</th></tr></thead><tbody><tr><td>Software Engineer</td><td>Make software from specifications</td><td>Technical</td><td>1</td></tr><tr><td>Product Owner</td><td>Create and ordered features from the wishes of the business</td><td>Product</td><td>1</td></tr><tr><td>Technical Leader</td><td>Help developer to build software for the business in the a good way</td><td>Technical</td><td>2</td></tr><tr><td>Engineer Manager</td><td>Manager of a team</td><td>Management</td><td>2</td></tr><tr><td>Architect</td><td>Responsible of the quality and the durability of the tech</td><td>Technical</td><td>3</td></tr><tr><td>Director</td><td>Manager of a departement</td><td>Management</td><td>3</td></tr></tbody></table>";
-            var table = _tableParser.Parse(html);
-            return table;
         }
 
         private static TagModel GetScriptJs()
