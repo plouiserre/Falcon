@@ -68,8 +68,7 @@ namespace FalconEngine.DomParsing
 
         private ITagParser GetTagParser()
         {
-            string htmlCleaned = _deleteUselessSpace.PurgeUselessCaractersAroundTag(_html);
-            _identifyStartTagEndTag.DetermineStartEndTags(htmlCleaned);
+            _identifyStartTagEndTag.DetermineStartEndTags(_html);
             _startTag = _identifyStartTagEndTag.StartTag;
             var endTag = _identifyStartTagEndTag.EndTag;
             RemoveUselessHtml(_startTag, endTag);
