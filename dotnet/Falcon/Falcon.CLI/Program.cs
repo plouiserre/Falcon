@@ -4,11 +4,7 @@ using FalconEngine.DomParsing;
 using FalconEngine.DomParsing.IdentifyTagParsing;
 using FalconEngine.DomParsing.Parser;
 using FalconEngine.DomParsing.Parser.Attribute;
-using FalconEngine.DomParsing.Parser.List;
-using FalconEngine.DomParsing.Parser.Structure;
-using FalconEngine.DomParsing.Parser.Table;
 using FalconEngine.Engine;
-using FalconEngine.Models;
 using Newtonsoft.Json;
 
 string html = @"<!DOCTYPE html>

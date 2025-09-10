@@ -176,5 +176,17 @@ namespace FalconEngineTest.DomParsing
             Assert.Equal("We cannot find a parser for <declaration> Tag", exception.Message);
             Assert.Equal("<declaration>", exception.NameTag);
         }
+
+        [Fact]
+        public void ShouldManageSpaceInStartTag()
+        {
+            string html = "<a  alt=\"list\" href=\"article.htm\">My article</a>";
+            var initiate = TestFactory.InitInitiateParser();
+
+            var parsers = initiate.GetTagParsers(html);
+
+            Assert.Single(parsers);
+            Assert.IsType<AParser>(parsers[0]);
+        }
     }
 }
