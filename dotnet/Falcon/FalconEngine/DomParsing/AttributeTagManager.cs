@@ -26,6 +26,7 @@ namespace FalconEngine.DomParsing
             _allAttributesAutorizedByTag[NameTagEnum.p] = new List<FamilyAttributeEnum>();
             _allAttributesAutorizedByTag[NameTagEnum.li] = new List<FamilyAttributeEnum>();
             _allAttributesAutorizedByTag[NameTagEnum.ul] = new List<FamilyAttributeEnum>();
+            _allAttributesAutorizedByTag[NameTagEnum.script] = new List<FamilyAttributeEnum>();
             _allAttributesAutorizedByTag[NameTagEnum.label] = new List<FamilyAttributeEnum>();
             _allAttributesAutorizedByTag[NameTagEnum.input] = new List<FamilyAttributeEnum>();
             _allAttributesAutorizedByTag[NameTagEnum.option] = new List<FamilyAttributeEnum>();
@@ -61,6 +62,7 @@ namespace FalconEngine.DomParsing
             SetAAttributesAutorized();
             SetSpanAttributesAutorized();
             SetH1AttributesAutorized();
+            SetScriptAttributesAutorized();
             SetLabelAttributesAutorized();
             SetInputAttributesAutorized();
             SetOptionAttributesAutorized();
@@ -166,6 +168,20 @@ namespace FalconEngine.DomParsing
             SetUniversalAttributes(NameTagEnum.label);
             _allAttributesAutorizedByTag[NameTagEnum.label].Add(FamilyAttributeEnum.forAttr);
             _allAttributesAutorizedByTag[NameTagEnum.label].Add(FamilyAttributeEnum.form);
+        }
+
+        private void SetScriptAttributesAutorized()
+        {
+            SetUniversalAttributes(NameTagEnum.script);
+            _allAttributesAutorizedByTag[NameTagEnum.script].Add(FamilyAttributeEnum.async);
+            _allAttributesAutorizedByTag[NameTagEnum.script].Add(FamilyAttributeEnum.crossorigin);
+            _allAttributesAutorizedByTag[NameTagEnum.script].Add(FamilyAttributeEnum.defer);
+            _allAttributesAutorizedByTag[NameTagEnum.script].Add(FamilyAttributeEnum.integrity);
+            _allAttributesAutorizedByTag[NameTagEnum.script].Add(FamilyAttributeEnum.nomodume);
+            _allAttributesAutorizedByTag[NameTagEnum.script].Add(FamilyAttributeEnum.nonce);
+            _allAttributesAutorizedByTag[NameTagEnum.script].Add(FamilyAttributeEnum.referrerpolicy);
+            _allAttributesAutorizedByTag[NameTagEnum.script].Add(FamilyAttributeEnum.src);
+            _allAttributesAutorizedByTag[NameTagEnum.script].Add(FamilyAttributeEnum.type);
         }
 
         private void SetInputAttributesAutorized()

@@ -15,6 +15,7 @@ namespace FalconEngine.DomParsing
         private ITagParser _doctypeParse;
         private ITagParser _htmlParse;
         private ITagParser _bodyParser;
+        private ITagParser _scriptParser;
         private IExtractHtmlRemaining _extractHtmlRemaining;
         private IAttributeTagManager _attributeTagManager;
         private string _html;
@@ -22,12 +23,13 @@ namespace FalconEngine.DomParsing
         private bool _isValidHtmlTag;
         private bool _isValidPage;
 
-        public HtmlParsing(ITagParser doctypeParse, ITagParser htmlParse, ITagParser bodyParser, IExtractHtmlRemaining extractHtmlRemaining,
-                            IAttributeTagManager attributeTagManager)
+        public HtmlParsing(ITagParser doctypeParse, ITagParser htmlParse, ITagParser bodyParser, ITagParser scriptParser,
+                    IExtractHtmlRemaining extractHtmlRemaining, IAttributeTagManager attributeTagManager)
         {
             _doctypeParse = doctypeParse;
             _htmlParse = htmlParse;
             _bodyParser = bodyParser;
+            _scriptParser = scriptParser;
             _extractHtmlRemaining = extractHtmlRemaining;
             _attributeTagManager = attributeTagManager;
         }
@@ -183,15 +185,10 @@ namespace FalconEngine.DomParsing
             return bodyTag;
         }
 
-        private static TagModel GetScriptJs()
+        private TagModel GetScriptJs()
         {
-            var scriptJs = new TagModel()
-            {
-                NameTag = NameTagEnum.script,
-                TagFamily = TagFamilyEnum.WithEnd,
-                TagStart = "<script src=\"javascript.js\">",
-                TagEnd = "</script>"
-            };
+            string html = "<script src=\"javascript.js\"></script>";
+            var scriptJs = _scriptParser.Parse(html);
             return scriptJs;
         }
     }

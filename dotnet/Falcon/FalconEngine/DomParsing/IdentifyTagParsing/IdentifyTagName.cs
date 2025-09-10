@@ -86,6 +86,8 @@ namespace FalconEngine.DomParsing.IdentifyTagParsing
                     return NameTagEnum.option;
                 case "select":
                     return NameTagEnum.select;
+                case "script":
+                    return NameTagEnum.script;
                 default:
                     //throw new Exception($"unknown tag {simpleTag.ToLower()}");
                     return NameTagEnum.a;

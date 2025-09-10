@@ -842,9 +842,11 @@ namespace FalconEngineTest.Data
             var scriptJs = new TagModel()
             {
                 NameTag = NameTagEnum.script,
+                Attributes = new List<AttributeModel>() { new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.src.ToString(), Value = "javascript.js" } },
                 TagFamily = TagFamilyEnum.WithEnd,
                 TagStart = "<script src=\"javascript.js\">",
-                TagEnd = "</script>"
+                TagEnd = "</script>",
+                Content = ""
             };
             return scriptJs;
         }
