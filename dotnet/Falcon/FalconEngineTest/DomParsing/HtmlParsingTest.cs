@@ -24,10 +24,8 @@ namespace FalconEngineTest.DomParsing
             var identifyTag = TestFactory.InitIdentifyTag();
             var doctypeParser = new DoctypeParser(identifyTag);
             var htmlTagParser = TestFactory.InitHtmlTagParser(true);
-            var bodyParser = TestFactory.InitBodyParser();
-            var scriptParser = TestFactory.InitScriptParser();
             var extractHtmlRemaining = new ExtractHtmlRemaining();
-            _htmlParsing = new HtmlParsing(doctypeParser, htmlTagParser, bodyParser, scriptParser, extractHtmlRemaining,
+            _htmlParsing = new HtmlParsing(doctypeParser, htmlTagParser, extractHtmlRemaining,
                             TestFactory.InitAttributeTagManager(true));
         }
 
@@ -36,7 +34,7 @@ namespace FalconEngineTest.DomParsing
         {
             HtmlPage htmlPage = SimulateParsingSimplePage.InitHtmlPage();
 
-            var parsing = _htmlParsing.Parse(HtmlPageSimpleData.GetHtml(TagHtmlSimple.htmlPageWithDoctype), false);
+            var parsing = _htmlParsing.Parse(HtmlPageSimpleData.GetHtml(TagHtmlSimple.htmlPageWithDoctype));
 
             Assert.True(AssertCommon.AssertTagsAreIdenticals(htmlPage.Tags, parsing.Tags));
             Assert.True(parsing.IsValid);
@@ -47,7 +45,7 @@ namespace FalconEngineTest.DomParsing
         {
             string html = string.Concat("<doctype>", HtmlPageSimpleData.GetHtml(TagHtmlSimple.htmlPage));
 
-            var parsing = _htmlParsing.Parse(html, false);
+            var parsing = _htmlParsing.Parse(html);
 
             Assert.False(parsing.IsValid);
         }
@@ -57,7 +55,7 @@ namespace FalconEngineTest.DomParsing
         {
             string html = string.Concat(HtmlPageSimpleData.GetHtml(TagHtmlSimple.doctype), "<html scheme=\"xml\">Hello World</html>");
 
-            var parsing = _htmlParsing.Parse(html, false);
+            var parsing = _htmlParsing.Parse(html);
 
             Assert.False(parsing.IsValid);
         }
@@ -67,7 +65,7 @@ namespace FalconEngineTest.DomParsing
         {
             string html = HtmlPageSimpleData.GetHtml(TagHtmlSimple.htmlNotValid);
 
-            var parsing = _htmlParsing.Parse(html, false);
+            var parsing = _htmlParsing.Parse(html);
 
             Assert.False(parsing.IsValid);
         }
@@ -77,7 +75,7 @@ namespace FalconEngineTest.DomParsing
         {
             HtmlPage htmlPage = SimulateParsingFormPage.InitHtmlPage();
 
-            var parsing = _htmlParsing.Parse(HtmlPageFormData.GetHtml(TagHtmlForm.htmlFormWithDoctype), false);
+            var parsing = _htmlParsing.Parse(HtmlPageFormData.GetHtml(TagHtmlForm.htmlFormWithDoctype));
 
             Assert.True(AssertCommon.AssertTagsAreIdenticals(htmlPage.Tags, parsing.Tags));
             Assert.True(parsing.IsValid);
@@ -88,7 +86,7 @@ namespace FalconEngineTest.DomParsing
         {
             var html = "<!DOCTYPE html><html><body><div id=\"main\"><declaration>Hello world</declaration></div></body></html>";
 
-            var exception = Assert.Throws<UnknownTagException>(() => _htmlParsing.Parse(html, false));
+            var exception = Assert.Throws<UnknownTagException>(() => _htmlParsing.Parse(html));
 
             Assert.Equal(ErrorTypeParsing.unknownTag, exception.ErrorType);
             Assert.Equal("<declaration> tag is unknown", exception.Message);
@@ -99,7 +97,7 @@ namespace FalconEngineTest.DomParsing
         {
             var html = "<!DOCTYPE html><html><body><div id=\"main\"><p mode=\"declaration\">Hello world</p></div></body></html>";
 
-            var exception = Assert.Throws<UnknownAttributeException>(() => _htmlParsing.Parse(html, false));
+            var exception = Assert.Throws<UnknownAttributeException>(() => _htmlParsing.Parse(html));
 
             Assert.Equal(ErrorTypeParsing.unknownAttribute, exception.ErrorType);
             Assert.Equal("mode attribute in <p mode=\"declaration\"> tag is unknown", exception.Message);
@@ -110,7 +108,7 @@ namespace FalconEngineTest.DomParsing
         {
             var html = "<!DOCTYPE html><html><body><div id=\"main\"><p Hello world</p></div></body></html>";
 
-            var exception = Assert.Throws<TagBadFormattingException>(() => _htmlParsing.Parse(html, false));
+            var exception = Assert.Throws<TagBadFormattingException>(() => _htmlParsing.Parse(html));
 
             Assert.Equal(ErrorTypeParsing.badFormatting, exception.ErrorType);
             Assert.Equal("<p Hello world</p> is bad formatting", exception.Message);
@@ -123,7 +121,7 @@ namespace FalconEngineTest.DomParsing
         {
             HtmlPage htmlPage = SimulateParsingTablePage.InitHtmlPage();
 
-            var parsing = _htmlParsing.Parse(HtmlPageTableData.GetHtml(TagHtmlTable.htmlTableWithDoctype), true);
+            var parsing = _htmlParsing.Parse(HtmlPageTableData.GetHtml(TagHtmlTable.htmlTableWithDoctype));
 
             Assert.True(AssertCommon.AssertTagsAreIdenticals(htmlPage.Tags, parsing.Tags));
             Assert.True(parsing.IsValid);

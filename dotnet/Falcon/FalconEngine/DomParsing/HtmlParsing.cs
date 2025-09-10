@@ -14,8 +14,6 @@ namespace FalconEngine.DomParsing
     {
         private ITagParser _doctypeParse;
         private ITagParser _htmlParse;
-        private ITagParser _bodyParser;
-        private ITagParser _scriptParser;
         private IExtractHtmlRemaining _extractHtmlRemaining;
         private IAttributeTagManager _attributeTagManager;
         private string _html;
@@ -23,57 +21,45 @@ namespace FalconEngine.DomParsing
         private bool _isValidHtmlTag;
         private bool _isValidPage;
 
-        public HtmlParsing(ITagParser doctypeParse, ITagParser htmlParse, ITagParser bodyParser, ITagParser scriptParser,
-                    IExtractHtmlRemaining extractHtmlRemaining, IAttributeTagManager attributeTagManager)
+        public HtmlParsing(ITagParser doctypeParse, ITagParser htmlParse, IExtractHtmlRemaining extractHtmlRemaining,
+                    IAttributeTagManager attributeTagManager)
         {
             _doctypeParse = doctypeParse;
             _htmlParse = htmlParse;
-            _bodyParser = bodyParser;
-            _scriptParser = scriptParser;
             _extractHtmlRemaining = extractHtmlRemaining;
             _attributeTagManager = attributeTagManager;
         }
 
-        public HtmlPage Parse(string html, bool isThirdTest)
+        public HtmlPage Parse(string html)
         {
             _html = html;
             _attributeTagManager.SetAttributes();
             var doctypeTag = GetDoctypeTag();
-            if (!isThirdTest)
+            try
             {
-                try
-                {
-                    RemoveUselessHtml(doctypeTag);
+                RemoveUselessHtml(doctypeTag);
 
-                    var htmlTag = GetTagHtml();
-                    RemoveTagOpenCloed(htmlTag);
-                    DeterminateIsValidPage();
-                    var tags = new List<TagModel>() { doctypeTag, htmlTag };
-                    var htmlPage = new HtmlPage() { Tags = tags, IsValid = _isValidPage };
-                    return htmlPage;
-                }
-                catch (ParserNotFoundException ex)
-                {
-                    string message = string.Format($"{ex.NameTag} tag is unknown");
-                    throw new UnknownTagException(message);
-                }
-                catch (AttributeTagParserException ex)
-                {
-                    string message = string.Format($"{ex.AttributeTagUnknown} attribute in {ex.StartTag} tag is unknown");
-                    throw new UnknownAttributeException(message);
-                }
-                catch (StartTagBadFormattedException ex)
-                {
-                    string message = string.Format($"{ex.TagBadFormatting} is bad formatting");
-                    throw new TagBadFormattingException(message);
-                }
-            }
-            else
-            {
-                var htmlTag = GetTagHtmlStatic();
+                var htmlTag = GetTagHtml();
+                RemoveTagOpenCloed(htmlTag);
+                DeterminateIsValidPage();
                 var tags = new List<TagModel>() { doctypeTag, htmlTag };
-                var htmlPage = new HtmlPage() { Tags = tags, IsValid = true };
+                var htmlPage = new HtmlPage() { Tags = tags, IsValid = _isValidPage };
                 return htmlPage;
+            }
+            catch (ParserNotFoundException ex)
+            {
+                string message = string.Format($"{ex.NameTag} tag is unknown");
+                throw new UnknownTagException(message);
+            }
+            catch (AttributeTagParserException ex)
+            {
+                string message = string.Format($"{ex.AttributeTagUnknown} attribute in {ex.StartTag} tag is unknown");
+                throw new UnknownAttributeException(message);
+            }
+            catch (StartTagBadFormattedException ex)
+            {
+                string message = string.Format($"{ex.TagBadFormatting} is bad formatting");
+                throw new TagBadFormattingException(message);
             }
         }
 
@@ -104,92 +90,6 @@ namespace FalconEngine.DomParsing
         private void DeterminateIsValidPage()
         {
             _isValidPage = _isValidDoctype && _isValidHtmlTag;
-        }
-
-        private TagModel GetTagHtmlStatic()
-        {
-            var attributLang = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.lang.ToString(), Value = "en" };
-            var attributDir = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.dir.ToString(), Value = "auto" };
-            var attributXmlns = new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.xmlns.ToString(), Value = "http://www.w3.org/1999/xhtml" };
-            var headTag = GetHeadTag();
-            var body = GetBodyTag();
-            var scriptJs = GetScriptJs();
-            string content = "<head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>Document</title><link rel=\"stylesheet\" href=\"main.css\" data-preload=\"true\"></head><body><nav><ul><li>Home</li><li>News</li><li>New organisation</li></ul></nav><article><section><h1>News!!!</h1><p>The direction decide to present you the news roles in the organisation.</p></section></article><main><table><thead><tr><th scope=\"col\">Title</th><th scope=\"col\">Description</th><th scope=\"col\">Type</th><th scope=\"col\">Level</th></tr></thead><tbody><tr><td>Software Engineer</td><td>Make software from specifications</td><td>Technical</td><td>1</td></tr><tr><td>Product Owner</td><td>Create and ordered features from the wishes of the business</td><td>Product</td><td>1</td></tr><tr><td>Technical Leader</td><td>Help developer to build software for the business in the a good way</td><td>Technical</td><td>2</td></tr><tr><td>Engineer Manager</td><td>Manager of a team</td><td>Management</td><td>2</td></tr><tr><td>Architect</td><td>Responsible of the quality and the durability of the tech</td><td>Technical</td><td>3</td></tr><tr><td>Director</td><td>Manager of a departement</td><td>Management</td><td>3</td></tr></tbody></table></main></body><script src=\"javascript.js\"></script>";
-            var htmlTag = new TagModel()
-            {
-                Attributes = new List<AttributeModel>() { attributLang, attributDir, attributXmlns },
-                NameTag = NameTagEnum.html,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = content,
-                TagStart = "<html lang=\"en\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\">",
-                TagEnd = "</html>",
-                Children = new List<TagModel>() { headTag, body, scriptJs }
-            };
-            return htmlTag;
-        }
-
-        private static TagModel GetHeadTag()
-        {
-            var metaCharsetTag = new TagModel()
-            {
-                TagFamily = TagFamilyEnum.NoEnd,
-                Attributes = new List<AttributeModel>() { new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.charset.ToString(), Value = "UTF-8" } },
-                NameTag = NameTagEnum.meta,
-                TagStart = "<meta charset=\"UTF-8\">"
-            };
-            var metaViewPort = new TagModel()
-            {
-                TagFamily = TagFamilyEnum.NoEnd,
-                Attributes = new List<AttributeModel>() {
-                        new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.name.ToString(), Value = "viewport" } ,
-                        new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.content.ToString(), Value = "width=device-width, initial-scale=1.0" }
-                },
-                NameTag = NameTagEnum.meta,
-                TagStart = "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
-            };
-            var title = new TagModel()
-            {
-                TagFamily = TagFamilyEnum.WithEnd,
-                NameTag = NameTagEnum.title,
-                Content = "Document",
-                TagStart = "<title>",
-                TagEnd = "</title>"
-            };
-            var link = new TagModel()
-            {
-                TagFamily = TagFamilyEnum.NoEnd,
-                Attributes = new List<AttributeModel>() {
-                        new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.rel.ToString(), Value = "stylesheet" } ,
-                        new AttributeModel() { FamilyAttribute = FamilyAttributeEnum.href.ToString(), Value = "main.css" },
-                        new AttributeModel(){ FamilyAttribute = "data-preload", Value = "true"}
-                },
-                NameTag = NameTagEnum.link,
-                TagStart = "<link rel=\"stylesheet\" href=\"main.css\" data-preload=\"true\">",
-            };
-            var headTag = new TagModel()
-            {
-                NameTag = NameTagEnum.head,
-                TagFamily = TagFamilyEnum.WithEnd,
-                Content = "<meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>Document</title><link rel=\"stylesheet\" href=\"main.css\" data-preload=\"true\">",
-                Children = new List<TagModel>() { metaCharsetTag, metaViewPort, title, link },
-                TagStart = "<head>",
-                TagEnd = "</head>"
-            };
-            return headTag;
-        }
-
-        private TagModel GetBodyTag()
-        {
-            string html = "<body><nav><ul><li>Home</li><li>News</li><li>New organisation</li></ul></nav><article><section><h1>News!!!</h1><p>The direction decide to present you the news roles in the organisation.</p></section></article><main><table><thead><tr><th scope=\"col\">Title</th><th scope=\"col\">Description</th><th scope=\"col\">Type</th><th scope=\"col\">Level</th></tr></thead><tbody><tr><td>Software Engineer</td><td>Make software from specifications</td><td>Technical</td><td>1</td></tr><tr><td>Product Owner</td><td>Create and ordered features from the wishes of the business</td><td>Product</td><td>1</td></tr><tr><td>Technical Leader</td><td>Help developer to build software for the business in the a good way</td><td>Technical</td><td>2</td></tr><tr><td>Engineer Manager</td><td>Manager of a team</td><td>Management</td><td>2</td></tr><tr><td>Architect</td><td>Responsible of the quality and the durability of the tech</td><td>Technical</td><td>3</td></tr><tr><td>Director</td><td>Manager of a departement</td><td>Management</td><td>3</td></tr></tbody></table></main></body>";
-            var bodyTag = _bodyParser.Parse(html);
-            return bodyTag;
-        }
-
-        private TagModel GetScriptJs()
-        {
-            string html = "<script src=\"javascript.js\"></script>";
-            var scriptJs = _scriptParser.Parse(html);
-            return scriptJs;
         }
     }
 }
