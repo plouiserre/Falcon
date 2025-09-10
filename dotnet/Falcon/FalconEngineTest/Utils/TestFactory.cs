@@ -32,6 +32,11 @@ namespace FalconEngineTest.Utils
             return new LinkParser(InitIdentifyTag(), InitAttributeTagManager(true));
         }
 
+        public static ScriptParser InitScriptParser()
+        {
+            return new ScriptParser(InitIdentifyTag(), InitAttributeTagManager(true));
+        }
+
         public static AParser InitAParser()
         {
             return new AParser(InitIdentifyTag(), InitAttributeTagManager(true), InitDeleteUselessSpace());

@@ -105,6 +105,18 @@ namespace FalconEngineTest.Utils.AssertHtml
             AssertTable(main.Children[0]);
         }
 
+        public static void AssertScript(TagModel script)
+        {
+            Assert.Equal(NameTagEnum.script, script.NameTag);
+            Assert.Equal(TagFamilyEnum.WithEnd, script.TagFamily);
+            Assert.Equal("<script src=\"javascript.js\">", script.TagStart);
+            Assert.Equal("</script>", script.TagEnd);
+            Assert.Empty(script.Content);
+            Assert.Equal("src", script.Attributes[0].FamilyAttribute);
+            Assert.Equal("javascript.js", script.Attributes[0].Value);
+            Assert.Null(script.Children);
+        }
+
         public static void AssertTable(TagModel table)
         {
             string content = HtmlPageTableData.GetHtml(TagHtmlTable.postTable).Replace("<table>", string.Empty).Replace("</table>", string.Empty);
