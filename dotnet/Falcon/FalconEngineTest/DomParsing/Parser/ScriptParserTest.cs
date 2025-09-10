@@ -25,7 +25,6 @@ namespace FalconEngineTest.DomParsing.Parser
         }
 
 
-        //with all valids attributs
         [Fact]
         public void ScriptParseWithAllAttributsAndValidate()
         {
