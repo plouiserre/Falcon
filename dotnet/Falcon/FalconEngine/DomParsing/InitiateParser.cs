@@ -138,6 +138,8 @@ namespace FalconEngine.DomParsing
                     return new BodyParser(_identifyTag, _manageChildrenTag, _attributeTagManager);
                 case string tag when tag.ToLower().Contains("<a"):
                     return new AParser(_identifyTag, _attributeTagManager, _deleteUselessSpace);
+                case string tag when tag.ToLower().Contains("<script"):
+                    return new ScriptParser(_identifyTag, _attributeTagManager);
                 default:
                     string message = string.Format($"We cannot find a parser for {_startTag} Tag");
                     throw new ParserNotFoundException(_startTag, ErrorTypeParsing.parserNotFoundException, message);
