@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace FalconEngineTest.DomParsing.IdentifyTagParsing
 {
-    public class LocateEndCaracterTest
+    public class LocateEndTagTest
     {
         [Fact]
-        public void LocateEndCaracterSimpleHtml()
+        public void LocateEndTagSimpleHtml()
         {
             string html = "<div>Hello World</div>";
-            var locateEndCaracter = TestFactory.InitLocateEndCaracter();
+            var LocateEndTag = TestFactory.InitLocateEndTag();
 
-            int? place = locateEndCaracter.Search("<div>", html);
+            int? place = LocateEndTag.Search("<div>", html);
 
             Assert.Equal(16, place);
         }
@@ -26,21 +26,21 @@ namespace FalconEngineTest.DomParsing.IdentifyTagParsing
         public void LocateEndCaractSimpleHtmlAndStartTagHaveAttributs()
         {
             string html = "<div class=\"greetings\">Hello World</div>";
-            var locateEndCaracter = TestFactory.InitLocateEndCaracter();
+            var LocateEndTag = TestFactory.InitLocateEndTag();
 
-            int? place = locateEndCaracter.Search("<div class=\"greetings\">", html);
+            int? place = LocateEndTag.Search("<div class=\"greetings\">", html);
 
             Assert.Equal(34, place);
         }
 
 
         [Fact]
-        public void LocateEndCaracterDoubleDivWithAttributsHtml()
+        public void LocateEndTagDoubleDivWithAttributsHtml()
         {
             string html = "<div class=\"greetings\"><div class=\"doubleDiv\"> Hello World</div></div>";
-            var locateEndCaracter = TestFactory.InitLocateEndCaracter();
+            var LocateEndTag = TestFactory.InitLocateEndTag();
 
-            int? place = locateEndCaracter.Search("<div class=\"greetings\">", html);
+            int? place = LocateEndTag.Search("<div class=\"greetings\">", html);
 
             Assert.Equal(64, place);
         }
@@ -48,12 +48,12 @@ namespace FalconEngineTest.DomParsing.IdentifyTagParsing
 
         //noendTag
         [Fact]
-        public void LocateEndCaracterWithNoEndTag()
+        public void LocateEndTagWithNoEndTag()
         {
             string html = HtmlPageTableData.GetHtml(TagHtmlTable.metaCharset);
-            var locateEndCaracter = TestFactory.InitLocateEndCaracter();
+            var LocateEndTag = TestFactory.InitLocateEndTag();
 
-            int? place = locateEndCaracter.Search(html, html);
+            int? place = LocateEndTag.Search(html, html);
 
             Assert.Null(place);
         }

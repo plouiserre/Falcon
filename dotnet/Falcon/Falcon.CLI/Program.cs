@@ -25,7 +25,7 @@ string html = @"<!DOCTYPE html>
 
 var attributeTagManager = new AttributeTagManager();
 var identifyTagName = new IdentifyTagName();
-var locateEndCaracter = new LocateEndCaracter();
+var locateEndCaracter = new LocateEndTag();
 var determinateContent = new DeterminateContent(locateEndCaracter);
 var identifyStartTagEndTag = new IdentifyStartTagEndTag();
 var extractHtmlRemaining = new ExtractHtmlRemaining();

@@ -7,9 +7,9 @@ namespace FalconEngine.DomParsing.IdentifyTagParsing
 {
     public class DeterminateContent : IDeterminateContent
     {
-        private ILocateEndCaracter _locateEndCaracter;
+        private ILocateEndTag _locateEndCaracter;
 
-        public DeterminateContent(ILocateEndCaracter locateEndCaracter)
+        public DeterminateContent(ILocateEndTag locateEndCaracter)
         {
             _locateEndCaracter = locateEndCaracter;
         }

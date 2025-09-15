@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FalconEngine.DomParsing.IdentifyTagParsing
 {
-    public class LocateEndCaracter : ILocateEndCaracter
+    public class LocateEndTag : ILocateEndTag
     {
         private string _html;
         private string _startTag;
