@@ -171,7 +171,7 @@ namespace FalconEngineTest.Utils
 
         public static DeterminateContent InitDeterminateContent()
         {
-            return new DeterminateContent();
+            return new DeterminateContent(InitLocateEndCaracter());
         }
 
         public static DeleteUselessSpace InitDeleteUselessSpace()
