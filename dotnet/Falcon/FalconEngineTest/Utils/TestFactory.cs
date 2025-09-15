@@ -171,7 +171,7 @@ namespace FalconEngineTest.Utils
 
         public static DeterminateContent InitDeterminateContent()
         {
-            return new DeterminateContent();
+            return new DeterminateContent(InitLocateEndTag());
         }
 
         public static DeleteUselessSpace InitDeleteUselessSpace()
@@ -204,9 +204,9 @@ namespace FalconEngineTest.Utils
             return initiate;
         }
 
-        public static LocateEndCaracter InitLocateEndCaracter()
+        public static LocateEndTag InitLocateEndTag()
         {
-            return new LocateEndCaracter();
+            return new LocateEndTag();
         }
 
         public static HeadParser InitHeadParser()
