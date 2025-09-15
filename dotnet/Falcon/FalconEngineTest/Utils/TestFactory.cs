@@ -204,6 +204,11 @@ namespace FalconEngineTest.Utils
             return initiate;
         }
 
+        public static LocateEndCaracter InitLocateEndCaracter()
+        {
+            return new LocateEndCaracter();
+        }
+
         public static HeadParser InitHeadParser()
         {
             var headParser = new HeadParser(InitDeleteUselessSpace(), InitIdentifyTag(), InitManageChildren());

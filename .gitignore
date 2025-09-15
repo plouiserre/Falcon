@@ -53,3 +53,5 @@ CodeCoverage/
 TestResult.xml
 nunit-*.xml
 .DS_Store
+/.vs
+/dotnet/Falcon/.vs
