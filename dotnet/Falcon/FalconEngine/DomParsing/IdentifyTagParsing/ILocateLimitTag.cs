@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace FalconEngine.DomParsing.IdentifyTagParsing
 {
-    public interface ILocateEndTag
+    public interface ILocateLimitTag
     {
-        public int? Search(string startTag, string html);
+        public int? Search(LimitMode mode, string startTag, string html);
     }
 }

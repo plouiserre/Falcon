@@ -22,17 +22,18 @@ namespace FalconEngine.DomParsing
         private IDeleteUselessSpace _deleteUselessSpace;
         private IIdentifyTag _identifyTag;
         private IIdentifyStartTagEndTag _identifyStartTagEndTag;
+        private ILocateLimitTag _locateLimitTag;
         private IDeterminateContent _determinateContent;
         private IManageChildrenTag _manageChildrenTag;
-        private IAttributeTagManager _attributeTagManager;
+        private IAttributeTagManager _attributeTagManager;        
 
-        public InitiateParser(IDeleteUselessSpace deleteUselessSpace, IIdentifyTag identifyTag,
-            IIdentifyStartTagEndTag identifyStartTagEndTag, IDeterminateContent determinateContent,
-            IManageChildrenTag manageChildrenTag, IAttributeTagManager attributeTagManager)
+        public InitiateParser(IDeleteUselessSpace deleteUselessSpace, IIdentifyTag identifyTag, IIdentifyStartTagEndTag identifyStartTagEndTag, 
+            ILocateLimitTag locateLimitTag, IDeterminateContent determinateContent, IManageChildrenTag manageChildrenTag, IAttributeTagManager attributeTagManager)
         {
             _deleteUselessSpace = deleteUselessSpace;
             _identifyTag = identifyTag;
             _identifyStartTagEndTag = identifyStartTagEndTag;
+            _locateLimitTag = locateLimitTag;
             _determinateContent = determinateContent;
             _manageChildrenTag = manageChildrenTag;
             _attributeTagManager = attributeTagManager;

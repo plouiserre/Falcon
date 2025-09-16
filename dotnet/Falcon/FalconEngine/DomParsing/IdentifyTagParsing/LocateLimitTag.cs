@@ -6,30 +6,50 @@ using System.Threading.Tasks;
 
 namespace FalconEngine.DomParsing.IdentifyTagParsing
 {
-    public class LocateEndTag : ILocateEndTag
+    public enum LimitMode
+    {
+        Start,
+        End
+    }
+    public class LocateLimitTag : ILocateLimitTag
     {
         private string _html;
         private string _startTag;
 
-        public int? Search(string startTag, string html)
+        public int? Search(LimitMode mode, string startTag, string html)
         {
             int result = 0;
             _startTag = startTag;
             _html = html;
+           if(mode == LimitMode.End)
+            {
+                result = LocateEndTag(startTag, html);
+            }
+            else
+            {
+                result = LocateStartTag(html);
+            }
+                return result != 0 ? result : null;
+        }
+
+        private int LocateEndTag(string startTag, string html)
+        {
+            int result = 0;
             string endTag = GetEndTag();
             string baseStartTag = GetBaseStartTag();
             int baseStartTagCount = CountBaseStartTag(baseStartTag);
-            for(int i = 0; i < _html.Length; i++)
+            for (int i = 0; i < _html.Length; i++)
             {
-                if(i + endTag.Length > _html.Length)                
+                if (i + endTag.Length > _html.Length)
                     break;
                 string endTagCandidate = _html.Substring(i, endTag.Length);
-                if(endTagCandidate == endTag && baseStartTagCount == 1)
-                 {
+                if (endTagCandidate == endTag && baseStartTagCount == 1)
+                {
                     result = i;
                     break;
                 }
-                else if(endTagCandidate == endTag) { 
+                else if (endTagCandidate == endTag)
+                {
                     baseStartTagCount--;
                 }
                 else
@@ -37,7 +57,26 @@ namespace FalconEngine.DomParsing.IdentifyTagParsing
                     continue;
                 }
             }
-            return result != 0 ? result : null;
+            return result;
+        }
+
+        private int LocateStartTag(string html)
+        {
+            int Localisation = 0;
+            bool IsOpenBracketPresent = false;
+            for (int i = 0; i < _html.Length; i++)
+            {
+                char caracter = _html[i];
+                if (caracter !=' ' && caracter != '\n' && caracter != '\r')
+                {
+                    Localisation = i;
+                    IsOpenBracketPresent = true;
+                    break;
+                }
+            }
+            if (!IsOpenBracketPresent)
+                Localisation = _html.Length;
+            return Localisation;
         }
 
         private string GetBaseStartTag()

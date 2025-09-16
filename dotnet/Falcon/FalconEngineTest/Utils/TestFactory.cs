@@ -198,15 +198,14 @@ namespace FalconEngineTest.Utils
 
         public static InitiateParser InitInitiateParser()
         {
-            var identifyTag = InitIdentifyTag();
-            var initiate = new InitiateParser(InitDeleteUselessSpace(), identifyTag, InitIdentifyStartTagEndTag(),
-                InitDeterminateContent(), InitManageChildren(), InitAttributeTagManager(false));
+            var initiate = new InitiateParser(InitDeleteUselessSpace(), InitIdentifyTag(), InitIdentifyStartTagEndTag(),
+                InitLocateEndTag(), InitDeterminateContent(), InitManageChildren(), InitAttributeTagManager(false));
             return initiate;
         }
 
-        public static LocateEndTag InitLocateEndTag()
+        public static LocateLimitTag InitLocateEndTag()
         {
-            return new LocateEndTag();
+            return new LocateLimitTag();
         }
 
         public static HeadParser InitHeadParser()
@@ -217,8 +216,8 @@ namespace FalconEngineTest.Utils
 
         public static ManageChildrenTag InitManageChildren()
         {
-            var manageChildrenTag = new ManageChildrenTag(InitDeleteUselessSpace(), InitIdentifyTag(),
-            InitIdentifyStartTagEndTag(), InitDeterminateContent(), InitAttributeTagManager(false));
+            var manageChildrenTag = new ManageChildrenTag(InitDeleteUselessSpace(), InitIdentifyTag(), InitIdentifyStartTagEndTag(), InitLocateEndTag(),
+                InitDeterminateContent(), InitAttributeTagManager(false));
             return manageChildrenTag;
         }
     }
