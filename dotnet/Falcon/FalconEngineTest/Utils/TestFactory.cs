@@ -204,9 +204,9 @@ namespace FalconEngineTest.Utils
             return initiate;
         }
 
-        public static LocateEndTag InitLocateEndTag()
+        public static LocateLimitTag InitLocateEndTag()
         {
-            return new LocateEndTag();
+            return new LocateLimitTag();
         }
 
         public static HeadParser InitHeadParser()
