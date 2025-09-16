@@ -1,4 +1,5 @@
-﻿using FalconEngineTest.Utils;
+﻿using FalconEngine.DomParsing.IdentifyTagParsing;
+using FalconEngineTest.Utils;
 using FalconEngineTest.Utils.HtmlData;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FalconEngineTest.DomParsing.IdentifyTagParsing
 {
-    public class LocateEndTagTest
+    public class LocateLimitTagTest
     {
         [Fact]
         public void LocateEndTagSimpleHtml()
@@ -16,7 +17,7 @@ namespace FalconEngineTest.DomParsing.IdentifyTagParsing
             string html = "<div>Hello World</div>";
             var LocateEndTag = TestFactory.InitLocateEndTag();
 
-            int? place = LocateEndTag.Search("<div>", html);
+            int? place = LocateEndTag.Search(LimitMode.End, "<div>", html);
 
             Assert.Equal(16, place);
         }
@@ -28,7 +29,7 @@ namespace FalconEngineTest.DomParsing.IdentifyTagParsing
             string html = "<div class=\"greetings\">Hello World</div>";
             var LocateEndTag = TestFactory.InitLocateEndTag();
 
-            int? place = LocateEndTag.Search("<div class=\"greetings\">", html);
+            int? place = LocateEndTag.Search(LimitMode.End, "<div class=\"greetings\">", html);
 
             Assert.Equal(34, place);
         }
@@ -40,22 +41,43 @@ namespace FalconEngineTest.DomParsing.IdentifyTagParsing
             string html = "<div class=\"greetings\"><div class=\"doubleDiv\"> Hello World</div></div>";
             var LocateEndTag = TestFactory.InitLocateEndTag();
 
-            int? place = LocateEndTag.Search("<div class=\"greetings\">", html);
+            int? place = LocateEndTag.Search(LimitMode.End, "<div class=\"greetings\">", html);
 
             Assert.Equal(64, place);
         }
 
-
-        //noendTag
         [Fact]
         public void LocateEndTagWithNoEndTag()
         {
             string html = HtmlPageTableData.GetHtml(TagHtmlTable.metaCharset);
             var LocateEndTag = TestFactory.InitLocateEndTag();
 
-            int? place = LocateEndTag.Search(html, html);
+            int? place = LocateEndTag.Search(LimitMode.End, html, html);
 
             Assert.Null(place);
+        }
+
+        [Fact]
+        public void LocateStartDoubleDivWithSpace()
+        {
+            string html = "   <div class=\"greetings\"><div class=\"doubleDiv\"> Hello World</div></div>";
+            var LocateEndTag = TestFactory.InitLocateEndTag();
+
+            int? place = LocateEndTag.Search(LimitMode.Start, "<div class=\"greetings\">", html);
+
+            Assert.Equal(3, place);
+        }
+
+
+        [Fact]
+        public void LocateStartDoubleDivWithNewLine()
+        {
+            string html = " \n \r  <div class=\"greetings\"><div class=\"doubleDiv\"> Hello World</div></div>";
+            var LocateEndTag = TestFactory.InitLocateEndTag();
+
+            int? place = LocateEndTag.Search(LimitMode.Start, "<div class=\"greetings\">", html);
+
+            Assert.Equal(6, place);
         }
     }
 }

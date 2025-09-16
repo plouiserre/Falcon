@@ -8,6 +8,6 @@ namespace FalconEngine.DomParsing.IdentifyTagParsing
 {
     public interface ILocateLimitTag
     {
-        public int? Search(string startTag, string html);
+        public int? Search(LimitMode mode, string startTag, string html);
     }
 }

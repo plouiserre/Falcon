@@ -16,6 +16,7 @@ namespace FalconEngine.DomParsing
         private IDeleteUselessSpace _deleteUselessSpace;
         private IIdentifyTag _identifyTag;
         private IIdentifyStartTagEndTag _identitfyStartEndTag;
+        private ILocateLimitTag _locateLimitTag;
         private IDeterminateContent _determinateContent;
         private IAttributeTagManager _attributeTagManager;
         private Dictionary<TagModel, IList<ITagParser>> _tagParsersByParent;
@@ -24,13 +25,13 @@ namespace FalconEngine.DomParsing
         private List<TagModel> _parents;
         private TagModel _parent;
 
-        public ManageChildrenTag(IDeleteUselessSpace deleteUselessSpace, IIdentifyTag identifyTag,
-            IIdentifyStartTagEndTag identifyStartTagEndTag, IDeterminateContent determinateContent,
-            IAttributeTagManager attributeTagManager)
+        public ManageChildrenTag(IDeleteUselessSpace deleteUselessSpace, IIdentifyTag identifyTag, IIdentifyStartTagEndTag identifyStartTagEndTag, 
+            ILocateLimitTag locateLimitTag, IDeterminateContent determinateContent, IAttributeTagManager attributeTagManager)
         {
             _identifyTag = identifyTag;
             _deleteUselessSpace = deleteUselessSpace;
             _identitfyStartEndTag = identifyStartTagEndTag;
+            _locateLimitTag = locateLimitTag;
             _determinateContent = determinateContent;
             _attributeTagManager = attributeTagManager;
             _parents = new List<TagModel>();
@@ -79,7 +80,7 @@ namespace FalconEngine.DomParsing
 
         private void SaveTagParsers(TagModel parent, string html)
         {
-            var initiateParser = new InitiateParser(_deleteUselessSpace, _identifyTag, _identitfyStartEndTag, _determinateContent, this, _attributeTagManager);
+            var initiateParser = new InitiateParser(_deleteUselessSpace, _identifyTag, _identitfyStartEndTag, _locateLimitTag, _determinateContent, this, _attributeTagManager);
             var tagParsers = initiateParser.GetTagParsers(html);
             if (!_tagParsersByParent.ContainsKey(parent))
                 _tagParsersByParent[parent] = tagParsers;
