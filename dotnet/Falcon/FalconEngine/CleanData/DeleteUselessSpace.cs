@@ -13,10 +13,12 @@ namespace FalconEngine.CleanData
         private string _startTagCleaned;
         private string _endTag;
         private IIdentifyStartTagEndTag _identifyStartTagEndTag;
+        private ILocateLimitTag _locateLimitTag;
 
-        public DeleteUselessSpace(IIdentifyStartTagEndTag identifyStartTagEndTag)
+        public DeleteUselessSpace(IIdentifyStartTagEndTag identifyStartTagEndTag, ILocateLimitTag locateLimitTag)
         {
             _identifyStartTagEndTag = identifyStartTagEndTag;
+            _locateLimitTag = locateLimitTag;
         }
 
         public string PurgeUselessCaractersAroundTag(string html)
@@ -76,8 +78,9 @@ namespace FalconEngine.CleanData
         {
             if (!string.IsNullOrEmpty(_endTag))
             {
-                int index = html.IndexOf(_endTag);
-                return html.Substring(0, index + _endTag.Length);
+                int? index = _locateLimitTag.Search(LimitMode.End, _startTag, html);
+                int index2 = html.IndexOf(_endTag);
+                return index.HasValue ? html.Substring(0, index.Value + _endTag.Length) : _startTag;
             }
             return _startTag;
         }

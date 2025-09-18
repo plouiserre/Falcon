@@ -106,5 +106,18 @@ namespace FalconEngineTest.CleanData
             string htmlExpected = "<head><title>Document</title></head>";
             Assert.Equal(htmlExpected, htmlClean);
         }
+
+        [Fact]
+        public void PurgeUselessCaractersAfterDoubleDiv()
+        {
+            string html = "<div class=\"main\"><div class=\"second\"><p>Hello World!!!</p></div></div>            \r\n         ";
+            var cleaner = TestFactory.InitDeleteUselessSpace();
+
+            string htmlClean = cleaner.PurgeUselessCaractersAroundTag(html);
+
+            string htmlExpected = "<div class=\"main\"><div class=\"second\"><p>Hello World!!!</p></div></div>";
+            Assert.Equal(htmlExpected, htmlClean);
+
+        }
     }
 }
