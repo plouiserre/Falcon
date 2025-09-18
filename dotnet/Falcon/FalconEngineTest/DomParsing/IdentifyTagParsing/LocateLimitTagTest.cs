@@ -79,5 +79,28 @@ namespace FalconEngineTest.DomParsing.IdentifyTagParsing
 
             Assert.Equal(6, place);
         }
+
+
+        [Fact]
+        public void LocateEndTagWithTwPoFollowsSameTags()
+        {
+            string html = "<p class=\"declarationText\"> Ceci est un <span><a href=\"declaration.html\">paragraphe</a></span><span class=\"red\">Et il raconte des supers trucs!!!</span></p><p>Allez-vous apprécier mon article?</p>";
+            var LocateEndTag = TestFactory.InitLocateEndTag();
+
+            int? place = LocateEndTag.Search(LimitMode.End, "<p class=\"declarationText\">", html);
+
+            Assert.Equal(152, place);
+        }
+
+        [Fact]
+        public void LocateEndTagWithTwoLiFollowsSameTags()
+        {
+            string html = "<li>Home</li><li>News</li><li>New organisation</li>";
+            var LocateEndTag = TestFactory.InitLocateEndTag();
+
+            int? place = LocateEndTag.Search(LimitMode.End, "<li>", html);
+
+            Assert.Equal(8, place);
+        }
     }
 }

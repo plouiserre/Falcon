@@ -176,7 +176,7 @@ namespace FalconEngineTest.Utils
 
         public static DeleteUselessSpace InitDeleteUselessSpace()
         {
-            return new DeleteUselessSpace(InitIdentifyStartTagEndTag());
+            return new DeleteUselessSpace(InitIdentifyStartTagEndTag(), InitLocateEndTag());
         }
 
         public static AttributeTagParser InitAttributeTagParser()

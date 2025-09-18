@@ -32,16 +32,22 @@ namespace FalconEngine.DomParsing.IdentifyTagParsing
                 return result != 0 ? result : null;
         }
 
+        //Todo rework this method with two submethods
         private int LocateEndTag(string startTag, string html)
         {
             int result = 0;
             string endTag = GetEndTag();
             string baseStartTag = GetBaseStartTag();
-            int baseStartTagCount = CountBaseStartTag(baseStartTag);
+            //int baseStartTagCount = CountBaseStartTag(baseStartTag);
+            int baseStartTagCount = 0;
             for (int i = 0; i < _html.Length; i++)
             {
                 if (i + endTag.Length > _html.Length)
                     break;
+                string startTagCandidate = _html.Substring(i, baseStartTag.Length);
+                if (startTagCandidate == baseStartTag)                
+                    baseStartTagCount += 1;
+                
                 string endTagCandidate = _html.Substring(i, endTag.Length);
                 if (endTagCandidate == endTag && baseStartTagCount == 1)
                 {
