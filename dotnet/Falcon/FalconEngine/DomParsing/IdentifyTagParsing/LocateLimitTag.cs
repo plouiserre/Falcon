@@ -15,6 +15,8 @@ namespace FalconEngine.DomParsing.IdentifyTagParsing
     {
         private string _html;
         private string _startTag;
+        private string _baseStartTag;
+        private int _baseStartTagCount;
 
         public int? Search(LimitMode mode, string startTag, string html)
         {
@@ -32,31 +34,27 @@ namespace FalconEngine.DomParsing.IdentifyTagParsing
                 return result != 0 ? result : null;
         }
 
-        //Todo rework this method with two submethods
         private int LocateEndTag(string startTag, string html)
         {
             int result = 0;
             string endTag = GetEndTag();
-            string baseStartTag = GetBaseStartTag();
-            //int baseStartTagCount = CountBaseStartTag(baseStartTag);
-            int baseStartTagCount = 0;
+            GetBaseStartTag();
+            _baseStartTagCount = 0;
             for (int i = 0; i < _html.Length; i++)
             {
                 if (i + endTag.Length > _html.Length)
                     break;
-                string startTagCandidate = _html.Substring(i, baseStartTag.Length);
-                if (startTagCandidate == baseStartTag)                
-                    baseStartTagCount += 1;
-                
+                DeterminateIfItIsAStartTagCandidate(i);
+
                 string endTagCandidate = _html.Substring(i, endTag.Length);
-                if (endTagCandidate == endTag && baseStartTagCount == 1)
+                if (endTagCandidate == endTag && _baseStartTagCount == 1)
                 {
                     result = i;
                     break;
                 }
                 else if (endTagCandidate == endTag)
                 {
-                    baseStartTagCount--;
+                    _baseStartTagCount--;
                 }
                 else
                 {
@@ -64,6 +62,13 @@ namespace FalconEngine.DomParsing.IdentifyTagParsing
                 }
             }
             return result;
+        }
+
+        private void DeterminateIfItIsAStartTagCandidate(int index)
+        {
+            string startTagCandidate = _html.Substring(index, _baseStartTag.Length);
+            if (startTagCandidate == _baseStartTag)
+                _baseStartTagCount += 1;
         }
 
         private int LocateStartTag(string html)
@@ -85,34 +90,16 @@ namespace FalconEngine.DomParsing.IdentifyTagParsing
             return Localisation;
         }
 
-        private string GetBaseStartTag()
+        private void GetBaseStartTag()
         {
             if (_startTag.Contains(" "))
             {
-                string baseStartTag = _startTag.Split(" ")[0];
-                return baseStartTag;
+                _baseStartTag = _startTag.Split(" ")[0];
             }
             else
             {
-                return _startTag.Replace(">", string.Empty);
+                _baseStartTag =  _startTag.Replace(">", string.Empty);
             }
-        }
-
-        private int CountBaseStartTag(string baseStartTag)
-        {
-            int count = 0;
-            for(int i = 0; i < _html.Length; i++)
-            {
-                if(i + baseStartTag.Length > _html.Length)                
-                    break;
-                
-                string startTagCandidate = _html.Substring(i, baseStartTag.Length);
-                if(startTagCandidate == baseStartTag)
-                {
-                    count++;
-                }
-            }
-            return count;
         }
 
         private string GetEndTag()
