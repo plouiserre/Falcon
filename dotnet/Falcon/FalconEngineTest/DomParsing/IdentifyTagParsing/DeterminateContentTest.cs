@@ -54,7 +54,7 @@ namespace FalconEngineTest.DomParsing.IdentifyTagParsing
             string contentDoubleDiv = determinate.FindContent(html, "<div class=\"greetings\">", "</div>");
 
             string content = "<div class=\"doubleDiv\"> Hello World</div>";
-            Assert.Equal(content, content);
+            Assert.Equal(content, contentDoubleDiv);
         }
     }
 }

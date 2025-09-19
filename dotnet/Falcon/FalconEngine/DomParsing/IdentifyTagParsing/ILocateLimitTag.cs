@@ -9,5 +9,6 @@ namespace FalconEngine.DomParsing.IdentifyTagParsing
     public interface ILocateLimitTag
     {
         public int? Search(LimitMode mode, string startTag, string html);
+        bool IndicateIsMultipleStartTag();
     }
 }
