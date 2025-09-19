@@ -17,6 +17,7 @@ namespace FalconEngine.DomParsing.IdentifyTagParsing
         private string _startTag;
         private string _baseStartTag;
         private int _baseStartTagCount;
+        private bool isMultipleStartTag;
 
         public int? Search(LimitMode mode, string startTag, string html)
         {
@@ -67,8 +68,16 @@ namespace FalconEngine.DomParsing.IdentifyTagParsing
         private void DeterminateIfItIsAStartTagCandidate(int index)
         {
             string startTagCandidate = _html.Substring(index, _baseStartTag.Length);
-            if (startTagCandidate == _baseStartTag)
+            if (startTagCandidate == _baseStartTag) { 
                 _baseStartTagCount += 1;
+                if(_baseStartTagCount > 1)
+                    isMultipleStartTag = true;
+            }
+        }
+
+        public bool IndicateIsMultipleStartTag()
+        {
+            return isMultipleStartTag;
         }
 
         private int LocateStartTag(string html)

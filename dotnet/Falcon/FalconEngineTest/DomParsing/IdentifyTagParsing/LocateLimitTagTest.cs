@@ -102,5 +102,29 @@ namespace FalconEngineTest.DomParsing.IdentifyTagParsing
 
             Assert.Equal(8, place);
         }
+
+        [Fact]
+        public void CountNumberStartTagSimple()
+        {
+            string html = HtmlPageSimpleData.GetHtml(TagHtmlSimple.pDeclarationText);
+            var LocateEndTag = TestFactory.InitLocateEndTag();
+
+            LocateEndTag.Search(LimitMode.End, "<p class=\"declarationText\">", html);
+            bool occurenceMultiple = LocateEndTag.IndicateIsMultipleStartTag();
+
+            Assert.False(occurenceMultiple);
+        }
+
+        [Fact]
+        public void CountNumberStartTagDouble()
+        {
+            string html = "<div class=\"greetings\"><div class=\"doubleDiv\"> Hello World</div></div>";
+            var LocateEndTag = TestFactory.InitLocateEndTag();
+
+            LocateEndTag.Search(LimitMode.End, "<div class=\"greetings\">", html);
+            bool occurenceMultiple = LocateEndTag.IndicateIsMultipleStartTag();
+
+            Assert.True(occurenceMultiple);
+        }
     }
 }
